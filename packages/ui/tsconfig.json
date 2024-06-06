@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "include": ["src","turbo","tailwind.config.js"],
+  "include": ["./src/**/*","lib/**/*","./components/**/*","turbo/**/*","tailwind.config.js", "components/ui/Avatar.tsx", "components/Button.tsx", "components/Navbar.tsx", "components/LeftSidebar.tsx", "components/Footbar.tsx"],
   "exclude": ["node_modules", "dist"]
 }
