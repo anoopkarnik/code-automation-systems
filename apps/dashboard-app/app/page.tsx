@@ -1,23 +1,14 @@
-import { Button } from "@repo/ui/components/Button";
-import { Navbar} from "@repo/ui/componentGroup/Navbar";
-import Image from "next/image";
+import { NEXT_AUTH_CONFIG } from "./lib/auth";
+import { getServerSession} from 'next-auth'
+import {redirect} from 'next/navigation'
 
-export default function Home() {
-  return (
-    <main className="flex w-full min-h-screen flex-col items-center justify-between ">
-      <Navbar 
-        appName="Personal Dashboard"
-        appIcon="./apps.png"
-        screens={[
-          {screenName: "Home"},
-          {screenName: "About"},
-          {screenName: "Contact"}
-        ]}
-        user= {{
-          name: "John Doe",
-          image:"./apps.png"
-        }}
-      />
-    </main>
-  );
+export default async function Home() {
+  const session:any = await getServerSession(NEXT_AUTH_CONFIG as any)
+
+  if (session?.user){
+    redirect('/api/practise-apps')
+  }
+  else{
+    redirect('/api/auth/signin')
+  }
 }

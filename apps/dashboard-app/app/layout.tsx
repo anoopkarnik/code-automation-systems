@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@repo/ui/globals.css";
+import "@repo/ui/styles/shadcn-violet"
+import { ThemeProvider } from "../components/theme-provider"
+import { SessionProviders } from "../components/session-provider";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,8 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <SessionProviders>
+          <ThemeProvider attribute="class"  defaultTheme="dark" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </SessionProviders>
+      </body>
     </html>
   );
 }
