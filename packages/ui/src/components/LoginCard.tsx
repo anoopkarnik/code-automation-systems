@@ -29,10 +29,11 @@ interface LoginCardProps {
   onEmailSubmit?: any;
   onGoogleProviderSubmit?: any;
   onGithubProviderSubmit?: any;
-  registerFunction?:any
+  backFunction?:any;
+  errorMessage?:string;
 }
 
-const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,registerFunction}
+const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,backFunction,errorMessage}
   :LoginCardProps
 ) => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -44,7 +45,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
   })
 
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | undefined>("")
+  const [error, setError] = useState<string | undefined>(errorMessage)
   const [success, setSuccess] = useState<string | undefined>("")
   const router = useRouter()
 
@@ -52,13 +53,17 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
     setError("")
     setSuccess("")
     startTransition(()=>{
-      onEmailSubmit(data).then((result:any)=>{setError(result.error);setSuccess(result.success)})
+      onEmailSubmit(data)
+      .then((data:any)=>{
+            setError(data?.error);
+            setSuccess(data?.success);
+      })
     })
   }
   return (
-    <Card className='w-[40%] bg-foreground text-background shadow-xl shadow-white/20'>
+    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
-        <div className='text-6xl font-bold text-center text-secondary'>Login</div>
+        <div className='text-6xl font-bold text-center'>Login</div>
         <div className='text-md font-extralight text-center'>Welcome Back</div>
       </CardHeader>
       {showEmail &&
@@ -70,7 +75,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-foreground' type="email" placeholder='example@gmail.com' {...field}/>
+                      <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -79,24 +84,24 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-foreground' placeholder='******' type="password" {...field}/>
+                      <Input disabled={isPending} className='bg-white' placeholder='******' type="password" {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
                 )}/>
               </div>
-              <FormResult type="error" message={error}/>
+              <FormResult type="error" message={error }/>
               <FormResult type="success" message={success}/>
-              <Button  disabled={isPending} className='bg-background text-foreground w-full ' variant="outline" type="submit">Login</Button>
+              <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Login</Button>
             </form>
           </Form>
         </CardContent>}
       <CardFooter className='fle rounded-2xl gap-4 '>
-        {showGoogleProvider && <Button variant='outline' className='bg-foreground w-full'><FcGoogle/></Button>}
-        {showGithubProvider && <Button variant='outline' className='bg-foreground w-full'><FaGithub/></Button>}
+        {showGoogleProvider && <Button onClick={onGoogleProviderSubmit} variant='outline' className='bg-white w-full'><FcGoogle/></Button>}
+        {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
-        <div onClick={registerFunction} className='text-sm text-center text-background/60 hover:text-background cursor-pointer hover:underline'>Don't have an Account?</div>
+        <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>Don't have an Account?</div>
       </CardFooter>
     </Card>
   )

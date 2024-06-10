@@ -19,8 +19,10 @@ interface NavbarProps {
 
 
 export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,onSignout}:NavbarProps) => {
+
+    
   return (
-    <div className=' p-4 flex items-center justify-between mx-4 bg-background dark:bg-background 
+    <div className=' p-1 flex items-center justify-between mx-4 bg-background dark:bg-background 
     border-b-2 '>
         <div className='flex items-center gap-4'>
             {appIcon && <img src={appIcon} alt={appName} className='w-10 h-10'/>}
@@ -35,7 +37,10 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,onSigno
         </div>
         <div className='flex items-center gap-4'>
             <Theme setTheme={setTheme}/>
-            <img src={user?.image} alt={user?.name} className='w-10 h-10 rounded-full'/>
+            <Avatar>
+                <AvatarImage src={user?.image }/>
+                <AvatarFallback>{user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
+            </Avatar>
             <Button variant='default' className='mx-2' onClick={user? onSignout : onSignin}>
                 {user ? "Logout" : "Login"}
             </Button>

@@ -28,10 +28,10 @@ interface RegisterCardProps {
   onEmailSubmit?: any;
   onGoogleProviderSubmit?: any;
   onGithubProviderSubmit?: any;
-  loginFunction?:any;
+  backFunction?:any;
 }
 
-const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,loginFunction}
+const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,backFunction}
   :RegisterCardProps
 ) => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -55,9 +55,9 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
     })
   }
   return (
-    <Card className='w-[40%] bg-foreground text-background shadow-xl shadow-white/20'>
+    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
-        <div className='text-6xl font-bold text-center text-secondary'>Register</div>
+        <div className='text-6xl font-bold text-center text-black'>Register</div>
         <div className='text-md font-extralight text-center'>Create an account</div>
       </CardHeader>
       {showEmail &&
@@ -69,7 +69,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-foreground' type="name" placeholder='first name' {...field}/>
+                      <Input disabled={isPending} className='bg-white' type="name" placeholder='first name' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -78,7 +78,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-foreground' type="email" placeholder='example@gmail.com' {...field}/>
+                      <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -87,7 +87,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-foreground' placeholder='******' type="password" {...field}/>
+                      <Input disabled={isPending} className='bg-white' placeholder='******' type="password" {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -95,16 +95,19 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
               </div>
               <FormResult type="error" message={error}/>
               <FormResult type="success" message={success}/>
-              <Button  disabled={isPending} className='bg-background text-foreground w-full ' variant="outline" type="submit" > Register</Button>
+              <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit" > Register</Button>
             </form>
           </Form>
         </CardContent>}
       <CardFooter className='fle rounded-2xl gap-4 '>
-        {showGoogleProvider && <Button variant='outline' className='bg-foreground w-full'><FcGoogle/></Button>}
-        {showGithubProvider && <Button variant='outline' className='bg-foreground w-full'><FaGithub/></Button>}
+        {showGoogleProvider && 
+        <Button onClick={onGoogleProviderSubmit} variant='outline' className='bg-white w-full'>
+          <FcGoogle/>
+        </Button>}
+        {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
-        <div onClick={loginFunction} className='text-sm text-center text-background/60 hover:text-background cursor-pointer hover:underline'>
+        <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
           Already have an Account!
         </div>
       </CardFooter>

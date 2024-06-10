@@ -1,5 +1,5 @@
 {
-  "name": "@repo/prisma-db",
+  "name": "@repo/resend-email",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,9 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    "./client": "./src/index.ts",
-    "./repo/*": "./src/*.ts"
+    "./mail": "./src/index.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.15.0",
-    "prisma": "^5.15.0",
-    "uuid": "^10.0.0"
-  },
-  "devDependencies": {
-    "@types/uuid": "^9.0.8"
+    "resend": "^3.2.0"
   }
 }

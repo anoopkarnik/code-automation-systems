@@ -3,18 +3,17 @@
 import { Navbar } from "@repo/ui/components/Navbar"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import {signIn, signOut, useSession} from 'next-auth/react';
 import { useRouter } from "next/navigation";
-
+import { useSession} from "next-auth/react"
+import { logout } from "../ actions/logout";
+import {DEFAULT_LOGIN_REDIRECT} from "../routes" 
+import { useEffect } from "react";       
 
 export function NavbarClient() {
     const { theme, setTheme } = useTheme()
-    const session:any = useSession();
     const router = useRouter();
-    async function handleSignOut() {
-        await signOut();
-        router.push('/api/auth/signin');
-      }
+    const session = useSession();
+
     return (
             <Navbar 
                 appName="Personal Dashboard"
@@ -26,8 +25,8 @@ export function NavbarClient() {
                 ]}
                 user= {session?.data?.user}
                 setTheme={setTheme}
-                onSignin={signIn}
-                onSignout={handleSignOut}
+                onSignin={()=>{router.push('/auth/login')}}
+                onSignout={async () =>{await logout();router.push('/auth/login');}}
             />
     )
 }
