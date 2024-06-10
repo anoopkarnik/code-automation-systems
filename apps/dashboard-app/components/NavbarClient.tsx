@@ -18,7 +18,7 @@ export function NavbarClient() {
     return (
             <Navbar 
                 appName="Personal Dashboard"
-                appIcon="./apps.png"
+                appIcon="https://raw.githubusercontent.com/anoopkarnik/personal-apps/main/apps/dashboard-app/public/apps.png"
                 screens={[
                     {screenName: "Home"},
                     {screenName: "About"},
