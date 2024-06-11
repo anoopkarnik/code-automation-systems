@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@repo/next-auth": "*",
+    "@repo/resend-email": "*",
     "@repo/ui": "*",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
@@ -22,7 +23,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "@repo/resend-email": "*"
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

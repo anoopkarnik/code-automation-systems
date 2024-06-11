@@ -11,12 +11,13 @@ export default function() {
     const router = useRouter();
     const searchParams = useSearchParams()
     const urlError = searchParams.get('error') === "OAuthAccountNotLinked" ?
-     "Email already in use with different provider" : "Some error occured. Please try again. or contact support"
+     "Email already in use with different provider" : ""
     return (
         <LoginCard
             showEmail={true}
             showGithubProvider={true}
             showGoogleProvider={true}
+            showLinkedinProvider={true}
             onEmailSubmit={login}
             onGithubProviderSubmit={async ()=>{
                 await signIn('github',{callbackUrl: DEFAULT_LOGIN_REDIRECT});
@@ -24,6 +25,10 @@ export default function() {
             onGoogleProviderSubmit={async ()=>{
                 await signIn('google',{callbackUrl: DEFAULT_LOGIN_REDIRECT});
             }}
+            onLinkedinProviderSubmit={async ()=>{
+                await signIn('linkedin',{callbackUrl: DEFAULT_LOGIN_REDIRECT});
+            }}
+            forgotPasswordFunction={()=>{router.push('/auth/forgot-password')}}
             backFunction={()=>{router.push('/auth/register')}}
             errorMessage={urlError}
         />

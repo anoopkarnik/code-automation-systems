@@ -9,6 +9,22 @@ export const sendVerificationEmail = async (email: string, token:string) => {
         from: "onboarding@resend.dev",
         to: email,
         subject: "Please confirm your email",
-        html: `<a href="${confirmLink}">Click here to confirm your email</a>`
+        html: `<p>
+            Click <a href="${confirmLink}">here</a> to confirm your email
+        </p>`
+    })
+}
+
+
+export const sendResetEmail = async (email: string, token:string) => {
+    const confirmLink = `http://localhost:4000/auth/reset-password?token=${token}`
+
+    await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: email,
+        subject: "Reset your password",
+        html: `<p>
+            Click <a href="${confirmLink}">here</a> to modify your password
+        </p>`
     })
 }

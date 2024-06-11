@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
 import { useTransition } from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from './ui/Button';
 import { LoginSchema } from '@repo/zod/index'
@@ -26,14 +26,18 @@ interface LoginCardProps {
   showEmail?: boolean;
   showGoogleProvider?: boolean;
   showGithubProvider?: boolean;
+  showLinkedinProvider?: boolean;
   onEmailSubmit?: any;
   onGoogleProviderSubmit?: any;
   onGithubProviderSubmit?: any;
+  onLinkedinProviderSubmit?: any;
+  forgotPasswordFunction?: any;
   backFunction?:any;
   errorMessage?:string;
 }
 
-const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,backFunction,errorMessage}
+const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,onEmailSubmit,
+  onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit,forgotPasswordFunction,backFunction,errorMessage}
   :LoginCardProps
 ) => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -49,19 +53,20 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
   const [success, setSuccess] = useState<string | undefined>("")
   const router = useRouter()
 
-  function handleSubmit(data: z.infer<typeof LoginSchema>) {
+  async function handleSubmit(data: z.infer<typeof LoginSchema>) {
     setError("")
     setSuccess("")
     startTransition(()=>{
       onEmailSubmit(data)
       .then((data:any)=>{
-            setError(data?.error);
-            setSuccess(data?.success);
+          console.log(data) 
+          setError(data?.error);
+          setSuccess(data?.success);
       })
     })
   }
   return (
-    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
+    <Card className='w-[400px] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
         <div className='text-6xl font-bold text-center'>Login</div>
         <div className='text-md font-extralight text-center'>Welcome Back</div>
@@ -90,6 +95,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
                   </FormItem>
                 )}/>
               </div>
+              <div onClick={forgotPasswordFunction} className='text-sm text-left text-black/60 hover:text-black cursor-pointer hover:underline'>Forgot Password</div>
               <FormResult type="error" message={error }/>
               <FormResult type="success" message={success}/>
               <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Login</Button>
@@ -99,6 +105,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmi
       <CardFooter className='fle rounded-2xl gap-4 '>
         {showGoogleProvider && <Button onClick={onGoogleProviderSubmit} variant='outline' className='bg-white w-full'><FcGoogle/></Button>}
         {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
+        {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='outline' className='bg-white w-full'><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
         <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>Don't have an Account?</div>

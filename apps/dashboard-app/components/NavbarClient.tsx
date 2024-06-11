@@ -8,11 +8,12 @@ import { useSession} from "next-auth/react"
 import { logout } from "../ actions/logout";
 import {DEFAULT_LOGIN_REDIRECT} from "../routes" 
 import { useEffect } from "react";       
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 export function NavbarClient() {
     const { theme, setTheme } = useTheme()
     const router = useRouter();
-    const session = useSession();
+    const user = useCurrentUser();
 
     return (
             <Navbar 
@@ -23,7 +24,7 @@ export function NavbarClient() {
                     {screenName: "About"},
                     {screenName: "Contact"}
                 ]}
-                user= {session?.data?.user}
+                user= {user}
                 setTheme={setTheme}
                 onSignin={()=>{router.push('/auth/login')}}
                 onSignout={async () =>{await logout();router.push('/auth/login');}}

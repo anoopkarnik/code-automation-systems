@@ -7,6 +7,7 @@ import { LoginSchema } from "@repo/zod/index";
 import type {NextAuthConfig} from "next-auth";
 import { getUserByEmail } from "@repo/prisma-db/repo/user";
 import bcrypt from "bcryptjs";
+import linkedin from "next-auth/providers/linkedin";
 
 export default {
     providers: [
@@ -32,5 +33,10 @@ export default {
         Google({
             clientId: process.env.AUTH_GOOGLE_ID,
             clientSecret: process.env.AUTH_GOOGLE_SECRET
-        })]
+        }),
+        linkedin({
+            clientId: process.env.AUTH_LINKEDIN_ID,
+            clientSecret: process.env.AUTH_LINKEDIN_SECRET
+        }),
+    ]
 } satisfies NextAuthConfig;

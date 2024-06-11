@@ -23,6 +23,7 @@ export const { auth, handlers, signIn, signOut }:any = NextAuth({
 
             //prevent login if email is not verified
             if (!existingUser?.emailVerified) return false;
+            
             return true;
         },
         async session({session,token}){

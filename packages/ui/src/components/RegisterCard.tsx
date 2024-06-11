@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
 import { useTransition } from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from './ui/Button';
 import { RegisterSchema } from '@repo/zod/index'
@@ -25,13 +25,16 @@ interface RegisterCardProps {
   showEmail?: boolean;
   showGoogleProvider?: boolean;
   showGithubProvider?: boolean;
+  showLinkedinProvider?: boolean;
   onEmailSubmit?: any;
   onGoogleProviderSubmit?: any;
   onGithubProviderSubmit?: any;
+  onLinkedinProviderSubmit?: any;
   backFunction?:any;
 }
 
-const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,backFunction}
+const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedinProvider,
+  onEmailSubmit,onGoogleProviderSubmit,onGithubProviderSubmit,onLinkedinProviderSubmit,backFunction}
   :RegisterCardProps
 ) => {
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -105,6 +108,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,onEmailSu
           <FcGoogle/>
         </Button>}
         {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
+        {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='outline' className='bg-white w-full'><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
         <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>
