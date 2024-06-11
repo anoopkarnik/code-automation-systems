@@ -2,6 +2,23 @@ import React from 'react'
 import { Button } from './ui/Button';
 import { Avatar, AvatarImage,AvatarFallback } from './ui/Avatar';
 import { Theme } from './Theme';
+import { GoTriangleDown } from "react-icons/go";
+import {
+    LogOut,
+    Settings,
+  } from "lucide-react"
+  import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "./ui/Dropdown"
+import { UserDropdown } from './UserDropdown';
+import { SettingsDialog } from './SettingsDialog';
+  
 
 interface NavbarProps {
     appName?: string;
@@ -14,11 +31,13 @@ interface NavbarProps {
     setTheme?:any;
     onSignin?:any;
     onSignout?:any;
+    resetFunction?:any;
 }
 
 
 
-export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,onSignout}:NavbarProps) => {
+export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,
+    onSignout,resetFunction}:NavbarProps) => {
 
     
   return (
@@ -37,13 +56,21 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,onSigno
         </div>
         <div className='flex items-center gap-4'>
             <Theme setTheme={setTheme}/>
-            <Avatar>
-                <AvatarImage src={user?.image }/>
-                <AvatarFallback>{user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
-            </Avatar>
-            <Button variant='default' className='mx-2' onClick={user? onSignout : onSignin}>
-                {user ? "Logout" : "Login"}
-            </Button>
+            <UserDropdown 
+                triggerChildren={
+                    <div className='flex items-center'>
+                        <Avatar className="w-10 h-10">
+                            <AvatarImage  src={user?.image }/>
+                            <AvatarFallback>{user?.name?.charAt(0).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <GoTriangleDown className='bg-background '/>
+                    </div>
+                }
+                logoutFunction={onSignout}
+                user={user}
+                resetFunction={resetFunction}
+            />
+                
         </div>
     </div>
   )

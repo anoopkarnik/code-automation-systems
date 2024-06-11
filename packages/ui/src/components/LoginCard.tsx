@@ -59,7 +59,6 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
     startTransition(()=>{
       onEmailSubmit(data)
       .then((data:any)=>{
-          console.log(data) 
           setError(data?.error);
           setSuccess(data?.success);
       })

@@ -7,6 +7,6 @@ export const logout = async () =>{
         await signOut();
     }
     catch(err){
-        console.log(err)
+        throw err;
     }
 }

@@ -33,3 +33,12 @@ export const RegisterSchema = z.object({
         message: "Password must be at least 6 characters long"
     })
 })
+
+export const ResetPasswordSettingsSchema = z.object({
+    currentPassword: z.string().min(1,{
+        message: "Old Password is required"
+    }),
+    newPassword: z.string().min(6,{
+        message: "New Password must be at least 6 characters long"
+    }),
+})

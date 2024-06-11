@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@repo/ui/styles/shadcn-violet"
+import "@repo/ui/styles/shadcn-rose"
 import { ThemeProvider } from "../components/theme-provider"
 import { SessionProviders } from "../components/session-provider";
 

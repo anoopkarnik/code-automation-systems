@@ -1,0 +1,52 @@
+import {
+    LogOut,
+    Settings,
+  } from "lucide-react"
+  
+  import { Button } from "./ui/Button"
+  import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+  } from "./ui/Dropdown"
+import { SettingsDialog } from "./SettingsDialog"
+import { useState } from "react"
+  
+  export function UserDropdown({triggerChildren,logoutFunction,user,resetFunction}:any) {
+    const [showModal, setShowModal] = useState(false)
+    return (
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                {triggerChildren}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 static">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                    <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                    </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logoutFunction}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+            {showModal && <SettingsDialog onClose={()=>setShowModal(false)} user={user} resetFunction={resetFunction} />}
+        </>
+    )
+  }
+  
