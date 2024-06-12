@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  dashboard-app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dashboard-app
+    image: anoopkarnik/dashboard-app:latest
+    ports:
+      - "4000:4000"
+    networks:
+      - turborepo-network
+
+networks:
+  turborepo-network:
+    driver: bridge

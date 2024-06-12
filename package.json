@@ -5,7 +5,9 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "cd packages/prisma-db && npx prisma generate && cd ../..",
+    "start-dashboard-app": "cd ./apps/dashboard-app && npm run start"
   },
   "exports": {
     "./zod": "./src/index.ts"

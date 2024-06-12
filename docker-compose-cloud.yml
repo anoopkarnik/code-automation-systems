@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  dashboard-app:
+    image: anoopkarnik/dashboard-app:latest
+    restart: always
+    ports:
+      - "4000:4000"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.dashboard-app
+      
+networks:
+  turborepo-network:
+    external: true
