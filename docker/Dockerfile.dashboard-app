@@ -8,6 +8,7 @@ COPY apps/dashboard-app ./apps/dashboard-app
 COPY packages ./packages
 
 RUN npm install
+RUN npm run db:generate
 
 RUN npm run build
 
