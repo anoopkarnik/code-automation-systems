@@ -24,7 +24,8 @@ export default function ResetPasswordClient() {
             setError(data?.error);
             setSuccess(data?.success);
         })
-    },[])
+    },[token,error,success])
+    
     if (error){
         return (
             <ErrorCard
