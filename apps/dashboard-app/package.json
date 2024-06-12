@@ -6,7 +6,7 @@
     "dev": "next dev --port 4000",
     "build": "next build",
     "start": "next start --port 4000",
-    "lint": "next lint"
+    "lint": "next lint --max-warnings 20"
   },
   "dependencies": {
     "@repo/next-auth": "*",
