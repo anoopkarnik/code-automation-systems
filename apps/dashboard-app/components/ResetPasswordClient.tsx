@@ -8,7 +8,7 @@ import { verifyResetToken } from '../ actions/verify-reset-token';
 import ErrorCard from '@repo/ui/components/ErrorCard';
 
 
-export default function() {
+export default function ResetPasswordClient() {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>('')
     const [success, setSuccess] = useState<string | undefined>('')

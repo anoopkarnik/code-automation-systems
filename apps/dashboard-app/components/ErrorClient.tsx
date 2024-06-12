@@ -4,7 +4,7 @@ import ErrorCard from '@repo/ui/components/ErrorCard';
 import { useRouter } from 'next/navigation';
 
 
-export default function() {
+export default function ErrorClient() {
     const router = useRouter();
 
     return (

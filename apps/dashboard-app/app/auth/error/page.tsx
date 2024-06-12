@@ -2,7 +2,7 @@
 import QuoteClient from '../../../components/QuoteClient';
 import ErrorClient from '../../../components/ErrorClient';
 
-export default function() {
+export default function page() {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 '>

@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '../ actions/new-verification';
 
 
-export default function() {
+export default function VerificationClient() {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>()
     const [success, setSuccess] = useState<string | undefined>()

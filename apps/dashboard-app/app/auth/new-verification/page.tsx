@@ -4,7 +4,7 @@ import QuoteClient from '../../../components/QuoteClient';
 import VerificationClient from '../../../components/VerificationClient';
 import LoadingClient from '../../../components/LoadingClient';
 
-export default function() {
+export default function page() {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 '>

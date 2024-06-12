@@ -7,7 +7,7 @@ import { logout } from "../ actions/logout";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { resetPasswordSettings } from "../ actions/reset-password-settings";
 
-export function NavbarClient() {
+export default function NavbarClient() {
     const { theme, setTheme } = useTheme()
     const router = useRouter();
     const user = useCurrentUser();

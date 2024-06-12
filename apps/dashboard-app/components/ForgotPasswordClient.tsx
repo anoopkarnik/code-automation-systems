@@ -6,7 +6,7 @@ import ForgotPasswordCard from '@repo/ui/components/ForgotPasswordCard';
 import { ForgotPassword } from '../ actions/forgot-password';
 
 
-export default function() {
+export default function ForgotPasswordClient() {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>('')
     const [success, setSuccess] = useState<string | undefined>('')

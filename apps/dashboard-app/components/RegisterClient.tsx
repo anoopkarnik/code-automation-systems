@@ -5,7 +5,7 @@ import { register } from '../ actions/register';
 import { signIn,useSession } from 'next-auth/react';
 import { DEFAULT_LOGIN_REDIRECT } from '../routes';
 
-export default function() {
+export default function RegisterClient() {
     const router = useRouter();
 
     return (

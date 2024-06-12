@@ -5,7 +5,7 @@ import ForgotPasswordClient from '../../../components/ForgotPasswordClient';
 import { Suspense } from 'react';
 import LoadingClient from '../../../components/LoadingClient';
 
-export default function() {
+export default function page() {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 '>

@@ -6,7 +6,7 @@ import { login } from '../ actions/login';
 import { DEFAULT_LOGIN_REDIRECT } from '../routes';
 
 
-export default function() {
+export default function LoginClient() {
     const router = useRouter();
     const searchParams = useSearchParams()
     const urlError = searchParams.get('error') === "OAuthAccountNotLinked" ?

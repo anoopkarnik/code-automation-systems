@@ -4,7 +4,7 @@ import QuoteClient from '../../../components/QuoteClient';
 import { Suspense } from 'react';
 import LoadingClient from '../../../components/LoadingClient';
 
-export default function() {
+export default function page() {
 
     return (
         <div className='min-h-screen grid grid-cols-1 lg:grid-cols-2 '>
