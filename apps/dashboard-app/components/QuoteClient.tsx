@@ -1,4 +1,3 @@
-import React from 'react'
 import  Quote  from "@repo/ui/components/Quote"
 
 export default function QuoteClient() {

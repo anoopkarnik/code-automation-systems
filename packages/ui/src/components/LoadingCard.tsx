@@ -1,4 +1,4 @@
-import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
+import { Card, CardContent } from './ui/Card';
 import { BeatLoader } from 'react-spinners';
 
 const LoadingCard = (

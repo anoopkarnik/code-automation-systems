@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface QuoteProps {
     quote: string,
     author: string,

@@ -1,7 +1,6 @@
 "use client"
 import LoginCard from '@repo/ui/components/LoginCard';
-import { Button } from '@repo/ui/components/ui/Button';
-import { signIn,useSession } from 'next-auth/react';
+import { signIn} from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { login } from '../ actions/login';
 import { DEFAULT_LOGIN_REDIRECT } from '../routes';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
 import { useTransition } from 'react';
@@ -6,13 +6,11 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from './ui/Button';
 import { LoginSchema } from '@repo/zod/index'
-import { set, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BsExclamationTriangle } from 'react-icons/bs';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,7 +18,6 @@ import {
 } from "./ui/Form"
 import { Input } from './ui/Input';
 import { FormResult } from './FormResult';
-import { useRouter } from 'next/navigation';
 
 interface LoginCardProps {
   showEmail?: boolean;
@@ -51,7 +48,6 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | undefined>(errorMessage)
   const [success, setSuccess] = useState<string | undefined>("")
-  const router = useRouter()
 
   async function handleSubmit(data: z.infer<typeof LoginSchema>) {
     setError("")

@@ -1,10 +1,7 @@
 "use client"
 
-
-import VerificationCard from '@repo/ui/components/VerificationCard';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
-import { newVerification } from '../ actions/new-verification';
+import { useEffect, useState } from 'react';
 import ResetPasswordCard from '@repo/ui/components/ResetPasswordCard';
 import { resetPassword} from '../ actions/reset-password';
 import { verifyResetToken } from '../ actions/verify-reset-token';

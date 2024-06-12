@@ -1,13 +1,9 @@
 'use client'
 
 import { Navbar } from "@repo/ui/components/Navbar"
-import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
-import { useSession} from "next-auth/react"
-import { logout } from "../ actions/logout";
-import {DEFAULT_LOGIN_REDIRECT} from "../routes" 
-import { useEffect } from "react";       
+import { logout } from "../ actions/logout";   
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { resetPasswordSettings } from "../ actions/reset-password-settings";
 

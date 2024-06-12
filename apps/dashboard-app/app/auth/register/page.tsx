@@ -1,6 +1,5 @@
 "use client"
-import { signIn } from 'next-auth/react';
-import { redirect, useRouter } from 'next/navigation';
+
 import QuoteClient from '../../../components/QuoteClient';
 import RegisterClient from '../../../components/RegisterClient';
 import { Suspense } from 'react';

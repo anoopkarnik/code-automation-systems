@@ -1,6 +1,5 @@
 "use client"
 
-import LoadingCard from '@repo/ui/components/LoadingCard';
 import QuoteClient from '../../../components/QuoteClient';
 import ResetPasswordClient from '../../../components/ResetPasswordClient';
 import { Suspense } from 'react';

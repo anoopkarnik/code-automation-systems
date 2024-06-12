@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import {z} from "zod"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/Card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/Card';
 import { useTransition } from 'react';
 import { Button } from './ui/Button';
-import { LoginSchema, ResetPasswordSchema, ResetPasswordSettingsSchema } from '@repo/zod/index'
-import { set, useForm } from 'react-hook-form';
+import {  ResetPasswordSettingsSchema } from '@repo/zod/index'
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,

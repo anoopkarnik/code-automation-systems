@@ -3,19 +3,13 @@ import {
     Settings,
   } from "lucide-react"
   
-  import { Button } from "./ui/Button"
   import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
   } from "./ui/Dropdown"
 import { SettingsDialog } from "./SettingsDialog"

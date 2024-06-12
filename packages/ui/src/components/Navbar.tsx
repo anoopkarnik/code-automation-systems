@@ -1,24 +1,8 @@
-import React from 'react'
 import { Button } from './ui/Button';
 import { Avatar, AvatarImage,AvatarFallback } from './ui/Avatar';
 import { Theme } from './Theme';
 import { GoTriangleDown } from "react-icons/go";
-import {
-    LogOut,
-    Settings,
-  } from "lucide-react"
-  import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "./ui/Dropdown"
 import { UserDropdown } from './UserDropdown';
-import { SettingsDialog } from './SettingsDialog';
-  
 
 interface NavbarProps {
     appName?: string;
@@ -36,7 +20,7 @@ interface NavbarProps {
 
 
 
-export const Navbar = ({appName,appIcon, screens, user,setTheme,onSignin,
+export const Navbar = ({appName,appIcon, screens, user,setTheme,
     onSignout,resetFunction}:NavbarProps) => {
 
     

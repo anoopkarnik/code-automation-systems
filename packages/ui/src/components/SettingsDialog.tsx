@@ -1,14 +1,12 @@
-import { Button } from "./ui/Button"
+
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "./ui/Card"
-import { Input } from "./ui/Input"
-import { Label } from "./ui/Label"
+
 import {
   Tabs,
   TabsContent,
@@ -17,7 +15,6 @@ import {
 } from "./ui/Tabs"
 import Modal from "./ui/Modal"
 import ResetPasswordSettingsCard from "./ResetPasswordSettingsCard"
-import { error } from "console"
 
 export function SettingsDialog({onClose,user,resetFunction}:any) {
   return (

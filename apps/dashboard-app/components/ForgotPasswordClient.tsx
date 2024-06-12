@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import ForgotPasswordCard from '@repo/ui/components/ForgotPasswordCard';
 import { ForgotPassword } from '../ actions/forgot-password';
 

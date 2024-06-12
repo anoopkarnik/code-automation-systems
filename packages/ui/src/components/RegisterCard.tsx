@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
 import { useTransition } from 'react';
@@ -6,13 +6,11 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from './ui/Button';
 import { RegisterSchema } from '@repo/zod/index'
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BsExclamationTriangle } from 'react-icons/bs';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
