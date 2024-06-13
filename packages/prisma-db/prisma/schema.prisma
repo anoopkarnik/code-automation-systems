@@ -76,6 +76,16 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+model EmailTemplate {
+  id        String   @id @default(cuid())
+  name      String
+  from      String
+  subject   String
+  html      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum UserRole {
   USER
   ADMIN
