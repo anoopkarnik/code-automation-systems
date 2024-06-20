@@ -2,7 +2,7 @@
 import React from 'react'
 import { useScheduler } from '../../hooks/useScheduler'
 
-const page = () => {
+const Page = () => {
   useScheduler()
   return (
     <div className='flex '>
@@ -12,4 +12,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
