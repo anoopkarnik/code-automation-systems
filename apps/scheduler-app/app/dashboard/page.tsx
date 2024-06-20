@@ -1,11 +1,9 @@
 'use client'
-import React, { useEffect } from 'react'
-import { initializeScheduler } from '../../actions/scheduler'
+import React from 'react'
+import { useScheduler } from '../../hooks/useScheduler'
 
 const page = () => {
-  useEffect(() =>{
-    initializeScheduler()
-  },[])
+  useScheduler()
   return (
     <div className='flex '>
       <div>1</div>
