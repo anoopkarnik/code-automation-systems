@@ -8,6 +8,11 @@ interface CalendarPageProps {
     timebox_db_id?: string
 }
 
+interface SchedulerDetailsProps {
+  location?: string
+  scheduler_db_id: string
+}
+
 export const createCalendarPage = async({
   calendar_db_id=process.env.CALENDAR_DB_ID,
   scheduler_db_id=process.env.SCHEDULER_DB_ID,
@@ -97,7 +102,7 @@ export const createCalendarPage = async({
     return ;
 }
 
-export const getSchedulerDetails = async ({location,scheduler_db_id}:{location:string,scheduler_db_id:string}) =>{
+export const getSchedulerDetails = async ({location,scheduler_db_id}:any):Promise<any> =>{
     const currentTimeGmt = moment().format('YYYY-MM-DD');
     let filters:any = [];
     filters.push({'name': 'Start Date', 'type': 'date', 'condition': 'on_or_before', 'value': currentTimeGmt})
@@ -107,7 +112,7 @@ export const getSchedulerDetails = async ({location,scheduler_db_id}:{location:s
     return results;
 }
 
-const getCurrentLocation = async ({timebox_db_id}) => {   
+const getCurrentLocation = async ({timebox_db_id}:any):Promise<any> => {   
     let filters = [];
     filters.push({"name":"End Time", 'type': 'date','condition':'is_empty','value':true})
     let response = await queryNotionDatabase({database_id: timebox_db_id, filters: filters})
@@ -115,7 +120,7 @@ const getCurrentLocation = async ({timebox_db_id}) => {
     let results = response.results;
     if (results && Array.isArray(results) && results.length > 0){
         for (let row =0;row<results.length;row++){
-            if (results[row]['Action Name'] === 'Parents'){
+            if (results[row]?.['Action Name'] === 'Parents'){
                 return results[row]['Action Name']
             }
             else if (results[row]['Action Name'] === 'Short Vacation'){

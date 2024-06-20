@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    "./index": "./src/index.js"
+    "./index": "./src/index.ts"
   },
   "dependencies": {
     "axios": "^1.7.2",

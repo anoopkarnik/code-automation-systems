@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
-import { initializeScheduler } from '../../lib/scheduler'
+import { initializeScheduler } from '../../actions/scheduler'
 
 const page = () => {
   useEffect(() =>{

@@ -1,7 +1,7 @@
 "use client"
 import RegisterCard from '@repo/ui/components/RegisterCard';
 import { useRouter } from 'next/navigation';
-import { register } from '../ actions/register';
+import { register } from '../actions/register';
 import { signIn,useSession } from 'next-auth/react';
 import { DEFAULT_LOGIN_REDIRECT } from '../routes';
 

@@ -1,11 +1,13 @@
 import {Client } from '@notionhq/client'
-
+import { CreateDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
+import { createDatabaseProps } from './props/request';
 import { logger } from '@repo/winston-logger/index';
 const notion = new Client({auth: process.env.NOTION_TOKEN})
 
 
-export const createDatabase = async ({parent,title,properties}:any) =>{
-    let payload:any = {
+
+export const createDatabase = async ({parent,title,properties}:createDatabaseProps) =>{
+    let payload:CreateDatabaseParameters = {
         "parent": { "type": "page_id", "page_id": parent },
         "title": [
             {

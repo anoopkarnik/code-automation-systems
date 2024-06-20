@@ -4,7 +4,7 @@
 import VerificationCard from '@repo/ui/components/VerificationCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import { newVerification } from '../ actions/new-verification';
+import { newVerification } from '../actions/new-verification';
 
 
 export default function VerificationClient() {

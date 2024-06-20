@@ -2,12 +2,12 @@ const Transport = require('winston-transport');
 const axios = require('axios');
 
 export class LokiTransport extends Transport {
-  constructor(opts) {
+  constructor(opts:any) {
     super(opts);
     this.url = opts.url;
   }
 
-  log(info, callback) {
+  log(info:any, callback:any) {
     setImmediate(() => {
       this.emit('logged', info);
     });
@@ -30,10 +30,10 @@ export class LokiTransport extends Transport {
     // Send the log entry to Loki
     axios
       .post(this.url, logEntry)
-      .then((response) => {
+      .then((response:any) => {
         callback();
       })
-      .catch((error) => {
+      .catch((error:any) => {
         console.error('Error sending log to Loki:', error);
         callback(error);
       });
