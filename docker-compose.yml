@@ -10,6 +10,16 @@ services:
       - "4000:4000"
     networks:
       - turborepo-network
+  scheduler-app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.scheduler-app
+    image: anoopkarnik/scheduler-app:latest
+    ports:
+      - "4001:4001"
+    networks:
+      - turborepo-network
+
 
 networks:
   turborepo-network:

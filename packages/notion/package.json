@@ -1,0 +1,32 @@
+{
+  "name": "@repo/notion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "./notion-client": "./src/index.ts",
+    "./notion-functions/*":"./src/*.tsx"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "@repo/winston-logger": "*",
+    "express": "^4.19.2",
+    "moment-timezone": "^0.5.45",
+    "winston": "^3.13.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "ts-jest": "^29.1.5",
+    "vitest": "^1.6.0"
+  }
+}

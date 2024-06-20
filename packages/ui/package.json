@@ -5,7 +5,7 @@
   "exports": {
     "./components/*": "./src/components/*.tsx",
     "./styles/*": "./src/styles/*.css",
-    "./lib/*": "./lib/*.ts",
+    "./lib/*": "./src/lib/*.ts",
     "./postcss.config": "./postcss.config.js",
     "./tailwind.config": "./tailwind.config.ts"
   },

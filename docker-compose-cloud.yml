@@ -10,6 +10,20 @@ services:
       - turborepo-network
     env_file:
       - .env.dashboard-app
+    volumes:
+      - /home/ubuntu/logs/dashboard-app:/app/apps/dashboard-app/logs
+
+  scheduler-app:
+    image: anoopkarnik/scheduler-app:latest
+    restart: always
+    ports:
+      - "4000:4000"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.scheduler-app
+    volumes:
+      - /home/ubuntu/logs/scheduler-app:/app/apps/scheduler-app/logs
       
 networks:
   turborepo-network:

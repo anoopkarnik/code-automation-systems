@@ -7,7 +7,8 @@
     "lint": "turbo lint -- --max-warnings 20",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "cd packages/prisma-db && npx prisma generate && cd ../..",
-    "start-dashboard-app": "cd ./apps/dashboard-app && npm run start"
+    "start-dashboard-app": "cd ./apps/dashboard-app && npm run start",
+    "start-scheduler-app": "cd ./apps/scheduler-app && npm run start"
   },
   "exports": {
     "./zod": "./src/index.ts"

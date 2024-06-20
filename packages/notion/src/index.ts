@@ -1,0 +1,101 @@
+import {Client } from '@notionhq/client'
+
+import { logger } from '@repo/winston-logger/index';
+const notion = new Client({auth: process.env.NOTION_TOKEN})
+
+
+export const createDatabase = async ({parent,title,properties}:any) =>{
+    let payload:any = {
+        "parent": { "type": "page_id", "page_id": parent },
+        "title": [
+            {
+                "type": "text",
+                "text": {
+                    "content": title
+                }
+            }
+        ],
+        "properties": properties
+    }
+    const response = await notion.databases.create(payload)
+    return response;
+}
+
+export const queryDatabase = async ({database_id, body}:any) =>{
+    logger.info(`querying database ${database_id} with this ${JSON.stringify(body)}`)
+    const response = await notion.databases.query({
+        database_id: database_id,
+        ...body
+    })
+    if (response.hasOwnProperty('status')){
+        logger.error(JSON.stringify(response))
+    }
+    else{
+        logger.info(`sucessfully queried database - length - ${response.results.length} - has_more - ${response.has_more} - cursor - ${response.next_cursor}`);
+    }
+    return response;
+}
+
+export const createPage = async({body}:any)=>{
+    logger.info(`creating page with this ${JSON.stringify(body)}`)
+    const response = await notion.pages.create(body)
+    if (response.hasOwnProperty('status')){
+        logger.error(JSON.stringify(response))
+    }
+    else{
+        logger.info(`sucessfully created page ${response.id}`);
+    }
+    return response;
+}
+
+export const modifyPage = async({page_id,body}:any)=>{
+    logger.info(`modifying page ${page_id} with this ${JSON.stringify(body)}`)
+    const response = await notion.pages.update({
+        page_id: page_id,
+        ...body
+    })
+    if (response.hasOwnProperty('status')){
+        logger.error(JSON.stringify(response))
+    }
+    else{
+        logger.info(`sucessfully modified page ${response.id}`);
+    }
+    return response;
+}
+
+export const getPage = async ({page_id}:any) =>{
+    const response = await notion.pages.retrieve({ page_id: page_id })
+    return response;
+}
+
+export const getBlockChildren = async ({block_id}:any) =>{
+    const response = await notion.blocks.children.list({ block_id: block_id })
+    return response;
+}
+
+export const deleteBlock = async ({block_id}:any) =>{
+    const response = await notion.blocks.delete({ block_id: block_id })
+    return response;
+}
+
+export const appendBlockChildren = async ({block_id,children}:any) =>{
+    const response = await notion.blocks.children.append({ block_id: block_id, children: children })
+    return response;
+}
+
+// import express from 'express';
+// import {createCalendarPage } from './calendar/add_calendar_to_page';
+// //const bodyParser = require("body-parser");
+// const port = 5000;
+// const app = express();
+
+// app.use(express.json());
+// app.get('/add_calendar_to_page',function(req,res){
+
+// 	createCalendarPage({})//sends 401 to the result derfault 200 if works
+// 	//res.json({name:"anoop", age: 31});
+// })
+
+// app.listen(port, function() {
+// 	console.log(`Example app listening on port ${port}`)
+// })

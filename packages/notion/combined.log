@@ -1,0 +1,518 @@
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T06:47:18.002Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T06:47:18.679Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T06:47:18.679Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T06:47:18.681Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T06:47:22.048Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T06:47:22.049Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T06:47:22.050Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T06:47:23.400Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T06:47:23.401Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T06:47:23.401Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T07:45:18.158Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:45:18.640Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T07:45:18.641Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T07:45:18.642Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T07:45:21.629Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T07:45:21.630Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T07:45:21.630Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:45:21.976Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T07:45:21.976Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T07:45:21.977Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T07:48:49.915Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:48:50.527Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T07:48:50.528Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T07:48:50.530Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T07:48:52.082Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T07:48:52.085Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T07:48:52.085Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:48:53.290Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T07:48:53.291Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T07:48:53.291Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T07:50:44.831Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:50:45.215Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T07:50:45.215Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T07:50:45.215Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T07:50:47.857Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T07:50:47.860Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T07:50:47.860Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T07:50:48.234Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T07:50:48.234Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T07:50:48.235Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:20:26.831Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:20:27.292Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:20:27.293Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:20:27.293Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:20:28.910Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:20:28.911Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:20:28.911Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:20:30.499Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T08:20:30.499Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T08:20:30.499Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:23:25.565Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:23:26.466Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:23:26.467Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:23:26.468Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:23:28.094Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:23:28.096Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:23:28.096Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:23:28.716Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T08:23:28.716Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T08:23:28.716Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:37:37.655Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:37:38.476Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:37:38.477Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:37:38.479Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:37:40.520Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:37:40.523Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:37:40.523Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:37:41.568Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T08:37:41.568Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T08:37:41.569Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:44:06.422Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:44:07.235Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:44:07.235Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:44:07.238Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:44:09.924Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:44:09.926Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:44:09.926Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:44:10.405Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T08:44:10.405Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T08:44:10.406Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - NaN PT14H14M10.412S PT14H14M10.412S  {"timestamp":"2024-06-19T08:44:10.413Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - NaN PT470H14M10.413S PT470H14M10.413S  {"timestamp":"2024-06-19T08:44:10.413Z"}
+[32minfo[39m: Morning Sunlight - NaN PT470H14M10.414S PT470H14M10.414S  {"timestamp":"2024-06-19T08:44:10.414Z"}
+[32minfo[39m: Finish Drinking 3 litres - NaN PT470H14M10.415S PT470H14M10.415S  {"timestamp":"2024-06-19T08:44:10.415Z"}
+[32minfo[39m: Night Subconscious Programming  - NaN PT470H14M10.416S PT470H14M10.416S  {"timestamp":"2024-06-19T08:44:10.416Z"}
+[32minfo[39m: Morning Subconscious Programming  - NaN PT470H14M10.416S PT470H14M10.416S  {"timestamp":"2024-06-19T08:44:10.416Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - NaN PT470H14M10.416S PT470H14M10.416S  {"timestamp":"2024-06-19T08:44:10.417Z"}
+[32minfo[39m: Fill Both Bottles - NaN PT470H14M10.417S PT470H14M10.417S  {"timestamp":"2024-06-19T08:44:10.418Z"}
+[32minfo[39m: Night Skin Care Routine - NaN PT470H14M10.419S PT470H14M10.419S  {"timestamp":"2024-06-19T08:44:10.419Z"}
+[32minfo[39m: Morning Skin Care Routine - NaN PT470H14M10.419S PT470H14M10.419S  {"timestamp":"2024-06-19T08:44:10.419Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - NaN PT470H14M10.42S PT470H14M10.42S  {"timestamp":"2024-06-19T08:44:10.420Z"}
+[32minfo[39m: Movies /tvshows / books update - NaN PT470H14M10.421S PT470H14M10.421S  {"timestamp":"2024-06-19T08:44:10.421Z"}
+[32minfo[39m: Financial Transactions update - NaN PT470H14M10.421S PT470H14M10.421S  {"timestamp":"2024-06-19T08:44:10.422Z"}
+[32minfo[39m: Daily - Today - NaN PT3878H14M10.422S PT3878H14M10.422S  {"timestamp":"2024-06-19T08:44:10.422Z"}
+[32minfo[39m: Calendar Dashboard Update - NaN PT470H14M10.423S PT470H14M10.423S  {"timestamp":"2024-06-19T08:44:10.423Z"}
+[32minfo[39m: Night Minoxidil - NaN PT470H14M10.425S PT470H14M10.425S  {"timestamp":"2024-06-19T08:44:10.425Z"}
+[32minfo[39m: Night Brush - NaN PT470H14M10.428S PT470H14M10.428S  {"timestamp":"2024-06-19T08:44:10.428Z"}
+[32minfo[39m: Bath - NaN PT470H14M10.428S PT470H14M10.428S  {"timestamp":"2024-06-19T08:44:10.429Z"}
+[32minfo[39m: Face Scrub - NaN PT470H14M10.429S PT470H14M10.429S  {"timestamp":"2024-06-19T08:44:10.430Z"}
+[32minfo[39m: Morning Minoxidil - NaN PT470H14M10.43S PT470H14M10.43S  {"timestamp":"2024-06-19T08:44:10.430Z"}
+[32minfo[39m: Morning Brush - NaN PT470H14M10.43S PT470H14M10.43S  {"timestamp":"2024-06-19T08:44:10.430Z"}
+[32minfo[39m: Drink Green Tea - NaN PT470H14M10.431S PT470H14M10.431S  {"timestamp":"2024-06-19T08:44:10.431Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:54:35.956Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:54:36.429Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:54:36.430Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:54:36.432Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:54:38.041Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:54:38.043Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:54:38.043Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:54:38.411Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:56:06.108Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:56:06.836Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:56:06.837Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:56:06.839Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:56:08.495Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:56:08.496Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:56:08.496Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:56:09.567Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T08:56:39.130Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:56:39.675Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T08:56:39.676Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T08:56:39.678Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T08:56:41.727Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T08:56:41.729Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T08:56:41.729Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T08:56:42.097Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T08:56:42.097Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T08:56:42.098Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - NaN 866 866  {"timestamp":"2024-06-19T08:56:42.103Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.103Z"}
+[32minfo[39m: Morning Sunlight - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.104Z"}
+[32minfo[39m: Finish Drinking 3 litres - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.106Z"}
+[32minfo[39m: Night Subconscious Programming  - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.107Z"}
+[32minfo[39m: Morning Subconscious Programming  - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.107Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.107Z"}
+[32minfo[39m: Fill Both Bottles - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.109Z"}
+[32minfo[39m: Night Skin Care Routine - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.109Z"}
+[32minfo[39m: Morning Skin Care Routine - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.110Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.110Z"}
+[32minfo[39m: Movies /tvshows / books update - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.111Z"}
+[32minfo[39m: Financial Transactions update - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.111Z"}
+[32minfo[39m: Daily - Today - NaN 232706 232706  {"timestamp":"2024-06-19T08:56:42.112Z"}
+[32minfo[39m: Calendar Dashboard Update - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.112Z"}
+[32minfo[39m: Night Minoxidil - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.114Z"}
+[32minfo[39m: Night Brush - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.114Z"}
+[32minfo[39m: Bath - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.115Z"}
+[32minfo[39m: Face Scrub - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.115Z"}
+[32minfo[39m: Morning Minoxidil - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.115Z"}
+[32minfo[39m: Morning Brush - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.115Z"}
+[32minfo[39m: Drink Green Tea - NaN 28226 28226  {"timestamp":"2024-06-19T08:56:42.115Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:06:52.207Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:06:52.671Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:06:52.671Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:06:52.672Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:06:54.590Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:06:54.592Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:06:54.592Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:06:54.964Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:06:54.964Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:06:54.965Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 876 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.971Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.971Z"}
+[32minfo[39m: Morning Sunlight - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.972Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.973Z"}
+[32minfo[39m: Night Subconscious Programming  - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.973Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.973Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.974Z"}
+[32minfo[39m: Fill Both Bottles - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.974Z"}
+[32minfo[39m: Night Skin Care Routine - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.975Z"}
+[32minfo[39m: Morning Skin Care Routine - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.975Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.975Z"}
+[32minfo[39m: Movies /tvshows / books update - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.976Z"}
+[32minfo[39m: Financial Transactions update - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.976Z"}
+[32minfo[39m: Daily - Today - 876 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.977Z"}
+[32minfo[39m: Calendar Dashboard Update - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.977Z"}
+[32minfo[39m: Night Minoxidil - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.979Z"}
+[32minfo[39m: Night Brush - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.980Z"}
+[32minfo[39m: Bath - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.980Z"}
+[32minfo[39m: Face Scrub - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.980Z"}
+[32minfo[39m: Morning Minoxidil - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.981Z"}
+[32minfo[39m: Morning Brush - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.981Z"}
+[32minfo[39m: Drink Green Tea - 28236 Invalid date Wed Jun 19 2024 14:36:54 GMT+0530  {"timestamp":"2024-06-19T09:06:54.981Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:09:38.205Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:09:38.737Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:09:38.737Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:09:38.739Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:09:40.823Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:09:40.824Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:09:40.824Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:09:41.252Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:09:41.252Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:09:41.253Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 879 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.257Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.258Z"}
+[32minfo[39m: Morning Sunlight - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.258Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28239 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.259Z"}
+[32minfo[39m: Night Subconscious Programming  - 28239 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.260Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28239 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.260Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.260Z"}
+[32minfo[39m: Fill Both Bottles - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.261Z"}
+[32minfo[39m: Night Skin Care Routine - 28239 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.262Z"}
+[32minfo[39m: Morning Skin Care Routine - 28239 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.262Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28239 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.262Z"}
+[32minfo[39m: Movies /tvshows / books update - 28239 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.263Z"}
+[32minfo[39m: Financial Transactions update - 28239 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.263Z"}
+[32minfo[39m: Daily - Today - 2319 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.264Z"}
+[32minfo[39m: Calendar Dashboard Update - 28239 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.265Z"}
+[32minfo[39m: Night Minoxidil - 28239 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.266Z"}
+[32minfo[39m: Night Brush - 28239 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.267Z"}
+[32minfo[39m: Bath - 28239 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.267Z"}
+[32minfo[39m: Face Scrub - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.267Z"}
+[32minfo[39m: Morning Minoxidil - 28239 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.268Z"}
+[32minfo[39m: Morning Brush - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.268Z"}
+[32minfo[39m: Drink Green Tea - 28239 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:39:41 GMT+0530  {"timestamp":"2024-06-19T09:09:41.268Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:11:00.561Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:11:01.316Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:11:01.317Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:11:01.317Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:11:06.184Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:11:06.186Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:11:06.186Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:11:06.693Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:11:06.693Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:11:06.693Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 881 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.694Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28241 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.694Z"}
+[32minfo[39m: Morning Sunlight - 28241 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.694Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28241 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.695Z"}
+[32minfo[39m: Night Subconscious Programming  - 28241 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.695Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28241 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.696Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28241 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.696Z"}
+[32minfo[39m: Fill Both Bottles - 28241 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.696Z"}
+[32minfo[39m: Night Skin Care Routine - 28241 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.697Z"}
+[32minfo[39m: Morning Skin Care Routine - 28241 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.697Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28241 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.697Z"}
+[32minfo[39m: Movies /tvshows / books update - 28241 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.698Z"}
+[32minfo[39m: Financial Transactions update - 28241 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.698Z"}
+[32minfo[39m: Daily - Today - 5201 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:41:06 GMT+0530  {"timestamp":"2024-06-19T09:11:06.699Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:11:06.699Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:24:57.620Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:24:58.309Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:24:58.309Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:24:58.311Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:25:00.250Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:25:00.252Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:25:00.252Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:25:01.329Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:25:01.330Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:25:01.330Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 895 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.336Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.337Z"}
+[32minfo[39m: Morning Sunlight - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.337Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28255 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.338Z"}
+[32minfo[39m: Night Subconscious Programming  - 28255 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.338Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28255 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.339Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.339Z"}
+[32minfo[39m: Fill Both Bottles - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.339Z"}
+[32minfo[39m: Night Skin Care Routine - 28255 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.340Z"}
+[32minfo[39m: Morning Skin Care Routine - 28255 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.341Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28255 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.341Z"}
+[32minfo[39m: Movies /tvshows / books update - 28255 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.342Z"}
+[32minfo[39m: Financial Transactions update - 28255 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.342Z"}
+[32minfo[39m: Daily - Today - 5215 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:55:01 GMT+0530  {"timestamp":"2024-06-19T09:25:01.343Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:25:01.343Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:25:26.422Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:25:26.900Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:25:26.900Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:25:26.903Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:25:28.907Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:25:28.909Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:25:28.909Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:25:29.845Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:25:29.846Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:25:29.846Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 895 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.852Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.852Z"}
+[32minfo[39m: Morning Sunlight - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.853Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28255 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.854Z"}
+[32minfo[39m: Night Subconscious Programming  - 28255 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.855Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28255 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.855Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.855Z"}
+[32minfo[39m: Fill Both Bottles - 28255 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.856Z"}
+[32minfo[39m: Night Skin Care Routine - 28255 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.856Z"}
+[32minfo[39m: Morning Skin Care Routine - 28255 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.857Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28255 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.857Z"}
+[32minfo[39m: Movies /tvshows / books update - 28255 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.859Z"}
+[32minfo[39m: Financial Transactions update - 28255 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.859Z"}
+[32minfo[39m: Daily - Today - 5215 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:55:29 GMT+0530  {"timestamp":"2024-06-19T09:25:29.860Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:25:29.862Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:26:53.509Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:26:54.032Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:26:54.033Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:26:54.035Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:26:56.299Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:26:56.300Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:26:56.300Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:26:56.770Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:26:56.770Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:26:56.771Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 896 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.776Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28256 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.777Z"}
+[32minfo[39m: Morning Sunlight - 28256 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.777Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28256 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.779Z"}
+[32minfo[39m: Night Subconscious Programming  - 28256 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.780Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28256 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.780Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28256 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.780Z"}
+[32minfo[39m: Fill Both Bottles - 28256 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.781Z"}
+[32minfo[39m: Night Skin Care Routine - 28256 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.782Z"}
+[32minfo[39m: Morning Skin Care Routine - 28256 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.782Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28256 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.783Z"}
+[32minfo[39m: Movies /tvshows / books update - 28256 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.784Z"}
+[32minfo[39m: Financial Transactions update - 28256 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.784Z"}
+[32minfo[39m: Daily - Today - 5216 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:56:56 GMT+0530  {"timestamp":"2024-06-19T09:26:56.785Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:26:56.787Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:28:11.879Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:28:12.468Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:28:12.469Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:28:12.470Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:28:14.414Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:28:14.416Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:28:14.416Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:28:14.839Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:28:14.839Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:28:14.840Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 898 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.847Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28258 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.847Z"}
+[32minfo[39m: Morning Sunlight - 28258 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.848Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28258 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.849Z"}
+[32minfo[39m: Night Subconscious Programming  - 28258 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.849Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28258 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.850Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28258 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.850Z"}
+[32minfo[39m: Fill Both Bottles - 28258 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.850Z"}
+[32minfo[39m: Night Skin Care Routine - 28258 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.851Z"}
+[32minfo[39m: Morning Skin Care Routine - 28258 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.851Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28258 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.852Z"}
+[32minfo[39m: Movies /tvshows / books update - 28258 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.853Z"}
+[32minfo[39m: Financial Transactions update - 28258 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.853Z"}
+[32minfo[39m: Daily - Today - 5218 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:58:14 GMT+0530  {"timestamp":"2024-06-19T09:28:14.855Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:28:14.858Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:29:33.033Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:29:33.982Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:29:33.983Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:29:33.985Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:29:35.932Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:29:35.932Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:29:35.933Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:29:36.439Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:29:36.439Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:29:36.439Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 899 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.445Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28259 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.446Z"}
+[32minfo[39m: Morning Sunlight - 28259 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.446Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28259 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.448Z"}
+[32minfo[39m: Night Subconscious Programming  - 28259 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.448Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28259 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.448Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28259 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.449Z"}
+[32minfo[39m: Fill Both Bottles - 28259 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.449Z"}
+[32minfo[39m: Night Skin Care Routine - 28259 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.450Z"}
+[32minfo[39m: Morning Skin Care Routine - 28259 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.450Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28259 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.451Z"}
+[32minfo[39m: Movies /tvshows / books update - 28259 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.452Z"}
+[32minfo[39m: Financial Transactions update - 28259 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.452Z"}
+[32minfo[39m: Daily - Today - 5219 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 14:59:36 GMT+0530  {"timestamp":"2024-06-19T09:29:36.453Z"}
+[32minfo[39m: creating page with this undefined {"timestamp":"2024-06-19T09:29:36.456Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:30:29.052Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:30:29.694Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:30:29.695Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:30:29.696Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:30:32.661Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:30:32.662Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:30:32.663Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:30:34.296Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:30:34.296Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:30:34.297Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 900 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.302Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.303Z"}
+[32minfo[39m: Morning Sunlight - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.303Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28260 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.304Z"}
+[32minfo[39m: Night Subconscious Programming  - 28260 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.305Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28260 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.305Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.305Z"}
+[32minfo[39m: Fill Both Bottles - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.306Z"}
+[32minfo[39m: Night Skin Care Routine - 28260 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.306Z"}
+[32minfo[39m: Morning Skin Care Routine - 28260 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.307Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28260 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.307Z"}
+[32minfo[39m: Movies /tvshows / books update - 28260 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.308Z"}
+[32minfo[39m: Financial Transactions update - 28260 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.308Z"}
+[32minfo[39m: Daily - Today - 900 Wed Jun 19 2024 14:30:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.308Z"}
+[32minfo[39m: Calendar Dashboard Update - 28260 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.309Z"}
+[32minfo[39m: Night Minoxidil - 28260 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.311Z"}
+[32minfo[39m: Night Brush - 28260 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.312Z"}
+[32minfo[39m: Bath - 28260 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.312Z"}
+[32minfo[39m: Face Scrub - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.312Z"}
+[32minfo[39m: Morning Minoxidil - 28260 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.313Z"}
+[32minfo[39m: Morning Brush - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.313Z"}
+[32minfo[39m: Drink Green Tea - 28260 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:00:34 GMT+0530  {"timestamp":"2024-06-19T09:30:34.313Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:32:15.091Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:32:15.984Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:32:15.984Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:32:15.986Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:32:18.750Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:32:18.752Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:32:18.752Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:32:20.871Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:32:20.871Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:32:20.871Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 902 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.876Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28262 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.876Z"}
+[32minfo[39m: Morning Sunlight - 28262 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.877Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28262 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.878Z"}
+[32minfo[39m: Night Subconscious Programming  - 28262 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.878Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28262 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.879Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28262 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.879Z"}
+[32minfo[39m: Fill Both Bottles - 28262 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.879Z"}
+[32minfo[39m: Night Skin Care Routine - 28262 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.880Z"}
+[32minfo[39m: Morning Skin Care Routine - 28262 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.880Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28262 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.881Z"}
+[32minfo[39m: Movies /tvshows / books update - 28262 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.883Z"}
+[32minfo[39m: Financial Transactions update - 28262 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.884Z"}
+[32minfo[39m: Daily - Today - 10982 Wed Jun 19 2024 15:00:00 GMT+0530 Wed Jun 19 2024 15:02:20 GMT+0530  {"timestamp":"2024-06-19T09:32:20.884Z"}
+[32minfo[39m: creating page with this {"parent":{"type":"database_id","database_id":"00b62d4985b345ff8393b38ffba3c915"},"properties":{"Name":{"title":[{"text":{"content":"Daily - Today"}}]},"Tags":{"multi_select":[{"name":"Trial"}]},"Scheduler":{"relation":[{"id":"8e803177-1814-4bee-b059-4dbbae1aa3ec"}]}}} {"timestamp":"2024-06-19T09:32:20.887Z"}
+[32minfo[39m: sucessfully created page 678f7d36-d8cb-40eb-9921-bdaa84dfb4f8 {"timestamp":"2024-06-19T09:32:23.867Z"}
+[32minfo[39m: modifying page 8e803177-1814-4bee-b059-4dbbae1aa3ec with this {"properties":{"Last Triggered Date":{}}} {"timestamp":"2024-06-19T09:32:23.867Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T09:51:28.561Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:51:29.040Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T09:51:29.041Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T09:51:29.043Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T09:51:30.771Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T09:51:30.773Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T09:51:30.774Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T09:51:31.182Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T09:51:31.182Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T09:51:31.182Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 921 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.188Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28281 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.188Z"}
+[32minfo[39m: Morning Sunlight - 28281 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.189Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28281 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.190Z"}
+[32minfo[39m: Night Subconscious Programming  - 28281 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.190Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28281 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.190Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28281 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.191Z"}
+[32minfo[39m: Fill Both Bottles - 28281 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.191Z"}
+[32minfo[39m: Night Skin Care Routine - 28281 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.192Z"}
+[32minfo[39m: Morning Skin Care Routine - 28281 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.192Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28281 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.193Z"}
+[32minfo[39m: Movies /tvshows / books update - 28281 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.194Z"}
+[32minfo[39m: Financial Transactions update - 28281 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.194Z"}
+[32minfo[39m: Daily - Today - 11001 Wed Jun 19 2024 15:00:00 GMT+0530 Wed Jun 19 2024 15:21:31 GMT+0530  {"timestamp":"2024-06-19T09:51:31.194Z"}
+[32minfo[39m: creating page with this {"parent":{"type":"database_id","database_id":"00b62d4985b345ff8393b38ffba3c915"},"properties":{"Name":{"title":[{"text":{"content":"Daily - Today"}}]},"Tags":{"multi_select":[{"name":"Trial"}]},"Scheduler":{"relation":[{"id":"8e803177-1814-4bee-b059-4dbbae1aa3ec"}]}}} {"timestamp":"2024-06-19T09:51:31.197Z"}
+[32minfo[39m: sucessfully created page 000252c8-c432-4156-9906-40734e9c4bbd {"timestamp":"2024-06-19T09:51:33.133Z"}
+[32minfo[39m: modifying page 8e803177-1814-4bee-b059-4dbbae1aa3ec with this {"properties":{"Last Triggered Date":{"date":{"start":"2024-06-19"}}}} {"timestamp":"2024-06-19T09:51:33.134Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T10:13:08.683Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T10:13:09.594Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T10:13:09.595Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T10:13:09.597Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T10:13:11.310Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T10:13:11.313Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T10:13:11.313Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T10:13:11.659Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T10:13:11.660Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T10:13:11.660Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 943 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.665Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.666Z"}
+[32minfo[39m: Morning Sunlight - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.666Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28303 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.667Z"}
+[32minfo[39m: Night Subconscious Programming  - 28303 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.668Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28303 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.668Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.669Z"}
+[32minfo[39m: Fill Both Bottles - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.669Z"}
+[32minfo[39m: Night Skin Care Routine - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.670Z"}
+[32minfo[39m: Morning Skin Care Routine - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.670Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28303 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.671Z"}
+[32minfo[39m: Movies /tvshows / books update - 28303 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.672Z"}
+[32minfo[39m: Financial Transactions update - 28303 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.672Z"}
+[32minfo[39m: Daily - Today - 2383 Wed Jun 19 2024 15:30:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.673Z"}
+[32minfo[39m: Calendar Dashboard Update - 28303 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.673Z"}
+[32minfo[39m: Night Minoxidil - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.675Z"}
+[32minfo[39m: Night Brush - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.675Z"}
+[32minfo[39m: Bath - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.676Z"}
+[32minfo[39m: Face Scrub - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.676Z"}
+[32minfo[39m: Morning Minoxidil - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.676Z"}
+[32minfo[39m: Morning Brush - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.676Z"}
+[32minfo[39m: Drink Green Tea - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:11 GMT+0530  {"timestamp":"2024-06-19T10:13:11.677Z"}
+[32minfo[39m: querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}} {"timestamp":"2024-06-19T10:13:46.306Z"}
+[32minfo[39m: sucessfully queried database - length - 0 - has_more - false - cursor - null {"timestamp":"2024-06-19T10:13:46.774Z"}
+[32minfo[39m: Current Location: Home {"timestamp":"2024-06-19T10:13:46.775Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]}} {"timestamp":"2024-06-19T10:13:46.777Z"}
+[32minfo[39m: sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed {"timestamp":"2024-06-19T10:13:48.369Z"}
+[32minfo[39m: sucessfully modified results - length - 100 - has_more - true {"timestamp":"2024-06-19T10:13:48.371Z"}
+[32minfo[39m: querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-19"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"} {"timestamp":"2024-06-19T10:13:48.371Z"}
+[32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-19T10:13:49.199Z"}
+[32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-19T10:13:49.199Z"}
+[32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-19T10:13:49.200Z"}
+[32minfo[39m: Consume Whey Protein - 1 Scoop - 943 Wed Jun 19 2024 13:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.206Z"}
+[32minfo[39m: Consume 1000mg omega 3 fatty acids per day - flaxseeds - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.207Z"}
+[32minfo[39m: Morning Sunlight - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.207Z"}
+[32minfo[39m: Finish Drinking 3 litres - 28303 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.209Z"}
+[32minfo[39m: Night Subconscious Programming  - 28303 Wed Jun 19 2024 22:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.209Z"}
+[32minfo[39m: Morning Subconscious Programming  - 28303 Wed Jun 19 2024 05:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.210Z"}
+[32minfo[39m: Daily Min 10 Competitive Coding Problems - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.210Z"}
+[32minfo[39m: Fill Both Bottles - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.210Z"}
+[32minfo[39m: Night Skin Care Routine - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.211Z"}
+[32minfo[39m: Morning Skin Care Routine - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.211Z"}
+[32minfo[39m: Strength/HIIT/Stamina training - 28303 Wed Jun 19 2024 06:30:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.211Z"}
+[32minfo[39m: Movies /tvshows / books update - 28303 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.212Z"}
+[32minfo[39m: Financial Transactions update - 28303 Wed Jun 19 2024 21:00:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.213Z"}
+[32minfo[39m: Daily - Today - 3823 Wed Jun 19 2024 15:30:00 GMT+0530 Wed Jun 19 2024 15:43:49 GMT+0530  {"timestamp":"2024-06-19T10:13:49.214Z"}
+[32minfo[39m: creating page with this {"parent":{"type":"database_id","database_id":"00b62d4985b345ff8393b38ffba3c915"},"properties":{"Name":{"title":[{"text":{"content":"Daily - Today"}}]},"Tags":{"multi_select":[{"name":"Trial"}]},"Scheduler":{"relation":[{"id":"8e803177-1814-4bee-b059-4dbbae1aa3ec"}]}}} {"timestamp":"2024-06-19T10:13:49.216Z"}
+[32minfo[39m: sucessfully created page dea9daf8-b092-4bcf-8b74-152baf2e755a {"timestamp":"2024-06-19T10:13:50.410Z"}
+[32minfo[39m: modifying page 8e803177-1814-4bee-b059-4dbbae1aa3ec with this {"properties":{"Last Triggered Date":{"date":{"start":"2024-06-19"}}}} {"timestamp":"2024-06-19T10:13:50.411Z"}
+[32minfo[39m: sucessfully created page 8e803177-1814-4bee-b059-4dbbae1aa3ec {"timestamp":"2024-06-19T10:13:52.070Z"}
+[32minfo[39m: Calendar Dashboard Update - 28303 Wed Jun 19 2024 23:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.072Z"}
+[32minfo[39m: Night Minoxidil - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.075Z"}
+[32minfo[39m: Night Brush - 28303 Wed Jun 19 2024 20:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.076Z"}
+[32minfo[39m: Bath - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.076Z"}
+[32minfo[39m: Face Scrub - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.077Z"}
+[32minfo[39m: Morning Minoxidil - 28303 Wed Jun 19 2024 08:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.078Z"}
+[32minfo[39m: Morning Brush - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.078Z"}
+[32minfo[39m: Drink Green Tea - 28303 Wed Jun 19 2024 06:00:00 GMT+0530 Wed Jun 19 2024 15:43:52 GMT+0530  {"timestamp":"2024-06-19T10:13:52.078Z"}
