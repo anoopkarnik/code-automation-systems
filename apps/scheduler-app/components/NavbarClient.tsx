@@ -15,7 +15,7 @@ export default function NavbarClient() {
 
     return (
             <Navbar 
-                appName="Scheduler"
+                appName="BWA"
                 appIcon=""
                 screens={[
                 ]}

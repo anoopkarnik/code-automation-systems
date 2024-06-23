@@ -258,3 +258,23 @@
 [32minfo[39m: sucessfully queried database - length - 2 - has_more - false - cursor - null {"timestamp":"2024-06-20T09:00:08.183Z"}
 [32minfo[39m: sucessfully modified results - length - 102 - has_more - false {"timestamp":"2024-06-20T09:00:08.184Z"}
 [32minfo[39m: Current Scheduler details length - 102} {"timestamp":"2024-06-20T09:00:08.184Z"}
+[32minfo[39m: Jun-23-2024 21:30:00: 	querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}}
+[32minfo[39m: Jun-23-2024 21:30:00: 	querying database 737eabd7fcc34900ba4e408bd43570ce with this {"filter":{"and":[{"property":"End Time","date":{"is_empty":true}}]}}
+[32minfo[39m: Jun-23-2024 21:30:00: 	sucessfully queried database - length - 0 - has_more - false - cursor - null
+[32minfo[39m: Jun-23-2024 21:30:00: 	Current Location: Home
+[32minfo[39m: Jun-23-2024 21:30:01: 	querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-23"}},{"property":"Location","multi_select":{"contains":"Home"}}]}}
+[32minfo[39m: Jun-23-2024 21:30:02: 	sucessfully queried database - length - 0 - has_more - false - cursor - null
+[32minfo[39m: Jun-23-2024 21:30:02: 	Current Location: Home
+[32minfo[39m: Jun-23-2024 21:30:02: 	querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-23"}},{"property":"Location","multi_select":{"contains":"Home"}}]}}
+[32minfo[39m: Jun-23-2024 21:30:04: 	sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed
+[32minfo[39m: Jun-23-2024 21:30:04: 	sucessfully modified results - length - 100 - has_more - true
+[32minfo[39m: Jun-23-2024 21:30:04: 	querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-23"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"}
+[32minfo[39m: Jun-23-2024 21:30:04: 	sucessfully queried database - length - 100 - has_more - true - cursor - 50f9e8c3-6628-4114-98aa-89d5507f67ed
+[32minfo[39m: Jun-23-2024 21:30:04: 	sucessfully modified results - length - 100 - has_more - true
+[32minfo[39m: Jun-23-2024 21:30:04: 	querying database 3206c6d48bb04c2e803c211ca426668d with this {"filter":{"and":[{"property":"Start Date","date":{"on_or_before":"2024-06-23"}},{"property":"Location","multi_select":{"contains":"Home"}}]},"start_cursor":"50f9e8c3-6628-4114-98aa-89d5507f67ed"}
+[32minfo[39m: Jun-23-2024 21:30:05: 	sucessfully queried database - length - 2 - has_more - false - cursor - null
+[32minfo[39m: Jun-23-2024 21:30:05: 	sucessfully modified results - length - 102 - has_more - false
+[32minfo[39m: Jun-23-2024 21:30:05: 	Current Scheduler details length - 102}
+[32minfo[39m: Jun-23-2024 21:30:05: 	sucessfully queried database - length - 2 - has_more - false - cursor - null
+[32minfo[39m: Jun-23-2024 21:30:05: 	sucessfully modified results - length - 102 - has_more - false
+[32minfo[39m: Jun-23-2024 21:30:05: 	Current Scheduler details length - 102}
