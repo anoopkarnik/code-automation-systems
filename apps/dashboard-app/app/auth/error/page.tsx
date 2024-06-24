@@ -1,5 +1,5 @@
 "use client"
-import QuoteClient from '../../../components/QuoteClient';
+import QuoteClient from '../../../components/auth/QuoteClient';
 import ErrorClient from '../../../components/ErrorClient';
 
 export default function page() {

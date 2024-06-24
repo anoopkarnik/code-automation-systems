@@ -1,0 +1,78 @@
+model LocalGoogleCredential {
+  id          String @id @default(uuid())
+  accessToken String @unique
+
+  folderId   String?
+  pageToken  String?
+  channelId  String  @unique @default(uuid())
+  subscribed Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String  @unique
+  user   User @relation(fields: [userId], references: [id])
+
+  @@schema("workflow_schema")
+}
+
+model DiscordWebhook {
+  id          String        @id @default(uuid())
+  webhookId   String        @unique
+  url         String        @unique
+  name        String
+  guildName   String
+  guildId     String
+  channelId   String        @unique
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
+  connections Connections[]
+
+  @@schema("workflow_schema")
+}
+
+model Notion {
+  id            String        @id @default(uuid())
+  accessToken   String        @unique
+  workspaceId   String        @unique
+  databaseId    String        @unique
+  workspaceName String
+  workspaceIcon String
+  User          User          @relation(fields: [userId], references: [id])
+  userId        String
+  connections   Connections[]
+
+  @@schema("workflow_schema")
+}
+
+model Connections {
+  id               String          @id @default(uuid())
+  type             String          @unique
+  DiscordWebhook   DiscordWebhook? @relation(fields: [discordWebhookId], references: [id])
+  discordWebhookId String?
+  Notion           Notion?         @relation(fields: [notionId], references: [id])
+  notionId         String?
+  User             User?           @relation(fields: [userId], references: [id])
+  userId           String?
+
+  @@schema("workflow_schema")
+}
+
+model Workflows {
+  id                String   @id @default(uuid())
+  nodes             String?
+  edges             String?
+  name              String
+  discordTemplate   String?
+  notionTemplate    String?
+  notionAccessToken String?
+  notionDbId        String?
+  flowPath          String?
+  cronPath          String?
+  publish           Boolean? @default(false)
+  description       String
+  User              User     @relation(fields: [userId], references: [id])
+  userId            String
+
+  @@schema("workflow_schema")
+}

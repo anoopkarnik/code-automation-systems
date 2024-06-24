@@ -1,7 +1,7 @@
 'use client'
 
-import LeftSidebar from "@repo/ui/organisms/common/LeftSidebar";
-import { BadgeCentIcon, Briefcase, BriefcaseIcon, Library, LibraryIcon, Notebook, NotebookIcon } from "lucide-react";
+import LeftSidebar from "@repo/ui/organisms/home/LeftSidebar";
+import { BadgeCentIcon, BluetoothConnectedIcon, Briefcase, BriefcaseIcon, Library, LibraryIcon, Notebook, NotebookIcon, WorkflowIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 
@@ -26,6 +26,16 @@ const sidebarItems = [
       title: "Knowledge Base",
       icon: LibraryIcon,
       href: "/dashboard/knowledge-base"
+  },
+  {
+      title: "Workflows",
+      icon: WorkflowIcon,
+      href: "/dashboard/workflows"
+  },
+  {
+      title: "Connections",
+      icon: BluetoothConnectedIcon,
+      href: "/dashboard/connections"
   }
 ]
 

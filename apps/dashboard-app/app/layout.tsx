@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter,DM_Sans } from "next/font/google";
 import "@repo/ui/styles/shadcn-rose"
-import { ThemeProvider } from "./theme-provider"
-import { SessionProviders } from "./session-provider";
+import { ThemeProvider } from "../providers/theme-provider"
+import { SessionProviders } from "../providers/session-provider";
 
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const font = DM_Sans({
+  subsets: ["latin"]
 })
 
 export const metadata: Metadata = {
@@ -22,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={font.className}>
         <SessionProviders>
           <ThemeProvider attribute="class"  defaultTheme="dark" enableSystem disableTransitionOnChange>
             {children}

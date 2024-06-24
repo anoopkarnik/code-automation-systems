@@ -1,10 +1,10 @@
 'use client'
 
-import { Navbar } from "@repo/ui/organisms/common/Navbar"
+import { Navbar } from "@repo/ui/organisms/home/Navbar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "../hooks/useCurrentUser";
-import { resetPasswordSettings } from "../ actions/reset-password-settings";
+import { resetPasswordSettings } from "../actions/settings/reset-password-settings";
 import { signOut } from "next-auth/react";
 
 export default function NavbarClient() {
