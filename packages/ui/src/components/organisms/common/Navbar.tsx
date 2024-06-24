@@ -1,5 +1,5 @@
-import { Button } from './ui/Button';
-import { Avatar, AvatarImage,AvatarFallback } from './ui/Avatar';
+import { Button } from '../../molecules/shadcn/Button';
+import { Avatar, AvatarImage,AvatarFallback } from '../../molecules/shadcn/Avatar';
 import { Theme } from './Theme';
 import { GoTriangleDown } from "react-icons/go";
 import { UserDropdown } from './UserDropdown';
@@ -29,7 +29,7 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,
     border-b-2 '>
         <div className='flex items-center gap-4'>
             {appIcon && <img src={appIcon} alt={appName} className='w-10 h-10'/>}
-            {appName && <h1 className='text-2xl font-bold'>{appName}</h1>}
+            {appName && <h1 className='text-2xl font-bold hidden sm:block'>{appName}</h1>}
         </div>
         <div className='flex items-center'>
             {screens && screens.map((screen, index) => (

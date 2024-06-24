@@ -1,5 +1,5 @@
 import { FormResult } from './FormResult';
-import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
+import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadcn/Card';
 
 import { BeatLoader } from 'react-spinners';
 

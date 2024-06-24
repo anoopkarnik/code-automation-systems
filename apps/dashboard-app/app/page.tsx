@@ -8,6 +8,6 @@ export default async function Home() {
   if (!session){
     redirect('/auth/login')
   }else{
-    redirect('/dashboard/practise-apps')
+    redirect('/dashboard')
   }
 }

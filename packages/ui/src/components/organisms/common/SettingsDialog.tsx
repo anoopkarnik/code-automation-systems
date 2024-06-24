@@ -5,15 +5,15 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/Card"
+} from "../../molecules/shadcn/Card"
 
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "./ui/Tabs"
-import Modal from "./ui/Modal"
+} from "../../molecules/shadcn/Tabs"
+import Modal from "../../molecules/shadcn/Modal"
 import ResetPasswordSettingsCard from "./ResetPasswordSettingsCard"
 
 export function SettingsDialog({onClose,user,resetFunction}:any) {

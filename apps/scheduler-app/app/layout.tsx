@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@repo/ui/styles/shadcn-rose"
-import { ThemeProvider } from "../components/theme-provider"
-import { SessionProviders } from "../components/session-provider";
+import { ThemeProvider } from "./theme-provider"
+import { SessionProviders } from "./session-provider";
 
 
 const inter = Inter({

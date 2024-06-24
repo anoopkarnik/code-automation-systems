@@ -1,4 +1,4 @@
-import  Quote  from "@repo/ui/components/Quote"
+import  Quote  from "@repo/ui/organisms/common/Quote"
 
 export default function QuoteClient() {
   return (

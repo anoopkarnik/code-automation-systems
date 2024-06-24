@@ -1,4 +1,4 @@
-import { Card,  CardFooter, CardHeader } from './ui/Card';
+import { Card,  CardFooter, CardHeader } from '../../molecules/shadcn/Card';
 import { BsExclamationTriangle } from 'react-icons/bs';
 
 interface ErrorCardProps {

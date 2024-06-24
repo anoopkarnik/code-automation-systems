@@ -11,7 +11,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-  } from "./ui/Dropdown"
+  } from "../../molecules/shadcn/Dropdown"
 import { SettingsDialog } from "./SettingsDialog"
 import { useState } from "react"
   

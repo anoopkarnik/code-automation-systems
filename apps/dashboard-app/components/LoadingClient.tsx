@@ -1,11 +1,9 @@
 "use client"
 
-import LoadingCard from '@repo/ui/components/LoadingCard';
-import { useRouter } from 'next/navigation';
+import LoadingCard from '@repo/ui/organisms/common/LoadingCard';
 
 
 export default function LoadingClient() {
-    const router = useRouter();
 
     return (
         <LoadingCard

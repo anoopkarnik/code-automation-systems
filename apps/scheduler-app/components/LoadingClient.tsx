@@ -1,6 +1,6 @@
 "use client"
 
-import LoadingCard from '@repo/ui/components/LoadingCard';
+import LoadingCard from '@repo/ui/organisms/common/LoadingCard';
 import { useRouter } from 'next/navigation';
 
 

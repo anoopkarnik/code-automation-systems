@@ -1,5 +1,5 @@
 "use client"
-import LoginCard from '@repo/ui/components/LoginCard';
+import LoginCard from '@repo/ui/organisms/common/LoginCard';
 import { signIn} from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { login } from '../actions/login';

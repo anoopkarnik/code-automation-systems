@@ -1,8 +1,8 @@
 import  { useState } from 'react'
 import {z} from "zod"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/Card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../molecules/shadcn/Card';
 import { useTransition } from 'react';
-import { Button } from './ui/Button';
+import { Button } from '../../molecules/shadcn/Button';
 import {  ResetPasswordSettingsSchema } from '@repo/zod/index'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/Form"
-import { Input } from './ui/Input';
+} from "../../molecules/shadcn/Form"
+import { Input } from '../../molecules/shadcn/Input';
 import { FormResult } from './FormResult';
 
 interface ResetPasswordSettingsCardProps {

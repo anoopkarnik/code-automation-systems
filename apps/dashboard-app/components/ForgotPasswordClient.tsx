@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ForgotPasswordCard from '@repo/ui/components/ForgotPasswordCard';
+import ForgotPasswordCard from '@repo/ui/organisms/common/ForgotPasswordCard';
 import { ForgotPassword } from '../ actions/forgot-password';
 
 

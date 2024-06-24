@@ -1,7 +1,7 @@
 "use client"
 
 
-import VerificationCard from '@repo/ui/components/VerificationCard';
+import VerificationCard from '@repo/ui/organisms/common/VerificationCard';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { newVerification } from '../ actions/new-verification';

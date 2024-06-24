@@ -1,6 +1,6 @@
 "use client"
 
-import ErrorCard from '@repo/ui/components/ErrorCard';
+import ErrorCard from '@repo/ui/organisms/common/ErrorCard';
 import { useRouter } from 'next/navigation';
 
 

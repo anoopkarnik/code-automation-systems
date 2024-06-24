@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {z} from "zod"
-import { Card, CardContent, CardFooter, CardHeader } from './ui/Card';
+import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadcn/Card';
 import { useTransition } from 'react';
-import { Button } from './ui/Button';
-import { ResetPasswordSchema } from '@repo/zod/index'
+import { Button } from '../../molecules/shadcn/Button';
+import { ForgotPasswordSchema } from '@repo/zod/index'
 import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -13,25 +13,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/Form"
-import { Input } from './ui/Input';
+} from "../../molecules/shadcn/Form"
+import { Input } from '../../molecules/shadcn/Input';
 import { FormResult } from './FormResult';
 
-interface ResetPasswordCardProps {
+interface ForgotPasswordCardProps {
   errorMessage?:string;  
   successMessage?:string;
-  token?:string;
   resetFunction?:any; 
   backFunction?:any;
 }
 
-const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,backFunction}
-  :ResetPasswordCardProps
+const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction,backFunction}
+  :ForgotPasswordCardProps
 ) => {
-  const form = useForm<z.infer<typeof ResetPasswordSchema>>({
-    resolver: zodResolver(ResetPasswordSchema),
+  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues:{
-      password: '',
+      email: '',
     },
   })
   const [error, setError] = useState<string | undefined>(errorMessage)
@@ -39,11 +38,11 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
 
   const [isPending, startTransition] = useTransition()
 
-  function handleSubmit(data: z.infer<typeof ResetPasswordSchema>) {
+  function handleSubmit(data: z.infer<typeof ForgotPasswordSchema>) {
     setError("")
     setSuccess("")
     startTransition(()=>{
-      resetFunction(token,data.password)
+      resetFunction(data.email)
       .then((data:any)=>{
             setError(data?.error);
             setSuccess(data?.success);
@@ -53,18 +52,18 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
   return (
     <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
-        <div className='text-6xl font-bold text-center'>Reset Password</div>
-        <div className='text-md font-extralight text-center'>Enter New Password</div>
+        <div className='text-6xl font-bold text-center'>Forgot Password</div>
+        <div className='text-md font-extralight text-center'>Send Reset Password Mail</div>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-6'>
             <div className='space-y-4 mb-4'>
-              <FormField control={form.control} name="password" render={({field})=>(
+              <FormField control={form.control} name="email" render={({field})=>(
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input disabled={isPending} className='bg-white' type="password" placeholder='******' {...field}/>
+                    <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
                   </FormControl>
                   <FormMessage/>
                 </FormItem>
@@ -72,7 +71,7 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
             </div>
             <FormResult type="error" message={error }/>
             <FormResult type="success" message={success}/>
-            <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Reset Password</Button>
+            <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Send Email</Button>
           </form>
         </Form>
       </CardContent>
@@ -83,4 +82,4 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
   )
 }
 
-export default ResetPasswordCard;
+export default ForgotPasswordCard;

@@ -1,6 +1,6 @@
 'use client'
 
-import { Navbar } from "@repo/ui/components/Navbar"
+import { Navbar } from "@repo/ui/organisms/common/Navbar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
 import { logout } from "../actions/logout";   

@@ -1,4 +1,4 @@
-import { Card, CardContent } from './ui/Card';
+import { Card, CardContent } from '../../molecules/shadcn/Card';
 import { BeatLoader } from 'react-spinners';
 
 const LoadingCard = (

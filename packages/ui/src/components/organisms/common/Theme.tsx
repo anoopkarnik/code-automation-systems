@@ -2,13 +2,13 @@
 
 import { Moon, Sun } from "lucide-react"
 
-import { Button } from "./ui/Button"
+import { Button } from "../../molecules/shadcn/Button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/Dropdown"
+} from "../../molecules/shadcn/Dropdown"
 
 export function Theme({setTheme}:any) {
 

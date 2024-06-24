@@ -2,10 +2,10 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ResetPasswordCard from '@repo/ui/components/ResetPasswordCard';
+import ResetPasswordCard from '@repo/ui/organisms/common/ResetPasswordCard';
 import { resetPassword} from '../ actions/reset-password';
 import { verifyResetToken } from '../ actions/verify-reset-token';
-import ErrorCard from '@repo/ui/components/ErrorCard';
+import ErrorCard from '@repo/ui/organisms/common/ErrorCard';
 
 
 export default function ResetPasswordClient() {

@@ -1,17 +1,18 @@
 'use client'
 import { cn } from '@repo/ui/lib/utils'
-import { MenuIcon} from 'lucide-react'
+import { LogOut, MenuIcon} from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { ChevronsLeft } from 'lucide-react'
+import { ChevronsLeft,LucideIcon } from 'lucide-react'
 
 interface LeftSidebarProps {
-    children: React.ReactNode;
+    sidebarItems:any
+    redirect: (href: string) => void
 }
 
-const LeftSidebar = ({children}:LeftSidebarProps) => {
 
+const LeftSidebar = ({sidebarItems,redirect}:LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
     const isResizingRef = useRef(false);
@@ -96,21 +97,31 @@ const LeftSidebar = ({children}:LeftSidebarProps) => {
             isResetting && "transition-all ease-in-out duration-300",
             isMobile && "w-0"
         )}>
-            <div onClick={collapse} className={cn('rounded-lg hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition cursor-pointer',
+            <div onClick={collapse} className={cn('rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition cursor-pointer',
                 isMobile && "opacity-100",
             )}>
                 <ChevronsLeft className='h-6 w-6'/>
             </div>
-            {children}
+            <div className='mt-10 ml-2'>
+                {sidebarItems.map((item:any,index:number)=>(
+                    <div key={index} onClick={()=>redirect(item.href)}
+                    className={cn('flex items-center gap-2 p-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition cursor-pointer mb-4 ',
+                        pathname === item.href && 'bg-neutral-600'
+                    )}>
+                        <item.icon className='h-6 w-6' />
+                        <span>{item.title}</span>
+                    </div>
+                ))}
+            </div>
             <div onMouseDown={handleMouseDown} onClick={resetWidth}
             className='opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0'/>
         </div>
-        <div ref={navbarRef} className={cn('absolute z-[9999] left-60 w-[calc(100%-240px)] ',
+        <div ref={navbarRef} className={cn('absolute z-[9999] left-60 w-[calc(100%-240px)] top-[50%]  ',
             isResetting && "transition-all ease-in-out duration-300",
             isMobile && "left-[0px] w-full"
         )}>
             <nav className='bg-transparent px-3 py-2 w-full '>
-                {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className='text-white h-6 w-6'/>}
+                {isCollapsed && <LogOut onClick={resetWidth} role="button" className='text-black dark:text-white h-6 w-6'/>}
             </nav>
 
         </div>
