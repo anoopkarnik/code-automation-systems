@@ -1,7 +1,7 @@
 "use client"
 
-import QuoteClient from '../../../components/auth/QuoteClient';
-import ForgotPasswordClient from '../../../components/auth/ForgotPasswordClient';
+import QuoteClient from '../_components/QuoteClient';
+import ForgotPasswordClient from '../_components/ForgotPasswordClient';
 import { Suspense } from 'react';
 import LoadingClient from '../../../components/LoadingClient';
 

@@ -1,9 +1,9 @@
 "use client"
 import RegisterCard from '@repo/ui/organisms/auth/RegisterCard';
 import { useRouter } from 'next/navigation';
-import { register } from '../../actions/auth/register';
+import { register } from '../../../actions/auth/register';
 import { signIn,useSession } from 'next-auth/react';
-import { DEFAULT_LOGIN_REDIRECT } from '../../routes';
+import { DEFAULT_LOGIN_REDIRECT } from '../../../routes';
 
 export default function RegisterClient() {
     const router = useRouter();

@@ -1,7 +1,7 @@
 "use client"
 
-import QuoteClient from '../../../components/auth/QuoteClient';
-import RegisterClient from '../../../components/auth/RegisterClient';
+import QuoteClient from '../_components/QuoteClient';
+import RegisterClient from '../_components/RegisterClient';
 import { Suspense } from 'react';
 import LoadingClient from '../../../components/LoadingClient';
 

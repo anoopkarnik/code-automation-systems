@@ -1,7 +1,7 @@
 "use client"
 import { Suspense } from 'react';
-import QuoteClient from '../../../components/auth/QuoteClient';
-import VerificationClient from '../../../components/auth/VerificationClient';
+import QuoteClient from '../_components/QuoteClient';
+import VerificationClient from '../_components/VerificationClient';
 import LoadingClient from '../../../components/LoadingClient';
 
 export default function page() {

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ForgotPasswordCard from '@repo/ui/organisms/auth/ForgotPasswordCard';
-import { ForgotPassword } from '../../actions/auth/forgot-password';
+import { ForgotPassword } from '../../../actions/auth/forgot-password';
 
 
 export default function ForgotPasswordClient() {

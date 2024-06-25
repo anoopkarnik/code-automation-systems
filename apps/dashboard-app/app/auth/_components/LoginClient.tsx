@@ -2,8 +2,8 @@
 import LoginCard from '@repo/ui/organisms/auth/LoginCard';
 import { signIn} from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { login } from '../../actions/auth/login';
-import { DEFAULT_LOGIN_REDIRECT } from '../../routes';
+import { login } from '../../../actions/auth/login';
+import { DEFAULT_LOGIN_REDIRECT } from '../../../routes';
 
 
 export default function LoginClient() {
