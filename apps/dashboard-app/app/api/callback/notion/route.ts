@@ -5,7 +5,7 @@ import { Client } from '@notionhq/client';
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get('code');
   const encoded = Buffer.from(
-    `5f2da6f3-8d58-419a-829b-0d3c66ab082b:secret_p6CJXm8dTi1iB1PeXe0MGEWFwJItnd70H8QYzNWDLzB`
+    `${process.env.NEXT_PUBLIC_NOTION_CLIENT_ID}:${process.env.NEXT_PUBLIC_NOTION_CLIENT_SECRET}`
   ).toString('base64');
   if (code) {
     const response = await axios('https://api.notion.com/v1/oauth/token', {
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
       data: JSON.stringify({
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: 'http://localhost:4000/api/callback/notion',
+        redirect_uri: process.env.NEXT_PUBLIC_NOTION_REDIRECT_URI,
       }),
     });
     if (response) {
