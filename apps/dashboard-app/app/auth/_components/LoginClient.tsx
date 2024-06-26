@@ -13,6 +13,7 @@ export default function LoginClient() {
      "Email already in use with different provider" : ""
     return (
         <LoginCard
+            showEmail={true}
             showGithubProvider={true}
             showGoogleProvider={true}
             showLinkedinProvider={true}
