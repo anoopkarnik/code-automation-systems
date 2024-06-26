@@ -12,6 +12,8 @@
     "@repo/next-auth": "*",
     "@repo/resend-email": "*",
     "@repo/ui": "*",
+    "@repo/prisma-db": "*",
+    "@repo/winston-logger": "*",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

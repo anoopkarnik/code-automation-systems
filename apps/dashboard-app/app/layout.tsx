@@ -10,8 +10,8 @@ const font = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Personal Dashboard",
-  description: "Personal Dashboard for all your personal and professional data",
+  title: "Personal Automation Dashboard",
+  description: "Personal Automation Dashboard for all your personal and professional automation needs",
 };
 
 export default function RootLayout({

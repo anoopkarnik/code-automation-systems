@@ -8,11 +8,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
   password      String?
-
-  localGoogleId    String?  @unique
-  googleResourceId String?  @unique
-  LocalGoogleCredential LocalGoogleCredential?
-  DiscordWebhook        DiscordWebhook[]
   Notion                Notion[]
   connections           Connections[]
   workflows             Workflows[]

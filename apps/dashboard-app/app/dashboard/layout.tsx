@@ -8,7 +8,7 @@ export default async function Layout({children}:{children: React.ReactNode}){
             <LeftSidebarClient/>
             <div className="flex flex-col w-full ">
                 <NavbarClient />
-                <div className="flex justify-center">
+                <div className="flex">
                     {children}
                 </div>
             </div>

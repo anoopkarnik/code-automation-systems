@@ -1,10 +1,10 @@
 import {Resend} from 'resend';
 import { getEmailTemplateByName } from '@repo/prisma-db/repo/email-template';
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY)
 
 export const sendVerificationEmail = async (email: string, token:string) => {
-    const confirmLink = `http://localhost:4000/auth/new-verification?token=${token}`
+    const confirmLink = `${process.env.NEXT_PUBLIC_URL}/auth/new-verification?token=${token}`
     const emailTemplate = await getEmailTemplateByName('verification-mail');
     if (!emailTemplate) {
         return {error: "Verification Mail Template Not Found!"}

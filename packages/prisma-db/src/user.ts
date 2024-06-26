@@ -29,3 +29,16 @@ export const getUserById= async (id: string) => {
         return null;
     }
 }
+
+export const getConnectionByUser = async (userId: string) => {
+    try {
+        const connection = await db.user.findFirst({ 
+            where: {id:userId},
+            include: {connections: true}
+        });
+        return connection;
+    }
+    catch (error) {
+        return null;
+    }
+}

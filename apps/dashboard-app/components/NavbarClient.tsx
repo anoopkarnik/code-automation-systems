@@ -14,7 +14,7 @@ export default function NavbarClient() {
 
     return (
             <Navbar 
-                appName="Personal Dashboard"
+                appName="Personal Automation Dashboard"
                 appIcon="https://raw.githubusercontent.com/anoopkarnik/personal-apps/main/apps/dashboard-app/public/apps.png"
                 screens={[
                 ]}
