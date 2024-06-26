@@ -9,9 +9,16 @@ type Props = {
     description: string
     callback?: () => void
     connected: {} & any
+    formElements?: {
+      label: string
+      placeholder: string
+      type: string
+      name: string
+    }[]
+    showModal: boolean
   }
 
-const ConnectionClient = ({description,type,icon,title,connected}:Props) => {
+const ConnectionClient = ({description,type,icon,title,connected,formElements,showModal}:Props) => {
   return (
     <ConnectionCard
         description={description}
@@ -19,7 +26,10 @@ const ConnectionClient = ({description,type,icon,title,connected}:Props) => {
         icon={icon}
         type={type}
         connected={connected}
-        oauth_url={process.env.NEXT_PUBLIC_NOTION_OAUTH_URL || ''}
+        formElements={formElements}
+        showModal={showModal}
+        callback_url={(type==='OpenAI' ? process.env.NEXT_PUBLIC_URL+'/api/callback/openai' : '') || ''}
+        oauth_url={(type==='Notion' ? process.env.NEXT_PUBLIC_NOTION_OAUTH_URL : '' )|| ''}
 
     />
   )

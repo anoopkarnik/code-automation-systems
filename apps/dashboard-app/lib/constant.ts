@@ -39,7 +39,23 @@ export const CONNECTIONS: Connection[] = [
       title: 'Notion',
       description: 'Create entries in your notion dashboard and automate tasks.',
       image: '/notion.png',
-      connectionKey: 'notionNode',
       accessTokenKey: 'accessToken',
+      showModal: false
+    },
+    {
+      title: 'OpenAI',
+      description: 'Interact with openAI API',
+      image: '/openai.png',
+      accessTokenKey: 'accessToken',
+      showModal: true,
+      formElements: [
+        {
+          label: 'API Key',
+          placeholder: 'Enter your OpenAI API Key',
+          type: 'text',
+          name: 'apiKey'
+        }
+      ]
+
     }
   ]

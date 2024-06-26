@@ -33,7 +33,7 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,
         </div>
         <div className='flex items-center'>
             {screens && screens.map((screen, index) => (
-                <Button key={index} variant='outline' className='mx-2'>
+                <Button key={index} variant='outline' className='mx-2 '>
                     {screen.screenName}
                 </Button>
             ))}

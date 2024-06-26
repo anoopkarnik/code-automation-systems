@@ -105,8 +105,8 @@ const LeftSidebar = ({sidebarItems,redirect}:LeftSidebarProps) => {
             <div className='mt-10 ml-2'>
                 {sidebarItems.map((item:any,index:number)=>(
                     <div key={index} onClick={()=>redirect(item.href)}
-                    className={cn('flex items-center gap-2 p-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition cursor-pointer mb-4 ',
-                        pathname === item.href && 'bg-neutral-600'
+                    className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition cursor-pointer mb-4 ',
+                        pathname === item.href && 'bg-neutral-400'
                     )}>
                         <item.icon className='h-6 w-6' />
                         <span>{item.title}</span>

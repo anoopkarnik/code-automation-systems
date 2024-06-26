@@ -9,6 +9,7 @@ model User {
   sessions      Session[]
   password      String?
   Notion                Notion[]
+  OpenAI                OpenAI[]
   connections           Connections[]
   workflows             Workflows[]
 

@@ -43,10 +43,10 @@ export async function GET(req: NextRequest) {
       
 
       return NextResponse.redirect(
-        `http://localhost:4000/dashboard/connections?access_token=${response.data.access_token}&workspace_name=${response.data.workspace_name}&workspace_icon=${response.data.workspace_icon}&workspace_id=${response.data.workspace_id}&database_id=${databaseId}`
+        `${process.env.NEXT_PUBLIC_URL}/dashboard/connections?access_token=${response.data.access_token}&workspace_name=${response.data.workspace_name}&workspace_icon=${response.data.workspace_icon}&workspace_id=${response.data.workspace_id}&database_id=${databaseId}`
       );
     }
   }
 
-  return NextResponse.redirect('http://localhost:4000/dashboard/connections');
+  return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/dashboard/connections`);
 }

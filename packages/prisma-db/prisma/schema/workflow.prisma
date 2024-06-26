@@ -12,11 +12,23 @@ model Notion {
   @@schema("workflow_schema")
 }
 
+model OpenAI {
+  id            String   @id @default(uuid())
+  apiKey        String   @unique
+  User          User     @relation(fields: [userId], references: [id])
+  userId        String
+  connections   Connections[]
+
+  @@schema("workflow_schema")
+}
+
 model Connections {
   id               String          @id @default(uuid())
   type             String          @unique
   Notion           Notion?         @relation(fields: [notionId], references: [id])
   notionId         String?
+  OpenAI           OpenAI?         @relation(fields: [openaiId], references: [id])
+  openaiId         String?
   User             User?           @relation(fields: [userId], references: [id])
   userId           String?
 

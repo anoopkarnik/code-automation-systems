@@ -21,7 +21,7 @@ export function SettingsDialog({onClose,user,resetFunction}:any) {
     <Modal 
     children={
         <Tabs defaultValue="account" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full grid-cols-2 my-4">
         <TabsTrigger value="account">Profile</TabsTrigger>
         {!user.provider && <TabsTrigger value="password">Reset Password</TabsTrigger>}
       </TabsList>

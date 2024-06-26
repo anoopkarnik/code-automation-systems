@@ -6,6 +6,7 @@ import { onNotionConnection } from '../../../actions/connections/notion-connecti
 import { getUserInfo } from '../../../actions/connections/user-connections'
 import { useSearchParams } from 'next/navigation'
 import ConnectionClient from '../../../components/ConnectionClient'
+import { onOpenAIConnection } from '../../../actions/connections/openai-connections'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -19,6 +20,7 @@ const Connections = () => {
   const workspace_icon = params.get('workspace_icon')
   const workspace_id = params.get('workspace_id')
   const database_id = params.get('database_id')
+  const apiKey = params.get('apiKey')
   const session = useSession()
   const user = session?.data?.user
   const userId = user?.id
@@ -29,6 +31,8 @@ const Connections = () => {
     const onUserConnection = async () =>{
       // @ts-ignore
       await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+      // @ts-ignore
+      await onOpenAIConnection({apiKey,userId})
       const user_info = await getUserInfo(userId || '')
       const newConnections: Record<string, boolean> = {}
       user_info?.connections.forEach((connection: any) => {
@@ -37,7 +41,7 @@ const Connections = () => {
       setConnections(newConnections)
     }
     onUserConnection()
-  },[access_token,workspace_id,workspace_icon,workspace_name,database_id,userId])
+  },[access_token,workspace_id,workspace_icon,workspace_name,database_id,apiKey,userId])
 
   return (
     <div className='m-6'>
@@ -53,6 +57,8 @@ const Connections = () => {
                 icon={connection.image}
                 type={connection.title}
                 connected={connections}
+                showModal={connection.showModal}
+                formElements={connection.formElements}
               />
         ))}
       </div>
