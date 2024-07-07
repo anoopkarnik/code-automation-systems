@@ -12,6 +12,18 @@ services:
       - .env.dashboard-app
     volumes:
       - /home/ubuntu/logs/dashboard-app:/app/apps/dashboard-app/logs
+
+  backend-server:
+    image: anoopkarnik/backend-server:latest
+    restart: always
+    ports:
+      - "4001:40011"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.backend-server
+    volumes:
+      - /home/ubuntu/logs/backend-server:/app/apps/backend-server/logs
       
 networks:
   turborepo-network:

@@ -11,6 +11,16 @@ services:
     networks:
       - turborepo-network
 
+  backend-server:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.backend-server
+    image: anoopkarnik/backend-server:latest 
+    ports:
+      - "4001:40011"
+    networks:
+      - turborepo-network
+      
 networks:
   turborepo-network:
     driver: bridge
