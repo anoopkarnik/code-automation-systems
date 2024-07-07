@@ -1,54 +1,30 @@
-model Notion {
-  id            String        @id @default(uuid())
-  accessToken   String        @unique
-  workspaceId   String        @unique
-  databaseId    String        @unique
-  workspaceName String
-  workspaceIcon String
-  User          User          @relation(fields: [userId], references: [id])
-  userId        String
-  connections   Connections[]
-
-  @@schema("workflow_schema")
-}
-
-model OpenAI {
-  id            String   @id @default(uuid())
-  apiKey        String   @unique
-  User          User     @relation(fields: [userId], references: [id])
-  userId        String
-  connections   Connections[]
-
-  @@schema("workflow_schema")
-}
-
-model Connections {
-  id               String          @id @default(uuid())
-  type             String          @unique
-  Notion           Notion?         @relation(fields: [notionId], references: [id])
-  notionId         String?
-  OpenAI           OpenAI?         @relation(fields: [openaiId], references: [id])
-  openaiId         String?
-  User             User?           @relation(fields: [userId], references: [id])
-  userId           String?
-
-  @@schema("workflow_schema")
-}
-
 model Workflows {
   id                String   @id @default(uuid())
-  nodes             String?
-  edges             String?
+  nodes             Node[]
   name              String
-  notionTemplate    String?
-  notionAccessToken String?
-  notionDbId        String?
-  flowPath          String?
-  cronPath          String?
   publish           Boolean? @default(false)
   description       String
+  lastRun           String?
   User              User     @relation(fields: [userId], references: [id])
   userId            String
 
+
   @@schema("workflow_schema")
 }
+
+model Node {
+  id                String   @id @default(uuid())
+  name              String?
+  description       String?
+  type              String?
+  workflowId        String
+  actionType        String?
+  subActionType     String?
+  actionData        Json?
+  actionId          String?
+  worklows          Workflows @relation(fields: [workflowId], references: [id])
+  userId            String?
+  User              User?     @relation(fields: [userId], references: [id])
+  @@schema("workflow_schema")
+}
+

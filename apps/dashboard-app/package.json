@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@repo/next-auth": "*",
+    "@repo/prisma-db": "*",
     "@repo/resend-email": "*",
     "@repo/ui": "*",
-    "@repo/prisma-db": "*",
     "@repo/winston-logger": "*",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
@@ -23,6 +23,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "reactflow": "^11.11.4",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuidv4": "^6.2.13"

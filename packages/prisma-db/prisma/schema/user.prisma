@@ -12,6 +12,7 @@ model User {
   OpenAI                OpenAI[]
   connections           Connections[]
   workflows             Workflows[]
+  nodes                Node[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -1,0 +1,36 @@
+model Action{
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  templates        Template[]
+  actionType        ActionType
+
+  @@schema("action_schema")
+}
+
+model Template{
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  action           Action[]
+  param             Param[]
+
+  @@schema("action_schema")
+}
+
+model Param{
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  type              String
+  options           String[]
+  template          Template[]
+
+  @@schema("action_schema")
+}
+
+enum ActionType {
+  TRIGGER
+  ACTION
+  @@schema("action_schema")
+}

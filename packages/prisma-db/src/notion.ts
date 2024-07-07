@@ -6,7 +6,6 @@ interface notionProps {
     workspace_id: string,
     workspace_icon: string,
     workspace_name: string,
-    database_id: string,
     userId: string
 }
 
@@ -28,8 +27,7 @@ export const getNotionByAccessToken = async (access_token: string) => {
     }
 }
 
-export const createNotion = async ({access_token,notion_connected,workspace_id,workspace_icon,workspace_name,database_id,
-    userId}:notionProps) =>{
+export const createNotion = async ({access_token,notion_connected,workspace_id,workspace_icon,workspace_name,userId}:notionProps) =>{
         if (access_token && !notion_connected){
             await db.notion.create({
                 data:{
@@ -38,7 +36,6 @@ export const createNotion = async ({access_token,notion_connected,workspace_id,w
                     workspaceName: workspace_name,
                     workspaceId: workspace_id,
                     accessToken: access_token,
-                    databaseId: database_id,
                     connections: {
                         create: {
                             userId: userId,

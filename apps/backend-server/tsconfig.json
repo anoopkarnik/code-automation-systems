@@ -1,0 +1,8 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": ["src/**/*", "../ws-chess-app/src/messages.ts", "../ws-chess-app/src/GameManager.ts", "../ws-chess-app/src/Game.ts"],
+  "exclude": ["node_modules", "dist"]
+}
