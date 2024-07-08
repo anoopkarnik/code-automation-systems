@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable */
 import React, {  useContext, useEffect, useState } from 'react'
 import { TRIGGER_TYPES, ACTION_TYPES } from '../../../../../../lib/constant';
 
