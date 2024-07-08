@@ -1,10 +1,10 @@
 'use client'
 import { cn } from '@repo/ui/lib/utils'
-import { LogOut, MenuIcon} from 'lucide-react'
+import { LogOut} from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import React, { ElementRef, useEffect, useRef, useState } from 'react'
+import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { ChevronsLeft,LucideIcon } from 'lucide-react'
+import { ChevronsLeft } from 'lucide-react'
 
 interface LeftSidebarProps {
     sidebarItems:any

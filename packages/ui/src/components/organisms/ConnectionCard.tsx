@@ -1,10 +1,8 @@
-import React from 'react'
 import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import AddConnectionsModal from './AddConnectionModal'
-import { Drawer,DrawerContent,DrawerDescription,DrawerHeader, DrawerTitle, DrawerTrigger } from '../molecules/shadcn/Drawer'
 import { Dialog } from '@radix-ui/react-dialog'
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../molecules/shadcn/Dialog'
 
