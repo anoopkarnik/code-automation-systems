@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
 import { Input } from '@repo/ui/molecules/shadcn/Input';
 import {  useForm } from 'react-hook-form';
@@ -45,7 +45,7 @@ const ActionForm = ({type,actionType,subActionType,params,node}:any) => {
             <div className='space-y-4 m-4 my-10'>
                 {
                     params?.map((param:any) => (
-                        <FormField control={form.control} name={param.name} render={({field})=>(
+                        <FormField key={param.name} control={form.control} name={param.name} render={({field})=>(
                             <FormItem>
                                 <FormLabel>{param.name}</FormLabel>
                                 <FormControl>
@@ -59,7 +59,7 @@ const ActionForm = ({type,actionType,subActionType,params,node}:any) => {
                                         <SelectContent>
                                             {
                                                 param.options.map((option:any) => (   
-                                                    <SelectItem value={option}>{option}</SelectItem>
+                                                    <SelectItem key={option} value={option}>{option}</SelectItem>
                                                 ))
                                             }
                                         </SelectContent>

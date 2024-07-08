@@ -21,7 +21,7 @@ const  ActionSelect = ({type,options,node}:any) => {
             <SelectContent>
                 {
                     options.map((option:any) => (   
-                        <SelectItem value={option.actionType}>
+                        <SelectItem key={option.actionType} value={option.actionType}>
                             <div className='flex items-center justify-start gap-4'>
                                 <option.icon/> 
                                 <div>{option.actionType}</div>

@@ -1,4 +1,3 @@
-import { Card } from '@repo/ui/molecules/shadcn/Card'
 import React, { useEffect, useState } from 'react'
 import { getWorkflows } from '../../../../actions/workflows/workflow'
 import { useSession } from 'next-auth/react'

@@ -16,7 +16,7 @@ const ActionTabs = ({type,actionType,subActions,node}:any) => {
       <Tabs onValueChange={onSubActionTypeChange} className='mt-4'>
         <TabsList>
           {subActions.map((subAction:any) => (
-              <TabsTrigger value={subAction.subActionType}>{subAction.subActionType}</TabsTrigger>
+              <TabsTrigger key={subAction.subActionType} value={subAction.subActionType}>{subAction.subActionType}</TabsTrigger>
           ))}
         </TabsList>
         <TabsContent value={subActionType}>
