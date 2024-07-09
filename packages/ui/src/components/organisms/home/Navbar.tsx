@@ -26,7 +26,7 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,
     
   return (
     <div className=' p-1 flex items-center justify-between mx-4 bg-background dark:bg-background 
-    border-b-2 '>
+    border-b-2'>
         <div className='flex items-center gap-4'>
             {appIcon && <img src={appIcon} alt={appName} className='w-10 h-10'/>}
             {appName && <h1 className='text-2xl font-bold hidden sm:block'>{appName}</h1>}

@@ -45,6 +45,7 @@ describe('Notion API Functions', () => {
 
   it('should create a database', async () => {
     const payload = {
+      apiToken: 'api_token',
       parent: 'parent_page_id',
       title: 'Test Database',
       properties: {},

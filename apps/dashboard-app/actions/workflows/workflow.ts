@@ -1,9 +1,10 @@
 'use server'
 
 import {createWorkflow, editWorkflow, getNodesByWorkflowId, getWorkflowsByUserId, publishWorkflow, createNode, editNode, deleteNode} from '@repo/prisma-db/repo/workflow';
+import {logger} from '@repo/winston-logger/index';
 
 export const createWorkflowAction = async ({name,description,userId}:any) => {
-    console.log('Creating workflow',name,description,userId);
+    logger.info('Creating workflow',name,description,userId);
     const workflow = await createWorkflow({name,description,userId});
     return workflow;
 }
@@ -14,13 +15,13 @@ export const getWorkflows = async (userId:string) => {
 }
 
 export const editFlow = async (workflowId:string, name:string, description: string) => {
-    console.log('Editing workflow',workflowId, name, description);
+    logger.info('Editing workflow',workflowId, name, description);
     const workflow = await editWorkflow(workflowId,name,description);
     return workflow;
 }
 
 export const publishFlow = async (workflowId:string, state:boolean) => {
-    console.log('Publishing workflow',workflowId,state);
+    logger.info('Publishing workflow',workflowId,state);
     await publishWorkflow(workflowId,state);  
 }
 
@@ -41,11 +42,13 @@ export const getNodes = async (workflowId:string) => {
 }
 
 export const addNodeToWorkflow = async ({name,description,workflowId,type,userId,actionType,subActionType,actionData}:any) => {
+    logger.info('Adding node to workflow',name,description,workflowId,type,userId,actionType,subActionType,actionData);
     const node:any = await createNode({name,description,workflowId,type,userId,actionType,subActionType,actionData});
     return node;
 }
 
 export const editNodeInWorkflow = async ({id,name,description,workflowId,type,userId,actionType,subActionType,actionData}:any) => {
+    logger.info('Editing node in workflow',id,name,description,workflowId,type,userId,actionType,subActionType,actionData);
     const node:any = await editNode({id,name,description,workflowId,type,userId,actionType,subActionType,actionData});
     return node;
 }

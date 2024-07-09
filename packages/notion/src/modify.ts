@@ -2,8 +2,7 @@ import { Client } from '@notionhq/client';
 import { logger } from '@repo/winston-logger/index';
 import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren } from './index'; // Adjust the import path accordingly
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-export const queryNotionDatabase = async ({database_id, filters, sorts = []}:any):Promise<any> => {
+export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts = []}:any):Promise<any> => {
     let has_more = true;
     let cursor = null;
     let results = [];
@@ -11,13 +10,15 @@ export const queryNotionDatabase = async ({database_id, filters, sorts = []}:any
     while (has_more) {
         let body = await constructFilterBody(filters, cursor);
         body = await constructSortBody(body, sorts);
-        let response = await queryDatabase({database_id, body});
+        let response = await queryDatabase({apiToken,database_id, body});
         if (response.results.length > 0) {
             has_more = response.has_more;
             cursor = response.next_cursor
-            for (let result of response.results) {
-                results.push(await modifyResult(result));
-            }
+            const modifiedResults = await Promise.all(response.results.map(async (result: any) => {
+                const modifiedResult = await modifyResult(result);
+                return modifiedResult;
+            }));
+            results.push(...modifiedResults);
             logger.info(`sucessfully modified results - length - ${results.length} - has_more - ${has_more}`);
         } else {
             has_more = false;
@@ -61,14 +62,11 @@ function modifyFilter(filter:any) {
     }
 }
 
-async function modifyResult(result:any):Promise<any> {
-    const resultBody:any = { id: result.id };
+async function modifyResult(result:any){
+    const resultBody: any = {};
     const properties = result.properties;
-
     for (const prop in properties) {
-        if (resultBody.hasOwnProperty(prop)) {
-            resultBody[prop] = unmodifyProperty(properties[prop]);
-        }
+        resultBody[prop] = unmodifyProperty(properties[prop]);
     }
     return resultBody;
 }
@@ -145,11 +143,9 @@ export const createNotionPage = async({database_id, properties}:any) => {
 }
 
 async function constructCreateBody(database_id:any, properties:any) {
-    console.log(properties);
     const propertiesBody:any = {};
     for (let property of properties){
         propertiesBody[property.name] = await modifyProperty(property);
-        console.log(propertiesBody);
     }
     return {
         parent: {

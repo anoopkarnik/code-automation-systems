@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CONNECTIONS } from '../../../lib/constant'
 import { useSession } from 'next-auth/react'
 import { onNotionConnection } from '../../../actions/connections/notion-connections'
@@ -7,6 +7,7 @@ import { getUserInfo } from '../../../actions/connections/user-connections'
 import { useSearchParams } from 'next/navigation'
 import ConnectionClient from '../../../components/ConnectionClient'
 import { onOpenAIConnection } from '../../../actions/connections/openai-connections'
+import { ConnectionsContext } from '../../../providers/connections-provider'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -24,6 +25,8 @@ const Connections = () => {
   const session = useSession()
   const user = session?.data?.user
   const userId = user?.id
+
+  const connectionsContext = useContext(ConnectionsContext)
 
   const [connections,setConnections] = useState<Record<string,boolean>>({}) 
 

@@ -4,6 +4,7 @@ import cors from 'cors';
 require('dotenv').config();
 import { router } from './routes/root';
 import { scheduleJob } from './scheduler';
+import { logger } from '@repo/winston-logger/index';
 
 const app = express();
 
@@ -15,6 +16,6 @@ const PORT = process.env.PORT || 4001;
 
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
     scheduleJob();
 })

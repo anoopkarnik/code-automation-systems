@@ -19,7 +19,6 @@ const AddConnectionsModal = ({callback_url,formElements}:Props) => {
   const router = useRouter();
 
   const onSubmit = (data:any) => {
-    console.log(data)
     const apiKey = data.apiKey;  // Assuming apiKey is a form field
     const redirectUrl = `${callback_url}?apiKey=${apiKey}`;
     router.push(redirectUrl);

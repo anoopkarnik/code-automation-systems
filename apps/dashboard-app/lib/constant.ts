@@ -1,6 +1,7 @@
-import { BadgeCentIcon, BluetoothConnectedIcon, Briefcase, BriefcaseIcon, ClockIcon, Library, LibraryIcon, Notebook, NotebookIcon, WebhookIcon, WorkflowIcon } from "lucide-react";
+import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon, Briefcase, BriefcaseIcon, ClockIcon, Library, 
+  LibraryIcon, Notebook, NotebookIcon, WebhookIcon, WorkflowIcon, FileLineChart, 
+  Settings} from "lucide-react";
 import { Connection } from "./types";
-import { time } from "console";
 
 export const sidebarItems = [
   {
@@ -32,6 +33,29 @@ export const sidebarItems = [
       title: "Connections",
       icon: BluetoothConnectedIcon,
       href: "/dashboard/connections"
+  }
+]
+
+export const financeItems = [
+  {
+    title: 'overview',
+    icon: Briefcase,
+  },
+  {
+    title: 'account',
+    icon: LandmarkIcon,
+  },
+  {
+    title: 'transactions',
+    icon: ArrowLeftRightIcon,
+  },
+  {
+    title: 'reports',
+    icon: FileLineChart,
+  },
+  {
+    title: 'settings',
+    icon: Settings,
   }
 ]
 

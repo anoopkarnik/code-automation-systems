@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@repo/prisma-db": "*",
+    "@repo/winston-logger": "*",
     "cors": "^2.8.5",
     "cron-parser": "^4.9.0",
     "express": "^4.19.2",

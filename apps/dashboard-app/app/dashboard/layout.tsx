@@ -1,3 +1,4 @@
+
 import LeftSidebarClient from "../../components/LeftSidebarClient";
 import NavbarClient  from "../../components/NavbarClient";
 
@@ -8,7 +9,7 @@ export default async function Layout({children}:{children: React.ReactNode}){
             <LeftSidebarClient/>
             <div className="flex flex-col w-full ">
                 <NavbarClient />
-                <div className="flex">
+                <div className="flex ">
                     {children}
                 </div>
             </div>

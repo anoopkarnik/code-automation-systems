@@ -2,11 +2,9 @@ import {Client } from '@notionhq/client'
 import { CreateDatabaseParameters } from '@notionhq/client/build/src/api-endpoints';
 import { createDatabaseProps } from './props/request';
 import { logger } from '@repo/winston-logger/index';
-const notion = new Client({auth: process.env.NOTION_TOKEN})
 
-
-
-export const createDatabase = async ({parent,title,properties}:createDatabaseProps) =>{
+export const createDatabase = async ({apiToken,parent,title,properties}:createDatabaseProps) =>{
+    const notion = new Client({auth: apiToken})
     let payload:CreateDatabaseParameters = {
         "parent": { "type": "page_id", "page_id": parent },
         "title": [
@@ -23,7 +21,8 @@ export const createDatabase = async ({parent,title,properties}:createDatabasePro
     return response;
 }
 
-export const queryDatabase = async ({database_id, body}:any) =>{
+export const queryDatabase = async ({apiToken,database_id, body}:any) =>{
+    const notion = new Client({auth: apiToken})
     logger.info(`querying database ${database_id} with this ${JSON.stringify(body)}`)
     const response = await notion.databases.query({
         database_id: database_id,
@@ -38,7 +37,8 @@ export const queryDatabase = async ({database_id, body}:any) =>{
     return response;
 }
 
-export const createPage = async({body}:any)=>{
+export const createPage = async({apiToken,body}:any)=>{
+    const notion = new Client({auth: apiToken})
     logger.info(`creating page with this ${JSON.stringify(body)}`)
     const response = await notion.pages.create(body)
     if (response.hasOwnProperty('status')){
@@ -50,7 +50,8 @@ export const createPage = async({body}:any)=>{
     return response;
 }
 
-export const modifyPage = async({page_id,body}:any)=>{
+export const modifyPage = async({apiToken,page_id,body}:any)=>{
+    const notion = new Client({auth: apiToken})
     logger.info(`modifying page ${page_id} with this ${JSON.stringify(body)}`)
     const response = await notion.pages.update({
         page_id: page_id,
@@ -65,22 +66,26 @@ export const modifyPage = async({page_id,body}:any)=>{
     return response;
 }
 
-export const getPage = async ({page_id}:any) =>{
+export const getPage = async ({apiToken,page_id}:any) =>{
+    const notion = new Client({auth: apiToken})
     const response = await notion.pages.retrieve({ page_id: page_id })
     return response;
 }
 
-export const getBlockChildren = async ({block_id}:any) =>{
+export const getBlockChildren = async ({apiToken,block_id}:any) =>{
+    const notion = new Client({auth: apiToken})
     const response = await notion.blocks.children.list({ block_id: block_id })
     return response;
 }
 
-export const deleteBlock = async ({block_id}:any) =>{
+export const deleteBlock = async ({apiToken,block_id}:any) =>{
+    const notion = new Client({auth: apiToken})
     const response = await notion.blocks.delete({ block_id: block_id })
     return response;
 }
 
-export const appendBlockChildren = async ({block_id,children}:any) =>{
+export const appendBlockChildren = async ({apiToken,block_id,children}:any) =>{
+    const notion = new Client({auth: apiToken})
     const response = await notion.blocks.children.append({ block_id: block_id, children: children })
     return response;
 }

@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "exports": {
-    "./notion-client": "./src/index.ts",
+    "./notion-client": "./src/modify.ts",
     "./notion-functions/*":"./src/*.tsx"
   },
   "dependencies": {

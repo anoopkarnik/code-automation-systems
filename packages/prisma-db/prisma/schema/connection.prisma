@@ -7,8 +7,22 @@ model Notion {
   User          User          @relation(fields: [userId], references: [id])
   userId        String
   connections   Connections[]
+  notionDb     NotionDb?
 
   @@schema("connection_schema")
+}
+
+model NotionDb {
+  id            String        @id @default(uuid())
+  accountsDb    Json?
+  transactionsDb Json?
+  monthlyBudgetDb Json?
+  budgetPlanDb   Json?
+  notionId     String     @unique
+  notion        Notion?        @relation(fields: [notionId], references: [id])
+
+  @@schema("connection_schema")
+
 }
 
 model OpenAI {
