@@ -38,20 +38,28 @@ export const sidebarItems = [
 
 export const financeItems = [
   {
-    title: 'overview',
+    title: 'Overview',
     icon: Briefcase,
   },
   {
-    title: 'account',
+    title: 'Account',
     icon: LandmarkIcon,
   },
   {
-    title: 'transactions',
+    title: 'Transactions',
     icon: ArrowLeftRightIcon,
   },
   {
-    title: 'reports',
-    icon: FileLineChart,
+    title: 'Monthly Budget',
+    icon: ArrowLeftRightIcon,
+  },
+  {
+    title: 'Budget Plan',
+    icon: ArrowLeftRightIcon,
+  },
+  {
+    title: 'Financial Goals',
+    icon: ArrowLeftRightIcon,
   },
   {
     title: 'settings',

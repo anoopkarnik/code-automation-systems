@@ -26,7 +26,6 @@ const Connections = () => {
   const user = session?.data?.user
   const userId = user?.id
 
-  const connectionsContext = useContext(ConnectionsContext)
 
   const [connections,setConnections] = useState<Record<string,boolean>>({}) 
 

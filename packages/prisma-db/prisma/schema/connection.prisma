@@ -18,6 +18,7 @@ model NotionDb {
   transactionsDb Json?
   monthlyBudgetDb Json?
   budgetPlanDb   Json?
+  financialGoalsDb Json?
   notionId     String     @unique
   notion        Notion?        @relation(fields: [notionId], references: [id])
 

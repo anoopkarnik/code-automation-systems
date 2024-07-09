@@ -68,51 +68,15 @@ export const createNotionDb = async ({notionId}:any) =>{
 
 }
 
-export const updateAccoutsDb = async ({id, accountsDb}:any) =>{
+export const updateNotionDb = async ({ id, field, value }: { id: string, field: string, value: any }) => {
+    console.log('updateNotionDb', id, field, value)
     const notionDb = await db.notionDb.update({
-        where:{
-            notionId:id
-        },
-        data:{
-            accountsDb,
-        }
-    })
+      where: {
+        notionId: id
+      },
+      data: {
+        [field]: value,
+      }
+    });
     return notionDb;
-}
-
-export const updateTransactionsDb = async ({id, transactionsDb}:any) =>{
-    const notionDb = await db.notionDb.update({
-        where:{
-            notionId:id
-        },
-        data:{
-            transactionsDb,
-        }
-    })
-    return notionDb;
-}
-
-export const updateMonthlyBudgetDb = async ({id, monthlyBudgetDb}:any) =>{
-    const notionDb = await db.notionDb.update({
-        where:{
-            notionId:id
-        },
-        data:{
-            monthlyBudgetDb,
-        }
-    })
-    return notionDb;
-}
-
-export const updateBudgetPlanDb = async ({id, budgetPlanDb}:any) =>{
-    const notionDb = await db.notionDb.update({
-        where:{
-            notionId:id
-        },
-        data:{
-            budgetPlanDb,
-        }
-    })
-    return notionDb;
-}
-
+  };

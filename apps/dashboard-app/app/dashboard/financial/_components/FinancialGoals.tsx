@@ -4,9 +4,9 @@ import React, { useContext } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import NotionTable from './NotionTable'
 
-const Account = ({showFilters}:any) => {
+const FinancialGoals = ({showFilters}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
-    const dbId = connectionsContext?.notionNode?.accountsDb?.id
+    const dbId = connectionsContext?.notionNode?.financialGoalsDb?.id
 
   return (
     <div className='flex flex-col  '>
@@ -15,4 +15,4 @@ const Account = ({showFilters}:any) => {
   )
 }
 
-export default Account
+export default FinancialGoals

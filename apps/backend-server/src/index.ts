@@ -1,4 +1,3 @@
-import cron from 'node-cron';
 import express from 'express';
 import cors from 'cors';
 require('dotenv').config();

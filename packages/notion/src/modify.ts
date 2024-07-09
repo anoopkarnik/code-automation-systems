@@ -1,8 +1,29 @@
 import { Client } from '@notionhq/client';
 import { logger } from '@repo/winston-logger/index';
-import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren } from './index'; // Adjust the import path accordingly
+import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren, getDatabaseProperties } from './index'; // Adjust the import path accordingly
 
 export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts = []}:any):Promise<any> => {
+    let has_more = true;
+    let cursor = null;
+    let results = [];
+
+    let body = await constructFilterBody(filters, cursor);
+    body = await constructSortBody(body, sorts);
+    let response = await queryDatabase({apiToken,database_id, body});
+    if (response.results.length > 0) {
+        has_more = response.has_more;
+        cursor = response.next_cursor
+        const modifiedResults = await Promise.all(response.results.map(async (result: any) => {
+            const modifiedResult = await modifyResult(result);
+            return modifiedResult;
+        }));
+        results.push(...modifiedResults);
+        logger.info(`sucessfully modified results - length - ${results.length} - has_more - ${has_more}`);
+    } 
+    return { "results": results };
+}
+
+export const queryAllNotionDatabase = async ({apiToken, database_id, filters, sorts = []}:any):Promise<any> => {
     let has_more = true;
     let cursor = null;
     let results = [];
@@ -25,6 +46,11 @@ export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts
         }
     }
     return { "results": results };
+}
+
+export const getNotionDatabaseProperties = async ({apiToken, database_id}:any) => {
+    const response = await getDatabaseProperties({apiToken,database_id});
+    return response;
 }
 
 function constructSortBody(body:any, sorts:any) {
@@ -182,6 +208,13 @@ async function modifyProperty(property:any) {
 }
 
 function unmodifyProperty(prop:any) {
+    const dateOptions = {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    }
     switch (prop.type) {
         case 'unique_id':
             return `${prop.unique_id.prefix}-${prop.unique_id.number}`;
@@ -204,9 +237,19 @@ function unmodifyProperty(prop:any) {
         case 'date':
             return prop.date ? prop.date.start : null;
         case 'last_edited_time':
-            return prop.last_edited_time;
+            const date1 = new Date(prop.last_edited_time);
+            const day1 = date1.getUTCDate().toString().padStart(2, '0');
+            const month1 = date1.toLocaleString('en-GB', { month: 'short' });
+            const hours1 = date1.getUTCHours().toString().padStart(2, '0');
+            const minutes1 = date1.getUTCMinutes().toString().padStart(2, '0');
+            return `${day1} ${month1} ${hours1}:${minutes1}`;
         case 'created_time':
-            return prop.created_time;
+            const date = new Date(prop.created_time);
+            const day = date.getUTCDate().toString().padStart(2, '0');
+            const month = date.toLocaleString('en-GB', { month: 'short' });
+            const hours = date.getUTCHours().toString().padStart(2, '0');
+            const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+            return `${day} ${month} ${hours}:${minutes}`;
         case 'multi_select':
             return prop.multi_select.map((x:any) => x.name);
         case 'array':
@@ -215,6 +258,10 @@ function unmodifyProperty(prop:any) {
             return prop.files.map((x:any) => x.name);
         case 'url':
             return prop.url;
+        case 'checkbox':
+            return prop.checkbox;
+        case 'formula':
+            return prop.formula.number
     }
 }
 

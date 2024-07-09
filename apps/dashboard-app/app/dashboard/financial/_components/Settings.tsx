@@ -1,21 +1,17 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
-import { ConnectionsContext } from '../../../../providers/connections-provider'
+import React from 'react'
 import DbSelection from './DbSelection'
-import { updateAccountNotionDatabase } from '../_actions/notion'
 
 const Settings = () => {
-    const connectionsContext = useContext(ConnectionsContext)
-    
-    const updateAccountDb = async () => {
-        await updateAccountNotionDatabase(connectionsContext.notionNode?.notionId,connectionsContext.notionNode?.accountsDb)
-    }
-
 
   return (
-    <div className='m-4'>
+    <div className='m-4 flex flex-col '>
         <h1 className='text-2xl font-medium mb-4'>Create or Attach your Financial Notion DBs</h1>
-        <DbSelection title='Accounts Notion Db' updateDb={updateAccountDb} name='Accounts'/>
+        <DbSelection title='Accounts Notion Db' name='Accounts' fieldName="accountsDb"/>
+        <DbSelection title='Transactions Notion Db'  name='Transactions' fieldName="transactionsDb"/>
+        <DbSelection title='Monthly Budget Notion Db' name='MonthlyBudget' fieldName="monthlyBudgetDb"/>
+        <DbSelection title='Budget Plan Notion Db'  name='BudgetPlan' fieldName="budgetPlanDb"/>
+        <DbSelection title='Financial Goals Notion Db' name='FinancialGoals' fieldName="financialGoalsDb"/>
           
     </div>
   )

@@ -37,6 +37,12 @@ export const queryDatabase = async ({apiToken,database_id, body}:any) =>{
     return response;
 }
 
+export const getDatabaseProperties = async ({apiToken,database_id}:any) =>{
+    const notion = new Client({auth: apiToken})
+    const response = await notion.databases.retrieve({ database_id: database_id })
+    return response;
+}
+
 export const createPage = async({apiToken,body}:any)=>{
     const notion = new Client({auth: apiToken})
     logger.info(`creating page with this ${JSON.stringify(body)}`)

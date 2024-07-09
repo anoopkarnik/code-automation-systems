@@ -29,6 +29,11 @@ export type ConnectionProviderProps = {
             id: string | undefined,
             name: string,
             icon: string
+        } | any,
+        financialGoalsDb: {
+            id: string | undefined,
+            name: string,
+            icon: string
         } | any
     },
     openAINode: {
@@ -69,6 +74,11 @@ export const InitialValues: ConnectionProviderProps = {
             name: '',
             icon: ''
         },
+        financialGoalsDb: {
+            id:undefined,
+            name: '',
+            icon: ''
+        }
     },
     openAINode: {
         accessToken: ''
@@ -97,7 +107,7 @@ export const ConnectionsProvider = ({children}: ConnectionWithChildProps) => {
       if (notion_info){
         setNotionNode({notionId: notion_info?.id,accessToken:notion_info?.accessToken,workspacename:notion_info?.workspaceName,
             accountsDb: notion_info?.notionDb?.accountsDb,transactionsDb:notion_info?.notionDb?.transactionsDb,
-            monthlyBudgetDb:notion_info?.notionDb?.monthlyBudgetDb,budgetPlanDb:notion_info?.notionDb?.budgetPlanDb})
+            monthlyBudgetDb:notion_info?.notionDb?.monthlyBudgetDb,budgetPlanDb:notion_info?.notionDb?.budgetPlanDb, financialGoalsDb:notion_info?.notionDb?.financialGoalsDb})
       }
     //   if (openAi_info){
     //     connectionsContext.setOpenAINode({apiKey:openAi_info?.apiKey})
