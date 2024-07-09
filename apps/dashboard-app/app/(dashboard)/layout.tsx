@@ -5,7 +5,7 @@ import NavbarClient  from "../../components/NavbarClient";
 export default async function Layout({children}:{children: React.ReactNode}){
 
     return (
-        <div className="overflow-hidden flex">
+        <div className="flex min-h-screen">
             <LeftSidebarClient/>
             <div className="flex flex-col w-full ">
                 <NavbarClient />

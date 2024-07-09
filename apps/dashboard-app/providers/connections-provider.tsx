@@ -3,7 +3,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
 import useConnection from '../hooks/useConnection'
 import { useSession } from 'next-auth/react'
-import { getNotionInfo } from '../app/dashboard/financial/_actions/notion'
+import { getNotionInfo } from '../app/(dashboard)/financial/_actions/notion'
 
 export type ConnectionProviderProps = {
     notionNode: {

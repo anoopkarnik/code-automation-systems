@@ -93,7 +93,7 @@ const LeftSidebar = ({sidebarItems,redirect}:LeftSidebarProps) => {
     
   return (
     <>
-        <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-y-auto relative w-60 flex flex-col z-[99999]',
+        <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-y-auto relative flex flex-col z-[99999]',
             isResetting && "transition-all ease-in-out duration-300",
             isMobile && "w-0"
         )}>

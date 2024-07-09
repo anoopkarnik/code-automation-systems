@@ -38,6 +38,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-tabs": "^1.0.4",
     "@repo/zod": "*",
+    "@tanstack/react-table": "^8.19.2",
     "autoprefixer": "^10.4.19",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

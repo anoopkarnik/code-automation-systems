@@ -4,7 +4,7 @@ import React, {  useContext, useEffect } from 'react'
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet'
 
 import 'reactflow/dist/style.css';
-import ActionSelect from '../_components/ActionSelect';
+import ActionSelect from './ActionSelect';
 
 const NodeSheet = ({node,type,actionTypes}:any) => {
   return (

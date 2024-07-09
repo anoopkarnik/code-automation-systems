@@ -1,5 +1,6 @@
+
 export const publicRoutes = [
-    "/","/auth/new-verification"
+    "/landing","/auth/new-verification"
 ]
 
 export const authRoutes =[
@@ -9,4 +10,8 @@ export const authRoutes =[
 
 export const apiAuthPrefix = "/api/auth"
 
-export const DEFAULT_LOGIN_REDIRECT = "/"
+export const DEFAULT_LOGIN_REDIRECT = "/financial"
+
+export const protectedRoutes = [
+    "/"
+]

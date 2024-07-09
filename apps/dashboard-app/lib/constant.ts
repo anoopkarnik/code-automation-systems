@@ -7,32 +7,32 @@ export const sidebarItems = [
   {
       title: "Financial",
       icon: BadgeCentIcon,
-      href: "/dashboard/financial"
+      href: "/financial"
   },
   {
       title: "Projects",
       icon: BriefcaseIcon,
-      href: "/dashboard/projects"
+      href: "/projects"
   },
   {
       title: "Planner",
       icon: NotebookIcon,
-      href: "/dashboard/planner"
+      href: "/planner"
   },
   {
       title: "Knowledge Base",
       icon: LibraryIcon,
-      href: "/dashboard/knowledge-base"
+      href: "/knowledge-base"
   },
   {
       title: "Workflows",
       icon: WorkflowIcon,
-      href: "/dashboard/workflows"
+      href: "/workflows"
   },
   {
       title: "Connections",
       icon: BluetoothConnectedIcon,
-      href: "/dashboard/connections"
+      href: "/connections"
   }
 ]
 
