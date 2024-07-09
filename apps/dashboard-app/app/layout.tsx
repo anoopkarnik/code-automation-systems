@@ -4,6 +4,7 @@ import "@repo/ui/styles/shadcn-rose"
 import { ThemeProvider } from "../providers/theme-provider"
 import { SessionProviders } from "../providers/session-provider";
 import { ConnectionsProvider } from "../providers/connections-provider";
+import useConnection from "../hooks/useConnection";
 
 
 const font = DM_Sans({

@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useEffect } from 'react'
+import React  from 'react'
 import { financeItems } from '../../../lib/constant'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import Overview from './_components/Overview'
@@ -7,9 +7,8 @@ import Account from './_components/Account'
 import Transactions from './_components/Transactions'
 import Reports from './_components/Reports'
 import Settings from './_components/Settings'
-import { ConnectionsContext } from '../../../providers/connections-provider'
-
 const page = () => {
+
 
   return (
     <Tabs className='w-full' defaultValue='overview'>
