@@ -1,4 +1,4 @@
-import React, { use, useContext, useEffect, useState } from 'react'
+import React, {  useContext, useEffect, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { getDatabases } from '../_actions/notion'
@@ -35,7 +35,7 @@ const DbSelection = ({title,name,fieldName}:any) => {
             setSelectedDb(JSON.stringify(connectionsContext.notionNode?.financialGoalsDb || {}))
         }
         
-    },[connectionsContext])
+    },[name,connectionsContext])
 
     const updateDatabase = async () => {
         const selectedDatabase = selectedDb ? JSON.parse(selectedDb) : null;
