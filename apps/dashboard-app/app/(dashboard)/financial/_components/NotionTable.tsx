@@ -55,7 +55,7 @@ const NotionTable = ({dbId}:any) => {
 
   return (
     <>
-        <div className="overflow-x-auto flex items-center justify-center ">
+        <div className="overflow-x-auto  ">
             <DataTable columns={databaseKeys} data={database} />
         </div>
     </>

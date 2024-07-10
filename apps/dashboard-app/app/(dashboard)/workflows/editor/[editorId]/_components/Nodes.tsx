@@ -8,11 +8,12 @@ import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from
 import { useParams, useRouter } from 'next/navigation';
 import { deleteNodeInWorkflow, editFlow, getNodes, publishFlow } from '../../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
-import { ArrowBigDownDash, Edit2Icon, RecycleIcon, TrashIcon } from 'lucide-react';
+import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import NodeSheet from './NodeSheet';
 import { Input } from '@repo/ui/molecules/shadcn/Input';
 import { Switch } from '@repo/ui/molecules/shadcn/Switch';
 import { Label } from '@repo/ui/molecules/shadcn/Label';
+import ConfirmDialog from '@repo/ui/molecules/common/ConfirmDialog';
 
 const Nodes = () => {
   const { editorId } = useParams()
@@ -54,6 +55,11 @@ const Nodes = () => {
     router.refresh();
   }
 
+  const handleDelete = async (id:string) => {
+    await deleteNodeInWorkflow(id);
+    router.refresh();
+  }
+
   if (loading) return (<div>Loading...</div>)
 
   return (
@@ -76,8 +82,14 @@ const Nodes = () => {
                 <Card className='min-w-[40%] flex flex-col items-start justify-center'>
                     <CardHeader className='w-full'>
                         <CardTitle className='flex items-center justify-between'>
-                            {editor.trigger.name} 
-                            <TrashIcon onClick={()=> {deleteNodeInWorkflow(editor.trigger.id);router.refresh()}}/> 
+                            {editor.trigger.name}
+                            <ConfirmDialog 
+                                alertActionFunction={()=>handleDelete(editor.trigger.id)} 
+                                alertTitle='Delete Node' 
+                                alertDescription='Are you sure you want to delete this node?'
+                                buttonDiv={<TrashIcon/>}
+                                alertActionText='Delete'
+                                />    
                         </CardTitle>
                         <CardDescription>{editor.trigger.description}</CardDescription>
                     </CardHeader>
@@ -103,7 +115,13 @@ const Nodes = () => {
                 <CardHeader className='w-full'>
                         <CardTitle className='flex items-center justify-between'>
                             {action.name} 
-                            <TrashIcon onClick={()=> {deleteNodeInWorkflow(action.id);router.refresh()}}/> 
+                            <ConfirmDialog 
+                                alertActionFunction={()=>handleDelete(action.id)} 
+                                alertTitle='Delete Node' 
+                                alertDescription='Are you sure you want to delete this node?'
+                                buttonDiv={<TrashIcon/>}
+                                alertActionText='Delete'
+                                /> 
                         </CardTitle>
                         <CardDescription>{action.description}</CardDescription>
                     </CardHeader>

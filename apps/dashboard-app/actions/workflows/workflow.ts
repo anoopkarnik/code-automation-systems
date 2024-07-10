@@ -1,6 +1,6 @@
 'use server'
 
-import {createWorkflow, editWorkflow, getNodesByWorkflowId, getWorkflowsByUserId, publishWorkflow, createNode, editNode, deleteNode} from '@repo/prisma-db/repo/workflow';
+import {createWorkflow, editWorkflow, getNodesByWorkflowId, getWorkflowsByUserId, publishWorkflow, createNode, editNode, deleteNode, deleteWorkflow} from '@repo/prisma-db/repo/workflow';
 import {logger} from '@repo/winston-logger/index';
 
 export const createWorkflowAction = async ({name,description,userId}:any) => {
@@ -23,6 +23,11 @@ export const editFlow = async (workflowId:string, name:string, description: stri
 export const publishFlow = async (workflowId:string, state:boolean) => {
     logger.info('Publishing workflow',workflowId,state);
     await publishWorkflow(workflowId,state);  
+}
+
+export const deleteFlow= async (workflowId:string) => {
+    logger.info('Deleting workflow',workflowId);
+    await deleteWorkflow(workflowId);  
 }
 
 export const getNodes = async (workflowId:string) => {
