@@ -73,7 +73,8 @@ export const CONNECTIONS: Connection[] = [
       description: 'Create entries in your notion dashboard and automate tasks.',
       image: '/notion.png',
       accessTokenKey: 'accessToken',
-      showModal: false
+      showModal: false,
+      published: true
     },
     {
       title: 'OpenAI',
@@ -81,6 +82,7 @@ export const CONNECTIONS: Connection[] = [
       image: '/openai.png',
       accessTokenKey: 'accessToken',
       showModal: true,
+      published: true,
       formElements: [
         {
           label: 'API Key',
@@ -89,7 +91,61 @@ export const CONNECTIONS: Connection[] = [
           name: 'apiKey'
         }
       ]
-
+    },
+    {
+      title: 'Postgresql',
+      description: 'Connect to your Postgresql database',
+      image: '/postgres.png',
+      showModal: true,
+      published: false,
+      formElements: [
+        {
+          label: 'Host',
+          placeholder: 'Enter your Postgresql Host',
+          type: 'text',
+          name: 'host'
+        },
+        {
+          label: 'Username',
+          placeholder: 'Enter your Postgresql Username',
+          type: 'text',
+          name: 'username'
+        },
+        {
+          label: 'Password',
+          placeholder: 'Enter your Postgresql Password',
+          type: 'password',
+          name: 'password'
+        },
+        {
+          label: 'Database',
+          placeholder: 'Enter your Postgresql Database',
+          type: 'text',
+          name: 'database'
+        },
+        {
+          label: 'Port',
+          placeholder: 'Enter your Postgresql Port',
+          type: 'text',
+          name: 'port'
+        }
+      ]   
+    },
+    {
+      title: 'Google Drive',
+      description: 'Connect to your Google Drive',
+      image: '/googleDrive.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Youtube',
+      description: 'Connect to your Youtube account',
+      image: '/youtube.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
     }
   ]
 

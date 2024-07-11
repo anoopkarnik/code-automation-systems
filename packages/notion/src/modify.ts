@@ -27,7 +27,7 @@ export const queryAllNotionDatabase = async ({apiToken, database_id, filters, so
     let has_more = true;
     let cursor = null;
     let results = [];
-
+    logger.info(filters.toString())
     while (has_more) {
         let body = await constructFilterBody(filters, cursor);
         body = await constructSortBody(body, sorts);
@@ -83,8 +83,11 @@ async function constructFilterBody(filters:any, cursor:any) {
 function modifyFilter(filter:any) {
     if (filter.type === 'last_edited_time') {
         return { timestamp: 'last_edited_time', last_edited_time: { [filter.condition]: filter.value } };
-    } else if (['date', 'checkbox', 'multi_select', 'select', 'created_time', 'relation', 'status'].includes(filter.type)) {
+    } else if (['date', 'checkbox', 'multi_select', 'select',  'relation', 'status'].includes(filter.type)) {
         return { property: filter.name, [filter.type]: { [filter.condition]: filter.value } };
+    } else if (filter.type === 'created_time'){
+        return { timestamp: 'created_time', created_time: { [filter.condition]: filter.value } };
+    
     }
 }
 
@@ -261,7 +264,7 @@ function unmodifyProperty(prop:any) {
         case 'checkbox':
             return prop.checkbox;
         case 'formula':
-            return prop.formula.number
+            return prop.formula.number || prop.formula.string;
     }
 }
 

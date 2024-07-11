@@ -14,6 +14,7 @@ type Props = {
     callback_url?: string
     connected: {} & any
     oauth_url?: string
+    published: boolean
     formElements?: {
       label: string
       placeholder: string
@@ -23,7 +24,7 @@ type Props = {
     showModal: boolean
   }
 
-const ConnectionCard = ({description,type,icon,title,connected,callback_url,oauth_url,formElements,showModal}: Props ) => {
+const ConnectionCard = ({description,type,icon,title,connected,callback_url,oauth_url,formElements,published,showModal}: Props ) => {
   return (
     <Card className="flex flex-col items-center justify-between ">
       <CardHeader className="flex flex-col items-center justify-center gap-2">
@@ -35,7 +36,7 @@ const ConnectionCard = ({description,type,icon,title,connected,callback_url,oaut
           <CardDescription className='min-w-[400px] max-w-[400px] text-center'>{description}</CardDescription>
         </div>
       </CardHeader>
-      <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
+      { published && <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
         {connected[type] ? (
           showModal? (
             <Dialog>
@@ -80,7 +81,12 @@ const ConnectionCard = ({description,type,icon,title,connected,callback_url,oaut
             Connect
           </Link>)
         )}
-      </Button>
+      </Button>}
+      {!published && 
+      <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
+        In Progress
+      </Button> 
+      }
     </Card>
   )
 }

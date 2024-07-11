@@ -59,6 +59,7 @@ const Connections = () => {
                 icon={connection.image}
                 type={connection.title}
                 connected={connections}
+                published={connection.published}
                 showModal={connection.showModal}
                 formElements={connection.formElements}
               />

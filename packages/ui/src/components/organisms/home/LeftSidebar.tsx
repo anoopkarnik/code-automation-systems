@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { ChevronsLeft } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../components/molecules/shadcn/Tooltip'
 
 interface LeftSidebarProps {
     sidebarItems:any
@@ -85,8 +86,13 @@ const LeftSidebar = ({sidebarItems,redirect}:LeftSidebarProps) => {
                     className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition cursor-pointer mb-4 ',
                         pathname === item.href && 'bg-neutral-400'
                     )}>
-                        <item.icon className='h-6 w-6' />
-                        <span>{item.title}</span>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger><item.icon className='h-6 w-6' /></TooltipTrigger>
+                                <TooltipContent>{item.title}</TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        {isNotMobile && <span>{item.title}</span>}
                     </div>
                 ))}
             </div>

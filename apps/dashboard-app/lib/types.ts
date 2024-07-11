@@ -1,4 +1,5 @@
-export type ConnectionTypes = 'Notion' | 'OpenAI'
+export type ConnectionTypes = 'Notion' | 'OpenAI' | 'Postgresql' | 'Google Drive' | 'Linkedin' | 'Youtube' | 'Twitter' |
+ 'Github' | 'Google Sheets' | 'Google Calendar' | 'Facebook' | 'Instagram' | 'Discord'
 
 export type Connection = {
   title: ConnectionTypes
@@ -7,6 +8,7 @@ export type Connection = {
   accessTokenKey?: string
   alwaysTrue?: boolean
   showModal: boolean
+  published: boolean
   formElements?: {
     label: string
     placeholder: string
