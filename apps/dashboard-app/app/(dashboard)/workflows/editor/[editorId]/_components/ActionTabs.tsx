@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs';
-import ActionForm from './ActionForm';
+import Notion from './action-forms/Notion';
+import Webhook from './action-forms/Webhook';
 
 const ActionTabs = ({type,actionType,subActions,node}:any) => {
     const [subActionType, setSubActionType] = useState(undefined) as any;
-    const [params, setParams] = useState([] as any);
 
     const onSubActionTypeChange = (value:any) => {
-        setParams(subActions.find((subAction:any) => subAction.subActionType === value)?.params || [])
         setSubActionType(value);
     }
 
@@ -15,12 +14,18 @@ const ActionTabs = ({type,actionType,subActions,node}:any) => {
     <div className='mt-10 w-full' >
       <Tabs onValueChange={onSubActionTypeChange} className='mt-4'>
         <TabsList>
-          {subActions.map((subAction:any) => (
-              <TabsTrigger key={subAction.subActionType} value={subAction.subActionType}>{subAction.subActionType}</TabsTrigger>
+          {subActions?.map((subAction:any) => (
+              <TabsTrigger key={subAction} value={subAction}>{subAction}</TabsTrigger>
           ))}
         </TabsList>
         <TabsContent value={subActionType}>
-          <ActionForm type={type} actionType={actionType} subActionType={subActionType} params={params} node={node}/>   
+          {
+            actionType === 'Notion'  && <Notion/> 
+          }
+          {
+            actionType === 'Webhook'  && 
+            <Webhook type={type} actionType={actionType} subActionType={subActionType} node={node}/> 
+          }  
         </TabsContent>
       </Tabs>
 

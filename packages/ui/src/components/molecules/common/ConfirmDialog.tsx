@@ -15,7 +15,7 @@ const ConfirmDialog = ({buttonDiv,alertTitle, alertDescription, alertActionText,
   return (
     <AlertDialog>
         <AlertDialogTrigger asChild >
-            {buttonDiv}
+            <div className="cursor-pointer">{buttonDiv}</div>
         </AlertDialogTrigger>
         <AlertDialogContent>
             <AlertDialogHeader>

@@ -43,7 +43,7 @@ const Nodes = () => {
         editor.setPublish(publish);
     }
     refreshNodes();
-  },[] )
+  },[editorId] )
 
   const handleEdit = async () =>{
     if (showEdit) {
@@ -95,7 +95,7 @@ const Nodes = () => {
                     </CardHeader>
                     <CardContent>
                         {
-                            Object.keys(JSON.parse(editor.trigger.actionData)).map((key:any) => (
+                            editor.trigger.actionData && Object.keys(JSON.parse(editor.trigger.actionData)).map((key:any) => (
                                 <div className='flex items-center gap-4'>
                                     <div className='font-black'>{key}:</div>
                                     <div className='italic font-light '>{JSON.parse(editor.trigger.actionData)[key]}</div>
@@ -127,7 +127,7 @@ const Nodes = () => {
                     </CardHeader>
                     <CardContent>
                         {
-                            Object.keys(JSON.parse(action.actionData)).map((key:any) => (
+                            action.actionData && Object.keys(JSON.parse(action.actionData)).map((key:any) => (
                                 <div className='flex items-center gap-4'>
                                     <div className='font-black'>{key}:</div>
                                     <div className='italic font-light '>{JSON.parse(action.actionData)[key]}</div>

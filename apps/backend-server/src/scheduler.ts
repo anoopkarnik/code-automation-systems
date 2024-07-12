@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import { getActiveWorkflows, updateWorkflowLastRun } from '@repo/prisma-db/repo/workflow';
+import { createEvent, getActiveWorkflows, updateWorkflowLastRun } from '@repo/prisma-db/repo/workflow';
 import cronParser from 'cron-parser';
 import { runWebhook } from './actions/webhook';
 import {logger} from '@repo/winston-logger/index'
@@ -14,6 +14,7 @@ export const startWorkflows = async () => {
     const workflows = await getActiveWorkflows();
     workflows.forEach(async (workflow:any) => {
         logger.info('Starting workflow',workflow.name);
+        const event = await createEvent(workflow.id, "processing")
         const trigger = workflow.nodes.find((node:any) => node.type === 'Trigger');
         const actions = workflow.nodes.filter((node:any) => node.type === 'Action');
         if (trigger && trigger.actionType === 'Schedule' && trigger.subActionType === 'Cron'){ 

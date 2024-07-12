@@ -177,3 +177,37 @@ export const deleteNode = async (nodeId: string) => {
     })
     return node;
 }
+
+export const createEvent = async(workflowId:string, status:string) => {
+    const event = await db.event.create({
+        data:{
+            workflowId,
+            status
+        }
+    })
+    return event;
+}
+
+export const updateEvent = async(eventId:string, status:string) => {
+    const event = await db.event.update({
+        where:{
+            id: eventId
+        },
+        data:{
+            status
+        }
+    })
+    return event;
+}
+
+export const getEventById = async(workflowId:string) => {
+    const events = await db.event.findMany({
+        where:{
+            workflowId: workflowId
+        },
+        include:{
+            Workflows:true
+        }
+    })
+    return events;
+}

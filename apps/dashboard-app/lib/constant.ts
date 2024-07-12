@@ -2,6 +2,8 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   LibraryIcon, Notebook, NotebookIcon, WebhookIcon, WorkflowIcon, FileLineChart, 
   Settings} from "lucide-react";
 import { Connection } from "./types";
+import { Image } from "next-auth/providers/42-school";
+import { sub } from "date-fns";
 
 export const sidebarItems = [
   {
@@ -190,16 +192,11 @@ export const CONNECTIONS: Connection[] = [
     {
       actionType: 'Webhook',
       icon: WebhookIcon,
-      subActions: [
-        {
-          subActionType: 'Internal Webhook',
-          params: [
-            { name:'Request Url', type: 'text', placeholder: 'https://example.com/webhook'},
-            { name:'Request Method', type: 'options', placeholder: 'POST', options: ['GET', 'POST', 'PUT', 'DELETE','PATCH']},
-            { name:'Request Body', type: 'json', placeholder: 'Enter JSON data'},
-            { name:'Request Headers', type: 'json', placeholder: 'Enter JSON data'}
-          ]
-        }
-      ]
+      subActions: ['Internal Webhook']
+    },
+    {
+      actionType: 'Notion',
+      image: '/notion.png',
+      subActions: ['Create Page','Update Page','Append Block', 'Delete Page']
     }
   ]

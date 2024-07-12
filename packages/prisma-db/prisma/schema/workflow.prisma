@@ -5,6 +5,7 @@ model Workflows {
   publish           Boolean? @default(false)
   description       String
   lastRun           String?
+  events            Event[]
   User              User     @relation(fields: [userId], references: [id])
   userId            String
 
@@ -28,3 +29,14 @@ model Node {
   @@schema("workflow_schema")
 }
 
+model Event {
+  id                String   @id @default(uuid())
+  workflowId       String
+  Workflows        Workflows @relation(fields: [workflowId], references: [id])
+  status           String
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@schema("workflow_schema")
+}

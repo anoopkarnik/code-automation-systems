@@ -47,7 +47,7 @@ export const getNodes = async (workflowId:string) => {
 }
 
 export const addNodeToWorkflow = async ({name,description,workflowId,type,userId,actionType,subActionType,actionData}:any) => {
-    logger.info('Adding node to workflow',name,description,workflowId,type,userId,actionType,subActionType,actionData);
+    console.log('Adding node to workflow',name,description,workflowId,type,userId,actionType,subActionType,actionData);
     const node:any = await createNode({name,description,workflowId,type,userId,actionType,subActionType,actionData});
     return node;
 }
