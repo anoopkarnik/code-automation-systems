@@ -7,18 +7,21 @@ import { updateNotionDatabase } from '../_actions/notion'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
+    const accessToken = connectionsContext.notionNode?.accessToken
     const [databases, setDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('')
 
     useEffect(() => {
         const fetchDatabases = async () => {
-            const databases = await getDatabases(connectionsContext.notionNode?.accessToken)
+            if (!accessToken) return
+            const databases = await getDatabases(accessToken)
             setDatabases(databases)
         }
         fetchDatabases()
-    },[connectionsContext])
+    },[accessToken])
 
     useEffect(() => {
+        if (!connectionsContext) return
         if (name == 'Accounts'){
             setSelectedDb(JSON.stringify(connectionsContext.notionNode?.accountsDb || {}))
         }

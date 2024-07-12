@@ -1,4 +1,5 @@
 import {
+  HomeIcon,
     LogOut,
     Settings,
   } from "lucide-react"
@@ -24,9 +25,18 @@ import { useState } from "react"
                 {triggerChildren}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 static">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>
+                  <div className="flex flex-col">
+                    <div>{user?.name}</div>
+                    <div className="text-xs text-gray-500">{user?.email}</div>
+                  </div>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        <span>Home</span>
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>

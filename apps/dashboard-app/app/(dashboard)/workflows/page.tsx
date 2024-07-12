@@ -14,7 +14,7 @@ const Page = () => {
     <div className='w-full mt-4 flex flex-col items-center'>
       <Sheet>
         <SheetTrigger asChild>
-          <Button className='text-2xl font-medium '>Create New Workflow</Button>
+          <Button className='text-xl font-medium'>Create New Workflow</Button>
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
