@@ -50,7 +50,7 @@ const Connections = () => {
       <div>
         Connect all your apps directly from here. You may need to connect these apps regularly to refresh verfication.
       </div>
-      <div className='flex mt-10 flex-wrap gap-4'>
+      <div className='mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
         {CONNECTIONS.map((connection) => (
               <ConnectionClient
                 key={connection.title}
