@@ -1,12 +1,13 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { DatePickerWithRange } from '@repo/ui/molecules/shadcn/DateRange';
 import { ConnectionsContext } from '../../../../providers/connections-provider';
-import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getBudgetSummary } from '../_actions/notion';
+import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,  getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../_actions/notion';
 import ChartCard from '@repo/ui/molecules/common/ChartCard';
 import { ChartConfig } from '@repo/ui/molecules/shadcn/Chart';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
+import {Skeleton} from '@repo/ui/molecules/shadcn/Skeleton'
 
 const Overview = () => {
 
@@ -15,38 +16,49 @@ const Overview = () => {
   const transactionsDbId = connectionsContext?.notionNode?.transactionsDb?.id
   const accountsDbId = connectionsContext?.notionNode?.accountsDb?.id
   const budgetDbId = connectionsContext?.notionNode?.monthlyBudgetDb?.id
-  const [totalExpense, setTotalExpense] = useState<number>(0)
-  const [averageExpense, setAverageExpense] = useState<number>(0) 
-  const [totalBalance, setTotalBalance] = useState<number>(0)
-  const [dateSpecificSummary, setDateSpecificSummary] = useState<any>({})
-  const [lastMonthsSummary, setLastMonthsSummary] = useState<any>({})
-  const [accountsSummary, setAccountsSummary] = useState<any>({})
-  const [budgetSummary, setBudgetSummary] = useState<any>({})
+  const [dateSpecificSummary, setDateSpecificSummary] = useState<any>(undefined)
+  const [lastMonthsSummary, setLastMonthsSummary] = useState<any>(undefined)
+  const [accountsSummary, setAccountsSummary] = useState<any>(undefined)
+  const [monthlyBudgetSummary, setMonthlyBudgetSummary] = useState<any>(undefined)
+  const [yearlyBudgetSummary, setYearlyBudgetSummary] = useState<any>(undefined)
+  const [pastMonthsBudgetSummary, setPastMonthsBudgetSummary] = useState<any>(undefined)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+
   useEffect(() => {
     const updateSummary = async () => {
-      const endDate = new Date()
-      const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1)
-      setStartDate(format(startDate, 'dd MMMyy'))
-      setEndDate(format(endDate, 'dd MMMyy'))
-      if (!apiToken || !transactionsDbId) {
-        return
+      try{
+        const endDate = new Date()
+        const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1)
+        setStartDate(format(startDate, 'dd MMMyy'))
+        setEndDate(format(endDate, 'dd MMMyy'))
+        if (!apiToken || !transactionsDbId || !accountsDbId || !budgetDbId) {
+          return
+        }
+        const [dateSpecificSummary,lastMonthsSummary,accountsSummary,monthlyBudgetSummary,
+          yearlyBudgetSummary,budgetSummary] = await Promise.all([
+            getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate}),
+            getLastMonthsFinancialSummary({apiToken,transactionsDbId,k:6 }),
+            getAccountsSummary({apiToken,accountsDbId}),
+            getMonthlyBudgetSummary({apiToken,budgetDbId}),
+            getYearlyBudgetSummary({apiToken,budgetDbId,transactionsDbId}),
+            getPastMonthsBudgetSummary({apiToken,budgetDbId,transactionsDbId,k:6})
+          ])
+        setDateSpecificSummary(dateSpecificSummary)
+        setLastMonthsSummary(lastMonthsSummary)
+        setAccountsSummary(accountsSummary)
+        setMonthlyBudgetSummary(monthlyBudgetSummary)
+        setYearlyBudgetSummary(yearlyBudgetSummary)
+        setPastMonthsBudgetSummary(budgetSummary)
+        
+      }catch(e){
+        console.error('Error in fetching financial summary',e)
       }
-      const dateSpecificSummary = await getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate})
-      setTotalExpense(dateSpecificSummary.totalExpense)
-      const lastMonthsSummary = await getLastMonthsFinancialSummary({apiToken,transactionsDbId,k:6 })
-      setAverageExpense(lastMonthsSummary.reduce((acc:any, item:any) => { return acc += item.totalExpenses},0)/6)
-      const accountsSummary = await getAccountsSummary({apiToken,accountsDbId})
-      const budgetSummary = await getBudgetSummary({apiToken,budgetDbId})
-      setTotalBalance(accountsSummary.totalBalance)
-      setDateSpecificSummary(dateSpecificSummary)
-      setLastMonthsSummary(lastMonthsSummary)
-      setAccountsSummary(accountsSummary)
-      setBudgetSummary(budgetSummary)
     }
     updateSummary()
-  },[apiToken, transactionsDbId ])
+  },[apiToken, transactionsDbId, accountsDbId, budgetDbId])
+
+
 
   const onTimeUpdate = async (dateRange: any) => {
     if (!dateRange) {
@@ -57,7 +69,6 @@ const Overview = () => {
     setStartDate(format(dateRange.from, 'dd MMMyy'))
     setEndDate(format(dateRange.to, 'dd MMMyy'))
     const dateSpecificSummary = await getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate  })
-    setTotalExpense(dateSpecificSummary.totalExpense)
     setDateSpecificSummary(dateSpecificSummary)
   }
 
@@ -100,6 +111,17 @@ const Overview = () => {
     }
   }
 
+  if (!accountsSummary) return (
+    <div className='m-6 w-full flex flex-col gap-4'>
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+        <Skeleton className=" h-[30px] rounded-full my-2" />
+    </div>
+  )
+
   return (
     <div className='mx-6 w-full'>
       <Accordion type="single" collapsible className='w-full'>
@@ -107,7 +129,7 @@ const Overview = () => {
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
               <div>Total Expenses between {startDate} & {endDate} </div>
-              <div>Rs {totalExpense}</div>
+              <div>Rs {dateSpecificSummary.totalExpense}</div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -138,8 +160,8 @@ const Overview = () => {
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
-             <div>Total Expenses in last 6 Months </div>
-             <div> Rs {averageExpense}</div>
+             <div>Average Expenses in last 6 Months </div>
+             <div> Rs {lastMonthsSummary?.reduce((acc:any, item:any) => { return acc += item.totalExpenses},0)/6}</div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -170,7 +192,7 @@ const Overview = () => {
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
               <div>Account Balance</div>
-              <div>Rs {totalBalance}</div>
+              <div>Rs {accountsSummary.totalBalance}</div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -208,8 +230,8 @@ const Overview = () => {
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
-             <div>Monthly Cost | Budget </div>
-             <div> Rs {budgetSummary?.monthlyExpense} | Rs {budgetSummary?.monthlyBudget}</div>
+             <div>Current Monthly Cost | Budget </div>
+             <div> Rs {monthlyBudgetSummary?.monthlyExpense} | Rs {monthlyBudgetSummary?.monthlyBudget}</div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -218,7 +240,7 @@ const Overview = () => {
               <ChartCard 
                 title='Total Budget and Cost By Expense Type' 
                 description='Total budget and cost By Expense Type '
-                chartData={budgetSummary?.monthlyBudgetByExpenseType}
+                chartData={monthlyBudgetSummary?.monthlyBudgetByExpenseType}
                 chartConfig={chartConfig4}
                 xKey='type'
                 angle='horizontal'
@@ -226,7 +248,7 @@ const Overview = () => {
               <ChartCard 
                 title='Total Budget and Cost By Budget Name' 
                 description='Total budget and cost By Budget Name'
-                chartData={budgetSummary?.monthlyBudgetByName}
+                chartData={monthlyBudgetSummary?.monthlyBudgetByName}
                 chartConfig={chartConfig4}
                 xKey='type'
                 angle='vertical'
@@ -239,8 +261,8 @@ const Overview = () => {
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
-             <div>Yearly  Cost | Budget </div>
-             <div> Rs {budgetSummary?.yearlyExpense} | Rs {budgetSummary?.yearlyBudget}</div>
+             <div>Current Yearly Cost | Budget </div>
+             <div> Rs {yearlyBudgetSummary?.yearlyExpense} | Rs {yearlyBudgetSummary?.yearlyBudget}</div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
@@ -249,7 +271,7 @@ const Overview = () => {
               <ChartCard 
                 title='Total Budget and Cost By Expense Type' 
                 description='Total budget and cost By Expense Type '
-                chartData={budgetSummary?.yearlyBudgetByExpenseType}
+                chartData={yearlyBudgetSummary?.yearlyBudgetByExpenseType}
                 chartConfig={chartConfig4}
                 xKey='type'
                 angle='horizontal'
@@ -257,10 +279,64 @@ const Overview = () => {
               <ChartCard 
                 title='Total Budget and Cost By Budget Name' 
                 description='Total budget and cost By Budget Name'
-                chartData={budgetSummary?.yearlyBudgetByName}
+                chartData={yearlyBudgetSummary?.yearlyBudgetByName}
                 chartConfig={chartConfig4}
                 xKey='type'
                 angle='vertical'
+                />
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <Accordion type="single" collapsible className='w-full'>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>
+            <div className='flex justify-between items-center w-full mr-2'>
+             <div>Average Monthly Cost | Budget </div>
+             <div> Rs {pastMonthsBudgetSummary?.totalLastMonthExpenses/6} | Rs {pastMonthsBudgetSummary?.totalLastMonthCosts}</div>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+              <ChartCard 
+                title='Total Budget and Cost By Month' 
+                description='Total budget and cost By Month '
+                chartData={pastMonthsBudgetSummary?.totalBudgetByMonth}
+                chartConfig={chartConfig4}
+                xKey='month'
+                angle='horizontal'
+                />
+              <ChartCard 
+                title='Total Living Budget and Cost By Month' 
+                description='Total Living budget and cost By Month '
+                chartData={pastMonthsBudgetSummary?.totalLivingBudgetByMonth}
+                chartConfig={chartConfig4}
+                xKey='month'
+                angle='horizontal'
+                />
+              <ChartCard 
+                title='Total Delight Budget and Cost By Month' 
+                description='Total Delight budget and cost By Month '
+                chartData={pastMonthsBudgetSummary?.totalDelightBudgetByMonth}
+                chartConfig={chartConfig4}
+                xKey='month'
+                angle='horizontal'
+                />
+              <ChartCard 
+                title='Total Growth Budget and Cost By Month' 
+                description='Total Growth budget and cost By Month '
+                chartData={pastMonthsBudgetSummary?.totalGrowthBudgetByMonth}
+                chartConfig={chartConfig4}
+                xKey='month'
+                angle='horizontal'
+                />
+              <ChartCard 
+                title='Total Savings Budget and Cost By Month' 
+                description='Total Savings budget and cost By Month '
+                chartData={pastMonthsBudgetSummary?.totalSavingsBudgetByMonth}
+                chartConfig={chartConfig4}
+                xKey='month'
+                angle='horizontal'
                 />
             </div>
           </AccordionContent>

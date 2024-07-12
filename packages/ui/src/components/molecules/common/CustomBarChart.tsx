@@ -20,12 +20,12 @@ const CustomBarChart = ({chartConfig,chartData,xKey,angle}:any) => {
           padding={"no-gap"}
           orientation={angle === "horizontal" ? "bottom" : "top"}
           interval={0} // Ensures all labels are shown
-          dy={angle === 'horizontal' ? 0 : 10} 
+          dy={angle === 'horizontal' ? 0 : 10}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         <ChartLegend content={<ChartLegendContent />} />
         {Object.keys(chartConfig).map((key: string,index) => (
-            <Bar key={key} dataKey={key} fill={`hsl(var(--chart-${index+1}))`} radius={4} />
+            <Bar key={key} dataKey={key}  fill={`hsl(var(--chart-${index+1}))`} radius={4} />
         ))}
       </BarChart>
     </ChartContainer>

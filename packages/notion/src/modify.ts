@@ -2,7 +2,7 @@ import { Client } from '@notionhq/client';
 import { logger } from '@repo/winston-logger/index';
 import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren, getDatabaseProperties } from './index'; // Adjust the import path accordingly
 
-export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts = []}:any):Promise<any> => {
+export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts = [], includes=[]}:any):Promise<any> => {
     let has_more = true;
     let cursor = null;
     let results = [];

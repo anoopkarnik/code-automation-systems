@@ -188,16 +188,13 @@ export const getAccountsSummary = async ({apiToken, accountsDbId}:any) => {
     return summary;
 }
 
-export const getBudgetSummary = async ({apiToken, budgetDbId}:any) => {
+export const getMonthlyBudgetSummary = async ({apiToken, budgetDbId}:any) => {
     const response = await queryAllNotionDatabase({apiToken,database_id:budgetDbId,  filters: []})
-    
     const filteredResults = response.results.filter((item:any) => item['Currently Applicable'] === true )
 
     let summary:any = {}
     let monthlyBudgetByExpenseType:any = []
-    let yearlyBudgetByExpenseType:any = []
     let monthlyBudgetByName:any = []
-    let yearlyBudgetByName:any = []
 
     let expenseTypes = filteredResults.reduce((acc:any, item:any) => {
         acc.add(item['Expense Type'])
@@ -205,47 +202,137 @@ export const getBudgetSummary = async ({apiToken, budgetDbId}:any) => {
     },new Set())
 
     const monthlyResults = filteredResults.filter((item:any) => item['Payment Schedule Type'] === 'Monthly')
-    const yearlyResults = filteredResults.filter((item:any) => item['Payment Schedule Type'] === 'Yearly')
 
     let cost =0;
     let expense=0;
     expenseTypes.forEach((type:any) => {
         cost = monthlyResults.filter((item:any) => item['Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item.Cost},0)
-        expense = monthlyResults.filter((item:any) => item['Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item['Current Month Transaction Sum']},0)
+        expense = monthlyResults.filter((item:any) => item['Expense Type'] === type).filter((item:any)=>item['Current Month Transaction Sum']).reduce((acc:any, item:any) => { return acc += item['Current Month Transaction Sum']},0)
         monthlyBudgetByExpenseType.unshift({type,cost,expense})
     })
 
-    cost =0;
-    expense=0;
-    expenseTypes.forEach((type:any) => {
-        cost = yearlyResults.filter((item:any) => item['Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item.Cost},0)
-        expense = yearlyResults.filter((item:any) => item['Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item['Current Month Transaction Sum']},0)
-        yearlyBudgetByExpenseType.unshift({type,cost,expense})
-    })
 
     monthlyResults.forEach((item:any) => {
         monthlyBudgetByName.unshift({type:item.Name,cost:item.Cost,expense:item['Current Month Transaction Sum']})
     })
 
-    yearlyResults.forEach((item:any) => {
-        yearlyBudgetByName.unshift({type:item.Name,cost:item.Cost,expense:item['Current Month Transaction Sum']})
-    })
-
     let monthlyBudget = monthlyResults.reduce((acc:any, item:any) => { return acc += item.Cost},0)
-    let yearlyBudget = yearlyResults.reduce((acc:any, item:any) => { return acc += item.Cost},0)
     let monthlyExpense = monthlyResults.filter((item:any)=>item['Current Month Transaction Sum']).reduce((acc:any, item:any) => { return acc += item['Current Month Transaction Sum']},0)
-    let yearlyExpense = yearlyResults.filter((item:any)=>item['Current Month Transaction Sum']).reduce((acc:any, item:any) => { return acc += item['Current Month Transaction Sum']},0)
 
 
     summary = {
         monthlyBudgetByExpenseType,
-        yearlyBudgetByExpenseType,
         monthlyBudgetByName,
-        yearlyBudgetByName,
-        monthlyBudget,
-        yearlyBudget,   
+        monthlyBudget,  
         monthlyExpense,
+    }
+    return summary
+
+}
+
+export const getYearlyBudgetSummary = async ({apiToken, budgetDbId,transactionsDbId}:any) => {
+    const response = await queryAllNotionDatabase({apiToken,database_id:budgetDbId,  filters: []})
+    const filteredResults = response.results.filter((item:any) => item['Currently Applicable'] === true )
+
+    const endDate = format(new Date(), 'yyyy-MM-dd')
+    const startDate = format(new Date(new Date().getFullYear(),0,1), 'yyyy-MM-dd')
+    const transactionsResponseYearly = await queryNotionDatabaseByDateRange({apiToken,database_id: transactionsDbId,startDate:startDate,endDate:endDate})
+
+    let summary:any = {}
+    let yearlyBudgetByExpenseType:any = []
+    let yearlyBudgetByName:any = []
+
+    let expenseTypes = filteredResults.reduce((acc:any, item:any) => {
+        acc.add(item['Expense Type'])
+        return acc
+    },new Set())
+
+    const budgetYearlyResults = filteredResults.filter((item:any) => item['Payment Schedule Type'] === 'Yearly')
+    let transactionYearlyResults:any = []
+    budgetYearlyResults.forEach((item1:any) => {
+        let result = transactionsResponseYearly.results.filter((item2:any) => item1['Name'] === item2['Monthly Budget Name'][0] || item1['Name'] === item2['Old Monthly Budget Name'][0])
+       transactionYearlyResults.unshift(...result)
+    })
+
+    let cost =0;
+    let expense=0;
+    expenseTypes.forEach((type:any) => {
+        cost = budgetYearlyResults.filter((item:any) => item['Expense Type'] === type || item['Old Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item.Cost},0)
+        expense = transactionYearlyResults.filter((item:any) => item['Expense Type'].includes(type) || item['Old Expense Type'].includes(type)).reduce((acc:any, item:any) => { return acc += item.Cost},0)
+        yearlyBudgetByExpenseType.unshift({type,cost,expense})
+    })
+
+    budgetYearlyResults.forEach((item:any) => {
+        yearlyBudgetByName.unshift({type:item.Name,cost:item.Cost,expense:transactionYearlyResults.filter((item2:any) => item['Name'] === item2['Monthly Budget Name'][0] || item['Name'] === item2['Old Monthly Budget Name'][0]).reduce((acc:any, item2:any) => { return acc += item2.Cost},0)})
+    })
+
+    let yearlyBudget = budgetYearlyResults.reduce((acc:any, item:any) => { return acc += item.Cost},0)
+
+    let yearlyExpense = transactionYearlyResults.reduce((acc:any, item:any) => { return acc += item.Cost},0)
+
+    summary = {
+        yearlyBudgetByExpenseType,
+        yearlyBudgetByName,
+        yearlyBudget,   
         yearlyExpense
+    }
+
+    return summary
+}
+
+export const getPastMonthsBudgetSummary = async ({apiToken, budgetDbId,transactionsDbId,k}:any) => {
+    const lastMonthsDates = await getLastKMonthsStartAndEndDates(k);
+    let totalBudgetByMonth:any = []
+    let totalLivingBudgetByMonth:any = []
+    let totalDelightBudgetByMonth:any = []
+    let totalSavingsBudgetByMonth:any = []
+    let totalGrowthBudgetByMonth:any = []
+    let cost:any = {}
+    const response = await queryAllNotionDatabase({apiToken,database_id:budgetDbId,  filters: []})
+    const filteredResults = response.results
+    const monthlyResults = filteredResults.filter((item:any) => item['Payment Schedule Type'] === 'Monthly').filter((item:any) => item['Currently Applicable'] )
+    let totalLastMonthCosts = monthlyResults.reduce((acc:any, item:any) => { return acc += item.Cost},0)
+    let expenseTypes = ['Living','Growth','Delight','Savings']
+    expenseTypes.forEach((type:any) => {
+        cost[type] = monthlyResults.filter((item:any) => item['Expense Type'] === type).reduce((acc:any, item:any) => { return acc += item.Cost},0)
+    })
+
+
+    let totalLastMonthExpenses = 0
+    for (const dateRange of lastMonthsDates) {
+        const startDate = dateRange.start;
+        const endDate = dateRange.end;
+
+        if (startDate && endDate) {
+            let currentMonth = format(new Date(startDate), "MMMyy")
+            const response = await queryNotionDatabaseByDateRange({apiToken,database_id: transactionsDbId,startDate,endDate})
+            let totalExpenses = response.results.filter((item:any) => item.Cost).reduce((acc:any, item:any) => {
+                return acc += item.Cost;
+            },0)
+            let expense:any = {}
+            expenseTypes.forEach((type:any) => {
+                expense[type] = response.results.filter((item:any) => item['Expense Type'].includes(type) || item['Old Expense Type'].includes(type)).reduce((acc:any, item:any) => { return acc += item.Cost},0)
+        
+            })
+        
+            totalBudgetByMonth.unshift({month:currentMonth,cost:totalLastMonthCosts, expense:totalExpenses})
+            totalLivingBudgetByMonth.unshift({month:currentMonth,cost:cost['Living'], expense:expense['Living']})
+            totalGrowthBudgetByMonth.unshift({month:currentMonth,cost:cost['Growth'], expense:expense['Growth']})
+            totalDelightBudgetByMonth.unshift({month:currentMonth,cost:cost['Delight'], expense:expense['Delight']})
+            totalSavingsBudgetByMonth.unshift({month:currentMonth,cost:cost['Savings'], expense:expense['Savings']})
+            totalLastMonthExpenses += totalExpenses
+        }
+    }
+    
+    let summary = {
+        totalBudgetByMonth,
+        totalLastMonthCosts,
+        totalLastMonthExpenses,
+        totalLivingBudgetByMonth,
+        totalDelightBudgetByMonth,
+        totalSavingsBudgetByMonth,
+        totalGrowthBudgetByMonth
+
     }
 
     return summary
