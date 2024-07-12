@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import ActionTabs from './ActionTabs';
+import Image from 'next/image';
 
 const  ActionSelect = ({type,options,node}:any) => {
 
@@ -24,7 +25,7 @@ const  ActionSelect = ({type,options,node}:any) => {
                         <SelectItem key={option.actionType} value={option.actionType}>
                             <div className='flex items-center justify-start gap-4'>
                                  {option.icon && <option.icon/> }
-                                 {option.image && <img src={option.image} className='w-6 h-6'/>}
+                                 {option.image && <Image src={option.image} alt={''} className='w-6 h-6'/>}
                                 <div>{option.actionType}</div>
                             </div>
 

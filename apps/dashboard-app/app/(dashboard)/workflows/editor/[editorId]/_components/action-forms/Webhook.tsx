@@ -12,12 +12,11 @@ import { EditorContext } from '../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
 
 const Webhook = ({type,actionType,subActionType,node}:any) => {
+    const form = useForm()
+    const { editorId } = useParams()
+    const editor =  useContext(EditorContext);
+    const router = useRouter();
     if (subActionType == 'Internal Webhook'){
-        const form = useForm()
-        const { editorId } = useParams()
-        const editor =  useContext(EditorContext);
-        const router = useRouter();
-    
         const onSubmit = async (data:any) => {
             const session = await getSession()
             const userId = session?.user?.id
