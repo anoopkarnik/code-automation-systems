@@ -112,7 +112,7 @@ const Overview = () => {
   }
 
   if (!accountsSummary) return (
-    <div className='m-6 w-full flex flex-col gap-4'>
+    <div className='w-[95%] mx-[2.5%] my-6 flex flex-col gap-4'>
         <Skeleton className=" h-[30px] rounded-full my-2" />
         <Skeleton className=" h-[30px] rounded-full my-2" />
         <Skeleton className=" h-[30px] rounded-full my-2" />
@@ -123,7 +123,7 @@ const Overview = () => {
   )
 
   return (
-    <div className='mx-6 w-full'>
+    <div className='w-[95%] mx-[2.5%] '>
       <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>

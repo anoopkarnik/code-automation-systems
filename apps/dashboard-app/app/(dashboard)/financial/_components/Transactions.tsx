@@ -9,7 +9,7 @@ const Transactions = ({showFilters}:any) => {
     const dbId = connectionsContext?.notionNode?.transactionsDb?.id
 
   return (
-    <div className='flex flex-col  '>
+    <div className='flex flex-col w-[95%] mx-[2.5%]   '>
         <NotionTable showFilters={showFilters} dbId={dbId}/>
     </div>
   )
