@@ -35,20 +35,17 @@ const Overview = () => {
         if (!apiToken || !transactionsDbId || !accountsDbId || !budgetDbId) {
           return
         }
-        const [dateSpecificSummary,lastMonthsSummary,accountsSummary,monthlyBudgetSummary,
-          yearlyBudgetSummary,budgetSummary] = await Promise.all([
-            getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate}),
-            getLastMonthsFinancialSummary({apiToken,transactionsDbId,k:6 }),
-            getAccountsSummary({apiToken,accountsDbId}),
-            getMonthlyBudgetSummary({apiToken,budgetDbId}),
-            getYearlyBudgetSummary({apiToken,budgetDbId,transactionsDbId}),
-            getPastMonthsBudgetSummary({apiToken,budgetDbId,transactionsDbId,k:6})
-          ])
+        let dateSpecificSummary = await getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate})
         setDateSpecificSummary(dateSpecificSummary)
+        let lastMonthsSummary = await getLastMonthsFinancialSummary({apiToken,transactionsDbId,k:6 })
         setLastMonthsSummary(lastMonthsSummary)
+        let accountsSummary = await getAccountsSummary({apiToken,accountsDbId})
         setAccountsSummary(accountsSummary)
+        let monthlyBudgetSummary = await getMonthlyBudgetSummary({apiToken,budgetDbId})
         setMonthlyBudgetSummary(monthlyBudgetSummary)
+        let yearlyBudgetSummary = await getYearlyBudgetSummary({apiToken,budgetDbId,transactionsDbId})
         setYearlyBudgetSummary(yearlyBudgetSummary)
+        let budgetSummary = await getPastMonthsBudgetSummary({apiToken,budgetDbId,transactionsDbId,k:6})
         setPastMonthsBudgetSummary(budgetSummary)
         
       }catch(e){
@@ -111,20 +108,9 @@ const Overview = () => {
     }
   }
 
-  if (!accountsSummary) return (
-    <div className='w-[95%] mx-[2.5%] my-6 flex flex-col gap-4'>
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-        <Skeleton className=" h-[30px] rounded-full my-2" />
-    </div>
-  )
-
   return (
-    <div className='w-[95%] mx-[2.5%] '>
-      <Accordion type="single" collapsible className='w-full'>
+    <div className='w-[95%] mx-[2.5%] my-6 '>
+      {dateSpecificSummary ? <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -155,8 +141,8 @@ const Overview = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
-      <Accordion type="single" collapsible className='w-full'>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      {lastMonthsSummary? <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -186,8 +172,8 @@ const Overview = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
-      <Accordion type="single" collapsible className='w-full'>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      {accountsSummary? <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -225,8 +211,8 @@ const Overview = () => {
               </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
-      <Accordion type="single" collapsible className='w-full'>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      {monthlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -256,8 +242,8 @@ const Overview = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
-      <Accordion type="single" collapsible className='w-full'>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      {yearlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -287,8 +273,8 @@ const Overview = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
-      <Accordion type="single" collapsible className='w-full'>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      {pastMonthsBudgetSummary?<Accordion type="single" collapsible className='w-full'>
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className='flex justify-between items-center w-full mr-2'>
@@ -341,7 +327,7 @@ const Overview = () => {
             </div>
           </AccordionContent>
         </AccordionItem>
-      </Accordion>
+      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
     </div>
   )
 }
