@@ -9,7 +9,7 @@ const FinancialGoals = ({showFilters}:any) => {
     const dbId = connectionsContext?.notionNode?.financialGoalsDb?.id
 
   return (
-    <div className='flex flex-col  '>
+    <div className='flex flex-col w-full  '>
         <NotionTable showFilters={showFilters} dbId={dbId}/>
     </div>
   )

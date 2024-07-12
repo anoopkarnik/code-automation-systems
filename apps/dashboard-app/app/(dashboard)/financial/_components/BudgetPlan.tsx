@@ -9,7 +9,7 @@ const BudgetPlan = ({showFilters}:any) => {
     const dbId = connectionsContext?.notionNode?.budgetPlanDb?.id
 
   return (
-    <div className='flex flex-col  '>
+    <div className='flex flex-col w-full '>
         <NotionTable showFilters={showFilters} dbId={dbId}/>
     </div>
   )

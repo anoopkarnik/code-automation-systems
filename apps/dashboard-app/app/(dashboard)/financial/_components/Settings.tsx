@@ -5,7 +5,7 @@ import DbSelection from './DbSelection'
 const Settings = () => {
 
   return (
-    <div className='m-4 flex flex-col  '>
+    <div className='m-4 flex flex-col w-full '>
         <h1 className='text-2xl font-medium mb-4'>Create or Attach your Financial Notion DBs</h1>
         <DbSelection title='Accounts Notion Db' name='Accounts' fieldName="accountsDb"/>
         <DbSelection title='Transactions Notion Db'  name='Transactions' fieldName="transactionsDb"/>

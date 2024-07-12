@@ -25,7 +25,7 @@ const FinancialPage = () => {
 
   if (isMobile){
     return (
-      <div className='flex flex-col items-center w-full min-w-max mr-10'>
+      <div className='flex flex-col items-center w-full m-6'>
         <Select onValueChange={handleSelect}>
           <SelectTrigger className='my-4 mx-8 w-[200px]'>
             <div>{selectedValue}</div>
@@ -54,7 +54,7 @@ const FinancialPage = () => {
   }
 
   return (
-    <Tabs className='mx-4 ' defaultValue='overview'>
+    <Tabs className='mx-4 w-full' defaultValue='overview'>
       <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
         {financeItems.map((item:any) =>(
             <TabsTrigger key={item.title} value={item.title} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >

@@ -64,7 +64,7 @@ const DbSelection = ({title,name,fieldName}:any) => {
     }
 
   return (
-    <div className='flex items-center gap-4 my-2'>
+    <div className='flex flex-wrap items-center justify-center border-b-2 border-border py-10 gap-4 '>
         <div className='font-bold w-[200px]'> {title}</div>
         <Select value={selectedDb} onValueChange={(value) => setSelectedDb(value)} >
             <SelectTrigger className='w-[380px] py-8'>
