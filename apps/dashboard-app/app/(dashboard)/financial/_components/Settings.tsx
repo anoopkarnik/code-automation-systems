@@ -6,7 +6,7 @@ const Settings = () => {
 
   return (
     <div className='my-4 flex flex-col w-[95%] mx-[2.5%] '>
-        <h1 className='text-2xl font-medium mb-4'>Create or Attach your Financial Notion DBs</h1>
+        <h1 className='text-2xl font-medium my-4 text-center'>Create or Attach your Financial Notion DBs</h1>
         <DbSelection title='Accounts Notion Db' name='Accounts' fieldName="accountsDb"/>
         <DbSelection title='Transactions Notion Db'  name='Transactions' fieldName="transactionsDb"/>
         <DbSelection title='Budget Notion Db' name='MonthlyBudget' fieldName="monthlyBudgetDb"/>
