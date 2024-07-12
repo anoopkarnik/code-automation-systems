@@ -25,7 +25,7 @@ const FinancialPage = () => {
 
   if (isMobile){
     return (
-      <div className='flex flex-col items-center w-full'>
+      <div className='flex flex-col items-center w-full min-w-max mr-10'>
         <Select onValueChange={handleSelect}>
           <SelectTrigger className='my-4 mx-8 w-[200px]'>
             <div>{selectedValue}</div>

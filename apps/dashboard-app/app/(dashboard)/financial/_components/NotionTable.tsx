@@ -18,7 +18,6 @@ const NotionTable = ({dbId}:any) => {
             const db = await queryNotionDatabaseAction({apiToken ,database_id: dbId})
             const dbProps = await queryNotionDatabaseProperties({apiToken ,database_id: dbId})
             setDatabase(db.results)
-            console.log(db.results)
             const keys = Object.keys(dbProps.properties).map(key => {
                 const property = dbProps.properties[key]
                 return {
@@ -47,7 +46,6 @@ const NotionTable = ({dbId}:any) => {
                 if (b.type === 'created_time' || b.type === 'last_edited_time') return -1;
                 return 0;
             });
-            console.log('Keys',filteredKeys)
             setDatabaseKeys(sortedKeys)
         }
         updateDatabase()        

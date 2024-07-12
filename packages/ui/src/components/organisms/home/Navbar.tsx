@@ -37,7 +37,7 @@ export const Navbar = ({appName,appIcon, screens, user,setTheme,
                 </Button>
             ))}
         </div>
-        <div className='flex items-center gap-4 z-40'>
+        <div className='flex items-center gap-4'>
             <Theme setTheme={setTheme}/>
             <UserDropdown 
                 triggerChildren={
