@@ -12,6 +12,11 @@ export const scheduleJob = async ()=>{
 
 export const startWorkflows = async () => {
     const workflows = await getActiveWorkflows();
+    if (workflows.length === 0){
+        logger.info('No active workflows found');
+        return;
+    }
+    logger.info('Found Active workflows',workflows.length);
     workflows.forEach(async (workflow:any) => {
         logger.info('Starting workflow',workflow.name);
         const event = await createEvent(workflow.id, "processing")

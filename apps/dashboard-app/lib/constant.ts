@@ -155,37 +155,13 @@ export const CONNECTIONS: Connection[] = [
     {
       actionType: 'Schedule',
       icon: ClockIcon,
-      subActions: [
-        {   
-          subActionType: 'Cron',
-          params: [
-            {name: 'Cron Expression', type: 'text', placeholder: '0 0 * * *'},
-            {name: 'Timezone', type: 'options', placeholder: 'Asia/Kolkata', options: [
-              'Asia/Kolkata',
-              'Asia/Tokyo',
-              'America/New_York',
-              'Europe/London'
-            ]},
-            {name: 'Start Date', type: 'text', placeholder: '2022-01-01'}
-          ]
-        },
-      ]
+      subActions: ['Cron' ]
     },
     {
       actionType: 'Webhook',
       icon: WebhookIcon,
-      subActions: [
-        {
-          subActionType: 'Internal Webhook',
-          params: [
-            { name:'Request Url', type: 'text', placeholder: 'https://example.com/webhook'},
-            { name:'Request Method', type: 'options', placeholder: 'Select Method', options: ['GET', 'POST', 'PUT', 'DELETE','PATCH']},
-            { name:'Request Body', type: 'json', placeholder: 'Enter JSON data'},
-            { name:'Request Headers', type: 'json', placeholder: 'Enter JSON data'}
-          ]
-        }
-      ]
-    }
+      subActions: ['Internal Webhook']
+    },
   ]
 
   export const ACTION_TYPES:any = [
