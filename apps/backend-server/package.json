@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "cron-parser": "^4.9.0",
     "express": "^4.19.2",
+    "newrelic": "^11.23.1",
     "node-cron": "^3.0.3"
   },
   "devDependencies": {
