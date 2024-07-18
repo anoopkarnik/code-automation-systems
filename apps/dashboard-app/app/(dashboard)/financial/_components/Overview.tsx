@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { format } from "date-fns";
 import { DatePickerWithRange } from '@repo/ui/molecules/shadcn/DateRange';
 import { ConnectionsContext } from '../../../../providers/connections-provider';
-import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,  getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../_actions/notion';
+import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,  getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../../../../actions/notion/notion';
 import ChartCard from '@repo/ui/molecules/common/ChartCard';
 import { ChartConfig } from '@repo/ui/molecules/shadcn/Chart';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';

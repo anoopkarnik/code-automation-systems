@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext, useState }  from 'react'
-import { financeItems } from '../../../lib/constant'
+import { knowledgeBaseItems, projectItems, plannerItems, personalInfoItems } from '../../../lib/constant'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import Overview from './_components/Overview'
 import Settings from './_components/Settings'
@@ -10,16 +10,20 @@ import { useRouter } from 'next/navigation'
 import { ConnectionsContext } from '../../../providers/connections-provider'
 import NotionTable from '../../../components/NotionTable'
 
-const FinancialPage = () => {
+const ProjectsPage = () => {
   const isMobile = useMedia("(max-width: 1324px)", false);
   const [selectedValue, setSelectedValue] = useState('Overview')
   const router = useRouter()
   const connectionsContext = useContext(ConnectionsContext);
-  const accountsDbId = connectionsContext?.notionNode?.accountsDb?.id
-  const budgetPlanDbId = connectionsContext?.notionNode?.budgetPlanDb?.id
-  const monthlyBudgetDbId = connectionsContext?.notionNode?.monthlyBudgetDb?.id
-  const transactionsDbId = connectionsContext?.notionNode?.transactionsDb?.id
-  const financialGoalsDbId = connectionsContext?.notionNode?.financialGoalsDb?.id
+  const socialSphereDbId = connectionsContext?.notionNode?.socialSphereDb?.id
+  const passwordsDbId = connectionsContext?.notionNode?.passwordsDb?.id
+  const journalDbId = connectionsContext?.notionNode?.journalDb?.id
+  const inventoryDbId = connectionsContext?.notionNode?.inventoryDb?.id
+  const statusDbId = connectionsContext?.notionNode?.statusDb?.id
+  const goalsDbId = connectionsContext?.notionNode?.goalsDb?.id
+  const rewardsDbId = connectionsContext?.notionNode?.rewardsDb?.id
+  const punishmentsDbId = connectionsContext?.notionNode?.punishmentsDb?.id
+
 
   const handleSelect = (value:any) => {
     setSelectedValue(value)
@@ -34,7 +38,7 @@ const FinancialPage = () => {
             <div>{selectedValue}</div>
           </SelectTrigger>
           <SelectContent className='w-[200px]'>
-            {financeItems.map((item:any) =>(
+            {personalInfoItems.map((item:any) =>(
               <SelectItem key={item.title} value={item.title}>
                 <div className='flex items-center justify-start gap-4 w-[200px]'>
                   <item.icon/>
@@ -46,11 +50,14 @@ const FinancialPage = () => {
           </SelectContent>
         </Select>
         {selectedValue === 'Overview' && <Overview/>}
-        {selectedValue === 'Account' && <NotionTable dbId={accountsDbId}/>}
-        {selectedValue === 'Transactions' && <NotionTable dbId={transactionsDbId}/>}
-        {selectedValue === 'Monthly Budget' && <NotionTable dbId={monthlyBudgetDbId}/>}
-        {selectedValue === 'Budget Plan' && <NotionTable dbId={budgetPlanDbId}/>}
-        {selectedValue === 'Financial Goals' && <NotionTable dbId={financialGoalsDbId}/>}
+        {selectedValue === 'Social Sphere' && <NotionTable dbId={socialSphereDbId}/>}
+        {selectedValue === 'Passwords' && <NotionTable dbId={passwordsDbId}/>}
+        {selectedValue === 'Journal' && <NotionTable dbId={journalDbId}/>}
+        {selectedValue === 'Inventory' && <NotionTable dbId={inventoryDbId}/>}
+        {selectedValue === 'Status' && <NotionTable dbId={statusDbId}/>}
+        {selectedValue === 'Goals' && <NotionTable dbId={goalsDbId}/>}
+        {selectedValue === 'Rewards' && <NotionTable dbId={rewardsDbId}/>}
+        {selectedValue === 'Punishments' && <NotionTable dbId={punishmentsDbId}/>}
         {selectedValue === 'settings' && <Settings/>}
       </div>
     )
@@ -59,7 +66,7 @@ const FinancialPage = () => {
   return (
     <Tabs className='w-full' defaultValue='overview'>
       <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
-        {financeItems.map((item:any) =>(
+        {personalInfoItems.map((item:any) =>(
             <TabsTrigger key={item.title} value={item.title} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
               <item.icon/>
               <div>{item.title}</div>
@@ -69,20 +76,29 @@ const FinancialPage = () => {
       <TabsContent value='Overview'>
         <Overview/>
       </TabsContent>
-      <TabsContent value='Account'>
-        <NotionTable dbId={accountsDbId}/>
+      <TabsContent value='Social Sphere'>
+        <NotionTable dbId={socialSphereDbId}/>
       </TabsContent>
-      <TabsContent value='Transactions'>
-        <NotionTable dbId={transactionsDbId}/>
+      <TabsContent value='Passwords'>
+        <NotionTable dbId={passwordsDbId}/>
       </TabsContent>
-      <TabsContent value='Monthly Budget'>
-        <NotionTable dbId={monthlyBudgetDbId}/>
+      <TabsContent value='Journal'>
+        <NotionTable dbId={journalDbId}/>
       </TabsContent>
-      <TabsContent value='Budget Plan'>
-        <NotionTable dbId={budgetPlanDbId}/>
+      <TabsContent value='Inventory'>
+        <NotionTable dbId={inventoryDbId}/>
       </TabsContent>
-      <TabsContent value='Financial Goals'>
-        <NotionTable dbId={financialGoalsDbId}/>
+      <TabsContent value='Status'>
+        <NotionTable dbId={statusDbId}/>
+      </TabsContent>
+      <TabsContent value='Goals'>
+        <NotionTable dbId={goalsDbId}/>
+      </TabsContent>
+      <TabsContent value='Rewards'>
+        <NotionTable dbId={rewardsDbId}/>
+      </TabsContent>
+      <TabsContent value='Punishments'>
+        <NotionTable dbId={punishmentsDbId}/>
       </TabsContent>
       <TabsContent value='settings'>
         <Settings/>
@@ -91,4 +107,4 @@ const FinancialPage = () => {
   )
 }
 
-export default FinancialPage
+export default ProjectsPage

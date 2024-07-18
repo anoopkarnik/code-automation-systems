@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { use, useEffect, useState } from 'react'
 
 import ConnectionCard from '@repo/ui/organisms/ConnectionCard'
+import { set } from 'date-fns'
 
 type Props = {
     type: string
@@ -20,6 +21,27 @@ type Props = {
   }
 
 const ConnectionClient = ({description,type,icon,title,connected,formElements,published,showModal}:Props) => {
+
+  const [appType, setAppType] = useState(type)
+  const [callbackUrl, setCallbackUrl] = useState('')
+  const [oauthUrl, setOauthUrl] = useState('')  
+
+  useEffect(() => {
+    setAppType(type)
+    if (type === 'OpenAI'){
+      setCallbackUrl(process.env.NEXT_PUBLIC_URL+'/api/callback/openai')
+      setOauthUrl('')
+    }
+    else if (type === 'Notion'){
+      setCallbackUrl('')
+      setOauthUrl(process.env.NEXT_PUBLIC_NOTION_OAUTH_URL as string) 
+    }
+    else if (type === 'Youtube'){
+      setCallbackUrl('')
+      setOauthUrl(process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI as string)
+    }
+  },[type])
+
   return (
     <ConnectionCard
         description={description}
@@ -30,8 +52,8 @@ const ConnectionClient = ({description,type,icon,title,connected,formElements,pu
         formElements={formElements}
         published={published}
         showModal={showModal}
-        callback_url={(type==='OpenAI' ? process.env.NEXT_PUBLIC_URL+'/api/callback/openai' : '') || ''}
-        oauth_url={(type==='Notion' ? process.env.NEXT_PUBLIC_NOTION_OAUTH_URL : '' )|| ''}
+        callback_url={callbackUrl}
+        oauth_url={oauthUrl}
 
     />
   )

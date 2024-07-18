@@ -4,7 +4,7 @@
 import { useContext, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { ConnectionsContext } from '../providers/connections-provider'
-import { getNotionInfo } from '../app/(dashboard)/financial/_actions/notion'
+import { getNotionInfo } from '../actions/notion/notion'
 
 const useConnection = () => {
   const connectionsContext = useContext(ConnectionsContext)

@@ -200,14 +200,18 @@ export const updateEvent = async(eventId:string, status:string) => {
     return event;
 }
 
-export const getEventById = async(workflowId:string) => {
+export const getEventsById = async(workflowId:string) => {
     const events = await db.event.findMany({
         where:{
             workflowId: workflowId
         },
         include:{
             Workflows:true
-        }
+        },
+        orderBy:{
+            createdAt: 'desc'
+        },
+        take:20
     })
     return events;
 }

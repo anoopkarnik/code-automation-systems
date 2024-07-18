@@ -3,9 +3,20 @@
 import { DataTable } from '@repo/ui/molecules/shadcn/DataTable'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import React, { useContext, useEffect, useState } from 'react'
-import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../_actions/notion'
+import { ConnectionsContext } from '../providers/connections-provider'
+import { queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../actions/notion/notion'
 import { ArrowUpDown } from "lucide-react"
+import { MoreHorizontal } from "lucide-react"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@repo/ui/molecules/shadcn/Dropdown"
+ 
 
 const NotionTable = ({dbId}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
@@ -36,8 +47,10 @@ const NotionTable = ({dbId}:any) => {
                     accessorKey: key,
                     id: key,
                     type: property?.type,
-                    }
-            })
+                    cell: ({row}:any) => {
+                      return <div className=' font-medium'>{row.getValue(key)}</div>
+                    },
+            }})
             const filteredKeys = keys.filter((key:any) => key.type != 'unique_id' && key.type != 'relation' )
             const sortedKeys = filteredKeys.sort((a:any, b:any) => {
                 if (a.type === 'title') return -1;

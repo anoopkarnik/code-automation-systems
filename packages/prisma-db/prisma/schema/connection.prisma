@@ -19,6 +19,32 @@ model NotionDb {
   monthlyBudgetDb Json?
   budgetPlanDb   Json?
   financialGoalsDb Json?
+  booksDb       Json?
+  quickCaptureDb Json?
+  areasDb       Json?
+  archiveDb     Json?
+  interestingDb Json?
+  podcastsDb    Json?
+  videosDb      Json?
+  skillTreesDb   Json?
+  channelsDb    Json?
+  projectsDb    Json?
+  blogsDb      Json?
+  placeOfWorkDb Json?
+  schedulerDb   Json?
+  calendarDb    Json?
+  eisenhowerMatrixDb Json?
+  actionsDb     Json?
+  timeTrackingDb Json?
+  weeklyPlannerDb Json?
+  socialSphereDb Json?
+  passwordsDb   Json?
+  journalDb     Json? 
+  inventoryDb  Json?
+  statusDb     Json?
+  goalsDb      Json?
+  rewardsDb    Json?
+  punishmentsDb Json?
   notionId     String     @unique
   notion        Notion?        @relation(fields: [notionId], references: [id])
 

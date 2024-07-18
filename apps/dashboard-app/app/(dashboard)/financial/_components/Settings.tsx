@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import DbSelection from './DbSelection'
+import DbSelection from '../../../../components/DbSelection'
 
 const Settings = () => {
 
@@ -12,7 +12,6 @@ const Settings = () => {
         <DbSelection title='Budget Notion Db' name='MonthlyBudget' fieldName="monthlyBudgetDb"/>
         <DbSelection title='Budget Plan Notion Db'  name='BudgetPlan' fieldName="budgetPlanDb"/>
         <DbSelection title='Financial Goals Notion Db' name='FinancialGoals' fieldName="financialGoalsDb"/>
-          
     </div>
   )
 }

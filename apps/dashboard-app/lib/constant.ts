@@ -1,6 +1,29 @@
 import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon, Briefcase, BriefcaseIcon, ClockIcon, Library, 
   LibraryIcon, Notebook, NotebookIcon, WebhookIcon, WorkflowIcon, FileLineChart, 
-  Settings} from "lucide-react";
+  Settings,
+  BookPlusIcon,
+  CameraIcon,
+  ArchiveIcon,
+  OctagonAlertIcon,
+  PodcastIcon,
+  Tv2Icon,
+  ClapperboardIcon,
+  NetworkIcon,
+  FileBarChartIcon,
+  PanelsTopLeftIcon,
+  ListCollapseIcon,
+  CalendarCheck2Icon,
+  CalendarCheckIcon,
+  ColumnsIcon,
+  FerrisWheelIcon,
+  RouteIcon,
+  ContactIcon,
+  KeyRoundIcon,
+  ShoppingCartIcon,
+  PieChartIcon,
+  GoalIcon,
+  TrophyIcon,
+  WormIcon} from "lucide-react";
 import { Connection } from "./types";
 import { Image } from "next-auth/providers/42-school";
 import { sub } from "date-fns";
@@ -27,6 +50,11 @@ export const sidebarItems = [
       href: "/knowledge-base"
   },
   {
+      title: "Personal Info",
+      icon: BadgeCentIcon,
+      href: "/personal-info"
+  },
+  {
       title: "Workflows",
       icon: WorkflowIcon,
       href: "/workflows"
@@ -39,34 +67,60 @@ export const sidebarItems = [
 ]
 
 export const financeItems = [
-  {
-    title: 'Overview',
-    icon: Briefcase,
-  },
-  {
-    title: 'Account',
-    icon: LandmarkIcon,
-  },
-  {
-    title: 'Transactions',
-    icon: ArrowLeftRightIcon,
-  },
-  {
-    title: 'Monthly Budget',
-    icon: ArrowLeftRightIcon,
-  },
-  {
-    title: 'Budget Plan',
-    icon: ArrowLeftRightIcon,
-  },
-  {
-    title: 'Financial Goals',
-    icon: ArrowLeftRightIcon,
-  },
-  {
-    title: 'settings',
-    icon: Settings,
-  }
+  {title: 'Overview',icon: Briefcase,},
+  {title: 'Account', icon: LandmarkIcon,},
+  {title: 'Transactions',icon: ArrowLeftRightIcon,},
+  {title: 'Monthly Budget', icon: ArrowLeftRightIcon, },
+  {title: 'Budget Plan', icon: ArrowLeftRightIcon, },
+  {title: 'Financial Goals', icon: ArrowLeftRightIcon, },
+  {title: 'settings',icon: Settings, }
+]
+
+export const knowledgeBaseItems = [
+  {title: 'Overview',icon: FileBarChartIcon,},
+  {title: 'Books', icon: BookPlusIcon,},
+  {title: 'Quick Capture',icon: CameraIcon,},
+  {title: 'Areas', icon: LibraryIcon, },
+  {title: 'Archive', icon: ArchiveIcon, },
+  {title: 'Interesting', icon: OctagonAlertIcon },
+  {title: 'Podcasts', icon: PodcastIcon, },
+  {title: 'Channels', icon: Tv2Icon, },
+  {title: 'Videos', icon: ClapperboardIcon, },
+  {title: 'Skill Trees', icon: NetworkIcon, },
+  {title: 'settings',icon: Settings, }
+]
+
+export const projectItems = [
+  {title: 'Overview',icon: FileBarChartIcon,},
+  {title: 'Projects', icon: PanelsTopLeftIcon,},
+  {title: 'Blogs', icon: ListCollapseIcon,},
+  {title: 'Place of Work', icon: LandmarkIcon,},
+  {title: 'settings',icon: Settings, }
+]
+
+export const plannerItems = [
+  {title: 'Overview',icon: FileBarChartIcon,},
+  {title: 'Scheduler', icon: CalendarCheck2Icon,},
+  {title: 'Calendar', icon: CalendarCheckIcon,},
+  {title: 'Eisenhower Matrix', icon: ColumnsIcon,},
+  {title: 'Actions', icon: FerrisWheelIcon,},
+  {title: 'Time Tracking', icon: ClockIcon,},
+  {title: 'Weekly Planner', icon: RouteIcon,},
+  {title: 'settings',icon: Settings, }
+]
+
+
+export const personalInfoItems = [
+  {title: 'Overview',icon: FileBarChartIcon,},
+  {title: 'Social Sphere', icon: ContactIcon,},
+  {title: 'Passwords', icon: KeyRoundIcon,},
+  {title: 'Journal', icon: NotebookIcon,},
+  {title: 'Inventory', icon: ShoppingCartIcon,},
+  {title: 'Status', icon: PieChartIcon,},
+  {title: 'Goals', icon: GoalIcon,},
+  {title: 'Rewards', icon: TrophyIcon,},
+  {title: 'Punishments', icon: WormIcon,},
+  {title: 'settings',icon: Settings, }
 ]
 
 export const CONNECTIONS: Connection[] = [
@@ -147,7 +201,7 @@ export const CONNECTIONS: Connection[] = [
       image: '/youtube.png',
       accessTokenKey: 'accessToken',
       showModal: false,
-      published: false
+      published: true
     }
   ]
 
