@@ -62,6 +62,18 @@ model OpenAI {
   @@schema("connection_schema")
 }
 
+model Youtube {
+  id            String        @id @default(uuid())
+  accessToken   String?        @unique
+  refreshToken  String?        @unique
+  scopes        String?
+  connections   Connections[]
+  User          User          @relation(fields: [userId], references: [id])
+  userId        String
+
+  @@schema("connection_schema")
+}
+
 model Connections {
   id               String          @id @default(uuid())
   type             String          @unique
@@ -69,6 +81,8 @@ model Connections {
   notionId         String?
   OpenAI           OpenAI?         @relation(fields: [openaiId], references: [id])
   openaiId         String?
+  Youtube          Youtube?        @relation(fields: [youtubeId], references: [id])
+  youtubeId        String?
   User             User?           @relation(fields: [userId], references: [id])
   userId           String?
 

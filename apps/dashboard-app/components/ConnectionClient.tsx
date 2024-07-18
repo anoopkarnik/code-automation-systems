@@ -37,8 +37,8 @@ const ConnectionClient = ({description,type,icon,title,connected,formElements,pu
       setOauthUrl(process.env.NEXT_PUBLIC_NOTION_OAUTH_URL as string) 
     }
     else if (type === 'Youtube'){
-      setCallbackUrl('')
-      setOauthUrl(process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI as string)
+      setCallbackUrl(process.env.NEXT_PUBLIC_URL+'/api/callback/youtube')
+      setOauthUrl(process.env.NEXT_PUBLIC_YOUTUBE_OAUTH_URL as string)
     }
   },[type])
 

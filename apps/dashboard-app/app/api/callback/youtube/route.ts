@@ -2,22 +2,23 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
-const oauth2Client = new google.auth.OAuth2(
-    process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_ID,
-    process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET,
-    process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI
-);
+export async function GET(req: NextRequest) {   
 
-// generate a url that asks permissions for Blogger and Google Calendar scopes
-const scopes = [
-  'https://www.googleapis.com/auth/blogger',
-  'https://www.googleapis.com/auth/calendar'
-];
+    const oauth2Client = new google.auth.OAuth2(
+        process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_ID,
+        process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET,
+        process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI
+    );
+    
+    const code = req.nextUrl.searchParams.get('code');
+    const response = await oauth2Client.getToken(code as string);
+    const type = 'Youtube';
+    if (response){
+        return NextResponse.redirect(
+            `${process.env.NEXT_PUBLIC_URL}/connections?access_token=${response.tokens.access_token}&refresh_token=${response.tokens.refresh_token}&scopes=${response.tokens.scope}&type=${type}`
+          );
+    }
 
-const url = oauth2Client.generateAuthUrl({
-  // 'online' (default) or 'offline' (gets refresh_token)
-  access_type: 'offline',
 
-  // If you only need one scope you can pass it as a string
-  scope: scopes
-});
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/connections`);
+}

@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation'
 import ConnectionClient from '../../../components/ConnectionClient'
 import { onOpenAIConnection } from '../../../actions/connections/openai-connections'
 import { ConnectionsContext } from '../../../providers/connections-provider'
+import { onYoutubeConnection } from '../../../actions/connections/youtube-connections'
 
 type Props = {
   searchParams?: { [key: string]: string | undefined }
@@ -17,11 +18,14 @@ const Connections = () => {
 
   const params = useSearchParams();
   const access_token = params.get('access_token')
+  const refresh_token = params.get('refresh_token')
+  const scopes = params.get('scopes')
   const workspace_name = params.get('workspace_name')
   const workspace_icon = params.get('workspace_icon')
   const workspace_id = params.get('workspace_id')
   const database_id = params.get('database_id')
   const apiKey = params.get('apiKey')
+  const type = params.get('type')
   const session = useSession()
   const user = session?.data?.user
   const userId = user?.id
@@ -31,10 +35,18 @@ const Connections = () => {
 
   useEffect(() =>{
     const onUserConnection = async () =>{
-      // @ts-ignore
-      await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
-      // @ts-ignore
-      await onOpenAIConnection({apiKey,userId})
+      if (type === 'Notion'){
+        // @ts-ignore     
+        await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+      }
+      if (type === 'OpenAI'){
+        // @ts-ignore
+        await onOpenAIConnection({apiKey,userId})
+      }
+      if (type === 'Youtube'){
+        // @ts-ignore
+        await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+      }
       const user_info = await getUserInfo(userId || '')
       const newConnections: Record<string, boolean> = {}
       user_info?.connections.forEach((connection: any) => {
@@ -43,7 +55,7 @@ const Connections = () => {
       setConnections(newConnections)
     }
     onUserConnection()
-  },[access_token,workspace_id,workspace_icon,workspace_name,database_id,apiKey,userId])
+  },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,userId,type])
 
   return (
     <div className='m-6'>
