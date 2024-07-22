@@ -1,4 +1,4 @@
-model Workflows {
+model Workflow {
   id                String   @id @default(uuid())
   nodes             Node[]
   name              String
@@ -23,7 +23,7 @@ model Node {
   subActionType     String?
   actionData        Json?
   actionId          String?
-  worklows          Workflows @relation(fields: [workflowId], references: [id])
+  worklows          Workflow @relation(fields: [workflowId], references: [id])
   userId            String?
   User              User?     @relation(fields: [userId], references: [id])
   @@schema("workflow_schema")
@@ -32,7 +32,7 @@ model Node {
 model Event {
   id                String   @id @default(uuid())
   workflowId       String
-  Workflows        Workflows @relation(fields: [workflowId], references: [id])
+  Workflows        Workflow @relation(fields: [workflowId], references: [id])
   status           String
  
   createdAt DateTime @default(now())

@@ -23,7 +23,9 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   PieChartIcon,
   GoalIcon,
   TrophyIcon,
-  WormIcon} from "lucide-react";
+  WormIcon,
+  YoutubeIcon,
+  VideoIcon} from "lucide-react";
 import { Connection } from "./types";
 import { Image } from "next-auth/providers/42-school";
 import { sub } from "date-fns";
@@ -63,6 +65,16 @@ export const sidebarItems = [
       title: "Connections",
       icon: BluetoothConnectedIcon,
       href: "/connections"
+  },
+  {
+      title: 'Youtube',
+      icon: VideoIcon,
+      href: '/youtube'
+  },
+  {
+      title: "Settings",
+      icon: Settings,
+      href: "/settings"
   }
 ]
 

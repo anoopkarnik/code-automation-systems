@@ -1,13 +1,18 @@
+'use selection'
+
 import React, {  useContext, useEffect, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { getDatabases } from '../actions/notion/notion'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { updateNotionDatabase } from '../actions/notion/notion'
+import { useSession } from 'next-auth/react'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
     const accessToken = connectionsContext.notionNode?.accessToken
+    const session = useSession()
+    const userId = session?.data?.user?.id
     const [databases, setDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('')
 
@@ -18,7 +23,7 @@ const DbSelection = ({title,name,fieldName}:any) => {
             setDatabases(databases)
         }
         fetchDatabases()
-    },[accessToken])
+    },[accessToken,userId])
 
     useEffect(() => {
         if (!connectionsContext) return
@@ -228,12 +233,12 @@ const DbSelection = ({title,name,fieldName}:any) => {
             </SelectTrigger>
             <SelectContent>
                 {databases?.map((database:any) => (
-                    <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon?.emoji, 
-                    name: database.title[0]?.text?.content})}>
+                    <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon, 
+                    name: database.name, accessToken: database.accessToken})}>
                         <div className='flex items-center justify-center gap-4'>
-                            <div>{database.icon?.emoji || "⛁"}</div>
+                            <div>{database.icon|| "⛁"}</div>
                             <div className='flex flex-col items-start justify-center w-[400px]'>
-                                <div>{database.title[0]?.text?.content}</div>
+                                <div>{database.name}</div>
                                 <div>{database.id}</div>
                             </div>
                         </div>

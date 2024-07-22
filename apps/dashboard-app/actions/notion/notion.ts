@@ -1,33 +1,45 @@
 'use server'
-import { getNotionByUserId, updateNotionDb} from "@repo/prisma-db/repo/notion";
+import { getConnectionsByUserAndType, updateNotionDb} from "@repo/prisma-db/repo/connection";
 import { getNotionDatabaseProperties, queryAllNotionDatabase, queryNotionDatabase } from '@repo/notion/notion-client'
 import { format } from "date-fns";
 
 export const getDatabases = async (token: string) => {
-    const response = await fetch('https://api.notion.com/v1/search', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            'Notion-Version': '2022-02-22'
-        },
-        body: JSON.stringify({
-            filter: {
-                value: 'database',
-                property: 'object'
-            }
+    try{
+        const response = await fetch('https://api.notion.com/v1/search', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'Notion-Version': '2022-02-22'
+            },
+            body: JSON.stringify({
+                filter: {
+                    value: 'database',
+                    property: 'object'
+                }
+            })
+        });
+        const data = await response.json();
+        const results:any = [];
+        data?.results.forEach((conn: any) => {
+            results.push({id: conn.id, name: conn?.title?.[0]?.text?.content, icon: conn?.icon?.emoji})
         })
-    });
-    const data = await response.json();
-    return data.results;
+        return results
+    }
+    catch(err){
+        console.log(err)
+    }
+  
 }
 
 export const getNotionInfo = async (userId: string) => {
-    const notion_info = await getNotionByUserId(userId)
-    return notion_info;
+    const notion_info = await getConnectionsByUserAndType(userId, 'Notion');
+    return notion_info?.[0];
 }
 
 export const updateNotionDatabase = async (notionId: string, field:string, value: any) => {
+
+    console.log('Update Notion Database', notionId, field, value)
     const notionDb = await updateNotionDb({id:notionId, field, value} );
     return notionDb;
 }

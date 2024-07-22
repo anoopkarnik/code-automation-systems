@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 
@@ -19,12 +18,12 @@ export async function GET(req: NextRequest) {
     'https://www.googleapis.com/auth/youtube.upload',
     ];
 
+
     const url = oauth2Client.generateAuthUrl({
     // 'online' (default) or 'offline' (gets refresh_token)
-    access_type: 'offline',
-
-    // If you only need one scope you can pass it as a string
-    scope: scopes
+        access_type: 'offline',
+        // If you only need one scope you can pass it as a string
+        scope: scopes
     });
     return NextResponse.redirect(url);
 }

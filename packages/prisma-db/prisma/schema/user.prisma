@@ -8,11 +8,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   password      String?
-  Notion        Notion[]
-  OpenAI        OpenAI[]
-  Youtube       Youtube[] 
-  connections   Connections[]
-  workflows     Workflows[]
+  connections   Connection[]
+  workflows     Workflow[]
   nodes         Node[]
 
   createdAt DateTime @default(now())

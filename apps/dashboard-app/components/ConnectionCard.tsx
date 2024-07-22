@@ -59,7 +59,7 @@ const ConnectionCard = ({connection}:any) => {
               </DialogTitle>
               <DialogDescription className='py-4 '>{connection.description}</DialogDescription>
             </DialogHeader>
-            <AddConnectionsModal formElements={connection.formElements || []} callback_url={callbackUrl as string}/>
+            <AddConnectionsModal formElements={connection.formElements || []} callback_url={callbackUrl}/>
           </DialogContent>
         </Dialog>
       ):(

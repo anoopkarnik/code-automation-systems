@@ -30,6 +30,7 @@ export const queryDatabase = async ({apiToken,database_id, body}:any) =>{
     })
     if (response.hasOwnProperty('status')){
         logger.error(JSON.stringify(response))
+        return {results:[],has_more:false,next_cursor:''};
     }
     else{
         logger.info(`sucessfully queried database - length - ${response.results.length} - has_more - ${response.has_more} - cursor - ${response.next_cursor}`);

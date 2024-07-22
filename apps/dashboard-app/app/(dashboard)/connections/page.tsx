@@ -30,6 +30,7 @@ const PlannerPage = () => {
   const session = useSession()
   const user = session?.data?.user
   const userId = user?.id
+  const connectionsContext = useContext(ConnectionsContext)
 
 
   const handleSelect = (value:any) => {
@@ -42,20 +43,19 @@ const PlannerPage = () => {
     const onUserConnection = async () =>{
       if (user){
         if (type === 'Notion'){    
-          await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+          const notion = await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+          connectionsContext.setNotionNode(notion)
         }
         if (type === 'OpenAI'){
-          await onOpenAIConnection({apiKey,userId})
+          const openAI = await onOpenAIConnection({apiKey,userId})
+          connectionsContext.setOpenAINode(openAI)
         }
         if (type === 'Youtube'){
-          await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+          const youtube = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
         }
         const user_info = await getUserInfo(userId || '')
-        const newConnections: Record<string, boolean> = {}
-        user_info?.connections.forEach((connection: any) => {
-          newConnections[connection.type] = true
-        })
-        setConnections(newConnections)
+      
+        setConnections(user_info?.connections)
     }
     }
     onUserConnection()

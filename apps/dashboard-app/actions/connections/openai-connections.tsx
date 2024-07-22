@@ -1,23 +1,20 @@
 'use server'
 
-import { createOpenAI,getOpenAIByAPIKey,getOpenAIByUserId } from '@repo/prisma-db/repo/openAi'
+import { createConnection, getConnectionByAPIKey, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
 
-interface Props {
-    apiKey: string,
-    userId: string
-}
 
 export const onOpenAIConnection = async ({apiKey,userId}:any) => {
         if(apiKey){
-            const openai_connected = await getOpenAIByAPIKey(apiKey)
+            const openai_connected = await getConnectionByAPIKey(apiKey)
             if (!openai_connected){
-                await createOpenAI({name: 'My OpenAI Key',apiKey,openai_connected, userId})
+                const openai = await createConnection({apiKey,type:'OpenAI', userId})
+                return openai;
             }
         }
     
     }
 
 export const getOpenAIConnection = async (userId: string) => {
-    const connection = await getOpenAIByUserId(userId)
+    const connection = await getConnectionsByUserAndType(userId, 'OpenAI')
     return connection
 }

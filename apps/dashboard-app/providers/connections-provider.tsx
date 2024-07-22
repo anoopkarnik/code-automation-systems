@@ -4,6 +4,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react'
 import useConnection from '../hooks/useConnection'
 import { useSession } from 'next-auth/react'
 import { getNotionInfo } from '../actions/notion/notion'
+import { getYoutubeConnection } from '../actions/connections/youtube-connections'
 
 export type ConnectionProviderProps = {
     notionNode: {
@@ -116,8 +117,8 @@ export const ConnectionsProvider = ({children}: ConnectionWithChildProps) => {
 
   useEffect(() =>{
     const onAddConnection = async () =>{
-        const notion_info = await getNotionInfo(userId || '')
-        console.log('Notion Info',notion_info)
+        const notion_info:any = await getNotionInfo(userId || '')
+
     //   const openAi_info = await getOpenAIByUserId(userId || '')
       if (notion_info){
         setNotionNode({notionId: notion_info?.id,accessToken:notion_info?.accessToken,workspacename:notion_info?.workspaceName,

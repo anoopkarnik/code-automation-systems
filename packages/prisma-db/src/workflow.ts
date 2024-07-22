@@ -16,7 +16,7 @@ interface NodeProps {
 
 
 export const createWorkflow = async ({name,description,userId}:WorkflowProps) => {
-    const workflow = await db.workflows.create({
+    const workflow = await db.workflow.create({
         data:{
             name,
             description,
@@ -28,7 +28,7 @@ export const createWorkflow = async ({name,description,userId}:WorkflowProps) =>
 
 export const getWorkflowsByUserId = async (userId: string) => {
     if (userId){
-        const workflows = await db.workflows.findMany({
+        const workflows = await db.workflow.findMany({
             where:{
                 userId
             },
@@ -41,7 +41,7 @@ export const getWorkflowsByUserId = async (userId: string) => {
 }
 
 export const editWorkflow = async (workflowId: string, name: string, description: string) => {
-    const workflow = await db.workflows.update({
+    const workflow = await db.workflow.update({
         where:{
             id: workflowId
         },
@@ -67,7 +67,7 @@ export const startAction = async (id:string,actionId: string) => {
 
 
 export const publishWorkflow = async (workflowId: string, state:boolean) => {
-    const workflow = await db.workflows.update({
+    const workflow = await db.workflow.update({
         where:{
             id: workflowId
         },
@@ -80,7 +80,7 @@ export const publishWorkflow = async (workflowId: string, state:boolean) => {
 }
 
 export const updateWorkflowLastRun = async (workflowId: string, lastRun: string) => {
-    const workflow = await db.workflows.update({
+    const workflow = await db.workflow.update({
         where:{
             id: workflowId
         },
@@ -93,7 +93,7 @@ export const updateWorkflowLastRun = async (workflowId: string, lastRun: string)
 
 
 export const getNodesByWorkflowId = async (id: string) => {
-    const nodes = await db.workflows.findFirst({
+    const nodes = await db.workflow.findFirst({
         where:{
             id
         },
@@ -105,7 +105,7 @@ export const getNodesByWorkflowId = async (id: string) => {
 }
 
 export const getActiveWorkflows = async () => {
-    const workflows = await db.workflows.findMany({
+    const workflows = await db.workflow.findMany({
         where:{
             publish: true
         },
@@ -161,7 +161,7 @@ export const editNode = async ({id,name,description,workflowId,type,userId,actio
 
 
 export const deleteWorkflow = async (workflowId: string) => {
-    const workflow = await db.workflows.delete({
+    const workflow = await db.workflow.delete({
         where:{
             id: workflowId
         }

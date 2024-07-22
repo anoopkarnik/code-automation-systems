@@ -7,6 +7,7 @@ const Settings = () => {
   return (
     <div className='my-4 flex flex-col w-[95%] mx-[2.5%] '>
         <h1 className='text-2xl font-medium my-4 text-center'>Create or Attach your Knowledge Base Notion DBs</h1>
+        <div className='flex flex-wrap'>
         <DbSelection title='Books Notion Db' name='Books' fieldName="booksDb"/>
         <DbSelection title='Quick Capture Notion Db'  name='Quick Capture' fieldName="quickCaptureDb"/>
         <DbSelection title='Areas Notion Db' name='Areas' fieldName="areasDb"/>
@@ -16,6 +17,7 @@ const Settings = () => {
         <DbSelection title='Channels Notion Db' name='Channels' fieldName="channelsDb"/>
         <DbSelection title='Videos Notion Db'  name='Videos' fieldName="videosDb"/>
         <DbSelection title='Skill Treees Notion Db' name='Skill Trees' fieldName="skillTreesDb"/>
+        </div>
     </div>
   )
 }

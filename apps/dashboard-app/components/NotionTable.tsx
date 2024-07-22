@@ -6,17 +6,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../actions/notion/notion'
 import { ArrowUpDown } from "lucide-react"
-import { MoreHorizontal } from "lucide-react"
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@repo/ui/molecules/shadcn/Dropdown"
- 
 
 const NotionTable = ({dbId}:any) => {
     const connectionsContext = useContext(ConnectionsContext)

@@ -16,11 +16,13 @@ const Connected = () => {
       if (session?.data?.user?.id) {
         const userInfo = await getUserInfo(session.data.user.id);
         const newConnections: any = [];
+        if (!userInfo) {
+          return;
+        } 
         for (let connection of userInfo?.connections) {
           const cons = CONNECTIONS.find((con) => con.title === connection.type);
           if (cons) {
             const newConnection = { ...cons, ...connection };
-            console.log()
             if (!connections.some((conn:any) => conn.id === newConnection.id)) {
               newConnections.push(newConnection);
             }
