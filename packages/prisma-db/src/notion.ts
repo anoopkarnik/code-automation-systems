@@ -38,6 +38,7 @@ export const createNotion = async ({access_token,notion_connected,workspace_id,w
             connections: {
                 create: {
                     userId: userId,
+                    name: workspace_name,
                     type: "Notion"
                 }
             }

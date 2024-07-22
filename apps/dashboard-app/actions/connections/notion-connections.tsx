@@ -12,7 +12,7 @@ interface notionProps {
 }
 
 export const onNotionConnection = async ({access_token, notion_connected, workspace_id, workspace_icon, workspace_name, 
-    userId}: notionProps) => {
+    userId}: any) => {
         if(access_token){
             const notion_connected = await getNotionByAccessToken(access_token)
             if (!notion_connected){

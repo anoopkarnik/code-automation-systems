@@ -76,7 +76,8 @@ model Youtube {
 
 model Connections {
   id               String          @id @default(uuid())
-  type             String          @unique
+  name             String          @default("New Connection")
+  type             String          
   Notion           Notion?         @relation(fields: [notionId], references: [id])
   notionId         String?
   OpenAI           OpenAI?         @relation(fields: [openaiId], references: [id])

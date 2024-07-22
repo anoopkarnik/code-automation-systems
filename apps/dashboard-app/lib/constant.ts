@@ -202,6 +202,86 @@ export const CONNECTIONS: Connection[] = [
       accessTokenKey: 'accessToken',
       showModal: false,
       published: true
+    },
+    {
+      title: 'Google Calendar',
+      description: 'Connect to your Google Calendar account',
+      image: '/calendar.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Google Sheets',
+      description: 'Connect to your Google Sheets account',
+      image: '/sheets.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Github',
+      description: 'Connect to your Github account',
+      image: '/github.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Gmail',
+      description: 'Connect to your Gmail account',
+      image: '/gmail.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Discord',
+      description: 'Connect to your Discord account',
+      image: '/discord.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Google Search',
+      description: 'Connect to your Google Search account',
+      image: '/googleSearch.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Reddit',
+      description: 'Connect to your Reddit account',
+      image: '/reddit.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Linkedin',
+      description: 'Connect to your Linkedin account',
+      image: '/linkedin.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Twitter',
+      description: 'Connect to your Twitter account',
+      image: '/twitter.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
+    },
+    {
+      title: 'Voice Monkey',
+      description: 'Connect to your Voice Monkey account',
+      image: '/voiceMonkey.png',
+      accessTokenKey: 'accessToken',
+      showModal: false,
+      published: false
     }
   ]
 

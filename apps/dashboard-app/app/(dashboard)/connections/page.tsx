@@ -1,21 +1,22 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react'
-import { CONNECTIONS } from '../../../lib/constant'
-import { useSession } from 'next-auth/react'
-import { onNotionConnection } from '../../../actions/connections/notion-connections'
-import { getUserInfo } from '../../../actions/connections/user-connections'
-import { useSearchParams } from 'next/navigation'
-import ConnectionClient from '../../../components/ConnectionClient'
-import { onOpenAIConnection } from '../../../actions/connections/openai-connections'
+import React, { useContext, useEffect, useState }  from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
+
+import { useMedia } from "react-use";
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/molecules/shadcn/Select'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { ConnectionsContext } from '../../../providers/connections-provider'
-import { onYoutubeConnection } from '../../../actions/connections/youtube-connections'
+import Connected from './_components/Connected'
+import Connections from './_components/Connections'
+import { useSession } from 'next-auth/react';
+import { getUserInfo } from '../../../actions/connections/user-connections';
+import { onNotionConnection } from '../../../actions/connections/notion-connections';
+import { onOpenAIConnection } from '../../../actions/connections/openai-connections';
+import { onYoutubeConnection } from '../../../actions/connections/youtube-connections';
 
-type Props = {
-  searchParams?: { [key: string]: string | undefined }
-}
-
-const Connections = () => {
-
+const PlannerPage = () => {
+  const isMobile = useMedia("(max-width: 1324px)", false);
+  const [selectedValue, setSelectedValue] = useState('Connected Apps')
   const params = useSearchParams();
   const access_token = params.get('access_token')
   const refresh_token = params.get('refresh_token')
@@ -31,54 +32,86 @@ const Connections = () => {
   const userId = user?.id
 
 
+  const handleSelect = (value:any) => {
+    setSelectedValue(value)
+  }
+
   const [connections,setConnections] = useState<Record<string,boolean>>({}) 
 
   useEffect(() =>{
     const onUserConnection = async () =>{
-      if (type === 'Notion'){
-        // @ts-ignore     
-        await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
-      }
-      if (type === 'OpenAI'){
-        // @ts-ignore
-        await onOpenAIConnection({apiKey,userId})
-      }
-      if (type === 'Youtube'){
-        // @ts-ignore
-        await onYoutubeConnection({access_token,refresh_token,scopes,userId})
-      }
-      const user_info = await getUserInfo(userId || '')
-      const newConnections: Record<string, boolean> = {}
-      user_info?.connections.forEach((connection: any) => {
-        newConnections[connection.type] = true
-      })
-      setConnections(newConnections)
+      if (user){
+        if (type === 'Notion'){    
+          await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+        }
+        if (type === 'OpenAI'){
+          await onOpenAIConnection({apiKey,userId})
+        }
+        if (type === 'Youtube'){
+          await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+        }
+        const user_info = await getUserInfo(userId || '')
+        const newConnections: Record<string, boolean> = {}
+        user_info?.connections.forEach((connection: any) => {
+          newConnections[connection.type] = true
+        })
+        setConnections(newConnections)
+    }
     }
     onUserConnection()
-  },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,userId,type])
+  },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,user,type])
+
+
+  if (!session) {
+    return <div>loading...</div>
+  }
+
+
+  if (isMobile){
+    return (
+      <div className='flex flex-col items-center w-full my-6'>
+        <Select onValueChange={handleSelect}>
+          <SelectTrigger className='my-4 mx-8 w-[200px]'>
+            <div>{selectedValue}</div>
+          </SelectTrigger>
+          <SelectContent className='w-[200px]'>
+              <SelectItem key={"Connected Apps"} value={"Connected Apps"}>
+                <div className='flex items-center justify-start gap-4 w-[200px]'>
+                  <div>{"Connected Apps"}</div>
+                </div>
+              </SelectItem>
+              <SelectItem key={"Connections"} value={"Connections"}>
+                <div className='flex items-center justify-start gap-4 w-[200px]'>
+                  <div>{"Connections"}</div>
+                </div>
+              </SelectItem>
+          </SelectContent>
+        </Select>
+        {selectedValue === 'Connected Apps' && <Connected/>}
+        {selectedValue === 'Connections' && <Connections/>}
+      </div>
+    )
+  }
 
   return (
-    <div className='m-6'>
-      <div>
-        Connect all your apps directly from here. You may need to connect these apps regularly to refresh verfication.
-      </div>
-      <div className='mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-        {CONNECTIONS.map((connection) => (
-              <ConnectionClient
-                key={connection.title}
-                description={connection.description}
-                title={connection.title}
-                icon={connection.image}
-                type={connection.title}
-                connected={connections}
-                published={connection.published}
-                showModal={connection.showModal}
-                formElements={connection.formElements}
-              />
-        ))}
-      </div>
-    </div>
+    <Tabs className='w-full' defaultValue='Connected Apps'>
+      <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
+        <TabsTrigger key={"Connected Apps"} value={"Connected Apps"} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+            <div>{"Connected Apps"}</div>
+        </TabsTrigger>
+        <TabsTrigger key={'Connections'} value={'Connections'} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+            <div>{'Connections'}</div>
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value='Connected Apps'>
+        <Connected/>
+      </TabsContent>
+      <TabsContent value='Connections'>
+        <Connections/> 
+      </TabsContent>
+     
+    </Tabs>
   )
 }
 
-export default Connections;
+export default PlannerPage

@@ -1,6 +1,7 @@
 import db from './index'
 
 interface openAIProps {
+    name: string,
     apiKey: string,
     openai_connected: any,
     userId: string
@@ -24,7 +25,7 @@ export const getOpenAIByAPIKey = async (apiKey: string) => {
     }
 }
 
-export const createOpenAI = async ({apiKey, openai_connected,userId}:openAIProps) =>{
+export const createOpenAI = async ({name,apiKey, openai_connected,userId}:openAIProps) =>{
         if (apiKey && !openai_connected){
             await db.openAI.create({
                 data:{
@@ -33,6 +34,7 @@ export const createOpenAI = async ({apiKey, openai_connected,userId}:openAIProps
                     connections: {
                         create: {
                             userId: userId,
+                            name: name,
                             type: "OpenAI"
                         }
                     }

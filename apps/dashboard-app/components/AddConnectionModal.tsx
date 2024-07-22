@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { FormControl, FormField, FormItem, FormLabel } from '../molecules/shadcn/Form'
-import { Input } from '../molecules/shadcn/Input'
-import { Button } from '../molecules/shadcn/Button'
+import { FormControl, FormField, FormItem, FormLabel } from '@repo/ui/molecules/shadcn/Form'
+import { Input } from '@repo/ui/molecules/shadcn/Input'
+import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { useRouter } from 'next/navigation';
 
 type Props = {

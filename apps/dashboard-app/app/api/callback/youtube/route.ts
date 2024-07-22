@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 

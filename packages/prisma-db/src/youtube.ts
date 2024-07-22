@@ -1,6 +1,6 @@
 import db from './index'
 
-export const createYoutube = async ({access_token,refresh_token,scopes,userId}:any) =>{
+export const createYoutube = async ({name,access_token,refresh_token,scopes,userId}:any) =>{
     const youtube = await db.youtube.create({
         data:{
             userId: userId,
@@ -10,6 +10,7 @@ export const createYoutube = async ({access_token,refresh_token,scopes,userId}:a
             connections: {
                 create: {
                     userId: userId,
+                    name: name,
                     type: "Youtube"
                 }
             }

@@ -1,5 +1,5 @@
 export type ConnectionTypes = 'Notion' | 'OpenAI' | 'Postgresql' | 'Google Drive' | 'Linkedin' | 'Youtube' | 'Twitter' |
- 'Github' | 'Google Sheets' | 'Google Calendar' | 'Facebook' | 'Instagram' | 'Discord'
+ 'Github' | 'Google Sheets' | 'Google Calendar' | 'Facebook' | 'Instagram' | 'Discord' | 'Gmail' | 'Google Search' | 'Reddit' | 'Voice Monkey'
 
 export type Connection = {
   title: ConnectionTypes

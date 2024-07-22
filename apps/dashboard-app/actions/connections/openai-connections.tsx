@@ -7,11 +7,11 @@ interface Props {
     userId: string
 }
 
-export const onOpenAIConnection = async ({apiKey,userId}:Props) => {
+export const onOpenAIConnection = async ({apiKey,userId}:any) => {
         if(apiKey){
             const openai_connected = await getOpenAIByAPIKey(apiKey)
             if (!openai_connected){
-                await createOpenAI({apiKey,openai_connected, userId})
+                await createOpenAI({name: 'My OpenAI Key',apiKey,openai_connected, userId})
             }
         }
     
