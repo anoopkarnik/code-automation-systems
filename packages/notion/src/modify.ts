@@ -2,12 +2,12 @@ import { Client } from '@notionhq/client';
 import { logger } from '@repo/winston-logger/index';
 import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren, getDatabaseProperties } from './index'; // Adjust the import path accordingly
 
-export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts = [], includes=[]}:any):Promise<any> => {
+export const queryNotionDatabase = async ({apiToken, database_id, filters, filter_condition='and', sorts = [], includes=[]}:any):Promise<any> => {
     let has_more = true;
     let cursor = null;
     let results = [];
 
-    let body = await constructFilterBody(filters, cursor);
+    let body = await constructFilterBody(filters,filter_condition, cursor);
     body = await constructSortBody(body, sorts);
     let response = await queryDatabase({apiToken,database_id, body});
     if (response.results.length > 0) {
@@ -23,13 +23,13 @@ export const queryNotionDatabase = async ({apiToken, database_id, filters, sorts
     return { "results": results };
 }
 
-export const queryAllNotionDatabase = async ({apiToken, database_id, filters, sorts = []}:any):Promise<any> => {
+export const queryAllNotionDatabase = async ({apiToken, database_id, filters, filter_condition='and',sorts = []}:any):Promise<any> => {
     let has_more = true;
     let cursor = null;
     let results = [];
     logger.info(filters.toString())
     while (has_more) {
-        let body = await constructFilterBody(filters, cursor);
+        let body = await constructFilterBody(filters, filter_condition, cursor);
         body = await constructSortBody(body, sorts);
         let response = await queryDatabase({apiToken,database_id, body});
         if (response.results.length > 0) {
@@ -70,12 +70,13 @@ function modifySort(sort:any) {
     }
 }
 
-async function constructFilterBody(filters:any, cursor:any) {
-    const filtersBody:any = { filter: { and: [] } };
+async function constructFilterBody(filters:any,filter_condition:any, cursor:any) {
+    const filtersBody:any = { filter: { } };
+    filtersBody.filter[filter_condition] = [];
     if (cursor) {
         filtersBody['start_cursor'] = cursor;
     }
-    filtersBody.filter.and = filters.map(modifyFilter);
+    filtersBody.filter[filter_condition] = filters.map(modifyFilter);
 
     return filtersBody;
 }
@@ -87,7 +88,8 @@ function modifyFilter(filter:any) {
         return { property: filter.name, [filter.type]: { [filter.condition]: filter.value } };
     } else if (filter.type === 'created_time'){
         return { timestamp: 'created_time', created_time: { [filter.condition]: filter.value } };
-    
+    } else if (filter.type === 'ID'){
+        return { property: filter.name, "unique_id": { [filter.condition]: filter.value } };
     }
 }
 
@@ -97,6 +99,7 @@ async function modifyResult(result:any){
     for (const prop in properties) {
         resultBody[prop] = unmodifyProperty(properties[prop]);
     }
+    resultBody['id'] = result.id;
     return resultBody;
 }
 

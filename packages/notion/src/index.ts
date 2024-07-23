@@ -97,6 +97,11 @@ export const appendBlockChildren = async ({apiToken,block_id,children}:any) =>{
     return response;
 }
 
+export const deletePage = async ({apiToken,page_id}:any) =>{
+    const notion = new Client({auth: apiToken})
+    const response = await notion.pages.update({ page_id: page_id, in_trash: true })
+    return response;
+}
 // import express from 'express';
 // import {createCalendarPage } from './calendar/add_calendar_to_page';
 // //const bodyParser = require("body-parser");

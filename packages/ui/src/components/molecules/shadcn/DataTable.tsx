@@ -15,6 +15,7 @@ import {
   getPaginationRowModel,
   VisibilityState,
   useReactTable,
+  Row
 } from "@tanstack/react-table";
 
 import {
@@ -32,20 +33,26 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "./Dropdown";
+import { EditIcon, Trash } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onDelete: (rows: Row<TData>[]) => void;
+  onEdit: (rows: Row<TData>[]) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onDelete,
+  onEdit,
 }: DataTableProps<TData, TValue>) {
 
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] =React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
   const table = useReactTable({
     data,
     columns,
@@ -56,16 +63,18 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   })
 
   return (
     <div className="my-0">
-      <div className="flex items-center p-4">
+      <div className="flex items-center p-4 justify-between">
         <Input
           placeholder="Filter Name..."
           value={(table.getColumn("Name")?.getFilterValue() as string) ?? ""}
@@ -74,6 +83,36 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <div className="flex items-center gap-4">
+        {table.getFilteredSelectedRowModel().rows.length == 1 && (
+          <Button
+            variant="outline"
+            className="ml-auto"
+            onClick={async () => {``
+                onEdit(table.getFilteredSelectedRowModel().rows)
+                table.resetRowSelection();
+            }}
+          >
+            <EditIcon className="size-4 mr-2" />
+            Edit ({table.getFilteredSelectedRowModel().rows.length})
+          </Button>
+        )}
+        {table.getFilteredSelectedRowModel().rows.length > 0 && (
+          <Button
+            variant="outline"
+            className="ml-auto"
+            onClick={async () => {``
+              const ok = await confirm();
+              if (ok) {
+                onDelete(table.getFilteredSelectedRowModel().rows)
+                table.resetRowSelection();
+              }
+            }}
+          >
+            <Trash className="size-4 mr-2" />
+            Delete ({table.getFilteredSelectedRowModel().rows.length})
+          </Button>
+        )}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -99,6 +138,7 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border max-h-svh overflow-x-auto overflow-y-auto">
         <Table className="min-w-full">

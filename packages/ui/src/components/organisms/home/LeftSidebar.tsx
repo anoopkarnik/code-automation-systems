@@ -3,7 +3,7 @@ import { cn } from '@repo/ui/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { ChevronsLeft, AlignJustifyIcon } from 'lucide-react'
+import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../components/molecules/shadcn/Tooltip'
 
 interface LeftSidebarProps {
@@ -20,6 +20,8 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+    const [items, setItems] = useState(sidebarItems);
+    const [showSubItems, setShowSubItems] = useState<any>({});
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -65,6 +67,14 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
         }
     }, [isMobile, pathname])
 
+    const toggleSubItems = (index:any) => {
+        setShowSubItems((prev:any) =>({
+            ...prev,
+            [index]: !prev[index]
+        }))
+
+    }
+
     return (
         <>
             <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-auto sticky flex flex-col z-10',
@@ -78,19 +88,66 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                     {isMobile && <ChevronsLeft className='h-6 w-6' />}
                 </div>
                 <div className='mt-14 ml-2'>
-                    {sidebarItems.map((item: any, index: number) => (
-                        <div key={index} onClick={() => redirect(item.href)}
-                            className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
-                                pathname === item.href && 'bg-destructive/30'
-                            )}>
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger><item.icon className='h-6 w-6' /></TooltipTrigger>
-                                    <TooltipContent>{item.title}</TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                            {<span>{item.title}</span>}
-                        </div>
+                    {items.map((item: any, index: number) => (
+                        <>
+                            {item.subItems && item.subItems.length > 0 ? (
+                                <>
+                                    <div key={index} onClick={() => toggleSubItems(index)}
+                                        className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
+                                            pathname === item.href && 'bg-destructive/30'
+                                        )}>
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                {item.icon && <item.icon className='h-6 w-6' />}
+                                                {!item.icon && <img src={item.image} className='h-6 w-6' />}
+                                                <TooltipContent>{item.title}</TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                        <div className='flex items-center justify-between w-full'>
+                                            {item.title} 
+                                            {showSubItems[index] ?
+                                             <MinusIcon className='w-4 h-4'/> :
+                                              <PlusIcon className='w-4 h-4'/>
+                                            }
+                                        </div>
+                                    </div>
+                                    <>
+                                    {showSubItems[index] && item.subItems.map((subItem: any, subIndex: number) => (
+                                        <div key={subIndex} onClick={() => redirect(subItem.href)}
+                                            className={cn('flex items-center gap-2 p-2 mx-8 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
+                                                pathname === subItem.href && 'bg-destructive/30'
+                                            )}>
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    {subItem.icon && <subItem.icon className='h-6 w-6' />}
+                                                    {!subItem.icon && <img src={subItem.image} className='h-6 w-6' />}
+                                                    <TooltipContent>{subItem.title}</TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
+                                            {<span>{subItem.title}</span>}
+                                        </div>
+                                    ))} 
+                                    </>
+                                    </> )
+                                :
+                                <div key={index} onClick={() => redirect(item.href)}
+                                    className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
+                                        pathname === item.href && 'bg-destructive/30'
+                                    )}>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger>
+                                                {item.icon && <item.icon className='h-6 w-6' />}
+                                                {!item.icon && <img src={item.image} className='h-6 w-6' />}
+                                            </TooltipTrigger>
+                                            <TooltipContent>{item.title}</TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                    {<span>{item.title}</span>}
+                                </div>
+                }
+                            
+                        </>
                     ))}
                 </div>
                 <div onClick={resetWidth}

@@ -25,36 +25,43 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   TrophyIcon,
   WormIcon,
   YoutubeIcon,
-  VideoIcon} from "lucide-react";
+  VideoIcon,
+  DatabaseIcon} from "lucide-react";
 import { Connection } from "./types";
-import { Image } from "next-auth/providers/42-school";
-import { sub } from "date-fns";
 
 export const sidebarItems = [
   {
-      title: "Financial",
-      icon: BadgeCentIcon,
-      href: "/financial"
-  },
-  {
-      title: "Projects",
-      icon: BriefcaseIcon,
-      href: "/projects"
-  },
-  {
-      title: "Planner",
-      icon: NotebookIcon,
-      href: "/planner"
-  },
-  {
-      title: "Knowledge Base",
-      icon: LibraryIcon,
-      href: "/knowledge-base"
-  },
-  {
-      title: "Personal Info",
-      icon: BadgeCentIcon,
-      href: "/personal-info"
+      title: "Notion Dbs",
+      image: '/notion.png',
+      show: true,
+      subItems: [
+        {
+            title: "Financial",
+            icon: BadgeCentIcon,
+            href: "/financial"
+        },
+        {
+            title: "Projects",
+            icon: BriefcaseIcon,
+            href: "/projects"
+        },
+        {
+            title: "Planner",
+            icon: NotebookIcon,
+            href: "/planner"
+        },
+        {
+            title: "Knowledge Base",
+            icon: LibraryIcon,
+            href: "/knowledge-base"
+        },
+        {
+            title: "Personal Info",
+            icon: BadgeCentIcon,
+            href: "/personal-info"
+        },
+      ]
+
   },
   {
       title: "Workflows",
@@ -68,8 +75,13 @@ export const sidebarItems = [
   },
   {
       title: 'Youtube',
-      icon: VideoIcon,
+      image: '/youtube.png',
       href: '/youtube'
+  },
+  {
+      title: "OpenAI",
+      image: '/openai.png',
+      href: "/openai"
   },
   {
       title: "Settings",

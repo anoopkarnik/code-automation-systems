@@ -7,6 +7,7 @@ import { getDatabases } from '../actions/notion/notion'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { updateNotionDatabase } from '../actions/notion/notion'
 import { useSession } from 'next-auth/react'
+import { Input } from '@repo/ui/molecules/shadcn/Input'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
@@ -14,16 +15,29 @@ const DbSelection = ({title,name,fieldName}:any) => {
     const session = useSession()
     const userId = session?.data?.user?.id
     const [databases, setDatabases] = useState([])
+    const [filteredDatabases, setFilteredDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('')
+    const [searchQuery, setSearchQuery] = useState('')
 
     useEffect(() => {
         const fetchDatabases = async () => {
             if (!accessToken) return
             const databases = await getDatabases(accessToken)
             setDatabases(databases)
+            setFilteredDatabases(databases)
         }
         fetchDatabases()
     },[accessToken,userId])
+
+    const handleSearch = (event:any) => {
+        const query = event.target.value.toLowerCase();
+        setSearchQuery(query);
+        setFilteredDatabases(databases?.filter((database:any) =>{
+            if (database.name == null) return
+            return  database.name.toLowerCase().includes(query)
+        }
+        ));
+    };
 
     useEffect(() => {
         if (!connectionsContext) return
@@ -227,12 +241,14 @@ const DbSelection = ({title,name,fieldName}:any) => {
   return (
     <div className='flex flex-wrap items-center justify-center border-b-2 border-border py-10 gap-4 '>
         <div className='font-bold w-[200px]'> {title}</div>
+
         <Select value={selectedDb} onValueChange={(value) => setSelectedDb(value)} >
             <SelectTrigger className='w-[380px] py-8'>
                 <SelectValue placeholder={`Select ${name} Notion Db`}/>
             </SelectTrigger>
             <SelectContent>
-                {databases?.map((database:any) => (
+                <Input placeholder='Search Database' className='w-full' value={searchQuery} onChange={handleSearch} />
+                {filteredDatabases.length> 0 && filteredDatabases?.map((database:any) => (
                     <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon, 
                     name: database.name, accessToken: database.accessToken})}>
                         <div className='flex items-center justify-center gap-4'>
