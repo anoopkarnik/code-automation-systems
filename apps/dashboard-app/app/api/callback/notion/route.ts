@@ -39,7 +39,6 @@ export async function GET(req: NextRequest) {
         ? databasesPages?.results[0]?.id
         : '';
 
-      console.log(`Number of databases connected: ${databasesPages?.results?.length}`);
       const type = 'Notion';
       
 

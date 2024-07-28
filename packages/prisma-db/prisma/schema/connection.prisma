@@ -53,27 +53,12 @@ model Connection {
   workspaceName    String?
   workspaceIcon    String?
   apiKey           String?
-  notionDb         NotionDb?
-  youtube          Youtube[]      
+  notionDb         NotionDb?  
   User             User?           @relation(fields: [userId], references: [id])
   userId           String?
 
   createdAt        DateTime        @default(now())  
   updatedAt        DateTime        @updatedAt
 
-  @@schema("connection_schema")
-}
-
-model Youtube {
-  id               String          @id @default(uuid())
-  videoId          String?
-  channelId        String?
-  watched          Boolean         @default(false)
-  connection       Connection     @relation(fields: [connectionId], references: [id])
-  connectionId     String         
-  createdAt        DateTime        @default(now())  
-  updatedAt        DateTime        @updatedAt
-
-  @@index([channelId,watched])
   @@schema("connection_schema")
 }

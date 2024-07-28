@@ -4,17 +4,17 @@ import { createConnection, getConnectionByAPIKey, getConnectionsByUserAndType } 
 
 
 export const onOpenAIConnection = async ({apiKey,userId}:any) => {
-        if(apiKey){
-            const openai_connected = await getConnectionByAPIKey(apiKey)
-            if (!openai_connected){
-                const openai = await createConnection({apiKey,type:'OpenAI', userId})
-                return openai;
-            }
-        }
-    
-    }
+    if(!apiKey) return {error: "API Key not present in the query"}
+    const openai_connected = await getConnectionByAPIKey(apiKey)
+    if (openai_connected) return {success: "OpenAI Connection already exists"}
+    const openai = await createConnection({apiKey,type:'OpenAI', userId})
+    if(!openai) return {error: "OpenAI Connection not created successfully"}
+    return openai;
+
+}
 
 export const getOpenAIConnection = async (userId: string) => {
+    if(!userId) return {error: "User Id not present in the query"}
     const connection = await getConnectionsByUserAndType(userId, 'OpenAI')
     return connection
 }

@@ -41,7 +41,7 @@ const PlannerPage = () => {
 
   useEffect(() =>{
     const onUserConnection = async () =>{
-      if (user){
+      if (user && access_token){
         if (type === 'Notion'){    
           const notion = await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
           connectionsContext.setNotionNode(notion)
@@ -59,7 +59,7 @@ const PlannerPage = () => {
     }
     }
     onUserConnection()
-  },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,user,type])
+  },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,user,type,userId])
 
 
   if (!session) {

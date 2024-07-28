@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client';
 import { logger } from '@repo/winston-logger/index';
 import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren, getDatabaseProperties } from './index'; // Adjust the import path accordingly
+import { log } from 'winston';
 
 export const queryNotionDatabase = async ({apiToken, database_id, filters, filter_condition='and', sorts = [], includes=[]}:any):Promise<any> => {
     let has_more = true;
@@ -168,9 +169,9 @@ async function constructUpdateBody(properties:any) {
     return { properties: propertiesBody };
 }
 
-export const createNotionPage = async({database_id, properties}:any) => {
+export const createNotionPage = async({apiToken,database_id, properties}:any) => {
     const body = await constructCreateBody(database_id, properties);
-    const response = await createPage({body});
+    const response = await createPage({apiToken,body});
     return modifyResult(response);
 }
 
@@ -261,13 +262,15 @@ function unmodifyProperty(prop:any) {
         case 'array':
             return prop.array.map((x:any) => unmodifyProperty(x));
         case 'files':
-            return prop.files.map((x:any) => x.name);
+            return prop.files[0].external.url;
         case 'url':
             return prop.url;
         case 'checkbox':
             return prop.checkbox;
         case 'formula':
             return prop.formula.number || prop.formula.string;
+        case 'file_url':
+            return prop.files[0].external.url;
     }
 }
 

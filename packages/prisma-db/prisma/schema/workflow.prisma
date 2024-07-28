@@ -26,17 +26,26 @@ model Node {
   worklows          Workflow @relation(fields: [workflowId], references: [id])
   userId            String?
   User              User?     @relation(fields: [userId], references: [id])
+  sortingOrder      Int      @default(0)
   @@schema("workflow_schema")
 }
 
 model Event {
-  id                String   @id @default(uuid())
+  id               String   @id @default(uuid())
   workflowId       String
   Workflows        Workflow @relation(fields: [workflowId], references: [id])
   status           String
+  eventOutbox      EventOutbox?
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@schema("workflow_schema")
+}
+
+model EventOutbox {
+  id                String   @id @default(uuid())
+  eventId           String @unique
+  event             Event @relation(fields: [eventId], references: [id])
   @@schema("workflow_schema")
 }

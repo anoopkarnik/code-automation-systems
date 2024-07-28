@@ -309,28 +309,31 @@ export const CONNECTIONS: Connection[] = [
     }
   ]
 
-  export const TRIGGER_TYPES:any = [
-    {
-      actionType: 'Schedule',
-      icon: ClockIcon,
-      subActions: ['Cron' ]
-    },
-    {
-      actionType: 'Webhook',
-      icon: WebhookIcon,
-      subActions: ['Internal Webhook']
-    },
-  ]
+export const TRIGGER_TYPES:any = [
+  {
+    actionType: 'Schedule',
+    icon: ClockIcon,
+    subActions: ['Cron' ]
+  },
+  {
+    actionType: 'Webhook',
+    icon: WebhookIcon,
+    subActions: ['Internal Webhook']
+  },
+]
 
-  export const ACTION_TYPES:any = [
-    {
-      actionType: 'Webhook',
-      icon: WebhookIcon,
-      subActions: ['Internal Webhook']
-    },
-    {
-      actionType: 'Notion',
-      image: '/notion.png',
-      subActions: ['Create Page','Update Page','Append Block', 'Delete Page']
-    }
-  ]
+export const ACTION_TYPES:any = [
+  {
+    actionType: 'Webhook',
+    icon: WebhookIcon,
+    subActions: ['Internal Webhook']
+  },
+  {
+    actionType: 'Notion',
+    image: '/notion.png',
+    subActions: ['Create Page','Update Page','Append Block', 'Delete Page']
+  }
+]
+
+export const ExpenseTypes = ['Living','Saving','Growth','Delight','Others']
+export const ScheduleTypes = ['Monthly','BiMonthly','Quarterly','Half Yearly','Yearly']

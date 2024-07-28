@@ -13,7 +13,7 @@ const useConnection = () => {
 
   useEffect(() =>{
     const onAddConnection = async () =>{
-        const notion_info = await getNotionInfo(userId || '')
+        const notion_info:any = await getNotionInfo(userId || '')
     //   const openAi_info = await getOpenAIByUserId(userId || '')
       if (notion_info){
         connectionsContext.setNotionNode({notionId: notion_info?.id,accessToken:notion_info?.accessToken,

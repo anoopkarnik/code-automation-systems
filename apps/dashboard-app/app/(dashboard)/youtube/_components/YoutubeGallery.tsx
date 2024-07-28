@@ -1,25 +1,32 @@
 'use client'
 
-import React, {  useEffect, useState } from 'react'
+import React, {  useContext, useEffect, useState } from 'react'
 
-import { getChannels } from '../../../../actions/connections/youtube-connections'
 import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { ConnectionsContext } from '../../../../providers/connections-provider'
+import { queryAllNotionDatabase } from '@repo/notion/notion-client'
+import { queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
+import Image from 'next/image'
 
-const YoutubeGallery = ({selectedAccount}:any) => {
+const YoutubeGallery = () => {
     const [cards, setCards] = useState<any>([])
     const session = useSession()
     const userId = session?.data?.user?.id
+    const connectionsContext = useContext(ConnectionsContext)
+    const channelsDbId = connectionsContext?.notionNode?.channelsDb?.id
+    const apiToken = connectionsContext?.notionNode?.accessToken
 
     useEffect(() => {
         const updateCards = async () => { 
-            const channels = await getChannels(userId || '',selectedAccount )
-
-            setCards(channels)
+            if (!userId || !channelsDbId || !apiToken) return
+            const channels = await queryAllNotionDatabaseAction({apiToken,database_id:channelsDbId})
+            setCards(channels.results)
+            console.log(channels.results)
         }
         updateCards()        
-    },[userId,selectedAccount])
+    },[userId,channelsDbId,apiToken])
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4' >
@@ -27,11 +34,14 @@ const YoutubeGallery = ({selectedAccount}:any) => {
           cards.map((card:any) => (
             <Card>
               <CardHeader>
-                  <CardTitle>{card.name}</CardTitle>
+                  <CardTitle className='flex items-center justify-between'>
+                    <div>{card.Name}</div>
+                    <div>{card.videosCount}</div>
+                  </CardTitle>
               </CardHeader>
               <CardContent className='flex flex-col gap-4'>
-                  <img src={card.imageId} alt={card.name} height={200} width={200} className="object-contain "/>
-                  <CardDescription>{card.description.substring(0,200) }.........</CardDescription>
+                  <Image src={card.imageId} alt={card.Name} height={200} width={200} className="object-contain "/>
+                  <CardDescription>{card.Description.substring(0,200) }.........</CardDescription>
                   <Button >View Channel</Button>
               </CardContent>
           </Card>

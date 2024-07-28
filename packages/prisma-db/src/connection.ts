@@ -24,11 +24,12 @@ export const deleteConnection = async (id: string) => {
 export const deleteNotionDb = async (id: string) => {
     const notionDb = await db.notionDb.delete({
         where: {
-            id
+            connectionId:id
         }
     });
     return notionDb;
 }
+
 
 export const getConnectionsByUser = async (userId: string) => {
     const connections = await db.connection.findMany({
@@ -93,7 +94,7 @@ export const getConnectionByAPIKey = async (apiKey: string) => {
 }
 
 export const createConnection = async ({type, userId, accessToken, workspaceName, workspaceIcon, workspaceId, apiKey,
-    refreshToken, scopes, results}: any) => {
+    refreshToken, scopes}: any) => {
     console.log('Creating connection', type, userId, accessToken, workspaceName, workspaceIcon, workspaceId, apiKey, refreshToken, scopes)
     if (type === 'Notion'){
         const result = await db.$transaction(async (db) =>{
@@ -130,30 +131,17 @@ export const createConnection = async ({type, userId, accessToken, workspaceName
         return openAI;
     }
     else if (type === 'Youtube'){
-        const result = await db.$transaction(async (transaction) =>{
-            const connection = await transaction.connection.create({
-                data:{
-                    name: 'My Youtube Account',
-                    userId: userId,
-                    accessToken: accessToken,
-                    refreshToken: refreshToken,
-                    scopes: scopes,
-                    type: type,
-                }
-            })
-            const youtube = await transaction.youtube.createMany({
-                data: results.map((result: any) => {
-                        return {
-                            connectionId: connection.id,
-                            videoId: result.videoId,
-                            channelId: result.channelId,
-                        }
-                    })
-                
-            })
-            return { connection, youtube }
-        });
-        return result;
+        const connection = await db.connection.create({
+            data:{
+                name: 'My Youtube Account',
+                userId: userId,
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+                scopes: scopes,
+                type: type,
+            }
+        })
+        return connection;
     }
     return null;
 }
@@ -170,14 +158,12 @@ export const updateNotionDb = async ({ id, field, value }: { id: string, field: 
     return notionDb;
   };
    
-export const updateYoutube = async ({id,watched}:any) =>{
-    const youtube = await db.youtube.update({
-        where:{
-            id: id
-        },
-        data:{
-            watched
+
+export const getConnectionById = async (id: string) => {
+    const connection = await db.connection.findUnique({
+        where: {
+            id
         }
-    })
-    return youtube;
+    });
+    return connection;
 }

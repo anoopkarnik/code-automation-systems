@@ -1,6 +1,6 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import { DatePickerWithRange } from '@repo/ui/molecules/shadcn/DateRange';
 import { ConnectionsContext } from '../../../../providers/connections-provider';
 import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,  getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../../../../actions/notion/financial'
@@ -8,6 +8,11 @@ import ChartCard from '@repo/ui/molecules/common/ChartCard';
 import { ChartConfig } from '@repo/ui/molecules/shadcn/Chart';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import {Skeleton} from '@repo/ui/molecules/shadcn/Skeleton'
+import HeaderCard from '@repo/ui/molecules/common/HeaderCard';
+import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
+import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { createNotionPageAction, queryNotionDatabaseAction } from '../../../../actions/notion/notion';
 
 const Overview = () => {
 
@@ -22,12 +27,23 @@ const Overview = () => {
   const [monthlyBudgetSummary, setMonthlyBudgetSummary] = useState<any>(undefined)
   const [yearlyBudgetSummary, setYearlyBudgetSummary] = useState<any>(undefined)
   const [pastMonthsBudgetSummary, setPastMonthsBudgetSummary] = useState<any>(undefined)
+  const [timeLeftToLoss, setTimeLeftToLoss] = useState(0)
+  const [timeLeftToBankruptcy, setTimeLeftToBankruptcy] = useState(0)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+
+  // Add Transaction
+  const [name, setName] = useState('')
+  const [cost, setCost] = useState('')
+  const [selectedBudget, setSelectedBudget] = useState('')
+  const [budgets, setBudgets] = useState([])
+  const [filteredBudgets, setFilteredBudgets] = useState([])
+  const [searchBudgetQuery, setSearchBudgetQuery] = useState('')
 
   useEffect(() => {
     const updateSummary = async () => {
       try{
+        const startTime = new Date().getTime()
         const endDate = new Date()
         const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), 1)
         setStartDate(format(startDate, 'dd MMMyy'))
@@ -35,6 +51,10 @@ const Overview = () => {
         if (!apiToken || !transactionsDbId || !accountsDbId || !budgetDbId) {
           return
         }
+        const budgets = await queryNotionDatabaseAction({apiToken,database_id:budgetDbId}) 
+        setBudgets(budgets.results)
+        setFilteredBudgets(budgets.results)
+        
         let dateSpecificSummary = await getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate})
         setDateSpecificSummary(dateSpecificSummary)
         let lastMonthsSummary = await getLastMonthsFinancialSummary({apiToken,transactionsDbId,k:6 })
@@ -47,6 +67,13 @@ const Overview = () => {
         setYearlyBudgetSummary(yearlyBudgetSummary)
         let budgetSummary = await getPastMonthsBudgetSummary({apiToken,budgetDbId,transactionsDbId,k:6})
         setPastMonthsBudgetSummary(budgetSummary)
+        let liquidMoney = Number(accountsSummary?.totalExpensesByLiquidity?.find((item:any) => item.type === 'Liquid')?.totalExpenses)
+        let monthlyBudget = Number(monthlyBudgetSummary?.monthlyBudget)*1.2
+        let yearlyBudget = Number(yearlyBudgetSummary?.yearlyBudget)/12
+        let partialLiquidMoney = Number(accountsSummary?.totalExpensesByLiquidity?.find((item:any) => item.type === 'Partially Liquid')?.totalExpenses)
+        setTimeLeftToLoss(Math.round(liquidMoney/(monthlyBudget+yearlyBudget)))
+        setTimeLeftToBankruptcy(Math.round((liquidMoney+partialLiquidMoney)/(monthlyBudget+yearlyBudget)))
+        console.log((new Date().getTime()-startTime)/60000)
         
       }catch(e){
         console.error('Error in fetching financial summary',e)
@@ -55,6 +82,32 @@ const Overview = () => {
     updateSummary()
   },[apiToken, transactionsDbId, accountsDbId, budgetDbId])
 
+    const handleBudget = (event:any) => {
+      const query = event.target.value.toLowerCase();
+      setSearchBudgetQuery(query)
+      setFilteredBudgets(budgets?.filter((budget:any) => {
+        if(budget.Name ===null) return
+        return budget.Name.toLowerCase().includes(query)
+      }));
+    }
+
+    const handleAddTransaction = async () => {
+      if (!name || !cost || !selectedBudget) {
+        return
+      }
+      const budget:any = budgets?.find((budget:any) => budget.Name === selectedBudget)
+      if (!budget) {
+        return
+      }
+      const properties:any = [
+        {name:'Name',type: 'title', value: name},
+        {name:'Cost',type: 'number', value: Number(cost)},
+        {name:'Monthly Budget',type: 'relation', value: [budget.id]}
+      ]
+      const dbId = transactionsDbId
+      const response = await createNotionPageAction({apiToken, dbId, properties})
+      console.log(response)
+    }
 
 
   const onTimeUpdate = async (dateRange: any) => {
@@ -108,226 +161,266 @@ const Overview = () => {
     }
   }
 
+
   return (
     <div className='w-[95%] mx-[2.5%] my-6 '>
-      {dateSpecificSummary ? <Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-              <div>Total Expenses between {startDate} & {endDate} </div>
-              <div>Rs {dateSpecificSummary.totalExpense}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-          <DatePickerWithRange modifyUrl={onTimeUpdate}/>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+      <div className='gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8'>
+        <HeaderCard title='Current Month Expenses' description='Total expenses in the current Month' value={`Rs ${dateSpecificSummary?.totalExpense}`}/>
+        <HeaderCard title='Current Account Balance' description='Total Balance liquid, partially liquid and illiquid' value={`Rs ${accountsSummary?.totalBalance}`}/>
+        <HeaderCard title='Time Left to Bankruptcy' description='Time left to Bankruptcy based on current expenses and income' value={`${timeLeftToBankruptcy} Months`}/>
+        <HeaderCard title='Time Left to Loss' description='Time left to Loss based on current expenses and income' value={`${timeLeftToLoss} Months`}/>
+      </div>
+      <div>
+      {budgets ? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+                <div> Add New Transactions and Budgets </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+            <div className='flex items-center gap-4 w-full flex-wrap my-2 mx-2'>
+              <Input className='w-[200px]' placeholder='Name' value={name} onChange={(event)=>setName(event.target.value)} />
+              <Input className='w-[200px]' placeholder='Cost' value={cost} onChange={(event)=>setCost(event.target.value)} />
+              <Select value={selectedBudget} onValueChange={(value) => setSelectedBudget(value)} >
+                  <SelectTrigger className='w-[200px]'>
+                      <SelectValue placeholder={`Select Budget`}/>
+                  </SelectTrigger>
+                  <SelectContent>
+                      <Input placeholder='Search Budget' className='w-full' value={searchBudgetQuery} onChange={handleBudget} />
+                      {filteredBudgets.length> 0 && filteredBudgets?.map((budget:any) => (
+                          <SelectItem key={budget.id} value={budget.Name}>
+                              <div className='flex items-center justify-center gap-4'>
+                                  <div>{budget.Name}</div>
+                              </div>
+                          </SelectItem>
+                      ))}
+                  </SelectContent>
+              </Select>
+              <Button onClick={handleAddTransaction} className='font-bold'> Add a Transaction</Button>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {dateSpecificSummary ? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+                <div>Total Expenses between {startDate} & {endDate} </div>
+                <div>Rs {dateSpecificSummary.totalExpense}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+            <DatePickerWithRange modifyUrl={onTimeUpdate}/>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
 
-            <ChartCard 
-                title='Total Expenses By Expense Type' 
-                description='Total expenses By Expense Type in the above specified Date'
-                chartData={dateSpecificSummary?.totalExpensesByExpenseType} 
-                chartConfig={chartConfig3}
-                xKey='type'
-                angle='horizontal'
-              />
               <ChartCard 
-                title='Total Expenses By Monthly Budget' 
-                description='Total expenses By Monthly Budget in the above specified Date'
-                chartData={dateSpecificSummary?.totalExpensesByBudgetType} 
-                chartConfig={chartConfig3}
-                xKey='type'
-                angle='vertical'
-              />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-      {lastMonthsSummary? <Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-             <div>Average Expenses in last 6 Months </div>
-             <div> Rs {lastMonthsSummary?.reduce((acc:any, item:any) => { return acc += item.totalExpenses},0)/6}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
-
-              <ChartCard 
-                title='Total Expenses' 
-                description='Total expenses in the last 6 months'
-                chartData={lastMonthsSummary}
-                chartConfig={chartConfig1}
-                xKey='month'
-                angle='horizontal'
+                  title='Total Expenses By Expense Type' 
+                  description='Total expenses By Expense Type in the above specified Date'
+                  chartData={dateSpecificSummary?.totalExpensesByExpenseType} 
+                  chartConfig={chartConfig3}
+                  xKey='type'
+                  angle='horizontal'
                 />
-              <ChartCard 
-                title='Total Expenses By Expense Type' 
-                description='Total expenses By Expense Type in the last 6 months'
-                chartData={lastMonthsSummary}
-                chartConfig={chartConfig2}
-                xKey='month'
-                angle='horizontal'
+                <ChartCard 
+                  title='Total Expenses By Monthly Budget' 
+                  description='Total expenses By Monthly Budget in the above specified Date'
+                  chartData={dateSpecificSummary?.totalExpensesByBudgetType} 
+                  chartConfig={chartConfig3}
+                  xKey='type'
+                  angle='vertical'
                 />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-      {accountsSummary? <Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-              <div>Account Balance</div>
-              <div>Rs {accountsSummary.totalBalance}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {lastMonthsSummary? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+              <div>Average Expenses in last 6 Months </div>
+              <div> Rs {lastMonthsSummary?.reduce((acc:any, item:any) => { return acc += item.totalExpenses},0)/6}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
 
                 <ChartCard 
-                    title='Total Amount By Asset Type' 
-                    description='Total amount by Asset Type'
-                    chartData={accountsSummary?.totalExpensesByAssetType} 
-                    chartConfig={chartConfig3}
-                    xKey='type'
-                    angle='horizontal'
+                  title='Total Expenses' 
+                  description='Total expenses in the last 6 months'
+                  chartData={lastMonthsSummary}
+                  chartConfig={chartConfig1}
+                  xKey='month'
+                  angle='horizontal'
                   />
-                  <ChartCard 
-                    title='Total Amount By Liquidity' 
-                    description='Total amount by how Liquid the Asset is'
-                    chartData={accountsSummary?.totalExpensesByLiquidity} 
-                    chartConfig={chartConfig3}
-                    xKey='type'
-                    angle='horizontal'
-                  />
-                  <ChartCard 
-                    title='Total amount By Asset/Liability Name' 
-                    description='Total amount By Asset/Liability Name'
-                    chartData={accountsSummary?.totalExpensesByName} 
-                    chartConfig={chartConfig3}
-                    xKey='type'
-                    angle='vertical'
+                <ChartCard 
+                  title='Total Expenses By Expense Type' 
+                  description='Total expenses By Expense Type in the last 6 months'
+                  chartData={lastMonthsSummary}
+                  chartConfig={chartConfig2}
+                  xKey='month'
+                  angle='horizontal'
                   />
               </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-      {monthlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-             <div>Current Monthly Cost | Budget </div>
-             <div> Rs {monthlyBudgetSummary?.monthlyExpense} | Rs {monthlyBudgetSummary?.monthlyBudget}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {accountsSummary? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+                <div>Account Balance</div>
+                <div>Rs {accountsSummary.totalBalance}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
 
-              <ChartCard 
-                title='Total Budget and Cost By Expense Type' 
-                description='Total budget and cost By Expense Type '
-                chartData={monthlyBudgetSummary?.monthlyBudgetByExpenseType}
-                chartConfig={chartConfig4}
-                xKey='type'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Budget and Cost By Budget Name' 
-                description='Total budget and cost By Budget Name'
-                chartData={monthlyBudgetSummary?.monthlyBudgetByName}
-                chartConfig={chartConfig4}
-                xKey='type'
-                angle='vertical'
-                />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-      {yearlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-             <div>Current Yearly Cost | Budget </div>
-             <div> Rs {yearlyBudgetSummary?.yearlyExpense} | Rs {yearlyBudgetSummary?.yearlyBudget}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+                  <ChartCard 
+                      title='Total Amount By Asset Type' 
+                      description='Total amount by Asset Type'
+                      chartData={accountsSummary?.totalExpensesByAssetType} 
+                      chartConfig={chartConfig3}
+                      xKey='type'
+                      angle='horizontal'
+                    />
+                    <ChartCard 
+                      title='Total Amount By Liquidity' 
+                      description='Total amount by how Liquid the Asset is'
+                      chartData={accountsSummary?.totalExpensesByLiquidity} 
+                      chartConfig={chartConfig3}
+                      xKey='type'
+                      angle='horizontal'
+                    />
+                    <ChartCard 
+                      title='Total amount By Asset/Liability Name' 
+                      description='Total amount By Asset/Liability Name'
+                      chartData={accountsSummary?.totalExpensesByName} 
+                      chartConfig={chartConfig3}
+                      xKey='type'
+                      angle='vertical'
+                    />
+                </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {monthlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+              <div>Current Monthly Cost | Budget </div>
+              <div> Rs {monthlyBudgetSummary?.monthlyExpense} | Rs {monthlyBudgetSummary?.monthlyBudget}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
 
-              <ChartCard 
-                title='Total Budget and Cost By Expense Type' 
-                description='Total budget and cost By Expense Type '
-                chartData={yearlyBudgetSummary?.yearlyBudgetByExpenseType}
-                chartConfig={chartConfig4}
-                xKey='type'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Budget and Cost By Budget Name' 
-                description='Total budget and cost By Budget Name'
-                chartData={yearlyBudgetSummary?.yearlyBudgetByName}
-                chartConfig={chartConfig4}
-                xKey='type'
-                angle='vertical'
-                />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-      {pastMonthsBudgetSummary?<Accordion type="single" collapsible className='w-full'>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <div className='flex justify-between items-center w-full mr-2'>
-             <div>Average Monthly Cost | Budget </div>
-             <div> Rs {pastMonthsBudgetSummary?.totalLastMonthExpenses/6} | Rs {pastMonthsBudgetSummary?.totalLastMonthCosts}</div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
-              <ChartCard 
-                title='Total Budget and Cost By Month' 
-                description='Total budget and cost By Month '
-                chartData={pastMonthsBudgetSummary?.totalBudgetByMonth}
-                chartConfig={chartConfig4}
-                xKey='month'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Living Budget and Cost By Month' 
-                description='Total Living budget and cost By Month '
-                chartData={pastMonthsBudgetSummary?.totalLivingBudgetByMonth}
-                chartConfig={chartConfig4}
-                xKey='month'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Delight Budget and Cost By Month' 
-                description='Total Delight budget and cost By Month '
-                chartData={pastMonthsBudgetSummary?.totalDelightBudgetByMonth}
-                chartConfig={chartConfig4}
-                xKey='month'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Growth Budget and Cost By Month' 
-                description='Total Growth budget and cost By Month '
-                chartData={pastMonthsBudgetSummary?.totalGrowthBudgetByMonth}
-                chartConfig={chartConfig4}
-                xKey='month'
-                angle='horizontal'
-                />
-              <ChartCard 
-                title='Total Savings Budget and Cost By Month' 
-                description='Total Savings budget and cost By Month '
-                chartData={pastMonthsBudgetSummary?.totalSavingsBudgetByMonth}
-                chartConfig={chartConfig4}
-                xKey='month'
-                angle='horizontal'
-                />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+                <ChartCard 
+                  title='Total Budget and Cost By Expense Type' 
+                  description='Total budget and cost By Expense Type '
+                  chartData={monthlyBudgetSummary?.monthlyBudgetByExpenseType}
+                  chartConfig={chartConfig4}
+                  xKey='type'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Budget and Cost By Budget Name' 
+                  description='Total budget and cost By Budget Name'
+                  chartData={monthlyBudgetSummary?.monthlyBudgetByName}
+                  chartConfig={chartConfig4}
+                  xKey='type'
+                  angle='vertical'
+                  />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {yearlyBudgetSummary? <Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+              <div>Current Yearly Cost | Budget </div>
+              <div> Rs {yearlyBudgetSummary?.yearlyExpense} | Rs {yearlyBudgetSummary?.yearlyBudget}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+
+                <ChartCard 
+                  title='Total Budget and Cost By Expense Type' 
+                  description='Total budget and cost By Expense Type '
+                  chartData={yearlyBudgetSummary?.yearlyBudgetByExpenseType}
+                  chartConfig={chartConfig4}
+                  xKey='type'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Budget and Cost By Budget Name' 
+                  description='Total budget and cost By Budget Name'
+                  chartData={yearlyBudgetSummary?.yearlyBudgetByName}
+                  chartConfig={chartConfig4}
+                  xKey='type'
+                  angle='vertical'
+                  />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        {pastMonthsBudgetSummary?<Accordion type="single" collapsible className='w-full'>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <div className='flex justify-between items-center w-full mr-2'>
+              <div>Average Monthly Cost | Budget </div>
+              <div> Rs {pastMonthsBudgetSummary?.totalLastMonthExpenses/6} | Rs {pastMonthsBudgetSummary?.totalLastMonthCosts}</div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className='my-4 grid grid-cols-1 lg:grid-cols-2  2xl:grid-cols-3 gap-4'>
+                <ChartCard 
+                  title='Total Budget and Cost By Month' 
+                  description='Total budget and cost By Month '
+                  chartData={pastMonthsBudgetSummary?.totalBudgetByMonth}
+                  chartConfig={chartConfig4}
+                  xKey='month'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Living Budget and Cost By Month' 
+                  description='Total Living budget and cost By Month '
+                  chartData={pastMonthsBudgetSummary?.totalLivingBudgetByMonth}
+                  chartConfig={chartConfig4}
+                  xKey='month'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Delight Budget and Cost By Month' 
+                  description='Total Delight budget and cost By Month '
+                  chartData={pastMonthsBudgetSummary?.totalDelightBudgetByMonth}
+                  chartConfig={chartConfig4}
+                  xKey='month'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Growth Budget and Cost By Month' 
+                  description='Total Growth budget and cost By Month '
+                  chartData={pastMonthsBudgetSummary?.totalGrowthBudgetByMonth}
+                  chartConfig={chartConfig4}
+                  xKey='month'
+                  angle='horizontal'
+                  />
+                <ChartCard 
+                  title='Total Savings Budget and Cost By Month' 
+                  description='Total Savings budget and cost By Month '
+                  chartData={pastMonthsBudgetSummary?.totalSavingsBudgetByMonth}
+                  chartConfig={chartConfig4}
+                  xKey='month'
+                  angle='horizontal'
+                  />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+      </div>
     </div>
   )
 }
