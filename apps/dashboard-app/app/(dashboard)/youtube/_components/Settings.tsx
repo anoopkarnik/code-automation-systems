@@ -95,7 +95,7 @@ const Settings = () => {
               </SelectTrigger>
               <SelectContent className='w-[380px]'>
                 {accounts.map((account:any) => (
-                    <SelectItem value={account.name}>
+                    <SelectItem key={account.name} value={account.name}>
                         <div className='flex items-center justify-start gap-4 w-[200px]'>
                         <div>{account.name}</div>
                         </div>
@@ -113,7 +113,7 @@ const Settings = () => {
               </SelectTrigger>
               <SelectContent className='w-[380px]'>
                 {accounts.map((account:any) => (
-                    <SelectItem value={account.name}>
+                    <SelectItem key={account.name} value={account.name}>
                         <div className='flex items-center justify-start gap-4 w-[200px]'>
                         <div>{account.name}</div>
                         </div>
