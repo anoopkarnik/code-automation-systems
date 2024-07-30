@@ -17,6 +17,9 @@ const ConnectionCard = ({connection}:any) => {
   const [oauthUrl, setOauthUrl] = useState('')  
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_URL)
+    console.log(process.env.NEXT_PUBLIC_NOTION_OAUTH_URL)
+    console.log(process.env.NEXT_PUBLIC_YOUTUBE_OAUTH_URL)
     setAppType(connection.title)
     if (connection.title === 'OpenAI'){
       setCallbackUrl(process.env.NEXT_PUBLIC_URL+'/api/callback/openai')

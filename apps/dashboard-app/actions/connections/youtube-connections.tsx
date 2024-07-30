@@ -199,7 +199,7 @@ export const createVideos = async ({apiToken, dbId, videos,channelId}:any) => {
             {name: 'channelId', type: 'text', value: video.channelId },
             {name: 'publishedAt', type: 'date', value: video.publishedAt},
             {name: 'Platform', type: 'select', value: 'Youtube'},
-            {name: 'Status', type: 'status', value: 'Not started'},
+            {name: 'Status', type: 'status', value: 'Not Started'},
             {name: 'URL', type: 'url', value: `https://www.youtube.com/watch?v=${video.videoId}`},
             {name: 'videoId', type: 'text', value: video.videoId},
             {name: 'Channel', type: 'text', value: video.channelTitle},
