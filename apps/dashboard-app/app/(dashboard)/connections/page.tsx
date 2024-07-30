@@ -78,6 +78,7 @@ const PlannerPage = () => {
     }
     }
     onUserConnection()
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[access_token,refresh_token, scopes, workspace_id,workspace_icon,workspace_name,database_id,apiKey,user,type,userId])
 
 

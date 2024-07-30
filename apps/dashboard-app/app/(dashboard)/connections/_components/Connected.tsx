@@ -33,6 +33,7 @@ const Connected = () => {
     };
 
     getConnections();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   if (!session) {
