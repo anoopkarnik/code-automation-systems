@@ -1,10 +1,11 @@
 'use server'
 
-import { createConnection, getConnectionByAccessToken, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
+import { createConnection, getConnectionByAccessToken, getConnectionByUserIdAndTypeAndName, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
 import axios from 'axios'
 import { getNotionConnection } from './notion-connections'
-import { createNotionPageAction } from '../notion/notion'
+import { createNotionPageAction, queryAllNotionDatabaseAction } from '../notion/notion'
 import { delay } from '../../lib/utils'
+import { modifyNotionPage } from '@repo/notion/notion-client'
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
@@ -13,34 +14,65 @@ export const onYoutubeConnection = async ({access_token, refresh_token, scopes, 
     if(access_token && userId){
         console.log('Access Token', access_token)
         const connected = await getConnectionByAccessToken(access_token)
-        if (!connected){
-            const notions:any = await getNotionConnection(userId)
-            const notion = notions[0]
-            if (!notion) return null
-            if (!notion.notionDb.channelsDb) return null
-            if (!notion.notionDb.videosDb) return null
-            let channelsDbId = notion.notionDb.channelsDb.id
-            let videosDbId = notion.notionDb.videosDb.id
-            const youtube:any = await createConnection({type:'Youtube', accessToken: access_token, refreshToken:refresh_token, scopes, userId})
-            const youtubeChannels = await getChannels(access_token)
-            const youtubeChannelsDb = await createYoutubeChannnels({apiToken: notion.accessToken, dbId: channelsDbId, channels: youtubeChannels, youtube})
-            for ( let channel of youtubeChannelsDb){
-                const youtubeVideos = await getVideos(access_token, channel.uploadId)
-                const youtubeVideosDb = await createVideos({apiToken: notion.accessToken, dbId: videosDbId, videos: youtubeVideos,channelId:channel.id})
-            }
-            return youtube;
-        }
+        if (connected) return {success: "Youtube Connection already exists"}
+        const youtube:any = await createConnection({type:'Youtube', accessToken: access_token, refreshToken:refresh_token, scopes, userId})
+        if(!youtube) return {error: "Youtube Connection not created successfully"}
+        return {success: "Youtube Connection created successfully", result: youtube}
+    
     }
     return null
 }
 
 export const getYoutubeConnection = async (userId: string) => {
+    console.log('User Id', userId)
     const connections = await getConnectionsByUserAndType(userId, 'Youtube')
     let result:any = []
     connections?.forEach((conn: any) => {
         result.push({id: conn.id, name: conn.name, icon: '',access_token: conn.accessToken, refresh_token: conn.refreshToken, scopes: conn.scopes})
     })
     return result
+}
+
+export const getAndUpdateChannels = async (userId:string,name:string) =>{
+        const connection = await getConnectionByUserIdAndTypeAndName(userId, 'Youtube', name)
+        if (!connection) return {error: "Youtube Connection not found"}
+        const refreshToken = connection.refreshToken
+        if (!refreshToken) return {error: "Refresh Token not found for this Youtube Connection"}
+        const accessToken = await getAccessTokenByRefreshToken(refreshToken)
+        if (!accessToken) return {error: "Access Token not refreshed from Refresh Token of this Youtube Connection"}
+        const notions:any = await getNotionConnection(userId)
+        const notion = notions[0]
+        if (!notion) return {error: "Notion Connection not found"}
+        if (!notion.notionDb.channelsDb) return {error: "Channels Database not updated in Notion Connection"}
+        let channelsDbId = notion.notionDb.channelsDb.id
+        const youtubeChannels = await getChannels(accessToken)
+        if (!youtubeChannels) return {error: "Youtube Channels not fetched via Youtube data API"}
+        const youtubeChannelsDb = await createYoutubeChannnels({apiToken: notion.accessToken, dbId: channelsDbId, channels: youtubeChannels, youtubeAccountName:name})
+        return {success: "Youtube Channels updated in Notion Database", result: youtubeChannelsDb}
+}
+
+export const getAndUpdateVideos = async (userId:string,name:string) =>{
+    const connection = await getConnectionByUserIdAndTypeAndName(userId, 'Youtube', name)
+    if (!connection) return {error: "Youtube Connection not found"}
+    const refreshToken = connection.refreshToken
+    if (!refreshToken) return {error: "Refresh Token not found for this Youtube Connection"}
+    const accessToken = await getAccessTokenByRefreshToken(refreshToken)
+    if (!accessToken) return {error: "Access Token not refreshed from Refresh Token of this Youtube Connection"}
+    const notions:any = await getNotionConnection(userId)
+    const notion = notions[0]
+    if (!notion) return {error: "Notion Connection not found"}
+    if (!notion.notionDb.videosDb) return {error: "Videos Database not updated in Notion Connection"}
+    let videosDbId = notion.notionDb.videosDb.id
+    if (!notion.notionDb.channelsDb) return {error: "Channels Database not updated in Notion Connection"}
+    let channelsDbId = notion.notionDb.channelsDb.id
+    const channelsDb = await queryAllNotionDatabaseAction({apiToken: notion.accessToken, database_id: channelsDbId})
+    if (!channelsDb) return {error: "Channels Database not fetched from Notion Connection"}
+    for (let channel of channelsDb.results){
+        const youtubeVideos = await getVideos(accessToken, channel.uploadId)
+        const youtubeVideosDb = await createVideos({apiToken: notion.accessToken, dbId: videosDbId, videos: youtubeVideos,channelId:channel.id})
+        break
+    }
+    return {success: "Youtube Channel Videos updated in Notion Database"}
 }
 
 export const getChannels = async (access_token: string): Promise<any[]> => {
@@ -93,7 +125,7 @@ export const getChannels = async (access_token: string): Promise<any[]> => {
     }
   };
 
-export const createYoutubeChannnels = async ({apiToken, dbId, channels,youtube}:any) => {
+export const createYoutubeChannnels = async ({apiToken, dbId, channels,youtubeAccountName}:any) => {
     let results:any = []
     for (let channel of channels){
         let properties:any = [
@@ -107,7 +139,7 @@ export const createYoutubeChannnels = async ({apiToken, dbId, channels,youtube}:
             {name: 'Views', type: 'number', value: Number(channel.totalViews)},
             {name: 'uploadId', type: 'text', value: channel.uploadId},
             {name: 'Author', type: 'text', value: channel.name},
-            {name: 'Account', type: 'text', value: youtube.name}
+            {name: 'Account', type: 'text', value: youtubeAccountName}
         ]
         let result = await createNotionPageAction({apiToken, dbId, properties})
         results.push(result)
@@ -169,6 +201,7 @@ export const createVideos = async ({apiToken, dbId, videos,channelId}:any) => {
             {name: 'Platform', type: 'select', value: 'Youtube'},
             {name: 'Status', type: 'status', value: 'Not started'},
             {name: 'URL', type: 'url', value: `https://www.youtube.com/watch?v=${video.videoId}`},
+            {name: 'videoId', type: 'text', value: video.videoId},
             {name: 'Channel', type: 'text', value: video.channelTitle},
             {name: 'Youtube Channels', type: 'relation', value: [channelId]}
         ]
@@ -176,4 +209,26 @@ export const createVideos = async ({apiToken, dbId, videos,channelId}:any) => {
         results.push(result)
     }   
     return results
+}
+
+const getAccessTokenByRefreshToken = async (refresh_token: string) => {
+    try{
+        const url = 'https://oauth2.googleapis.com/token'
+        const data = {
+            client_id: process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET,
+            refresh_token,
+            grant_type: 'refresh_token'
+        }
+        const response = await axios.post(url, data)
+        return response.data.access_token
+    }catch(err){
+        return null
+    }
+}
+
+export const modifyNotionPageAction = async ({apiToken,page_id,properties}:any) => {
+    const response = await modifyNotionPage({apiToken,page_id,properties})
+    console.log('Modify Notion Page Response', response)
+    return response;
 }

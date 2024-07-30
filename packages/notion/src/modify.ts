@@ -3,9 +3,8 @@ import { logger } from '@repo/winston-logger/index';
 import { queryDatabase, createPage, modifyPage, createDatabase, getPage, getBlockChildren, deleteBlock, appendBlockChildren, getDatabaseProperties } from './index'; // Adjust the import path accordingly
 import { log } from 'winston';
 
-export const queryNotionDatabase = async ({apiToken, database_id, filters, filter_condition='and', sorts = [], includes=[]}:any):Promise<any> => {
+export const queryNotionDatabase = async ({apiToken, database_id, filters=[], filter_condition='and', sorts = [], includes=[],cursor=null}:any):Promise<any> => {
     let has_more = true;
-    let cursor = null;
     let results = [];
 
     let body = await constructFilterBody(filters,filter_condition, cursor);
@@ -21,7 +20,11 @@ export const queryNotionDatabase = async ({apiToken, database_id, filters, filte
         results.push(...modifiedResults);
         logger.info(`sucessfully modified results - length - ${results.length} - has_more - ${has_more}`);
     } 
-    return { "results": results };
+    return { 
+        "results": results,
+        "has_more": has_more,
+        "next_cursor": cursor
+     };
 }
 
 export const queryAllNotionDatabase = async ({apiToken, database_id, filters, filter_condition='and',sorts = []}:any):Promise<any> => {
@@ -54,9 +57,9 @@ export const getNotionDatabaseProperties = async ({apiToken, database_id}:any) =
     return response;
 }
 
-function constructSortBody(body:any, sorts:any) {
+async function constructSortBody(body:any, sorts:any) {
     if (sorts.length > 0) {
-        body.sorts = sorts.map(modifySort);
+        body['sorts']= sorts.map(modifySort);
     }
     return body;
 }
@@ -85,7 +88,7 @@ async function constructFilterBody(filters:any,filter_condition:any, cursor:any)
 function modifyFilter(filter:any) {
     if (filter.type === 'last_edited_time') {
         return { timestamp: 'last_edited_time', last_edited_time: { [filter.condition]: filter.value } };
-    } else if (['date', 'checkbox', 'multi_select', 'select',  'relation', 'status'].includes(filter.type)) {
+    } else if (['date', 'checkbox', 'multi_select', 'select',  'relation', 'status','rich_text','number'].includes(filter.type)) {
         return { property: filter.name, [filter.type]: { [filter.condition]: filter.value } };
     } else if (filter.type === 'created_time'){
         return { timestamp: 'created_time', created_time: { [filter.condition]: filter.value } };
@@ -155,9 +158,9 @@ function modifyBlock(block:any) {
     }
 }
 
-export const modifyNotionPage = async ({page_id, properties}:any) => {
+export const modifyNotionPage = async ({apiToken,page_id, properties}:any) => {
     const body = await constructUpdateBody(properties);
-    const response = await modifyPage({page_id, body});
+    const response = await modifyPage({apiToken, page_id, body});
     return modifyResult(response);
 }
 
@@ -211,6 +214,8 @@ async function modifyProperty(property:any) {
             return { multi_select: property.value.map((value:any) => ({ name: value })) };
         case 'relation':
             return { relation: property.value.map((value:any) => ({ id: value })) };
+        case 'status':
+            return { status: { name: property.value } };
     }
 }
 
@@ -262,7 +267,10 @@ function unmodifyProperty(prop:any) {
         case 'array':
             return prop.array.map((x:any) => unmodifyProperty(x));
         case 'files':
-            return prop.files[0].external.url;
+            if (prop.files.length > 0) {
+                return prop.files[0].external.url;
+            }
+            return '';
         case 'url':
             return prop.url;
         case 'checkbox':

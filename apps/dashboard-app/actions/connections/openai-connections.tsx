@@ -9,7 +9,10 @@ export const onOpenAIConnection = async ({apiKey,userId}:any) => {
     if (openai_connected) return {success: "OpenAI Connection already exists"}
     const openai = await createConnection({apiKey,type:'OpenAI', userId})
     if(!openai) return {error: "OpenAI Connection not created successfully"}
-    return openai;
+    return {
+        success: "OpenAI Connection created successfully",
+        result: openai
+    }
 
 }
 

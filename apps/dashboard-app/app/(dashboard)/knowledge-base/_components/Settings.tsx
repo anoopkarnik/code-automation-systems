@@ -14,8 +14,6 @@ const Settings = () => {
         <DbSelection title='Archive Notion Db'  name='Archive' fieldName="archiveDb"/>
         <DbSelection title='Interesting Notion Db' name='Interesting' fieldName="interestingDb"/>
         <DbSelection title='Podcasts Notion Db'  name='Podcasts' fieldName="podcastsDb"/>
-        <DbSelection title='Channels Notion Db' name='Channels' fieldName="channelsDb"/>
-        <DbSelection title='Videos Notion Db'  name='Videos' fieldName="videosDb"/>
         <DbSelection title='Skill Treees Notion Db' name='Skill Trees' fieldName="skillTreesDb"/>
         </div>
     </div>

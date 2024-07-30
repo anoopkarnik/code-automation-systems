@@ -8,8 +8,16 @@ export const getUserInfo = async (userId: string) => {
 }
 
 export const updateConnectionById = async (id: string, name: string) => {
-    const conn = await updateConnection(id,name);
-    return conn;
+    try{
+        const conn = await updateConnection(id,name);
+        return {
+            success: `Notion Connection Name successfully updated to ${name}`,
+            result: conn
+        }
+    }
+    catch (error) {
+        return {error: "Notion Connection Not not updated successfully"}
+    }
 }
 
 export const deleteConnectionById = async (id: string) => {

@@ -13,6 +13,7 @@ import { getUserInfo } from '../../../actions/connections/user-connections';
 import { onNotionConnection } from '../../../actions/connections/notion-connections';
 import { onOpenAIConnection } from '../../../actions/connections/openai-connections';
 import { onYoutubeConnection } from '../../../actions/connections/youtube-connections';
+import { useToast } from '../../../hooks/useToast';
 
 const PlannerPage = () => {
   const isMobile = useMedia("(max-width: 1324px)", false);
@@ -31,6 +32,7 @@ const PlannerPage = () => {
   const user = session?.data?.user
   const userId = user?.id
   const connectionsContext = useContext(ConnectionsContext)
+  const {toast} = useToast();
 
 
   const handleSelect = (value:any) => {
@@ -41,17 +43,34 @@ const PlannerPage = () => {
 
   useEffect(() =>{
     const onUserConnection = async () =>{
-      if (user && access_token){
+      if (user){
+        let response;
         if (type === 'Notion'){    
-          const notion = await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
-          connectionsContext.setNotionNode(notion)
+          response = await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
+          connectionsContext.setNotionNode(response.result)
         }
         if (type === 'OpenAI'){
-          const openAI = await onOpenAIConnection({apiKey,userId})
-          connectionsContext.setOpenAINode(openAI)
+          response = await onOpenAIConnection({apiKey,userId})
+          connectionsContext.setOpenAINode(response.result)
         }
         if (type === 'Youtube'){
-          const youtube = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+          response = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+        }
+        console.log( 'Whait is adfadtafasdfa')
+        console.log(response)
+        if (response?.success){
+          toast({
+            title: "Success",
+            description: response?.success,
+            variant: "default"
+          })
+        }
+        else if (response?.error){
+          toast({
+            title: "Error",
+            description: response?.error,
+            variant: "destructive"
+          })
         }
         const user_info = await getUserInfo(userId || '')
       

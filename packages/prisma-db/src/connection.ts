@@ -167,3 +167,19 @@ export const getConnectionById = async (id: string) => {
     });
     return connection;
 }
+
+export const getConnectionByUserIdAndTypeAndName = async (userId: string, type: string, name: string) => {
+    try {
+        const connection = await db.connection.findFirst({
+            where: {
+                userId,
+                type,
+                name
+            }
+        });
+        return connection;
+    }
+    catch (error) {
+        return null;
+    }
+}

@@ -2,7 +2,7 @@
 const nextConfig = {
     transpilePackages: ["@repo/ui","@repo/next-auth","@repo/prisma-db"],
     images:{
-        domains: ['yt.ggpht.com','yt3.ggpht.com']
+        domains: ['yt.ggpht.com','yt3.ggpht.com','i.ytimg.com']
     }
 };
 

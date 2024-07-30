@@ -17,7 +17,10 @@ export const onNotionConnection = async ({access_token, workspace_id, workspace_
     if(notion_connected) return {success: "Notion Connection already exists"}
     const notion = await createConnection({type: 'Notion', userId, accessToken: access_token, workspaceName: workspace_name, workspaceIcon: workspace_icon, workspaceId: workspace_id})
     if(!notion) return {error: "Notion Connection not created successfully"}
-    return notion
+    return {
+        success: "Notion Connection created successfully",
+        result: notion
+    }
 }
 
 export const getNotionConnection = async (userId: string) => {

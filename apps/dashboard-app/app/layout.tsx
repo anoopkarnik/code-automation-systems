@@ -5,6 +5,7 @@ import { ThemeProvider } from "../providers/theme-provider"
 import { SessionProviders } from "../providers/session-provider";
 import { ConnectionsProvider } from "../providers/connections-provider";
 import useConnection from "../hooks/useConnection";
+import { Toaster } from "../components/Toaster";
 
 
 const font = DM_Sans({
@@ -27,7 +28,8 @@ export default function RootLayout({
         <SessionProviders>
           <ThemeProvider attribute="class"  defaultTheme="dark" enableSystem disableTransitionOnChange>
             <ConnectionsProvider>
-              {children}
+              <main>{children}</main>
+              <Toaster/>
             </ConnectionsProvider>
           </ThemeProvider>
         </SessionProviders>
