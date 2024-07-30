@@ -39,7 +39,7 @@ const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' >
         {cards.length > 0 && (
           cards.map((card:any) => (
-            <Card className='overflow-hidden flex flex-col'>
+            <Card key={card.id} className='overflow-hidden flex flex-col'>
               <CardHeader>
                 <CardTitle className='text-lg font-bold truncate'>{card.Name}</CardTitle>
                 <CardDescription className="text-sm">

@@ -132,7 +132,7 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' >
         {cards.length > 0 && (
           cards.map((card:any) => (
-            <Card className='overflow-hidden flex flex-col'>
+            <Card key={card.id} className='overflow-hidden flex flex-col'>
               <CardHeader>
                 <TooltipProvider>
                   <Tooltip>

@@ -29,7 +29,7 @@ const AddConnectionsModal = ({callback_url,formElements}:Props) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
           <div className='space-y-4 mb-4'>
             {formElements.map((element)=>(
-              <FormField control={form.control} name={element.name} render={({field})=>(
+              <FormField key={element.name} control={form.control} name={element.name} render={({field})=>(
                 <FormItem>
                   <FormLabel className='px-2'>{element.label}</FormLabel>
                   <FormControl>
