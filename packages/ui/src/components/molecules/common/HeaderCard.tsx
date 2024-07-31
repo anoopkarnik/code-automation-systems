@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../sh
 
 const HeaderCard = ({title,description,value}:any) => {
   return (
-    <Card className="flex flex-col items-center justify-between ">
+    <Card className="flex flex-col items-start justify-between ">
         <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>

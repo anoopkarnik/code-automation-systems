@@ -48,8 +48,8 @@ export const queryNotionDatabaseAction = async ({apiToken,database_id,filters,so
     return response;
 }
 
-export const queryAllNotionDatabaseAction = async ({apiToken,database_id}:any) => {
-    const response = await queryAllNotionDatabase({apiToken,database_id,  filters: []   })
+export const queryAllNotionDatabaseAction = async ({apiToken,database_id,filters,sorts}:any) => {
+    const response = await queryAllNotionDatabase({apiToken,database_id, filters, sorts})
     return response;
 }
 
