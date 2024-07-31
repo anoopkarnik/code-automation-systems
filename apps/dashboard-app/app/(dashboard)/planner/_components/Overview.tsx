@@ -226,16 +226,7 @@ const Overview = () => {
                       <div className='grid grid-cols-4 items-center gap-4'>
                         <div>{task['Remaining Time (in Hrs)']}</div>
                         <div>{task['Total Time Spent']}</div>
-                        <Button className='px-5 bg-green-900'onClick={() => {
-                  if (timers[task.id]?.intervalId) {
-                    stopTimer(task.id);
-                  } else {
-                    startTimer(task.id);
-                  }
-                }}
-              >
-                {timers[task.id]?.intervalId ? formatTime(timers[task.id].elapsed) : 'Start'}
-              </Button>
+                        <Button className='px-5 bg-green-900' onClick={() => startTimer(task.id)}>Start</Button>
                         <Checkbox id='completed' onCheckedChange={() => handleItemsCheckChange(task.id, 'Completed', !task.Completed)}/>
                       </div>
                     </div>
