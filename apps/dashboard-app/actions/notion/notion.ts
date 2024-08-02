@@ -1,6 +1,6 @@
 'use server'
 import { getConnectionsByUserAndType, updateNotionDb} from "@repo/prisma-db/repo/connection";
-import { createNotionPage, getNotionDatabaseProperties, queryAllNotionDatabase, queryNotionDatabase } from '@repo/notion/notion-client'
+import { createNotionPage, getNotionDatabaseProperties, modifyNotionPage, queryAllNotionDatabase, queryNotionDatabase } from '@repo/notion/notion-client'
 import { deletePage } from "../../../../packages/notion/src";
 
 export const getDatabases = async (token: string) => {
@@ -77,11 +77,6 @@ export const queryNotionDatabaseByDateRange = async ({apiToken,database_id,start
     return response;
 }
 
-export const createPage = async ({apiToken, dbId, properties}:any) => {
-    const response = await createNotionPage({apiToken, dbId, properties})
-    return response;
-}   
-
 export const deleteNotionPages = async ({apiToken, dbId, ids}:any) => {
     for (let id of ids){
         await deletePage({apiToken, page_id: id})
@@ -90,5 +85,11 @@ export const deleteNotionPages = async ({apiToken, dbId, ids}:any) => {
 
 export const createNotionPageAction = async ({apiToken, dbId, properties}:any) => {
     const response = await createNotionPage({apiToken, database_id:dbId, properties})
+    return response;
+}
+
+export const modifyNotionPageAction = async ({apiToken, pageId, properties}:any) => {
+    console.log('Modifying Page', pageId)
+    const response = await modifyNotionPage({apiToken, page_id:pageId, properties})
     return response;
 }

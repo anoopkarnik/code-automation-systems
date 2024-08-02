@@ -1,6 +1,6 @@
 'use server'
 
-import { queryAllNotionDatabaseAction } from "./notion"
+import { createNotionPageAction, queryAllNotionDatabaseAction } from "./notion"
 
 export const getCalendarSummary = async ({apiToken, calendarDbId}:any) => {
     let filters:any= [
@@ -67,7 +67,7 @@ export const getWeeklyPlannerSummary = async ({apiToken, weeklyPlannerDbId}:any)
     ]
     let sorts:any = [
         {
-            name: 'Created time',
+            ame: 'Created time',
             type: 'created_time',
             direction: 'descending'
         }
@@ -85,4 +85,9 @@ export const getWeeklyPlannerSummary = async ({apiToken, weeklyPlannerDbId}:any)
         weeklyPlannerTasks,
         totalHoursLeft
     }
+}
+
+export const createTimeTrackingPage = async ({apiToken, timeTrackingDbId, properties}:any) => {
+    const response = await createNotionPageAction({apiToken, dbId: timeTrackingDbId, properties})
+    return response
 }

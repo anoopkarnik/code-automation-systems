@@ -9,6 +9,7 @@ export const queryNotionDatabase = async ({apiToken, database_id, filters=[], fi
 
     let body = await constructFilterBody(filters,filter_condition, cursor);
     body = await constructSortBody(body, sorts);
+    logger.info(`body - ${JSON.stringify(body)}`);
     let response = await queryDatabase({apiToken,database_id, body});
     if (response.results.length > 0) {
         has_more = response.has_more;
@@ -31,10 +32,10 @@ export const queryAllNotionDatabase = async ({apiToken, database_id, filters, fi
     let has_more = true;
     let cursor = null;
     let results = [];
-    logger.info(filters.toString())
     while (has_more) {
         let body = await constructFilterBody(filters, filter_condition, cursor);
         body = await constructSortBody(body, sorts);
+        logger.info(`body - ${JSON.stringify(body)}`);
         let response = await queryDatabase({apiToken,database_id, body});
         if (response.results.length > 0) {
             has_more = response.has_more;
@@ -160,6 +161,7 @@ function modifyBlock(block:any) {
 
 export const modifyNotionPage = async ({apiToken,page_id, properties}:any) => {
     const body = await constructUpdateBody(properties);
+    logger.info(`body - ${JSON.stringify(body)}`);
     const response = await modifyPage({apiToken, page_id, body});
     return modifyResult(response);
 }
@@ -174,6 +176,7 @@ async function constructUpdateBody(properties:any) {
 
 export const createNotionPage = async({apiToken,database_id, properties}:any) => {
     const body = await constructCreateBody(database_id, properties);
+    logger.info(`body - ${JSON.stringify(body)}`);
     const response = await createPage({apiToken,body});
     return modifyResult(response);
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../shadcn/Card'
+import { Skeleton } from '../shadcn/Skeleton'
 
 const HeaderCard = ({title,description,value}:any) => {
   return (
@@ -9,7 +10,9 @@ const HeaderCard = ({title,description,value}:any) => {
             <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent>
-            <div className='text-3xl font-bold'>{value}</div>
+            {value? 
+            <div className='text-3xl font-bold'>{value}</div>:
+            <Skeleton/>}
         </CardContent>
     </Card>
   )

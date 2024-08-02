@@ -5,7 +5,6 @@ import axios from 'axios'
 import { getNotionConnection } from './notion-connections'
 import { createNotionPageAction, queryAllNotionDatabaseAction } from '../notion/notion'
 import { delay } from '../../lib/utils'
-import { modifyNotionPage } from '@repo/notion/notion-client'
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
@@ -225,10 +224,4 @@ const getAccessTokenByRefreshToken = async (refresh_token: string) => {
     }catch(err){
         return null
     }
-}
-
-export const modifyNotionPageAction = async ({apiToken,page_id,properties}:any) => {
-    const response = await modifyNotionPage({apiToken,page_id,properties})
-    console.log('Modify Notion Page Response', response)
-    return response;
 }

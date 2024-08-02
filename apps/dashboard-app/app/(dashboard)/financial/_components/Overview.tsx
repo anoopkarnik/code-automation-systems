@@ -1,18 +1,18 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { DatePickerWithRange } from '@repo/ui/molecules/shadcn/DateRange';
 import { ConnectionsContext } from '../../../../providers/connections-provider';
-import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,  getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../../../../actions/notion/financial'
+import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,
+    getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../../../../actions/notion/financial'
 import ChartCard from '@repo/ui/molecules/common/ChartCard';
 import { ChartConfig } from '@repo/ui/molecules/shadcn/Chart';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import {Skeleton} from '@repo/ui/molecules/shadcn/Skeleton'
 import HeaderCard from '@repo/ui/molecules/common/HeaderCard';
-import { Input } from '@repo/ui/molecules/shadcn/Input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
-import { createNotionPageAction, queryNotionDatabaseAction } from '../../../../actions/notion/notion';
+import { queryNotionDatabaseAction } from '../../../../actions/notion/notion';
+import TransactionForm from './TransactionForm';
+import BudgetForm from './BudgetForm';
 
 const Overview = () => {
 
@@ -33,12 +33,8 @@ const Overview = () => {
   const [endDate, setEndDate] = useState('')
 
   // Add Transaction
-  const [name, setName] = useState('')
-  const [cost, setCost] = useState('')
-  const [selectedBudget, setSelectedBudget] = useState('')
   const [budgets, setBudgets] = useState([])
-  const [filteredBudgets, setFilteredBudgets] = useState([])
-  const [searchBudgetQuery, setSearchBudgetQuery] = useState('')
+
 
   useEffect(() => {
     const updateSummary = async () => {
@@ -53,7 +49,6 @@ const Overview = () => {
         }
         const budgets = await queryNotionDatabaseAction({apiToken,database_id:budgetDbId}) 
         setBudgets(budgets.results)
-        setFilteredBudgets(budgets.results)
         
         let dateSpecificSummary = await getDateSpecificFinancialSummary({apiToken,transactionsDbId,startDate,endDate})
         setDateSpecificSummary(dateSpecificSummary)
@@ -81,34 +76,6 @@ const Overview = () => {
     }
     updateSummary()
   },[apiToken, transactionsDbId, accountsDbId, budgetDbId])
-
-    const handleBudget = (event:any) => {
-      const query = event.target.value.toLowerCase();
-      setSearchBudgetQuery(query)
-      setFilteredBudgets(budgets?.filter((budget:any) => {
-        if(budget.Name ===null) return
-        return budget.Name.toLowerCase().includes(query)
-      }));
-    }
-
-    const handleAddTransaction = async () => {
-      if (!name || !cost || !selectedBudget) {
-        return
-      }
-      const budget:any = budgets?.find((budget:any) => budget.Name === selectedBudget)
-      if (!budget) {
-        return
-      }
-      const properties:any = [
-        {name:'Name',type: 'title', value: name},
-        {name:'Cost',type: 'number', value: Number(cost)},
-        {name:'Monthly Budget',type: 'relation', value: [budget.id]}
-      ]
-      const dbId = transactionsDbId
-      const response = await createNotionPageAction({apiToken, dbId, properties})
-      console.log(response)
-    }
-
 
   const onTimeUpdate = async (dateRange: any) => {
     if (!dateRange) {
@@ -171,7 +138,8 @@ const Overview = () => {
         <HeaderCard title='Time Left to Loss' description='Time left to Loss based on current expenses and income' value={`${timeLeftToLoss} Months`}/>
       </div>
       <div>
-      {budgets ? <Accordion type="single" collapsible className='w-full'>
+      {budgets ? 
+        <Accordion type="single" collapsible className='w-full'>
           <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className='flex justify-between items-center w-full mr-2'>
@@ -179,30 +147,14 @@ const Overview = () => {
               </div>
             </AccordionTrigger>
             <AccordionContent>
-            <div className='flex items-center gap-4 w-full flex-wrap my-2 mx-2'>
-              <Input className='w-[200px]' placeholder='Name' value={name} onChange={(event)=>setName(event.target.value)} />
-              <Input className='w-[200px]' placeholder='Cost' value={cost} onChange={(event)=>setCost(event.target.value)} />
-              <Select value={selectedBudget} onValueChange={(value) => setSelectedBudget(value)} >
-                  <SelectTrigger className='w-[200px]'>
-                      <SelectValue placeholder={`Select Budget`}/>
-                  </SelectTrigger>
-                  <SelectContent>
-                      <Input placeholder='Search Budget' className='w-full' value={searchBudgetQuery} onChange={handleBudget} />
-                      {filteredBudgets.length> 0 && filteredBudgets?.map((budget:any) => (
-                          <SelectItem key={budget.id} value={budget.Name}>
-                              <div className='flex items-center justify-center gap-4'>
-                                  <div>{budget.Name}</div>
-                              </div>
-                          </SelectItem>
-                      ))}
-                  </SelectContent>
-              </Select>
-              <Button onClick={handleAddTransaction} className='font-bold'> Add a Transaction</Button>
-              </div>
+              <TransactionForm/>
+              <BudgetForm/>
             </AccordionContent>
           </AccordionItem>
-        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-        {dateSpecificSummary ? <Accordion type="single" collapsible className='w-full'>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />
+      }
+      {dateSpecificSummary ? 
+        <Accordion type="single" collapsible className='w-full'>
           <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className='flex justify-between items-center w-full mr-2'>
@@ -233,8 +185,10 @@ const Overview = () => {
               </div>
             </AccordionContent>
           </AccordionItem>
-        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
-        {lastMonthsSummary? <Accordion type="single" collapsible className='w-full'>
+        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />
+      }
+      {lastMonthsSummary? 
+        <Accordion type="single" collapsible className='w-full'>
           <AccordionItem value="item-1">
             <AccordionTrigger>
               <div className='flex justify-between items-center w-full mr-2'>
@@ -264,7 +218,9 @@ const Overview = () => {
               </div>
             </AccordionContent>
           </AccordionItem>
-        </Accordion>: <Skeleton className=" h-[30px] rounded-full my-6" />}
+        </Accordion>:
+        <Skeleton className=" h-[30px] rounded-full my-6" />
+      }
         {accountsSummary? <Accordion type="single" collapsible className='w-full'>
           <AccordionItem value="item-1">
             <AccordionTrigger>

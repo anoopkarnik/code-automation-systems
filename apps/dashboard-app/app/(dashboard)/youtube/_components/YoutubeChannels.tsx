@@ -8,7 +8,6 @@ import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
 import Image from 'next/image'
-import Modal from './Modal'
 
 const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string)=> void}) => {
     const [cards, setCards] = useState<any>([])
@@ -17,14 +16,14 @@ const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string
     const connectionsContext = useContext(ConnectionsContext)
     const channelsDbId = connectionsContext?.notionNode?.channelsDb?.id
     const apiToken = connectionsContext?.notionNode?.accessToken
-    const [visibleVideos, setVisibleVideos] = useState<{[key: string]: boolean}>({})
-    const [selectedChannel, setSelectedChannel] = useState<string | null>(null)
 
 
     useEffect(() => {
         const updateCards = async () => { 
             if (!userId || !channelsDbId || !apiToken) return
-            const channels = await queryAllNotionDatabaseAction({apiToken,database_id:channelsDbId})
+            let filters:any = []
+            let sorts:any = []
+            const channels = await queryAllNotionDatabaseAction({apiToken,database_id:channelsDbId,filters,sorts})
             setCards(channels.results)
         }
         updateCards()        

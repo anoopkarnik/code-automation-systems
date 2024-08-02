@@ -6,14 +6,13 @@ import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import {  queryNotionDatabaseAction } from '../../../../actions/notion/notion'
+import {  modifyNotionPageAction, queryNotionDatabaseAction } from '../../../../actions/notion/notion'
 import Image from 'next/image'
 import { format } from 'date-fns'
 import Modal from './Modal'
 import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/molecules/shadcn/Tooltip'
-import { modifyNotionPageAction } from '../../../../actions/connections/youtube-connections'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     const params = useSearchParams();
@@ -27,9 +26,6 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     const videosDbId = connectionsContext?.notionNode?.videosDb?.id
     const apiToken = connectionsContext?.notionNode?.accessToken
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
-    const [watched, setWatched] = useState<any>();
-    const [liked, setLiked] = useState<any>();
-    const router = useRouter()
 
     const fetchCards = async (cursor:string | null) => {
         if (!userId || !videosDbId || !apiToken) return
