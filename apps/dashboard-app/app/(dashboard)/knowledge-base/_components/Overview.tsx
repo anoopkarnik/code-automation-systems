@@ -112,7 +112,7 @@ const Overview = () => {
               <AccordionContent>
                   <div className='my-4  mx-2 px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
                       {interesting?.map((task:any) => (
-                          <Card>
+                          <Card key={task.id}>
                             <CardHeader>
                               <CardTitle className='flex items-center justify-start gap-2'>
                                 <div className='overflow-hidden'>{task['Name']}</div>
