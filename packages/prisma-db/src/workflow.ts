@@ -1,21 +1,20 @@
+import { WorkflowAction, WorkflowTrigger } from '@prisma/client'
 import db from './index'
 
-interface WorkflowProps {
-    name: string,
-    description: string,
+
+interface GetWorkflowProps {
+    name: string
+    id: string
+    description: string | null
     userId: string
+    publish: boolean
+    lastRun: string | null
+    trigger?: WorkflowTrigger | null
+    actions?: WorkflowAction[] | null
+
 }
 
-interface NodeProps {
-    name: string,
-    description?: string,
-    workflowId: string,
-    type: string,
-    userId: string
-}
-
-
-export const createWorkflow = async ({name,description,userId}:WorkflowProps) => {
+export const createWorkflow = async ({name,description,userId}:any) => {
     const workflow = await db.workflow.create({
         data:{
             name,
@@ -31,10 +30,7 @@ export const getWorkflowsByUserId = async (userId: string) => {
         const workflows = await db.workflow.findMany({
             where:{
                 userId
-            },
-            include:{
-                nodes: true
-            }   
+            }
         })
         return workflows;
     }
@@ -178,14 +174,21 @@ export const deleteNode = async (nodeId: string) => {
     return node;
 }
 
-export const createEvent = async(workflowId:string, status:string) => {
-    const event = await db.event.create({
-        data:{
-            workflowId,
-            status
-        }
+export const createEvent = async(workflowId:string, status:string, metadata:any) => {
+    await db.$transaction( async (tx) => {
+        const event = await tx.event.create({
+            data:{
+                workflowId,
+                status,
+                metadata
+            }
+        })
+        await tx.eventOutbox.create({
+            data:{
+                eventId: event.id
+            }
+        })
     })
-    return event;
 }
 
 export const updateEvent = async(eventId:string, status:string) => {
@@ -215,3 +218,4 @@ export const getEventsById = async(workflowId:string) => {
     })
     return events;
 }
+

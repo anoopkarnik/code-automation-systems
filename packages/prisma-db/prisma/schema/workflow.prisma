@@ -1,40 +1,67 @@
 model Workflow {
   id                String   @id @default(uuid())
-  nodes             Node[]
   name              String
-  publish           Boolean? @default(false)
   description       String
+  publish           Boolean? @default(false)
   lastRun           String?
-  events            Event[]
-  User              User     @relation(fields: [userId], references: [id])
   userId            String
-
-
+  events            Event[]
+  trigger           WorkflowTrigger?
+  actions           WorkflowAction[]
+  User              User     @relation(fields: [userId], references: [id])
   @@schema("workflow_schema")
 }
 
-model Node {
+model WorkflowTrigger {
   id                String   @id @default(uuid())
-  name              String?
-  description       String?
-  type              String?
-  workflowId        String
-  actionType        String?
-  subActionType     String?
-  actionData        Json?
-  actionId          String?
-  worklows          Workflow @relation(fields: [workflowId], references: [id])
-  userId            String?
-  User              User?     @relation(fields: [userId], references: [id])
-  sortingOrder      Int      @default(0)
+  workflowId        String   @unique
+  triggerId         String
+  metadata          Json?    @default("{}")
+  workflow          Workflow @relation(fields: [workflowId], references: [id])
+  type              WorkflowTriggerType @relation(fields: [triggerId], references: [id])
+  
   @@schema("workflow_schema")
 }
+
+model WorkflowAction {
+  id                String   @id @default(uuid())
+  workflowId        String
+  actionId          String
+  metadata          Json?    @default("{}")
+  sortingOrder      Int      @default(0)
+
+  workflow          Workflow @relation(fields: [workflowId], references: [id])
+  type              WorkflowActionType  @relation(fields: [actionId], references: [id])
+  @@schema("workflow_schema")
+}
+
+
+model WorkflowTriggerType {
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  icon              String?
+  triggers          WorkflowTrigger[]
+  @@schema("workflow_schema")
+}
+
+
+model WorkflowActionType {
+  id                String   @id @default(uuid())
+  name              String
+  description       String?
+  icon              String?
+  actions           WorkflowAction[]
+  @@schema("workflow_schema")
+}
+
 
 model Event {
   id               String   @id @default(uuid())
   workflowId       String
   Workflows        Workflow @relation(fields: [workflowId], references: [id])
   status           String
+  metadata         Json?
   eventOutbox      EventOutbox?
  
   createdAt DateTime @default(now())

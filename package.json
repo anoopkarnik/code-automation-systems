@@ -8,7 +8,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "cd packages/prisma-db && npx prisma generate && cd ../..",
     "start-dashboard-app": "cd ./apps/dashboard-app && npm run start",
-    "start-backend-server": "cd ./apps/backend-server && npm run start"
+    "start-backend-server": "cd ./apps/backend-server && npm run start",
+    "start-worker": "cd ./apps/worker && npm run start",
+    "start-processor": "cd ./apps/processor && npm run start"
   },
   "exports": {
     "./zod": "./src/index.ts"

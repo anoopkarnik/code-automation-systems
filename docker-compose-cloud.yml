@@ -17,13 +17,37 @@ services:
     image: anoopkarnik/backend-server:latest
     restart: always
     ports:
-      - "4001:40011"
+      - "4001:4001"
     networks:
       - turborepo-network
     env_file:
       - .env.backend-server
     volumes:
       - /home/ubuntu/logs/backend-server:/app/apps/backend-server/logs
+
+  processor:
+    image: anoopkarnik/processor:latest
+    restart: always
+    ports:
+      - "4002:4002"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.processor
+    volumes:
+      - /home/ubuntu/logs/processor:/app/apps/processor/logs
+
+  worker:
+    image: anoopkarnik/worker:latest
+    restart: always
+    ports:
+      - "4003:4003"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.worker
+    volumes:
+      - /home/ubuntu/logs/worker:/app/apps/worker/logs
       
 networks:
   turborepo-network:

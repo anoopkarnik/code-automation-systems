@@ -19,12 +19,9 @@ const ProjectsPage = () => {
   const blogsDbId = connectionsContext?.notionNode?.blogsDb?.id
   const placeOfWorkDbId = connectionsContext?.notionNode?.placeOfWorkDb?.id
 
-
-
   const handleSelect = (value:any) => {
     setSelectedValue(value)
   }
-
 
   if (isMobile){
     return (

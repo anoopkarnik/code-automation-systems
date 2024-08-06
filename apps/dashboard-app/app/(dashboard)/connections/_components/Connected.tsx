@@ -15,6 +15,7 @@ const Connected = () => {
     const getConnections = async () => {
       if (session?.data?.user?.id) {
         const userInfo = await getUserInfo(session.data.user.id);
+        setConnections(userInfo?.connections);
         const newConnections: any = [];
         if (!userInfo) {
           return;
@@ -34,7 +35,7 @@ const Connected = () => {
 
     getConnections();
      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session]);
+  }, [session,CONNECTIONS]);
 
   if (!session) {
     return <div>loading...</div>

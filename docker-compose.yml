@@ -17,7 +17,27 @@ services:
       dockerfile: ./docker/Dockerfile.backend-server
     image: anoopkarnik/backend-server:latest 
     ports:
-      - "4001:40011"
+      - "4001:4001"
+    networks:
+      - turborepo-network
+  
+  processor:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.processor
+    image: anoopkarnik/processor:latest 
+    ports:
+      - "4002:4002"
+    networks:
+      - turborepo-network
+  
+  worker:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.worker
+    image: anoopkarnik/worker:latest 
+    ports:
+      - "4003:4003"
     networks:
       - turborepo-network
       

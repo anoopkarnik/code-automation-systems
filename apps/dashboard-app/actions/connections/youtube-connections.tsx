@@ -69,7 +69,6 @@ export const getAndUpdateVideos = async (userId:string,name:string) =>{
     for (let channel of channelsDb.results){
         const youtubeVideos = await getVideos(accessToken, channel.uploadId)
         const youtubeVideosDb = await createVideos({apiToken: notion.accessToken, dbId: videosDbId, videos: youtubeVideos,channelId:channel.id})
-        break
     }
     return {success: "Youtube Channel Videos updated in Notion Database"}
 }

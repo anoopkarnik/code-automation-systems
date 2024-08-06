@@ -43,12 +43,12 @@ export const updateNotionDatabase = async (notionId: string, field:string, value
     return notionDb;
 }
 
-export const queryNotionDatabaseAction = async ({apiToken,database_id,filters,sorts,cursor}:any) => {
+export const queryNotionDatabaseAction = async ({apiToken,database_id,filters=[],sorts=[],cursor}:any) => {
     const response = await queryNotionDatabase({apiToken,database_id, filters, sorts,cursor })
     return response;
 }
 
-export const queryAllNotionDatabaseAction = async ({apiToken,database_id,filters,sorts}:any) => {
+export const queryAllNotionDatabaseAction = async ({apiToken,database_id,filters=[],sorts=[]}:any) => {
     const response = await queryAllNotionDatabase({apiToken,database_id, filters, sorts})
     return response;
 }

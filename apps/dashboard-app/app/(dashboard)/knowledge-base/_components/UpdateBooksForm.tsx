@@ -2,11 +2,9 @@ import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { Input } from '@repo/ui/molecules/shadcn/Input'
 import React, { useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { createNotionPageAction, modifyNotionPageAction, queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
-import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
+import {  modifyNotionPageAction, queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import {FloatingLabelInput} from '@repo/ui/molecules/common/FloatingLabelInput'
-import { set } from 'date-fns'
 
 const UpdateBooksForm = () => {
     const connectionsContext = useContext(ConnectionsContext)
@@ -41,6 +39,7 @@ const UpdateBooksForm = () => {
                 const books = await queryAllNotionDatabaseAction({apiToken,database_id:booksDbId,filters,sorts})
                 console.log(books)
                 setBooks(books.results)
+                setFilteredBooks(books.results)
             }catch(e){
                 console.error('Error in fetching books',e)
             }
