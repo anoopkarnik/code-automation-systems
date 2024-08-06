@@ -6,7 +6,7 @@ import { TRIGGER_TYPES, ACTION_TYPES } from '../../../../../../lib/constant';
 import 'reactflow/dist/style.css';
 import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from '@repo/ui/molecules/shadcn/Card';
 import { useParams, useRouter } from 'next/navigation';
-import { deleteNodeInWorkflow, editFlow, getNodes, publishFlow } from '../../../../../../actions/workflows/workflow';
+import { editFlow,  publishFlow } from '../../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import NodeSheet from './NodeSheet';
@@ -33,14 +33,6 @@ const Nodes = () => {
   useEffect(() => {
     const refreshNodes = async () => {
         setLoading(true);
-        const {name,description,publish,trigger,actions} = await getNodes(editorId as string);
-        setLoading(false);
-        console.log('Setting nodes',name,description,publish,trigger,actions);
-        editor.setActions(actions);
-        editor.setTrigger(trigger);
-        editor.setName(name);
-        editor.setDescription(description);
-        editor.setPublish(publish);
     }
     refreshNodes();
   },[editorId] )
@@ -56,7 +48,6 @@ const Nodes = () => {
   }
 
   const handleDelete = async (id:string) => {
-    await deleteNodeInWorkflow(id);
     router.refresh();
   }
 

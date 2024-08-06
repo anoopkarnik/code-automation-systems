@@ -5,7 +5,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
 import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';
-import { addNodeToWorkflow, editNodeInWorkflow } from '../../../../../../../actions/workflows/workflow';
 import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../providers/editor-provider';
@@ -23,13 +22,6 @@ const Webhook = ({type,actionType,subActionType,node}:any) => {
             let name = `${type}-${actionType}-${subActionType}`
             let description = `${type}-${actionType}-${subActionType}`
             let id = node?.id
-    
-            if (node.length ==0){
-                const node = await addNodeToWorkflow({name,description,workflowId: editorId,type,userId,actionType,subActionType,actionData:JSON.stringify(data)})
-            }
-            else{
-                const node = await editNodeInWorkflow({id,name,description,workflowId: editorId,type,userId,actionType,subActionType,actionData:JSON.stringify(data)})
-            }
             
             if (type === 'Trigger') {
                 editor.setTrigger(node)
