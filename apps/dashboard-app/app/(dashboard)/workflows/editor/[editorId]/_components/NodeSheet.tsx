@@ -1,33 +1,33 @@
-'use client'
-import { Button } from '@repo/ui/molecules/shadcn/Button';
-import React, {  useContext, useEffect } from 'react'
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet'
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet'
+import React from 'react'
+import SelectedForm from './SelectedForm'
+import { Button } from '@repo/ui/molecules/shadcn/Button'
 
-import 'reactflow/dist/style.css';
-import ActionSelect from './ActionSelect';
-
-const NodeSheet = ({node,type,actionTypes}:any) => {
+const NodeSheet = ({funcType,type,subType,node}:any) => {
   return (
-    <>
-        <Sheet>
-            <SheetTrigger asChild>
-                <Button className='text-2xl font-medium mt-6'>
-                    {node.length===0 ? "Create" : "Edit"} {type}
-                </Button>
-            </SheetTrigger>
-            <SheetContent side='rightLarge'>
-                <SheetHeader>
-                    <SheetTitle>Create a {type} </SheetTitle>
-                    <SheetDescription>
-                        Give details of the trigger used
-                    </SheetDescription>
-                </SheetHeader>
-                <ActionSelect type={type} options={actionTypes} node={node}/>
-                <SheetFooter >
-                </SheetFooter>
-            </SheetContent>
-        </Sheet>  
-    </>
+    <Sheet>
+        <SheetTrigger asChild>
+            {funcType === 'create' ? 
+            <div className='flex justify-start items-center gap-2 p-2 mr-4 hover:bg-destructive/10 cursor-pointer'>
+                <div>{subType.name}</div>
+                <div>{subType.description}</div>
+            </div>: 
+            <Button className='text-lg font-medium mt-2'>
+                Edit Node
+            </Button>}
+        </SheetTrigger>
+        <SheetContent side='rightLarge'>
+            <SheetHeader>
+                <SheetTitle>Create a {subType.name} </SheetTitle>
+                <SheetDescription>
+                    {subType.description}
+                </SheetDescription>
+            </SheetHeader>
+            <SelectedForm type={type} subType={subType} node={node}/>
+            <SheetFooter >
+            </SheetFooter>
+        </SheetContent>
+    </Sheet> 
   )
 }
 

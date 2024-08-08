@@ -9,7 +9,7 @@ export default async function Layout({children}:{children: React.ReactNode}){
         <NavbarClient />
         <div className="flex flex-grow overflow-hidden">
           <LeftSidebarClient />
-          <div className="flex-grow overflow-auto px-10">
+          <div className="flex-grow overflow-auto ">
             {children}
           </div>
         </div>

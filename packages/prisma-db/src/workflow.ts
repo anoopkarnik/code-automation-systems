@@ -1,19 +1,7 @@
 import { WorkflowAction, WorkflowTrigger } from '@prisma/client'
 import db from './index'
 
-
-interface GetWorkflowProps {
-    name: string
-    id: string
-    description: string | null
-    userId: string
-    publish: boolean
-    lastRun: string | null
-    trigger?: WorkflowTrigger | null
-    actions?: WorkflowAction[] | null
-
-}
-
+//Create functions
 export const createWorkflow = async ({name,description,userId}:any) => {
     const workflow = await db.workflow.create({
         data:{
@@ -25,6 +13,48 @@ export const createWorkflow = async ({name,description,userId}:any) => {
     return workflow;
 }
 
+export const createTrigger = async ({workflowId,triggerId,metadata}:any)=>{
+    const trigger = await db.workflowTrigger.create({
+        data:{
+            workflowId,
+            triggerId,
+            metadata
+        }
+    })
+    return trigger;
+}
+
+
+export const createAction = async ({workflowId,actionId,metadata,sortingOrder}:any)=>{
+    const action = await db.workflowAction.create({
+        data:{
+            workflowId,
+            actionId,
+            metadata,
+            sortingOrder
+        }
+    })
+    return action;
+}
+
+export const createEvent = async(workflowId:string, status:string, metadata:any) => {
+    await db.$transaction( async (tx) => {
+        const event = await tx.event.create({
+            data:{
+                workflowId,
+                status,
+                metadata
+            }
+        })
+        await tx.eventOutbox.create({
+            data:{
+                eventId: event.id
+            }
+        })
+    })
+}
+
+//Get Functions 
 export const getWorkflowsByUserId = async (userId: string) => {
     if (userId){
         const workflows = await db.workflow.findMany({
@@ -34,12 +64,20 @@ export const getWorkflowsByUserId = async (userId: string) => {
             include:{
                 actions: {
                     include:{
-                        type: true
+                        type: {
+                            include:{
+                                actionType: true
+                            }
+                        }
                     }
                 },
                 trigger: {
                     include:{
-                        type: true
+                        type: {
+                            include:{
+                                triggerType: true
+                            }
+                        }
                     }
                 }
             },
@@ -47,6 +85,110 @@ export const getWorkflowsByUserId = async (userId: string) => {
         return workflows;
     }
 }
+
+export const getEventsById = async(workflowId:string) => {
+    console.log('Workflow ID',workflowId)   
+    let events;
+    if (workflowId === ''){
+        events = await db.event.findMany({
+            where:{
+            },
+            include:{
+                Workflows:true
+            },
+            orderBy:{
+                createdAt: 'desc'
+            },
+            take:20
+        })
+    }
+    else{
+        events = await db.event.findMany({
+            where:{
+                workflowId
+            },
+            include:{
+                Workflows:true
+            },
+            orderBy:{
+                createdAt: 'desc'
+            },
+            take:20
+        })
+    }
+    return events;
+}
+
+export const getActiveWorkflowsByUserId = async (userId:string) => {
+    const workflows = await db.workflow.findMany({
+        where:{
+            publish: true,
+            userId
+        },
+        include:{
+            actions: {
+                include:{
+                    type: true
+                }
+            },
+            trigger: {
+                include:{
+                    type: true
+                }
+            }
+        },
+    })
+    return workflows;
+}
+
+export const getWorkflowById = async (workflowId: string) => {
+    const workflow = await db.workflow.findUnique({
+        where:{
+            id: workflowId
+        },
+        include:{
+            actions: {
+                include:{
+                    type: {
+                        include:{
+                            actionType: true
+                        }
+                    }
+                }
+            },
+            trigger: {
+                include:{
+                    type: {
+                        include:{
+                            triggerType: true
+                        }
+                    }
+                }
+            }
+        }
+    })
+    return workflow;
+}
+
+export const getActionTypes = async () => {
+    const actionTypes = await db.workflowActionType.findMany({
+        include:{
+            types: true
+        }
+    });
+    return actionTypes;
+}
+
+export const getTriggerTypes = async () => {
+    const triggerTypes = await db.workflowTriggerType.findMany({
+        include:{
+            types: true
+        }
+    });
+    return triggerTypes;
+}
+
+//Edit Functions
 
 export const editWorkflow = async (workflowId: string, name: string, description: string) => {
     const workflow = await db.workflow.update({
@@ -59,8 +201,6 @@ export const editWorkflow = async (workflowId: string, name: string, description
         }
     })
 }
-
-
 
 
 export const publishWorkflow = async (workflowId: string, state:boolean) => {
@@ -88,34 +228,6 @@ export const updateWorkflowLastRun = async (workflowId: string, lastRun: string)
     return workflow
 }
 
-
-export const deleteWorkflow = async (workflowId: string) => {
-    const workflow = await db.workflow.delete({
-        where:{
-            id: workflowId
-        }
-    })
-    return workflow;
-}
-
-
-export const createEvent = async(workflowId:string, status:string, metadata:any) => {
-    await db.$transaction( async (tx) => {
-        const event = await tx.event.create({
-            data:{
-                workflowId,
-                status,
-                metadata
-            }
-        })
-        await tx.eventOutbox.create({
-            data:{
-                eventId: event.id
-            }
-        })
-    })
-}
-
 export const updateEvent = async(eventId:string, status:string) => {
     const event = await db.event.update({
         where:{
@@ -128,19 +240,56 @@ export const updateEvent = async(eventId:string, status:string) => {
     return event;
 }
 
-export const getEventsById = async(workflowId:string) => {
-    const events = await db.event.findMany({
+export const updateTrigger = async(id:string, triggerId:string, metadata:any) => {
+    const trigger = await db.workflowTrigger.update({
         where:{
-            workflowId: workflowId
+            id: id
         },
-        include:{
-            Workflows:true
-        },
-        orderBy:{
-            createdAt: 'desc'
-        },
-        take:20
+        data:{
+            metadata,
+            triggerId
+        }
     })
-    return events;
+    return trigger;
 }
 
+export const updateAction = async(id:string, actionId:string, metadata:any) => {
+    const action = await db.workflowAction.update({
+        where:{
+            id: id
+        },
+        data:{
+            metadata,
+            actionId
+        }
+    })
+    return action;
+}
+
+//Delete Functions
+export const deleteWorkflow = async (workflowId: string) => {
+    const workflow = await db.workflow.delete({
+        where:{
+            id: workflowId
+        }
+    })
+    return workflow;
+}
+
+export const deleteTrigger = async (triggerId: string) => {
+    const trigger = await db.workflowTrigger.delete({
+        where:{
+            id: triggerId
+        }
+    })
+    return trigger;
+}
+
+export const deleteAction = async (actionId: string) => {
+    const action = await db.workflowAction.delete({
+        where:{
+            id: actionId
+        }
+    })
+    return action;
+}

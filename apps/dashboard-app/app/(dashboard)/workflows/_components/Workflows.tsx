@@ -14,6 +14,7 @@ const Workflows = () => {
     useEffect(()=>{
         async function fetchWorkflows(){
             const flows = await getWorkflows(userId || '');
+            console.log(flows)
             setWorkflows(flows);
         }
         fetchWorkflows()

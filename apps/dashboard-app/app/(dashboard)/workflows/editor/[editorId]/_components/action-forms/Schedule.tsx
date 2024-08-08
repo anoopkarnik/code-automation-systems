@@ -10,26 +10,16 @@ import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
 
-const Schedule = ({type,actionType,subActionType,node}:any) => {
+const Schedule = ({type,subType}:any) => {
     const form = useForm()
     const { editorId } = useParams()
     const editor =  useContext(EditorContext);
     const router = useRouter();
-    if (subActionType == 'Cron'){
+    if (subType == 'Cron'){
         const onSubmit = async (data:any) => {
             const session = await getSession()
             const userId = session?.user?.id
-            let name = `${type}-${actionType}-${subActionType}`
-            let description = `${type}-${actionType}-${subActionType}`
-            let id = node?.id
-
-            
-            if (type === 'Trigger') {
-                editor.setTrigger(node)
-            }
-            else {
-                editor.setActions([...editor.actions,node])
-            }
+            // editor.setTrigger(node)
             router.push(`/workflows/editor/${editorId}`)
         }
         return (

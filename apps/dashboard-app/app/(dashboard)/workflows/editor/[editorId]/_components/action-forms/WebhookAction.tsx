@@ -1,7 +1,6 @@
+'use client'
 import { Button } from '@repo/ui/molecules/shadcn/Button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@repo/ui/molecules/shadcn/Form'
-import { Input } from '@repo/ui/molecules/shadcn/Input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
 import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';
@@ -9,33 +8,57 @@ import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
+import { createActionAction, createTriggerAction } from '../../../../../../../actions/workflows/workflow';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
+import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { useToast } from '../../../../../../../hooks/useToast';
 
-const Webhook = ({type,actionType,subActionType,node}:any) => {
-    const form = useForm()
+const WebhookAction = ({type,subType,node}:any) => {
+    const {toast} = useToast();
+    const form = useForm({
+        defaultValues: {
+            url: JSON.stringify(node?.metadata?.url) || '',
+            method: JSON.stringify(node?.metadata?.method) || 'POST',
+            body:  JSON.stringify(node?.metadata?.body) || JSON.stringify({}),
+            headers:  JSON.stringify(node?.metadata?.headers) || JSON.stringify({})
+        }
+    })
     const { editorId } = useParams()
     const editor =  useContext(EditorContext);
     const router = useRouter();
-    if (subActionType == 'Internal Webhook'){
+    if (subType.name == 'External Webhook'){
         const onSubmit = async (data:any) => {
             const session = await getSession()
             const userId = session?.user?.id
-            let name = `${type}-${actionType}-${subActionType}`
-            let description = `${type}-${actionType}-${subActionType}`
-            let id = node?.id
-            
-            if (type === 'Trigger') {
-                editor.setTrigger(node)
+            let metadata = {
+                url: data.url,
+                method: data.method,
+                body: JSON.parse(data.body),
+                headers: JSON.parse(data.headers)
             }
-            else {
-                editor.setActions([...editor.actions,node])
+            const params = {
+                workflowId: editorId,
+                actionId: subType.id,
+                metadata,
+                sortingOrder: editor.actions.length
             }
-            router.push(`/workflows/editor/${editorId}`)
+            const res = await createActionAction(params)
+            if (res.success){
+                toast({title: "Success", description: res?.success, variant: 'default'})
+                router.refresh()
+                router.push(`/workflows/editor/${editorId}`)
+            }
+            else if (res.error){
+                toast({title: "Error", description: res?.error, variant: 'destructive'})
+            }
+
         }
         return (
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                    <div className='space-y-4 m-4 my-10'>
-                        <FormField key='Request Url' control={form.control} name='Request Url' render={({field})=>(
+            <div className='mt-10'>
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <div className='space-y-4 m-4 my-10'>
+                        <FormField key='url' control={form.control} name='url' render={({field})=>(
                             <FormItem>
                                 <FormLabel>Request Url</FormLabel>
                                 <FormControl>
@@ -44,7 +67,7 @@ const Webhook = ({type,actionType,subActionType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                        <FormField key='Request Method' control={form.control} name='Request Method' render={({field})=>(
+                        <FormField key='method' control={form.control} name='method' render={({field})=>(
                             <FormItem>
                                 <FormLabel>Request Method</FormLabel>
                                 <FormControl>
@@ -63,7 +86,7 @@ const Webhook = ({type,actionType,subActionType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                        <FormField key='Request Body' control={form.control} name='Request Body' render={({field})=>(
+                        <FormField key='body' control={form.control} name='body' render={({field})=>(
                             <FormItem>
                                 <FormLabel>Request Body</FormLabel>
                                 <FormControl>
@@ -72,7 +95,7 @@ const Webhook = ({type,actionType,subActionType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                        <FormField key='Request Headers' control={form.control} name='Request Headers' render={({field})=>(
+                        <FormField key='headers' control={form.control} name='headers' render={({field})=>(
                             <FormItem>
                                 <FormLabel>Request Headers</FormLabel>
                                 <FormControl>
@@ -81,11 +104,12 @@ const Webhook = ({type,actionType,subActionType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                        <Button  className='mt-4 ' variant="default" type="submit" > Add Node</Button>
-                    </div>
-                </form>
-            </Form>
+                            <Button  className='mt-4 ' variant="default" type="submit" > Add Action</Button>
+                        </div>
+                    </form>
+                </Form>
+            </div>
   )}
 }
 
-export default Webhook
+export default WebhookAction

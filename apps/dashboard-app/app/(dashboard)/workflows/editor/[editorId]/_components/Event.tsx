@@ -11,10 +11,9 @@ const Event = () => {
 
   useEffect(()=>{
     const fetchEvents = async () => {
-      if (workflowId){
-        const res = await getEventsByWorkflowId(workflowId as string)
-        setEvents(res)
-      }
+      const res = await getEventsByWorkflowId(workflowId as string)
+      setEvents(res)
+      console.log(res)
     }
     fetchEvents()
   },[workflowId])
@@ -22,21 +21,18 @@ const Event = () => {
 
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Events</CardTitle>
-      </CardHeader>
-      <CardContent>
-          {events.map((event:any) => (
-            <div key={event.id} className='flex items-center justify-between gap-4'>
-              <div>{format(event.createdAt,'HH:mm dd/MM')}</div>
-              <div>{event.status}</div>
-            </div>
-          ))
-          }
-      </CardContent>
-    </Card>
-
+    <div className='flex flex-col h-screen border-x-2 border-border/50 pr-2 px-2 bg-secondary/70'>
+      <div className='text-2xl font-medium text-center mb-4'>Events</div>
+        {events.map((event:any) => (
+          <div key={event.id} className='flex items-center justify-between gap-4 border-b-2 border-border/40'>
+            <div>{format(event.createdAt,'HH:mm')}</div>
+            <div>{format(event.createdAt,'ddMMM')}</div>
+            <div>{event.Workflows.name}</div>
+            <div>{event.status}</div>
+          </div>
+        ))
+        }
+    </div>
   )
 }
 

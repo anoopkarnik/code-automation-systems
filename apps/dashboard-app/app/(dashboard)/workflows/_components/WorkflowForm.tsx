@@ -1,6 +1,6 @@
 'use client'
 
-import { WorkflowFormSchema } from '@repo/zod/workflow'
+import { CreateWorkflowSchema } from '@repo/zod/workflow'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -17,6 +17,7 @@ import {
 import { Input } from '@repo/ui/molecules/shadcn/Input'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { Loader2 } from 'lucide-react'
+import { useToast } from '../../../../hooks/useToast'
 
 
 type Props = {
@@ -24,9 +25,10 @@ type Props = {
 }
 
 const Workflowform = ({onSubmit,userId}:any) => {
-  const form = useForm<z.infer<typeof WorkflowFormSchema>>({
+  const {toast} = useToast();
+  const form = useForm<z.infer<typeof CreateWorkflowSchema>>({
     mode: 'onChange',
-    resolver: zodResolver(WorkflowFormSchema),
+    resolver: zodResolver(CreateWorkflowSchema),
     defaultValues: {
       name: '',
       description: '',
@@ -36,13 +38,17 @@ const Workflowform = ({onSubmit,userId}:any) => {
   const isLoading = form.formState.isLoading
   const router = useRouter()
 
-  const handleSubmit = async (values: z.infer<typeof WorkflowFormSchema>) => {
+  const handleSubmit = async (values: z.infer<typeof CreateWorkflowSchema>) => {
     const name = values.name
     const description = values.description
-    const workflow = await onSubmit({name,description,userId})
-    if (workflow) {
+    const res = await onSubmit({name,description,userId})
+    if (res.success){
+      toast({title: "Success", description: res?.success, variant: 'default'})
       router.refresh()
-    }
+  }
+  else if (res.error){
+      toast({title: "Error", description: res?.error, variant: 'destructive'})
+  }
   }
 
   return (

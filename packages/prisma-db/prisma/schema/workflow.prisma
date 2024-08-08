@@ -18,7 +18,7 @@ model WorkflowTrigger {
   triggerId         String
   metadata          Json?    @default("{}")
   workflow          Workflow @relation(fields: [workflowId], references: [id])
-  type              WorkflowTriggerType @relation(fields: [triggerId], references: [id])
+  type              WorkflowTriggerSubType @relation(fields: [triggerId], references: [id])
   
   @@schema("workflow_schema")
 }
@@ -31,30 +31,45 @@ model WorkflowAction {
   sortingOrder      Int      @default(0)
 
   workflow          Workflow @relation(fields: [workflowId], references: [id])
-  type              WorkflowActionType  @relation(fields: [actionId], references: [id])
+  type              WorkflowActionSubType  @relation(fields: [actionId], references: [id])
   @@schema("workflow_schema")
 }
-
 
 model WorkflowTriggerType {
   id                String   @id @default(uuid())
   name              String
   description       String?
   icon              String?
-  triggers          WorkflowTrigger[]
+  types             WorkflowTriggerSubType[]
   @@schema("workflow_schema")
 }
 
+model WorkflowTriggerSubType {
+  id                String   @id @default(uuid())
+  name              String
+  typeId            String
+  triggerType       WorkflowTriggerType @relation(fields: [typeId], references: [id])
+  triggers          WorkflowTrigger[] 
+  @@schema("workflow_schema")
+}
 
 model WorkflowActionType {
   id                String   @id @default(uuid())
   name              String
   description       String?
   icon              String?
-  actions           WorkflowAction[]
+  types             WorkflowActionSubType[]
   @@schema("workflow_schema")
 }
 
+model WorkflowActionSubType {
+  id                String   @id @default(uuid())
+  name              String
+  typeId            String
+  actionType        WorkflowActionType @relation(fields: [typeId], references: [id])
+  actions           WorkflowAction[]
+  @@schema("workflow_schema")
+}
 
 model Event {
   id               String   @id @default(uuid())

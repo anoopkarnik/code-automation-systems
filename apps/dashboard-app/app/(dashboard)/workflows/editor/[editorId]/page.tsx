@@ -10,9 +10,9 @@ const page = () => {
 
   return (
     <div className='min-h-screen w-full'>
-        <div className='w-full flex'>
+        <div className='w-full flex '>
           <EditorProvider>
-              <div className='w-[40%] hidden md:block'>
+              <div className='hidden md:block'>
                 <Event/>
               </div>
               <div className='w-full flex flex-col items-center gap-10 my-10  '>
