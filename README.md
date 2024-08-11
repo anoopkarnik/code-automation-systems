@@ -3,5 +3,6 @@
 1) npm i
 2) npm run dev to run all the apps
 
-![image](https://github.com/user-attachments/assets/9d471c3d-8baf-49ba-a3bd-b79f974959fb)
+![image](https://github.com/user-attachments/assets/38049698-c8d5-4b7f-bbb1-6d97cad44e2a)
+
 
