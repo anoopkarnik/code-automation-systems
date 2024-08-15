@@ -47,7 +47,7 @@ const Workflow = ({workflow}:any) => {
                             </>
                             }
                             {workflow.actions.map((action:any) => (
-                                <DynamicIcon div={action.id} icon={action.type.actionType.icon}/>
+                                <DynamicIcon key={action.id} icon={action.type.actionType.icon}/>
                             ))}
                         </div>
                     </div>
