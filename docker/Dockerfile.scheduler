@@ -15,4 +15,4 @@ RUN npm run db:generate
 
 RUN npm run build
 
-CMD ["npm", "run", "scheduler"]
+CMD ["npm", "run", "start-scheduler"]

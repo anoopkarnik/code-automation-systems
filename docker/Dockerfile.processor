@@ -15,4 +15,4 @@ RUN npm run db:generate
 
 RUN npm run build
 
-CMD ["npm", "run", "processor"]
+CMD ["npm", "run", "start-processor"]
