@@ -13,17 +13,17 @@ services:
     volumes:
       - /home/ubuntu/logs/dashboard-app:/app/apps/dashboard-app/logs
 
-  backend-server:
-    image: anoopkarnik/backend-server:latest
+  scheduler:
+    image: anoopkarnik/scheduler:latest
     restart: always
     ports:
       - "4001:4001"
     networks:
       - turborepo-network
     env_file:
-      - .env.backend-server
+      - .env.scheduler
     volumes:
-      - /home/ubuntu/logs/backend-server:/app/apps/backend-server/logs
+      - /home/ubuntu/logs/scheduler:/app/apps/scheduler/logs
 
   processor:
     image: anoopkarnik/processor:latest

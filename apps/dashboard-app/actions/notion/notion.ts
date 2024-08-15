@@ -89,7 +89,6 @@ export const createNotionPageAction = async ({apiToken, dbId, properties}:any) =
 }
 
 export const modifyNotionPageAction = async ({apiToken, pageId, properties}:any) => {
-    console.log('Modifying Page', pageId)
     const response = await modifyNotionPage({apiToken, page_id:pageId, properties})
     return response;
 }

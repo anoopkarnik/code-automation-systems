@@ -6,21 +6,21 @@ import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';
 import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
-import { EditorContext } from '../../../../../../../providers/editor-provider';
+import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
-import { createActionAction, createTriggerAction } from '../../../../../../../actions/workflows/workflow';
+import { createActionAction, createTriggerAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
 import { Input } from '@repo/ui/molecules/shadcn/Input';
-import { useToast } from '../../../../../../../hooks/useToast';
+import { useToast } from '../../../../../../../../hooks/useToast';
 
-const WebhookAction = ({type,subType,node}:any) => {
+const WebhookAction = ({funcType,nodeType,type,subType,node}:any) => {
     const {toast} = useToast();
     const form = useForm({
         defaultValues: {
-            url: JSON.stringify(node?.metadata?.url) || '',
-            method: JSON.stringify(node?.metadata?.method) || 'POST',
+            url: node?.metadata?.url || '',
+            method: node?.metadata?.method || 'POST',
             body:  JSON.stringify(node?.metadata?.body) || JSON.stringify({}),
-            headers:  JSON.stringify(node?.metadata?.headers) || JSON.stringify({})
+            headers:  JSON.stringify(node?.metadata?.headers) || JSON.stringify({"Content-Type": "application/json"})
         }
     })
     const { editorId } = useParams()
@@ -42,7 +42,13 @@ const WebhookAction = ({type,subType,node}:any) => {
                 metadata,
                 sortingOrder: editor.actions.length
             }
-            const res = await createActionAction(params)
+            let res;
+            if (funcType == 'create'){
+                res = await createActionAction(params)
+            }
+            else{
+                res = await updateActionAction({id:node.id, actionId:node.actionId, metadata:metadata })
+            }
             if (res.success){
                 toast({title: "Success", description: res?.success, variant: 'default'})
                 router.refresh()

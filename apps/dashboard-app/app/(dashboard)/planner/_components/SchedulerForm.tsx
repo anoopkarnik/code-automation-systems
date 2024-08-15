@@ -47,7 +47,6 @@ const SchedulerForm = () => {
         }
         const dbId =schedulerDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

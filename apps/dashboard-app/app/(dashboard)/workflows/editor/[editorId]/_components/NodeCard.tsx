@@ -13,7 +13,7 @@ const NodeCard = ({funcType, nodeType, node, type, subType, handleDelete}:any) =
             <CardTitle className='flex items-center justify-between'>
                 <div className='flex items-center justify-start gap-4'>
                     <DynamicIcon icon={type.icon}/>
-                    {subType.name}
+                    {subType.name} - {node.sortingOrder}
                 </div>
                 <ConfirmDialog 
                     alertActionFunction={()=>handleDelete(node.id,nodeType)} 
@@ -27,7 +27,7 @@ const NodeCard = ({funcType, nodeType, node, type, subType, handleDelete}:any) =
         </CardHeader>
         <CardContent className='w-full'>
             <NodeAccordion node={node}/>
-            <NodeSheet funcType={funcType} type={type} subType={subType} node={node} />   
+            <NodeSheet funcType={funcType} nodeType={nodeType} type={type} subType={subType} node={node} />   
         </CardContent>
     </Card>
   )

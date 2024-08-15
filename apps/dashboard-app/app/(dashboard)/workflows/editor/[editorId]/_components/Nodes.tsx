@@ -5,7 +5,7 @@ import React, {  useContext, useEffect, useState } from 'react'
 import 'reactflow/dist/style.css';
 import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from '@repo/ui/molecules/shadcn/Card';
 import { useParams, useRouter } from 'next/navigation';
-import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow } from '../../../../../../actions/workflows/workflow';
+import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import { Input } from '@repo/ui/molecules/shadcn/Input';
@@ -18,6 +18,7 @@ import DynamicIcon from '../../../../../../components/DynamicIcon';
 import NodeSheet from './NodeSheet';
 import NodeCard from './NodeCard';
 import { useToast } from '../../../../../../hooks/useToast';
+import { Button } from '@repo/ui/molecules/shadcn/Button';
 
 const Nodes = () => {
     const { editorId } = useParams()
@@ -48,19 +49,16 @@ const Nodes = () => {
         fetchTypes();
     },[])
 
-
     useEffect(() => {
         const refreshNodes = async () => {
             setLoading(true);
             const res = await getWorkflow(editorId as string);
-            console.log(res);
             setLoading(false);
             editor.setTrigger(res?.trigger);
             editor.setActions(res?.actions);
             editor.setPublish(res?.publish || false);
             editor.setName(res?.name || '');
             editor.setDescription(res?.description || '');
-
         }
         refreshNodes();
     },[editorId] )
@@ -100,6 +98,17 @@ const Nodes = () => {
 
   if (loading) return (<div>Loading...</div>)
 
+    const handleRun = async () => {
+        toast({title: "Running", description: "Workflow has started", variant: 'default'})
+        const res = await runWorkflow(editorId as string);
+        if (res.success){
+            toast({title: "Success", description: res?.success, variant: 'default'})
+        }
+        else if (res.error){
+            toast({title: "Error", description: res?.error, variant: 'destructive'})
+        }
+    }
+
   return (
     <>
         <div className='text-4xl flex items-center gap-4 w-full justify-between px-10'>
@@ -110,6 +119,7 @@ const Nodes = () => {
                     <div>{editor.name}</div>
                 }
                 <Edit2Icon onClick={handleEdit}/>
+                <Button onClick={handleRun} >Run</Button>
             </div>
             <div className='flex items-center gap-2 text-right '>
                 <Label htmlFor='airplane-mode'>

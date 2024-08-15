@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json turbo.json tsconfig.json ./
 
-COPY apps/backend-server ./apps/backend-server
+COPY apps/scheduler ./apps/scheduler
 COPY packages ./packages
 
 ENV NEW_RELIC_DISTRIBUTED_TRACING_ENABLED=true
@@ -15,4 +15,4 @@ RUN npm run db:generate
 
 RUN npm run build
 
-CMD ["npm", "run", "start-backend-server"]
+CMD ["npm", "run", "scheduler"]

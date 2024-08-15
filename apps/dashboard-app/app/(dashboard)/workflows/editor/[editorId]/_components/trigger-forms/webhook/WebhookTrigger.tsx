@@ -6,17 +6,17 @@ import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';
 import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
-import { EditorContext } from '../../../../../../../providers/editor-provider';
+import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
-import { createTriggerAction } from '../../../../../../../actions/workflows/workflow';
-import { useToast } from '../../../../../../../hooks/useToast';
+import { createTriggerAction } from '../../../../../../../../actions/workflows/workflow';
+import { useToast } from '../../../../../../../../hooks/useToast';
 
-const WebhookTrigger = ({type,subType,node}:any) => {
+const WebhookTrigger = ({funcType,nodeType,type,subType,node}:any) => {
     const {toast} = useToast();
 
     const form = useForm({
         defaultValues: {
-            body: JSON.stringify(node?.metadata?.body) || JSON.stringify({})
+            body: node?.metadata?.body || {}
         }
     })
     const { editorId } = useParams()

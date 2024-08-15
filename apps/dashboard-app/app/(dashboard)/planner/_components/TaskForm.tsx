@@ -30,7 +30,6 @@ const TaskForm = () => {
         
         const dbId =eisenhowerMatrixDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

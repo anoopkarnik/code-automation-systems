@@ -8,7 +8,7 @@ model Workflow {
   events            Event[]
   trigger           WorkflowTrigger?
   actions           WorkflowAction[]
-  User              User     @relation(fields: [userId], references: [id])
+  User              User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@schema("workflow_schema")
 }
 
@@ -17,8 +17,8 @@ model WorkflowTrigger {
   workflowId        String   @unique
   triggerId         String
   metadata          Json?    @default("{}")
-  workflow          Workflow @relation(fields: [workflowId], references: [id])
-  type              WorkflowTriggerSubType @relation(fields: [triggerId], references: [id])
+  workflow          Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  type              WorkflowTriggerSubType @relation(fields: [triggerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   
   @@schema("workflow_schema")
 }
@@ -30,8 +30,8 @@ model WorkflowAction {
   metadata          Json?    @default("{}")
   sortingOrder      Int      @default(0)
 
-  workflow          Workflow @relation(fields: [workflowId], references: [id])
-  type              WorkflowActionSubType  @relation(fields: [actionId], references: [id])
+  workflow          Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  type              WorkflowActionSubType  @relation(fields: [actionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@schema("workflow_schema")
 }
 
@@ -48,7 +48,7 @@ model WorkflowTriggerSubType {
   id                String   @id @default(uuid())
   name              String
   typeId            String
-  triggerType       WorkflowTriggerType @relation(fields: [typeId], references: [id])
+  triggerType       WorkflowTriggerType @relation(fields: [typeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   triggers          WorkflowTrigger[] 
   @@schema("workflow_schema")
 }
@@ -66,7 +66,7 @@ model WorkflowActionSubType {
   id                String   @id @default(uuid())
   name              String
   typeId            String
-  actionType        WorkflowActionType @relation(fields: [typeId], references: [id])
+  actionType        WorkflowActionType @relation(fields: [typeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   actions           WorkflowAction[]
   @@schema("workflow_schema")
 }
@@ -74,7 +74,7 @@ model WorkflowActionSubType {
 model Event {
   id               String   @id @default(uuid())
   workflowId       String
-  Workflows        Workflow @relation(fields: [workflowId], references: [id])
+  Workflows        Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   status           String
   metadata         Json?
   eventOutbox      EventOutbox?
@@ -88,6 +88,6 @@ model Event {
 model EventOutbox {
   id                String   @id @default(uuid())
   eventId           String @unique
-  event             Event @relation(fields: [eventId], references: [id])
+  event             Event @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@schema("workflow_schema")
 }

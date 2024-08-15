@@ -87,7 +87,6 @@ export const getWorkflowsByUserId = async (userId: string) => {
 }
 
 export const getEventsById = async(workflowId:string) => {
-    console.log('Workflow ID',workflowId)   
     let events;
     if (workflowId === ''){
         events = await db.event.findMany({
@@ -117,6 +116,42 @@ export const getEventsById = async(workflowId:string) => {
         })
     }
     return events;
+}
+
+export const getEventDetailsById = async(eventId:string) => {
+    const event = await db.event.findUnique({
+        where:{
+            id: eventId
+        },
+        include:{
+            Workflows:{
+                include:{
+                    actions: {
+                        include:{
+                            type: {
+                                include:{
+                                    actionType: true
+                                }
+                            }
+                        }
+                    },
+                }
+            }
+        }
+    })
+    return event;
+}
+
+export const getLatestEventByWorkflowId = async(workflowId:string) => {
+    const event = await db.event.findFirst({
+        where:{
+            workflowId
+        },
+        orderBy:{
+            createdAt: 'desc'
+        }
+    })
+    return event;
 }
 
 export const getActiveWorkflowsByUserId = async (userId:string) => {
@@ -154,6 +189,9 @@ export const getWorkflowById = async (workflowId: string) => {
                             actionType: true
                         }
                     }
+                },
+                orderBy:{
+                    sortingOrder: 'asc'
                 }
             },
             trigger: {
@@ -235,6 +273,18 @@ export const updateEvent = async(eventId:string, status:string) => {
         },
         data:{
             status
+        }
+    })
+    return event;
+}
+
+export const updateEventMetadata = async(eventId:string, metadata:any) => {
+    const event = await db.event.update({
+        where:{
+            id: eventId
+        },
+        data:{
+            metadata
         }
     })
     return event;

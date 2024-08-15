@@ -1,21 +1,25 @@
 import React from 'react'
-import Notion from './action-forms/Notion'
-import Schedule from './action-forms/Schedule'
-import WebhookTrigger from './action-forms/WebhookTrigger'
-import WebhookAction from './action-forms/WebhookAction'
+import Schedule from './trigger-forms/schedule/Schedule'
+import WebhookTrigger from './trigger-forms/webhook/WebhookTrigger'
+import WebhookAction from './action-forms/webhook/WebhookAction'
+import { JavascriptCode } from './action-forms/code/JavascriptCode'
+import Notion from './action-forms/notion/Notion'
 
-const SelectedForm = ({type,subType,node}: any) => {
-    if (type.name == 'Notion'){
-        return <Notion/>
+const SelectedForm = ({funcType, nodeType,type,subType,node}: any) => {
+    if (type.name == 'Notion' && nodeType == 'Action'){
+        return <Notion funcType={funcType} type={type} subType={subType} node={node}/>
     }
-    else if (type.name == 'Schedule'){
-        return <Schedule type={type} subType={subType}/>
+    else if (type.name == 'Schedule' && nodeType == 'Trigger'){
+        return <Schedule funcType={funcType} type={type} subType={subType} node={node}/>
     }
-    else if (type.name == 'Webhook' && subType.name == 'Internal Webhook'){
-        return <WebhookTrigger type={type} subType={subType} node={node}/>
+    else if (type.name == 'Webhook' && nodeType == 'Trigger'){
+        return <WebhookTrigger funcType={funcType} type={type} subType={subType} node={node}/>
     }
-    else if (type.name == 'Webhook' && subType.name == 'External Webhook'){
-        return <WebhookAction type={type} subType={subType} node={node}/>
+    else if (type.name == 'Webhook' && nodeType == 'Action'){
+        return <WebhookAction funcType={funcType} type={type} subType={subType} node={node}/>
+    }
+    else if (type.name == 'Code'){
+        return <JavascriptCode funcType={funcType} type={type} subType={subType} node={node}/>
     }
   
 }

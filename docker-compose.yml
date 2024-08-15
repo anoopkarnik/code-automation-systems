@@ -11,11 +11,11 @@ services:
     networks:
       - turborepo-network
 
-  backend-server:
+  scheduler:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile.backend-server
-    image: anoopkarnik/backend-server:latest 
+      dockerfile: ./docker/Dockerfile.scheduler
+    image: anoopkarnik/scheduler:latest 
     ports:
       - "4001:4001"
     networks:

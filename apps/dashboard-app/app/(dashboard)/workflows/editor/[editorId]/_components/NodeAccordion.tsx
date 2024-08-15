@@ -1,8 +1,27 @@
+'use client'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {  getLatestEventByWorkflowIdAction } from '../../../../../../actions/workflows/workflow'
 
 const NodeAccordion = ({node}:any) => {
-  console.log(node)
+
+  const [eventMetadata,setEventMetadata] = useState<any>({})
+  useEffect(() => {
+    if (node){
+      const getEvent = async () => {
+        const res:any = await  getLatestEventByWorkflowIdAction(node.workflowId as string);
+        if (node.triggerId){
+          setEventMetadata(res?.metadata?.trigger);
+        }
+        else{
+          setEventMetadata(res?.metadata?.[`action${node.sortingOrder}`]);
+        }
+      }
+      getEvent();
+    }
+
+  },[node])
+
   return (
     <Accordion type="single" collapsible className='w-full'>
     <AccordionItem value="item-1">
@@ -29,6 +48,15 @@ const NodeAccordion = ({node}:any) => {
         </div>
       </AccordionTrigger>
       <AccordionContent>
+        <div className='flex flex-col'>
+          {
+              eventMetadata && eventMetadata.logs && eventMetadata.logs.map((log:any,index:any) => (
+                <div key={index} className='flex justify-between items-center w-full mr-2 flex-wrap overflow-clip font-extralight'>
+                  <div>{log}</div>
+                </div>
+              ))
+            }
+        </div>
       </AccordionContent>
     </AccordionItem>
     <AccordionItem value="item-3">
@@ -38,6 +66,14 @@ const NodeAccordion = ({node}:any) => {
         </div>
       </AccordionTrigger>
       <AccordionContent>
+        {
+          eventMetadata && eventMetadata.result && Object.keys(eventMetadata.result).map((key) => (
+            <div key={key} className='flex justify-between items-center w-full mr-2 flex-wrap overflow-clip font-extralight'>
+              <div>{key}</div>
+              <div>{typeof eventMetadata.result[key] === 'object' ? JSON.stringify(eventMetadata.result[key]) : eventMetadata.result[key]}</div>
+            </div>
+          ))
+        }
       </AccordionContent>
     </AccordionItem>
   </Accordion>

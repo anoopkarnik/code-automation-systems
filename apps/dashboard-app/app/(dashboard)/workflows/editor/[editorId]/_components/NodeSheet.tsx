@@ -3,7 +3,7 @@ import React from 'react'
 import SelectedForm from './SelectedForm'
 import { Button } from '@repo/ui/molecules/shadcn/Button'
 
-const NodeSheet = ({funcType,type,subType,node}:any) => {
+const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
   return (
     <Sheet>
         <SheetTrigger asChild>
@@ -23,7 +23,7 @@ const NodeSheet = ({funcType,type,subType,node}:any) => {
                     {subType.description}
                 </SheetDescription>
             </SheetHeader>
-            <SelectedForm type={type} subType={subType} node={node}/>
+            <SelectedForm funcType={funcType} nodeType={nodeType} type={type} subType={subType} node={node}/>
             <SheetFooter >
             </SheetFooter>
         </SheetContent>

@@ -9,11 +9,13 @@
     "dev": "npm run build && npm run start"
   },
   "dependencies": {
+    "@repo/notion": "*",
     "@repo/prisma-db": "*",
     "@repo/winston-logger": "*",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "kafkajs": "^2.2.4",
+    "moment-timezone": "^0.5.45",
     "newrelic": "^11.23.1"
   },
   "devDependencies": {

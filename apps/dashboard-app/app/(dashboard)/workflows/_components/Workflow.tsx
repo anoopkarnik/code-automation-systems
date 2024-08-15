@@ -41,8 +41,11 @@ const Workflow = ({workflow}:any) => {
                     <div className='flex items-center justify-start gap-2'>
                         {workflow.name}
                         <div className='flex items-center justify-start gap-2'>
-                            <DynamicIcon icon={workflow.trigger.type.triggerType.icon}/>
-                            <ArrowRightIcon className='w-4 h-4'/>
+                            {workflow.trigger && <>
+                                <DynamicIcon icon={workflow.trigger.type.triggerType.icon}/>
+                                <ArrowRightIcon className='w-4 h-4'/>
+                            </>
+                            }
                             {workflow.actions.map((action:any) => (
                                 <DynamicIcon icon={action.type.actionType.icon}/>
                             ))}

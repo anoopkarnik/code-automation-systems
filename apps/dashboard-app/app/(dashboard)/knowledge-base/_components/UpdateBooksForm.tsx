@@ -79,7 +79,6 @@ const UpdateBooksForm = () => {
 
         const dbId = booksDbId
         const response = await modifyNotionPageAction({apiToken, dbId, pageId:selectedBook?.id, properties})
-        console.log(response)
     }
   
   

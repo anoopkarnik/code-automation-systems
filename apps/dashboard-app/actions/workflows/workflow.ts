@@ -7,10 +7,12 @@ import {createWorkflow, editWorkflow, getWorkflowsByUserId, publishWorkflow,  de
     getActionTypes,
     getTriggerTypes,
     createTrigger,
-    createAction
+    createAction,
+    getLatestEventByWorkflowId,
+    updateAction,
+    updateTrigger
 } from '@repo/prisma-db/repo/workflow';
 import {logger} from '@repo/winston-logger/index';
-import { metadata } from '../../app/layout';
 
 export const createWorkflowAction = async ({name,description,userId}:any) => {
     try{
@@ -55,6 +57,10 @@ export const deleteFlow= async (workflowId:string) => {
  
 }
 
+export const getLatestEventByWorkflowIdAction = async (workflowId:string) => {
+    const event= await getLatestEventByWorkflowId(workflowId);
+    return event;
+}
 
 export const getEventsByWorkflowId = async (workflowId:string) => {
     const events:any = await getEventsById(workflowId);
@@ -120,5 +126,42 @@ export const createActionAction = async({workflowId, actionId, metadata,sortingO
     catch (error) {
         return {error: "Action creation failed"}
     }
+}
 
+export const updateTriggerAction = async({id,triggerId, metadata}:any) => {
+    try{
+        const trigger = await updateTrigger(id, triggerId, metadata);
+        return {success: "Trigger updated successfully", result: trigger}
+    }
+    catch (error) {
+        return {error: `Trigger update failed due to ${error}`}
+    }
+}
+
+export const updateActionAction = async({id,actionId, metadata}:any) => {
+    try{
+        const action = await updateAction(id, actionId, metadata);
+        return {success: "Action updated successfully", result: action}
+    }
+    catch (error) {
+        return {error: `Action update failed due to ${error}`}
+    }
+}
+
+export const runWorkflow = async (editorId:string) => {
+    logger.info('Running workflow',editorId);
+    try{
+        const res = await fetch(`http://localhost:4000/api/hooks/catch/${editorId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({'runType': 'Just a Trial Run','runTime': new Date().toISOString()})
+        })
+        const data = await res.json();
+        return {success: "Workflow run successfully", result: data}
+    }
+    catch (error) {
+        return {error: "Workflow run failed"}
+    }
 }

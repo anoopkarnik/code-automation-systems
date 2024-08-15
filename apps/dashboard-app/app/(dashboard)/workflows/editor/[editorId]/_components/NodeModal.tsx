@@ -13,7 +13,6 @@ const NodeModal = ({node, type, types}: any) => {
   const [selectedType, setSelectedType] = useState<any>({})
 
   const onTypeSelect = (type: any) => {
-    console.log(type)
     setSelectedType(type)
   }
   return (
@@ -45,7 +44,7 @@ const NodeModal = ({node, type, types}: any) => {
                   <DialogDescription>{selectedType?.description}</DialogDescription>
                 </div>
                 {selectedType?.types?.map((subType: any) => (
-                  <NodeSheet key={subType.id} funcType="create" type={selectedType} subType={subType} />
+                  <NodeSheet key={subType.id} funcType="create" nodeType={type} type={selectedType} subType={subType} />
                 ))}
               </>)
             }
