@@ -184,7 +184,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                     <Button className='' variant='secondary' onClick={addFilter}>Add This Filter</Button>
                 </div>
                 {selectedFilters.length > 0 && selectedFilters.map((filter:any, index:number) => (
-                    <div className='flex items-center justify-start gap-4'>
+                    <div key={index} className='flex items-center justify-start gap-4'>
                         <div className=''>{index+1}.</div>
                         <div className=''>{filter.name}</div>
                         <div className=''>{filter.type}</div>
@@ -227,8 +227,8 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                         <div> Show Test Results</div>
                     </AccordionTrigger>
                     <AccordionContent>
-                        {testResults.length > 0 && testResults.map((result:any) => (
-                            <div className='flex items-center justify-start gap-4'>
+                        {testResults.length > 0 && testResults.map((result:any,index:any) => (
+                            <div key={index} className='flex items-center justify-start gap-4'>
                                 <div className=''>{result.name}</div>
                                 <div className=''>{result.type}</div>
                                 <div className=''>{result.value}</div>
