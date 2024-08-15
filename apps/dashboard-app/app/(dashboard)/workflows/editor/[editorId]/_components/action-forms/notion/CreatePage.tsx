@@ -18,7 +18,6 @@ const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
     const [filteredDatabases, setFilteredDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('');
     const [selectedNotionAccount, setSelectedNotionAccount] = useState(node?.metadata?.notionAccountId || '');
-    const [testResults, setTestResults] = useState([]);
     const [allProperties, setAllProperties] = useState<any>(undefined);
     const session = useSession()
     const userId = session?.data?.user?.id;
@@ -72,7 +71,7 @@ const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
 
         }
         fetchOptions();
-    },[userId])
+    },[userId,selectedNotionAccount])
 
     const fetchDatabases = async (value:string) => {
         setSelectedNotionAccount(value);
