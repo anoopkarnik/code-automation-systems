@@ -26,7 +26,8 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   WormIcon,
   YoutubeIcon,
   VideoIcon,
-  DatabaseIcon} from "lucide-react";
+  DatabaseIcon,
+  SproutIcon} from "lucide-react";
 import { Connection } from "./types";
 
 export const sidebarItems = [
@@ -84,10 +85,24 @@ export const sidebarItems = [
       href: "/openai"
   },
   {
+      title: "Skill Trees",
+      icon: NetworkIcon,
+      href: "/skill-trees"
+  },
+  {
       title: "Settings",
       icon: Settings,
       href: "/settings"
   }
+]
+
+export const skillTreeTypes = [
+  {title: 'Software', icon: DatabaseIcon,},
+  {title: 'Extracurricular', icon: SproutIcon},
+  {title: 'Life', icon: PieChartIcon},
+  {title: 'Business', icon: BriefcaseIcon},
+  {title: 'Mental', icon: BadgeCentIcon},
+  {title: 'Social', icon: ContactIcon},
 ]
 
 export const financeItems = [

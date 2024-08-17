@@ -28,7 +28,7 @@ const WebhookTrigger = ({funcType,nodeType,type,subType,node}:any) => {
             const userId = session?.user?.id
             let metadata:any = {
                 body: JSON.parse(data.body),
-                url: `https://dashboard.bsamaritan.com/api/hooks/catch/${editorId}`,
+                url: `https://bsamaritan.com/api/hooks/catch/${editorId}`,
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ const WebhookTrigger = ({funcType,nodeType,type,subType,node}:any) => {
         return (
             <div className='mt-10'>
                 <div>Internal Webhook</div>
-                <div className='italic text-blue-500'>https://dashboard.bsamaritan.com/api/hooks/catch/{editorId}</div>
+                <div className='italic text-blue-500'>https://bsamaritan.com/api/hooks/catch/{editorId}</div>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <div className='space-y-4 m-4 my-10'>

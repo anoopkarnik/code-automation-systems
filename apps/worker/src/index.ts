@@ -26,7 +26,11 @@ async function main() {
     await consumer.run({
         autoCommit: false,
         eachMessage: async ({ topic, partition, message }) => {
-            
+            // await consumer.commitOffsets([{ 
+            //     topic, 
+            //     partition, 
+            //     offset: (parseInt(message.offset) + 1).toString() 
+            // }])
             let newLogs:any = []
             let log = `Received message ${message.offset} from topic ${topic}`;
             logger.info(log);
