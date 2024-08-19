@@ -1,6 +1,8 @@
 'use server'
 import { getConnectionsByUserAndType, updateNotionDb} from "@repo/prisma-db/repo/connection";
-import { createNotionPage, getNotionDatabaseProperties, modifyNotionPage, queryAllNotionDatabase, queryNotionDatabase } from '@repo/notion/notion-client'
+import { createNotionPage, getNotionDatabaseProperties, modifyNotionPage, queryAllNotionDatabase, queryNotionDatabase,
+    getNotionPage
+ } from '@repo/notion/notion-client'
 import { deletePage } from "../../../../packages/notion/src";
 
 export const getDatabases = async (token: string) => {
@@ -90,5 +92,10 @@ export const createNotionPageAction = async ({apiToken, dbId, properties}:any) =
 
 export const modifyNotionPageAction = async ({apiToken, pageId, properties}:any) => {
     const response = await modifyNotionPage({apiToken, page_id:pageId, properties})
+    return response;
+}
+
+export const queryNotionPageAction = async ({apiToken, pageId}:any) => {
+    const response = await getNotionPage({apiToken, page_id:pageId})
     return response;
 }

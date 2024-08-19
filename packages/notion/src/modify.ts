@@ -322,7 +322,7 @@ async function deletePageBlocks(page_id:any) {
     return { message: 'Deleted the children' };
 }
 
-async function getNotionPage(page_id:any) {
-    const response = await getPage(page_id);
+export const getNotionPage = async ({apiToken,page_id}:any) => {
+    const response = await getPage({apiToken,page_id});
     return modifyResult(response);
 }

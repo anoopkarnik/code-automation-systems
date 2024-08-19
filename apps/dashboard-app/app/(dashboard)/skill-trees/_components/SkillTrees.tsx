@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import SkillTreeCard from './SkillTreeCard'
 import { useRouter, useSearchParams } from 'next/navigation'
 import BreadCrumb from './BreadCrumb'
+import { calculateTotalLength, calculateTotalLengthPerType } from '../_action/summary'
 
 const SkillTrees = ({skillTreeItems}:any) => {
 
@@ -15,6 +16,7 @@ const SkillTrees = ({skillTreeItems}:any) => {
         const fetchSkillTrees = async () => {
             const parentId = searchParams.get('parentId')
             const type = searchParams.get('type')
+
             let skillTrees;
             if (!type) return;
             if (!parentId){
@@ -24,6 +26,7 @@ const SkillTrees = ({skillTreeItems}:any) => {
             else{
                 skillTrees =  skillTreeItems.filter((item:any) => item.Type === type).filter((item:any) => item['Parent-task'].includes(parentId))
                 const selectedParent = skillTreeItems.find((item: any) => item.id === parentId)
+                
                 if (selectedParent) {
                     setParents(prev => [...prev, selectedParent])
                 }
@@ -32,6 +35,20 @@ const SkillTrees = ({skillTreeItems}:any) => {
         }
         fetchSkillTrees()
     },[skillTreeItems,searchParams])
+
+    const [totalNotes, setTotalNotes] = useState([]);
+    const [totalAttachments, setTotalAttachments] = useState([]);
+    const [totalVideos, setTotalVideos] = useState([]);
+
+    useEffect(() => {
+         const fetchTotal = async () => {
+            const {notes, attachments, videos} = await calculateTotalLengthPerType(skillTrees, skillTreeItems)
+            setTotalNotes(notes)
+            setTotalAttachments(attachments)
+            setTotalVideos(videos)
+        }
+        fetchTotal()
+    },[skillTreeItems,skillTrees])
 
     const selectParentId  = (parentId:any) =>{
         const params = new URLSearchParams(searchParams.toString())
@@ -51,10 +68,18 @@ const SkillTrees = ({skillTreeItems}:any) => {
   return (
     <div>
         <BreadCrumb parents={parents} onBreadcrumbClick={handleBreadcrumbClick}/>
-        <div className='grid grid-cols-3 gap-4 mx-4 my-4'>
+
+        <div className='flex items-center justify-between gap-4 mx-4 my-4'>
+            <div className='flex items-center justify-between gap-4'>
+                <div className='text-lg'>Total Notes: {totalNotes.length}</div>
+                <div className='text-lg'>Total Attachments: {totalAttachments.length}</div>
+                <div className='text-lg'>Total Videos: {totalVideos.length}</div>
+            </div>
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mx-4 my-4'>
             {skillTrees.map((item:any) =>(
                 <div key={item.id} className='cursor-pointer' onClick={()=> selectParentId(item.id)}>
-                    <SkillTreeCard skillTree={item}/>
+                    <SkillTreeCard skillTree={item} skillTrees={skillTreeItems} />
                 </div>
             ))}
                     

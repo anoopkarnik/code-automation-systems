@@ -9,6 +9,8 @@ import { Tabs, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import { queryAllNotionDatabaseAction } from '../../../actions/notion/notion'
 import SkillTrees from './_components/SkillTrees'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { SettingsIcon } from 'lucide-react'
+import Settings from './_components/Settings'
 
 const SkillTreePage = () => {
     const [skillTreeType , setSkillTreeType] = useState('')
@@ -34,6 +36,7 @@ const SkillTreePage = () => {
     },[skillTreesDbId, apiToken])
 
     const selectType  = (type:any) =>{
+        setSkillTreeType(type)
         const params = new URLSearchParams(searchParams.toString())
         params.set('type', type)
         params.set('parentId', '')
@@ -71,8 +74,17 @@ const SkillTreePage = () => {
                     <div>{type.title}</div>
                     </TabsTrigger>
                 ))}
+                <TabsTrigger onClick={()=>selectType('Settings')} value='Settings' className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+                    <SettingsIcon/>
+                    <div>Settings</div>
+                </TabsTrigger>
             </TabsList>
-            <SkillTrees skillTreeItems={skillTrees}/>
+            
+            {
+                skillTreeType==='Settings' ? 
+                <Settings/> : 
+                <SkillTrees skillTreeItems={skillTrees}/>
+            }
         </Tabs>
     )
 }
