@@ -38,7 +38,6 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const editor = useContext(EditorContext);
     const router = useRouter();
     const onSubmit = async () => {
-        console.log(selectedNotionAccount)
         let metadata = {
             notionAccountId: selectedNotionAccount,
             databaseId: JSON.parse(selectedDb).id,
@@ -116,7 +115,6 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const getTestResults = async () => {
         const res = await queryNotionDatabaseAction({apiToken: selectedNotionAccount,
              database_id: JSON.parse(selectedDb).id, filters: selectedFilters, sorts: selectedSorts})
-        console.log(res.results)
         setTestResults(res.results)
     }
 

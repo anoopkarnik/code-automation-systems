@@ -67,7 +67,6 @@ const BudgetForm = () => {
         ]
         const dbId = budgetDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

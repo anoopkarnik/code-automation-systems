@@ -65,7 +65,6 @@ const Nodes = () => {
 
     const handleEdit = async () =>{
         if (showEdit) {
-            console.log('Saving name',name);
             editor.setName(name);
             await editFlow(editorId as string,name,editor.description);
         }

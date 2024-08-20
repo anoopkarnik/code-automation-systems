@@ -60,7 +60,6 @@ const TransactionForm = () => {
         ]
         const dbId = transactionsDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

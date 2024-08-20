@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SkillTreeDialog from './SkillTreeDialog'
 import { calculateTotalLength } from '../_action/summary';
 
@@ -48,10 +48,10 @@ const SkillTreeCard = ({skillTree, skillTrees}:any) => {
                 </div>
             </div>
             <div className='flex items-center justify-center gap-4 flex-wrap w-full '>
-                <SkillTreeDialog title="Notes" content={totalNotes} />
-                <SkillTreeDialog title="Attachments" content={totalAttachments} />
-                <SkillTreeDialog title="Videos" content={totalVideos} />
-                <SkillTreeDialog title="Projects" content={totalProjects} />
+                <SkillTreeDialog title="Notes" ids={totalNotes} />
+                <SkillTreeDialog title="Attachments" ids={totalAttachments} />
+                <SkillTreeDialog title="Videos" ids={totalVideos} />
+                <SkillTreeDialog title="Projects" ids={totalProjects} />
             </div>
         </CardContent>
     </Card>

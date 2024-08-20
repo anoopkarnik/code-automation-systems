@@ -52,7 +52,6 @@ export const getConnectionsByUserAndType = async (userId: string, type: string) 
                     notionDb: true
                 }
             });
-            console.log('Connections', connections)
             return connections;
         }
         else{
@@ -95,7 +94,6 @@ export const getConnectionByAPIKey = async (apiKey: string) => {
 
 export const createConnection = async ({type, userId, accessToken, workspaceName, workspaceIcon, workspaceId, apiKey,
     refreshToken, scopes}: any) => {
-    console.log('Creating connection', type, userId, accessToken, workspaceName, workspaceIcon, workspaceId, apiKey, refreshToken, scopes)
     if (type === 'Notion'){
         const result = await db.$transaction(async (db) =>{
 

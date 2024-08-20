@@ -44,7 +44,6 @@ const CreateBooksForm = () => {
 
         const dbId = booksDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

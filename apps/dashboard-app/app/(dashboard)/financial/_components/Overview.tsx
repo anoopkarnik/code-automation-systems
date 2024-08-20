@@ -68,7 +68,6 @@ const Overview = () => {
         let partialLiquidMoney = Number(accountsSummary?.totalExpensesByLiquidity?.find((item:any) => item.type === 'Partially Liquid')?.totalExpenses)
         setTimeLeftToLoss(Math.round(liquidMoney/(monthlyBudget+yearlyBudget)))
         setTimeLeftToBankruptcy(Math.round((liquidMoney+partialLiquidMoney)/(monthlyBudget+yearlyBudget)))
-        console.log((new Date().getTime()-startTime)/60000)
         
       }catch(e){
         console.error('Error in fetching financial summary',e)

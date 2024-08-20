@@ -37,7 +37,6 @@ const UpdateBooksForm = () => {
                 let filters:any = []
                 let sorts:any = []
                 const books = await queryAllNotionDatabaseAction({apiToken,database_id:booksDbId,filters,sorts})
-                console.log(books)
                 setBooks(books.results)
                 setFilteredBooks(books.results)
             }catch(e){

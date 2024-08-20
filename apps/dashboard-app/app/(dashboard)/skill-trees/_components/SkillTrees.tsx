@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react'
 import SkillTreeCard from './SkillTreeCard'
 import { useRouter, useSearchParams } from 'next/navigation'
 import BreadCrumb from './BreadCrumb'
-import { calculateTotalLength, calculateTotalLengthPerType } from '../_action/summary'
+import { calculateTotalLengthPerType } from '../_action/summary'
+import InfoCard from './InfoCard'
 
-const SkillTrees = ({skillTreeItems}:any) => {
+const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
 
     const [skillTrees, setSkillTrees] = useState([])
     const searchParams = useSearchParams()
     const router = useRouter()
     const [parents, setParents] = useState<any[]>([])
+    const [selfAreas, setSelfAreas] = useState<any[]>([])
+    const [selfAreasToReview, setSelfAreasToReview] = useState<any[]>(selfAreaItems)
 
     useEffect(() =>{
         const fetchSkillTrees = async () => {
@@ -18,6 +21,7 @@ const SkillTrees = ({skillTreeItems}:any) => {
             const type = searchParams.get('type')
 
             let skillTrees;
+
             if (!type) return;
             if (!parentId){
                 skillTrees =  skillTreeItems.filter((item:any) => item.Type === type).filter((item:any) => item['Parent-task'].length==0)
@@ -31,7 +35,11 @@ const SkillTrees = ({skillTreeItems}:any) => {
                     setParents(prev => [...prev, selectedParent])
                 }
             }
+            let selfAreas = selfAreaItems.filter((item:any) => item['Skill Type'].includes(type))
+            let selfAreasToReview = selfAreaItems.filter((item:any) => item['Skill Type'].includes(type)).filter((item:any)=>new Date(item['Review Date']) <= new Date())
             setSkillTrees(skillTrees)
+            setSelfAreas(selfAreas)
+            setSelfAreasToReview(selfAreasToReview)
         }
         fetchSkillTrees()
     },[skillTreeItems,searchParams])
@@ -68,13 +76,11 @@ const SkillTrees = ({skillTreeItems}:any) => {
   return (
     <div>
         <BreadCrumb parents={parents} onBreadcrumbClick={handleBreadcrumbClick}/>
-
-        <div className='flex items-center justify-between gap-4 mx-4 my-4'>
-            <div className='flex items-center justify-between gap-4'>
-                <div className='text-lg'>Total Notes: {totalNotes.length}</div>
-                <div className='text-lg'>Total Attachments: {totalAttachments.length}</div>
-                <div className='text-lg'>Total Videos: {totalVideos.length}</div>
-            </div>
+        <div className='flex items-center flex-wrap gap-4 justify-center'>
+            <InfoCard name="Total Notes" value={totalNotes.length} />
+            <InfoCard name="Total Attachments" value={totalAttachments.length} />
+            <InfoCard name="Total Videos" value={totalVideos.length} />
+            <InfoCard name="Total Notes To Review" value={selfAreasToReview.length} />
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mx-4 my-4'>
             {skillTrees.map((item:any) =>(

@@ -72,7 +72,6 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
 
     useEffect(() => {
       if (!userId || !videosDbId || !apiToken) return
-      console.log('fetching cards')
       fetchCards(null) 
        // eslint-disable-next-line react-hooks/exhaustive-deps 
     },[channelId,filterOption])

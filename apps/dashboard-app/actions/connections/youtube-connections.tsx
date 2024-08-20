@@ -11,7 +11,6 @@ const RETRY_DELAY = 1000;
 
 export const onYoutubeConnection = async ({access_token, refresh_token, scopes, userId}: any) => {
     if(access_token && userId){
-        console.log('Access Token', access_token)
         const connected = await getConnectionByAccessToken(access_token)
         if (connected) return {success: "Youtube Connection already exists"}
         const youtube:any = await createConnection({type:'Youtube', accessToken: access_token, refreshToken:refresh_token, scopes, userId})
@@ -23,7 +22,6 @@ export const onYoutubeConnection = async ({access_token, refresh_token, scopes, 
 }
 
 export const getYoutubeConnection = async (userId: string) => {
-    console.log('User Id', userId)
     const connections = await getConnectionsByUserAndType(userId, 'Youtube')
     let result:any = []
     connections?.forEach((conn: any) => {

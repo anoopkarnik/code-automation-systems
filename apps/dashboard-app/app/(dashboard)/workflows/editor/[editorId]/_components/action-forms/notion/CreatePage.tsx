@@ -29,7 +29,6 @@ const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
     const editor = useContext(EditorContext);
     const router = useRouter();
     const onSubmit = async () => {
-        console.log(selectedNotionAccount)
         let metadata = {
             notionAccountId: selectedNotionAccount,
             databaseId: JSON.parse(selectedDb).id,

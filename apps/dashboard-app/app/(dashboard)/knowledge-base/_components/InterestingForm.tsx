@@ -32,7 +32,6 @@ const InterestingForm = () => {
 
         const dbId = interestingDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

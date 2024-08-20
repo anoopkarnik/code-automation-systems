@@ -31,7 +31,6 @@ const WeeklyPlannerForm = () => {
         
         const dbId = weeklyPlannerDbId
         const response = await createNotionPageAction({apiToken, dbId, properties})
-        console.log(response)
       }
   
   

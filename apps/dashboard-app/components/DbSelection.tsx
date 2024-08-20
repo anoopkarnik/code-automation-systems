@@ -139,9 +139,6 @@ const DbSelection = ({title,name,fieldName}:any) => {
 
     const updateDatabase = async () => {
         const selectedDatabase = selectedDb ? JSON.parse(selectedDb) : null;
-        setTimeout(() => {
-            console.log('Selected Database',selectedDatabase)
-        }, 1000);   
         if ( name == 'Accounts'){
             connectionsContext.setNotionNode({...connectionsContext.notionNode,accountsDb:selectedDatabase})
         }

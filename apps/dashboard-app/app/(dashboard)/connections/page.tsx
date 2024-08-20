@@ -56,8 +56,6 @@ const PlannerPage = () => {
         if (type === 'Youtube'){
           response = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
         }
-        console.log( 'Whait is adfadtafasdfa')
-        console.log(response)
         if (response?.success){
           toast({
             title: "Success",
