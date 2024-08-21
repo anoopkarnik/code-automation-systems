@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import {NextRequest,NextResponse} from "next/server";
 import { apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT, publicRoutes } from "./routes";
 
-const allowedOrigins = ['http://localhost:4000', 'https://dashboard.bsamaritan.com','https://bsamaritan.com']
+const allowedOrigins = ['http://localhost:4000', 'https://bsamaritan.com']
 
 const corsOptions = {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -48,6 +48,10 @@ export default auth((req:any)=>{
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
     if (isApiAuthRoute){
+        return response;
+    }
+
+    if (isPublicRoute){
         return response;
     }
 

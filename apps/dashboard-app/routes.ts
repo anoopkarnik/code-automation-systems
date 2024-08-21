@@ -1,6 +1,6 @@
 
 export const publicRoutes = [
-    "/landing","/auth/new-verification",'/api/hooks/catch'
+    "/landing","/auth/new-verification",'/api'
 ]
 
 export const authRoutes =[
