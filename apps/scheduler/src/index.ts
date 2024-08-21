@@ -34,20 +34,20 @@ async function main() {
             if (workflow.trigger?.type.name === 'Cron'){
                 logger.info(`Processing cron workflow ${workflow.id}`);
                 const metadata:any = workflow.trigger?.metadata;
-                const startDate = new Date(metadata?.startDate);
-                const now = new Date();
                 const timezone = metadata?.timezone;
+                const startDate = moment(metadata?.startDate).tz(timezone).toDate();
+                const now =  moment().tz(timezone).toDate();
                 const cronExpression = metadata?.cronExpression;
                 let lastRun;
                 if (workflow.lastRun){
-                    lastRun = new Date(workflow.lastRun);
+                    lastRun = moment(workflow.lastRun).tz(timezone).toDate();
                 }
                 else{
-                    lastRun = new Date(metadata.startDate);
+                    lastRun = moment(metadata.startDate).tz(timezone).toDate();
                 }
                 const interval = cronParser.parseExpression(cronExpression,{currentDate: lastRun, tz: timezone});
-                let nextRun:Date = interval.next().toDate ();
-                const local_time = moment(new Date())
+                let nextRun:Date = interval.next().toDate();
+                const local_time = moment().tz(timezone);
                 let eventMetadata = {
                     trigger: {
                         result:{
