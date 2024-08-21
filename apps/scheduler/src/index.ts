@@ -46,24 +46,24 @@ async function main() {
                     lastRun = moment(metadata.startDate).tz(timezone).toDate();
                 }
                 const interval = cronParser.parseExpression(cronExpression,{currentDate: lastRun, tz: timezone});
-                let nextRun:Date = interval.next().toDate();
+                let nextRun= moment(interval.next().toDate()).tz(timezone);
                 const local_time = moment().tz(timezone);
                 let eventMetadata = {
                     trigger: {
                         result:{
-                            nextRun: nextRun.toLocaleString('en-US', { timeZone: timezone }),
+                            nextRun: nextRun.format('YYYY-MM-DD HH:mm:ss'),
                             runTime: local_time.format('YYYY-MM-DD HH:mm:ss')
                         },
                         logs:[  ]
                     }
                 }
 
-                if (now >= nextRun && now >= startDate){
+                if (now >= nextRun.toDate() && now >= startDate){
                     logger.info(`Creating event for workflow ${workflow.id}`);
                     const event = await createEvent( workflow.id,'STARTED',eventMetadata)
-                    updateWorkflowLastRun(workflow.id, now.toLocaleString('en-US', { timeZone: timezone }));
+                    updateWorkflowLastRun(workflow.id, local_time.format('YYYY-MM-DD HH:mm:ss'));
                 }else{
-                    logger.info(`Next run for workflow ${workflow.name} is scheduled for: ${nextRun.toLocaleString('en-US', { timeZone: timezone })}`);
+                    logger.info(`Next run for workflow ${workflow.name} is scheduled for: ${nextRun.format('YYYY-MM-DD HH:mm:ss')}`);
                 }
 
             }
