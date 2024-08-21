@@ -3,7 +3,7 @@ import { cn } from '@repo/ui/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon } from 'lucide-react'
+import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon, CircleChevronDown, CircleChevronUp } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../components/molecules/shadcn/Tooltip'
 
 interface LeftSidebarProps {
@@ -89,9 +89,9 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                 </div>
                 <div className='mt-14 ml-2'>
                     {items.map((item: any, index: number) => (
-                        <>
+                        <div key={index}>
                             {item.subItems && item.subItems.length > 0 ? (
-                                <>
+                                <div key={index}>
                                     <div key={index} onClick={() => toggleSubItems(index)}
                                         className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
                                             pathname === item.href && 'bg-destructive/30'
@@ -106,8 +106,8 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                                         <div className='flex items-center justify-between w-full'>
                                             {item.title} 
                                             {showSubItems[index] ?
-                                             <MinusIcon className='w-4 h-4'/> :
-                                              <PlusIcon className='w-4 h-4'/>
+                                             <CircleChevronUp className='w-4 h-4'/> :
+                                              <CircleChevronDown className='w-4 h-4'/>
                                             }
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                                         </div>
                                     ))} 
                                     </>
-                                    </> )
+                                </div> )
                                 :
                                 <div key={index} onClick={() => redirect(item.href)}
                                     className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
@@ -147,7 +147,7 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                                 </div>
                 }
                             
-                        </>
+                        </div>
                     ))}
                 </div>
                 <div onClick={resetWidth}
