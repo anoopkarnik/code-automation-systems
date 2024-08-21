@@ -35,19 +35,19 @@ async function main() {
                 logger.info(`Processing cron workflow ${workflow.id}`);
                 const metadata:any = workflow.trigger?.metadata;
                 const timezone = metadata?.timezone;
-                const startDate = moment(metadata?.startDate).tz(timezone).toDate();
-                const now =  moment().tz(timezone).toDate();
+                const startDate = metadata?.startDate;
+                const now =  new Date(moment.tz(timezone).format('YYYY-MM-DD HH:mm:ss'));
                 const cronExpression = metadata?.cronExpression;
                 let lastRun;
                 if (workflow.lastRun){
-                    lastRun = moment(workflow.lastRun).tz(timezone).toDate();
+                    lastRun = new Date(moment(workflow.lastRun).format('YYYY-MM-DD HH:mm:ss'));
                 }
                 else{
-                    lastRun = moment(metadata.startDate).tz(timezone).toDate();
+                    lastRun = new Date(moment(metadata.startDate).format('YYYY-MM-DD HH:mm:ss'));
                 }
                 const interval = cronParser.parseExpression(cronExpression,{currentDate: lastRun, tz: timezone});
-                let nextRun= moment(interval.next().toDate()).tz(timezone);
-                const local_time = moment().tz(timezone);
+                let nextRun= moment(interval.next().toDate());
+                const local_time = moment.tz(timezone);
                 let eventMetadata = {
                     trigger: {
                         result:{
@@ -58,7 +58,7 @@ async function main() {
                     }
                 }
 
-                if (now >= nextRun.toDate() && now >= startDate){
+                if (now >= nextRun.toDate() && now >= new Date(startDate)){
                     logger.info(`Creating event for workflow ${workflow.id}`);
                     const event = await createEvent( workflow.id,'STARTED',eventMetadata)
                     updateWorkflowLastRun(workflow.id, local_time.format('YYYY-MM-DD HH:mm:ss'));
