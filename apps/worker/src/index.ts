@@ -31,6 +31,7 @@ async function main() {
             //     partition, 
             //     offset: (parseInt(message.offset) + 1).toString() 
             // }])
+            console.log("Received message", message.offset);
             let newLogs:any = []
             let log = `Received message ${message.offset} from topic ${topic}`;
             logger.info(log);

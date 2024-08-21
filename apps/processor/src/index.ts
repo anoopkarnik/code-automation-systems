@@ -7,7 +7,7 @@ import { updateEvent } from '@repo/prisma-db/repo/workflow';
 const TOPIC_NAME = 'workflow-events';
 const kafka = new Kafka({
     clientId: 'workflow-event-outbox-processor',
-    brokers: [process.env.BOOTSTRAP_SERVER ||'' ]
+    brokers: ['kafka:9092']
 })
 
 async function main() {
