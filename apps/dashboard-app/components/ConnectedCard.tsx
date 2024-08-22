@@ -35,8 +35,8 @@ const ConnectedCard = ({connection}:any) => {
 
   return (
     <Card className="flex flex-col items-center justify-between ">
-      <CardHeader className="flex flex-col items-center justify-center gap-2 ">
-        <div className='flex flex-row justify-between items-center w-full '>
+      <CardHeader className="flex flex-col items-center justify-center gap-2 w-full ">
+        <div className='flex justify-between items-center w-full '>
           <div></div>
           <div className='text-2xl font-bold flex items-center gap-2 '>
             {showEdit ? (
@@ -57,7 +57,7 @@ const ConnectedCard = ({connection}:any) => {
         </div>
         <div className='flex flex-col gap-4'>
           <CardTitle className="text-center text-lg">{connection.title}</CardTitle>
-          <CardDescription className='min-w-[400px] max-w-[400px] text-center'>{connection.description}</CardDescription>
+          <CardDescription className=' text-center'>{connection.description}</CardDescription>
         </div>
       </CardHeader>
     </Card>

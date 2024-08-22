@@ -8,6 +8,7 @@ import { Button } from '@repo/ui/molecules/shadcn/Button'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
 import Image from 'next/image'
+import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 
 const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string)=> void}) => {
     const [cards, setCards] = useState<any>([])
@@ -16,15 +17,17 @@ const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string
     const connectionsContext = useContext(ConnectionsContext)
     const channelsDbId = connectionsContext?.notionNode?.channelsDb?.id
     const apiToken = connectionsContext?.notionNode?.accessToken
-
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         const updateCards = async () => { 
             if (!userId || !channelsDbId || !apiToken) return
+            setLoading(true)
             let filters:any = []
             let sorts:any = []
             const channels = await queryAllNotionDatabaseAction({apiToken,database_id:channelsDbId,filters,sorts})
             setCards(channels.results)
+            setLoading(false)
         }
         updateCards()        
     },[userId,channelsDbId,apiToken])
@@ -33,9 +36,13 @@ const YoutubeChannels= ({changeTab}:{changeTab: (value:string, channelId: string
       changeTab('Videos',card.channelId)
     }
 
+  if (loading) return <div>
+    <LoadingCard title='Youtube Channels' description='Loading Subscribed Channels from your Youtube Account'/>
+  </div>
+
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' >
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-6' >
         {cards.length > 0 && (
           cards.map((card:any) => (
             <Card key={card.id} className='overflow-hidden flex flex-col'>

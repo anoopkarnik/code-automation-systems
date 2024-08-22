@@ -28,9 +28,9 @@ const EventComponent = () => {
 
   return (
     <div className='flex flex-col h-screen border-x-2 border-border/50 pr-2 px-2 bg-secondary/70'>
-      <div className='text-2xl font-medium text-center mb-4'>Events</div>
-      {events.map((event) => (
-        <div key={event.id} className='flex items-center justify-between gap-4 border-b-2 border-border/40'>
+      <div className='text-xl font-medium text-center mb-4'>Events</div>
+      {events.slice(0,10).map((event) => (
+        <div key={event.id} className='flex items-center justify-between gap-4 border-b-2 border-border/40 text-xs'>
           <div>{format(new Date(event.createdAt), 'HH:mm')}</div>
           <div>{format(new Date(event.createdAt), 'ddMMM')}</div>
           <div>{event.Workflows.name}</div>

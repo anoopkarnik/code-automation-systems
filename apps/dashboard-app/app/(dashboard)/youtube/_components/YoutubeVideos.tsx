@@ -13,6 +13,7 @@ import Modal from './Modal'
 import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/molecules/shadcn/Tooltip'
 import { useSearchParams } from 'next/navigation'
+import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 
 const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     const params = useSearchParams();
@@ -26,9 +27,11 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     const videosDbId = connectionsContext?.notionNode?.videosDb?.id
     const apiToken = connectionsContext?.notionNode?.accessToken
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null)
+    const [loading, setLoading] = useState(false)
 
     const fetchCards = async (cursor:string | null) => {
         if (!userId || !videosDbId || !apiToken) return
+        setLoading(true)
         const sorts = [{name: 'publishedAt', type: 'date', direction: 'descending'}]
         const filters:any = []
         if (channelId) {
@@ -67,6 +70,7 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
         setCards( response.results)
         setHasMore(response.has_more)
         setNextCursor(response.next_cursor)
+        setLoading(false)
 
     }
 
@@ -118,6 +122,11 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
       await fetchCards(null)  
     }
 
+  if (loading) return <div>
+    <LoadingCard title='Youtube Videos' description='Loading Subscribed Videos from your Youtube Account'/>
+  </div>
+
+
   return (
     <>
     {hasMore && (
@@ -125,7 +134,7 @@ const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
             <Button onClick={loadMore}>Next Page</Button>
         </div>
     )}
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' >
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-6' >
         {cards.length > 0 && (
           cards.map((card:any) => (
             <Card key={card.id} className='overflow-hidden flex flex-col'>

@@ -33,7 +33,7 @@ import { useState } from "react"
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
+                  <DropdownMenuItem>
                         <HomeIcon className="mr-2 h-4 w-4" />
                         <span>Home</span>
                     </DropdownMenuItem>

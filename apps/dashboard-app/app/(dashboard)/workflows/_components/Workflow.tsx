@@ -36,44 +36,48 @@ const Workflow = ({workflow}:any) => {
 
   return (
     <Card className=''>
-            <CardHeader className=''>
-                <CardTitle className='flex items-center justify-between'>
-                    <div className='flex items-center justify-start gap-2'>
-                        {workflow.name}
-                        <div className='flex items-center justify-start gap-2'>
-                            {workflow.trigger && <>
-                                <DynamicIcon icon={workflow.trigger.type.triggerType.icon}/>
-                                <ArrowRightIcon className='w-4 h-4'/>
-                            </>
-                            }
-                            {workflow.actions.map((action:any) => (
-                                <DynamicIcon key={action.id} icon={action.type.actionType.icon}/>
-                            ))}
-                        </div>
-                    </div>
-                    <ConfirmDialog 
-                        alertActionFunction={()=>handleDelete(workflow.id)} 
-                        alertTitle='Delete Workflow' 
-                        alertDescription='Are you sure you want to delete this workflow?'
-                        buttonDiv={<TrashIcon className='cursor-pointer'/>}
-                        alertActionText='Delete'
-                        /> 
-                </CardTitle>
-                <CardDescription>{workflow.description}</CardDescription>
-            </CardHeader>
-            <CardContent className=''>
-                
-            </CardContent>
+        <CardHeader className='t'>
+            <CardTitle className='flex items-center justify-between leading-3 '>
+                <div className='flex items-center justify-start gap-2 text-lg'>
+                    {workflow.name}
+                </div>
+                <ConfirmDialog 
+                    alertActionFunction={()=>handleDelete(workflow.id)} 
+                    alertTitle='Delete Workflow' 
+                    alertDescription='Are you sure you want to delete this workflow?'
+                    buttonDiv={<TrashIcon className='cursor-pointer w-5 h-5'/>}
+                    alertActionText='Delete'
+                    /> 
+            </CardTitle>
+            <CardDescription className='text-sm leading-3'>{workflow.description}</CardDescription>
+            <CardDescription>
+                <div className='flex items-center justify-start gap-2 flex-wrap'>
+                    {workflow.trigger && <>
+                        <DynamicIcon icon={workflow.trigger.type.triggerType.icon}/>
+                        <ArrowRightIcon className='w-2 h-2'/>
+                    </>
+                    }
+                    {workflow.actions.map((action:any) => (
+                        <><DynamicIcon key={action.id} icon={action.type.actionType.icon}/>
+                            <ArrowRightIcon className='w-2 h-2'/>
+                        </>
+                    ))}
+                </div>
+            </CardDescription>
+
+        </CardHeader>
+        <CardContent className=''>
+            
+        </CardContent>
         <CardFooter>
             <div className='w-full flex items-center justify-between'>
-                <div className='flex items-center'>
+                <div className='flex items-center gap-2'>
                     <Label htmlFor='airplane-mode'>
                         {toggle? 'On': 'Off'}
                     </Label>
                     <Switch id='airplane-mode' onClick={onToggle} defaultChecked={workflow.publish!} />
                 </div>
-                <Button className='text-xl px-10 ' onClick={()=>router.push(`/workflows/editor/${workflow.id}`)}>Edit</Button>
-                <div></div>
+                <Button className='text-lg px-6 ' onClick={()=>router.push(`/workflows/editor/${workflow.id}`)}>Edit</Button>
             </div>
         </CardFooter>
     </Card>

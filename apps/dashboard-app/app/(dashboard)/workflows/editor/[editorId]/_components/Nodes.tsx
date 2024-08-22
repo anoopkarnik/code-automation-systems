@@ -122,7 +122,7 @@ const Nodes = () => {
             </div>
             <div className='flex items-center gap-2 text-right '>
                 <Label htmlFor='airplane-mode'>
-                    {toggle? 'On': 'Off'}
+                    {toggle? 'Off': 'On'}
                 </Label>
                 <Switch id='airplane-mode' onClick={onToggle} defaultChecked={editor.publish!} />
             </div>

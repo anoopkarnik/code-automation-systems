@@ -12,6 +12,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { BookOpenCheckIcon, SettingsIcon } from 'lucide-react'
 import Settings from './_components/Settings'
 import Notes from './_components/Notes'
+import { set } from 'date-fns'
+import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 
 const SkillTreePage = () => {
     const [skillTreeType , setSkillTreeType] = useState('')
@@ -24,16 +26,19 @@ const SkillTreePage = () => {
     const isMobile = useMedia("(max-width: 1324px)", false);
     const searchParams = useSearchParams()
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (!skillTreesDbId || !apiToken){
             return
         }
         const fetchSkillTrees = async () => {
+            setLoading(true)
             let filters:any = []
             let sorts:any = []
             const response = await queryAllNotionDatabaseAction({apiToken, database_id: skillTreesDbId,filters,sorts})
             setSkillTrees(response.results)
+            setLoading(false)
         }
         fetchSkillTrees()
     },[skillTreesDbId, apiToken])
@@ -59,6 +64,13 @@ const SkillTreePage = () => {
         params.set('type', type)
         params.set('parentId', '')
         router.push(`?${params.toString()}`)
+    }
+
+    if (loading){
+        return <div>
+            <LoadingCard title="Skill Trees and Notes"
+             description="Fetching data from your skill tree and areas notion pages"/>
+        </div>
     }
 
     if (isMobile){

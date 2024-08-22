@@ -40,7 +40,7 @@ const ConnectionCard = ({connection}:any) => {
       </div>
       <div className='flex flex-col gap-4'>
         <CardTitle className="text-center text-lg">{connection.title}</CardTitle>
-        <CardDescription className='min-w-[400px] max-w-[400px] text-center'>{connection.description}</CardDescription>
+        <CardDescription className=' text-center'>{connection.description}</CardDescription>
       </div>
     </CardHeader>
     { connection.published && <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
