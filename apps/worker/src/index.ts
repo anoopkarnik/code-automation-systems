@@ -1,6 +1,5 @@
 import { Kafka } from "kafkajs";
 require("dotenv").config();
-import db from "@repo/prisma-db/client";
 import { logger } from "@repo/winston-logger/index";
 import { getEventDetailsById, updateEvent, updateEventMetadata } from "@repo/prisma-db/repo/workflow";
 import {  webhook } from "./webhook";
@@ -70,6 +69,7 @@ async function main() {
                 let metadata:any = currentAction?.metadata;
                 const prevMetadata:any = eventDetails?.metadata;
                 metadata = await modifyMetadata(metadata, prevMetadata);
+                logger.info(`Metadata for action ${currentAction?.type?.name} is ${JSON.stringify(metadata)}`);
                 if (currentAction?.type?.name === 'External Webhook'){
                     const res = await webhook(metadata?.url, metadata?.body, metadata?.headers,metadata?.method);
 
@@ -125,7 +125,7 @@ async function main() {
                 const eventMetadata:any = eventDetails?.metadata;
                 let stageString = `action${stage}`
                 let updatedMetadata:any = {...eventMetadata, [stageString] : {result:result, logs: newLogs}};
-
+                logger.info('Result got is ', result);
                 const lastStage = (eventDetails?.Workflows?.actions.length || 1) - 1;
                 if (lastStage!==stage){
                     updateEventMetadata(eventId, updatedMetadata);
