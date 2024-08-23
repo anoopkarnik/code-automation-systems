@@ -60,7 +60,7 @@ const SkillTreePage = () => {
 
     const selectType  = (type:any) =>{
         setSkillTreeType(type)
-        const params = new URLSearchParams(searchParams.toString())
+        const params = new URLSearchParams(searchParams?.toString())
         params.set('type', type)
         params.set('parentId', '')
         router.push(`?${params.toString()}`)

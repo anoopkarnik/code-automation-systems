@@ -4,7 +4,7 @@ import React, {  useContext, useEffect, useState } from 'react'
 
 import 'reactflow/dist/style.css';
 import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from '@repo/ui/molecules/shadcn/Card';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
@@ -19,9 +19,11 @@ import NodeSheet from './NodeSheet';
 import NodeCard from './NodeCard';
 import { useToast } from '../../../../../../hooks/useToast';
 import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { useSearchParam } from 'react-use';
 
 const Nodes = () => {
-    const { editorId } = useParams()
+    const params = useParams()
+    const editorId = params?.editorId
     const editor =  useContext(EditorContext);
     const [showEdit,setShowEdit] = useState(false);
     const [name, setName] = useState(editor.name);

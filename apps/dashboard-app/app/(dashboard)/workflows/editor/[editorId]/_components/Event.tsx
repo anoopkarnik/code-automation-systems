@@ -16,7 +16,7 @@ interface Event {
 const EventComponent = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const param = useParams();
-  const workflowId = param.editorId;
+  const workflowId = param?.editorId;
 
   useEffect(() => {
     const fetchEvents = async () => {

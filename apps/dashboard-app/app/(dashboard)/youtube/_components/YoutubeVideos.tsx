@@ -17,7 +17,7 @@ import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 
 const YoutubeVideos = ({filterOption}:{filterOption:string}) => {
     const params = useSearchParams();
-    const channelId = params.get('channelId')
+    const channelId = params?.get('channelId')
     const [cards, setCards] = useState<any[]>([])
     const [hasMore, setHasMore] = useState<boolean>(true)
     const [nextCursor, setNextCursor] = useState<string | null>(null)
