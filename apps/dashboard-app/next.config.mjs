@@ -15,9 +15,12 @@ const nextConfig = {
     }
 };
 
-const withNextra = nextra({
-    theme: "nextra-theme-docs",
-    themeConfig: "./theme.config.jsx",
-})
+const withNextraDocs = nextra({
+    theme: 'nextra-theme-docs',
+    themeConfig: './theme-docs.config.jsx',
+    basePath: '/docs'
+});
 
-export default withNextra(nextConfig);
+const combinedConfig = withNextraDocs(nextConfig);
+
+export default combinedConfig;
