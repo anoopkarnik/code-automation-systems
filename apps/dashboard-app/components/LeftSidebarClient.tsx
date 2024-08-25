@@ -2,7 +2,7 @@
 
 import LeftSidebar from "@repo/ui/organisms/home/LeftSidebar";
 import { useRouter } from "next/navigation";
-import { sidebarItems } from "../lib/constant";
+import { sidebarStartItems, sidebarEndItems } from "../lib/constant";
 
 const LeftSidebarClient = () => {
 
@@ -14,7 +14,7 @@ const LeftSidebarClient = () => {
 
   return (
     <>
-        <LeftSidebar sidebarItems={sidebarItems} redirect={redirect}/>
+        <LeftSidebar sidebarStartItems={sidebarStartItems} sidebarEndItems={sidebarEndItems} redirect={redirect}/>
     </>
   )
 }

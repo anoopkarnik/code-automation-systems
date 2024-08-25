@@ -5,13 +5,15 @@ import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon, CircleChevronDown, CircleChevronUp } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../components/molecules/shadcn/Tooltip'
+import LeftSidebarItem from './LeftSidebarItem'
 
 interface LeftSidebarProps {
-    sidebarItems: any
+    sidebarStartItems: any
+    sidebarEndItems: any
     redirect: (href: string) => void
 }
 
-const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
+const LeftSidebar = ({ sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 640px)");
     const isNotMobile = useMediaQuery("(min-width: 640px)");
@@ -20,8 +22,6 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
-    const [items, setItems] = useState(sidebarItems);
-    const [showSubItems, setShowSubItems] = useState<any>({});
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -67,17 +67,9 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
         }
     }, [isMobile, pathname])
 
-    const toggleSubItems = (index:any) => {
-        setShowSubItems((prev:any) =>({
-            ...prev,
-            [index]: !prev[index]
-        }))
-
-    }
-
     return (
         <>
-            <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-auto sticky flex flex-col z-10',
+            <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-auto sticky flex flex-col z-10 overflow-y-auto',
                 isResetting && "transition-all ease-in-out duration-300",
                 isMobile && "w-0",
                 isNotMobile && "min-w-[240px]"
@@ -87,68 +79,17 @@ const LeftSidebar = ({ sidebarItems, redirect }: LeftSidebarProps) => {
                 )}>
                     {isMobile && <ChevronsLeft className='h-6 w-6' />}
                 </div>
-                <div className='mt-14 ml-2'>
-                    {items.map((item: any, index: number) => (
-                        <div key={index}>
-                            {item.subItems && item.subItems.length > 0 ? (
-                                <div key={index}>
-                                    <div key={index} onClick={() => toggleSubItems(index)}
-                                        className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
-                                            pathname === item.href && 'bg-destructive/30'
-                                        )}>
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                {item.icon && <item.icon className='h-6 w-6' />}
-                                                {!item.icon && <img src={item.image} className='h-6 w-6' />}
-                                                <TooltipContent>{item.title}</TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                        <div className='flex items-center justify-between w-full'>
-                                            {item.title} 
-                                            {showSubItems[index] ?
-                                             <CircleChevronUp className='w-4 h-4'/> :
-                                              <CircleChevronDown className='w-4 h-4'/>
-                                            }
-                                        </div>
-                                    </div>
-                                    <>
-                                    {showSubItems[index] && item.subItems.map((subItem: any, subIndex: number) => (
-                                        <div key={subIndex} onClick={() => redirect(subItem.href)}
-                                            className={cn('flex items-center gap-2 p-2 mx-8 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
-                                                pathname === subItem.href && 'bg-destructive/30'
-                                            )}>
-                                            <TooltipProvider>
-                                                <Tooltip>
-                                                    {subItem.icon && <subItem.icon className='h-6 w-6' />}
-                                                    {!subItem.icon && <img src={subItem.image} className='h-6 w-6' />}
-                                                    <TooltipContent>{subItem.title}</TooltipContent>
-                                                </Tooltip>
-                                            </TooltipProvider>
-                                            {<span>{subItem.title}</span>}
-                                        </div>
-                                    ))} 
-                                    </>
-                                </div> )
-                                :
-                                <div key={index} onClick={() => redirect(item.href)}
-                                    className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg hover:bg-destructive/10 transition cursor-pointer mb-4 ',
-                                        pathname === item.href && 'bg-destructive/30'
-                                    )}>
-                                    <TooltipProvider>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                {item.icon && <item.icon className='h-6 w-6' />}
-                                                {!item.icon && <img src={item.image} className='h-6 w-6' />}
-                                            </TooltipTrigger>
-                                            <TooltipContent>{item.title}</TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                    {<span>{item.title}</span>}
-                                </div>
-                }
-                            
-                        </div>
-                    ))}
+                <div className='py-4 pl-2 flex flex-col justify-between flex-grow'>
+                    <div>
+                        {sidebarStartItems.map((item: any, index: number) => (
+                        <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
+                        ))}
+                    </div>
+                    <div>
+                        {sidebarEndItems.map((item: any, index: number) => (
+                        <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
+                        ))}
+                    </div>
                 </div>
                 <div onClick={resetWidth}
                     className='opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0' />

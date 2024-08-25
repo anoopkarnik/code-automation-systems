@@ -4,11 +4,13 @@ import tailwindcssAnimate from "tailwindcss-animate";
 const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,tsx,js,jsx,mdx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
     "../../packages/ui/src/**/*.{ts,tsx}",
+    './.storybook/**/*.{js,ts,jsx,tsx,mdx}', // Include Storybook stories
+    './stories/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   prefix: "",
   theme: {

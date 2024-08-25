@@ -27,10 +27,11 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   YoutubeIcon,
   VideoIcon,
   DatabaseIcon,
-  SproutIcon} from "lucide-react";
+  SproutIcon,
+  FolderIcon} from "lucide-react";
 import { Connection } from "./types";
 
-export const sidebarItems = [
+export const sidebarStartItems = [
   {
       title: "Notion Dbs",
       image: '/notion.png',
@@ -88,11 +89,19 @@ export const sidebarItems = [
       title: "Skill Trees",
       icon: NetworkIcon,
       href: "/skill-trees"
-  },
+  }
+]
+
+export const sidebarEndItems = [
   {
       title: "Settings",
       icon: Settings,
       href: "/settings"
+  },
+  {
+      title: "Documentation",
+      icon: FolderIcon,
+      href: "/docs"
   }
 ]
 

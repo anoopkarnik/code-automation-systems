@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    "./stories/*": "./src/stories/*.tsx",
     "./molecules/*": "./src/components/molecules/*.tsx",
     "./organisms/*": "./src/components/organisms/*.tsx",
     "./styles/*": "./src/styles/*.css",
