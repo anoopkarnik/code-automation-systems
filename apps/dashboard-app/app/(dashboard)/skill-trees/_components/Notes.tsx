@@ -49,7 +49,7 @@ const Notes = ({ title, ids,  data}: any) => {
             setRevisionTimeTaken(revisionTimeTaken);
         };
         fetchPages();
-    },[ids, apiToken,title])
+    },[ids, apiToken,title,data]);
 
     const handleSearch = (event:any) => {
         setSearchNotes(event.target.value);

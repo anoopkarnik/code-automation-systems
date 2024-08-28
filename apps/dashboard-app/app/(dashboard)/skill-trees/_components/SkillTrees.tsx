@@ -42,7 +42,7 @@ const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
             setSelfAreasToReview(selfAreasToReview)
         }
         fetchSkillTrees()
-    },[skillTreeItems,searchParams])
+    },[skillTreeItems,searchParams,selfAreaItems])
 
     const [totalNotes, setTotalNotes] = useState([]);
     const [totalAttachments, setTotalAttachments] = useState([]);

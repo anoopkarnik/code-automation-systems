@@ -1,5 +1,4 @@
 import type { Preview } from "@storybook/react";
-import "@repo/ui/styles/shadcn-rose"
 
 const preview: Preview = {
   parameters: {
@@ -13,4 +12,3 @@ const preview: Preview = {
 };
 
 export default preview;
-

@@ -18,7 +18,7 @@ const SkillTreeCard = ({skillTree, skillTrees}:any) => {
             setTotalProjects(totalProjects)
         }
         fetchTotal()
-    },[])
+    },[skillTree,skillTrees])
   return (
     <Card className="flex flex-col items-center justify-between ">
         <CardHeader className="flex flex-col items-center justify-center gap-2 ">

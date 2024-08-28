@@ -12,7 +12,7 @@ export default function VerificationClient() {
     const [error, setError] = useState<string | undefined>()
     const [success, setSuccess] = useState<string | undefined>()
     const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const token = searchParams?.get('token');
 
     const onSubmit = useCallback(async()=>{
         if (success || error) return;

@@ -11,8 +11,8 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   stories: [
+    "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   addons: [
     getAbsolutePath("@storybook/addon-onboarding"),
@@ -25,9 +25,6 @@ const config: StorybookConfig = {
     name: getAbsolutePath("@storybook/nextjs"),
     options: {},
   },
-  staticDirs: ["..\\public"],
-  docs:{
-    "autodocs": true
-  }
+  staticDirs: ["../public"],
 };
 export default config;

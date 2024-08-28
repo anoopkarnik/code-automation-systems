@@ -9,7 +9,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '../../../routes';
 export default function LoginClient() {
     const router = useRouter();
     const searchParams = useSearchParams()
-    const urlError = searchParams.get('error') === "OAuthAccountNotLinked" ?
+    const urlError = searchParams?.get('error') === "OAuthAccountNotLinked" ?
      "Email already in use with different provider" : ""
     return (
         <LoginCard
