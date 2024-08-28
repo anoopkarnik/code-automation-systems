@@ -43,13 +43,13 @@ const ConnectionCard = ({connection}:any) => {
         <CardDescription className=' text-center'>{connection.description}</CardDescription>
       </div>
     </CardHeader>
-    { connection.published && <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
+    { connection.published && <div className="flex flex-col items-center gap-2 p-4 mx-4 ">
      { connection.showModal? (
         <Dialog>
           <DialogTrigger>
-            <div className=" rounded-lg px-3 py-2 font-bold text-white ">
+            <Button size="lg"  >
               Connect
-            </div>
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -63,14 +63,20 @@ const ConnectionCard = ({connection}:any) => {
           </DialogContent>
         </Dialog>
       ):(
-    <Link href={oauthUrl || ''} className=" rounded-lg bg-primary p-2 font-bold text-primary-foreground">
-      Connect
-    </Link>)}
-    </Button>}
+      <div className=''>
+        <Link href={oauthUrl || ''}>
+          <Button size="lg"  >
+            Connect
+          </Button>
+        </Link>
+      </div>)}
+    </div>}
     {!connection.published && 
-    <Button className="flex flex-col items-center gap-2 p-4 mx-4 mb-4">
-      In Progress
-    </Button> 
+    <div className="flex flex-col items-center gap-2 mb-4">
+        <Button size="lg" >
+          In Progress
+        </Button>
+    </div>
     }
   </Card>
   )

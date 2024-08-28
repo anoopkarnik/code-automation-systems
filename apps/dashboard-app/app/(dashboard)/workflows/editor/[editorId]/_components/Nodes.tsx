@@ -112,22 +112,24 @@ const Nodes = () => {
 
   return (
     <>
-        <div className='text-4xl flex items-center gap-4 w-full justify-between px-10'>
-            <div></div>
-            <div className='flex items-center justify-between gap-2'>
-                {showEdit ? 
-                    <Input placeholder={editor.name} onChange={(e:any) => setName(e.target.value)}/>:
-                    <div>{editor.name}</div>
-                }
-                <Edit2Icon onClick={handleEdit}/>
-                <Button onClick={handleRun} >Run</Button>
-            </div>
+        <div className='text-4xl flex flex-col items-center gap-4 w-full justify-between px-10'>
             <div className='flex items-center gap-2 text-right '>
                 <Label htmlFor='airplane-mode'>
                     {toggle? 'Off': 'On'}
                 </Label>
                 <Switch id='airplane-mode' onClick={onToggle} defaultChecked={editor.publish!} />
             </div>
+            <div className='flex items-center justify-between gap-2'>
+                {showEdit ? 
+                    <Input placeholder={editor.name} onChange={(e:any) => setName(e.target.value)}/>:
+                    <div>{editor.name}</div>
+                }
+                <Edit2Icon onClick={handleEdit}/>
+            </div>
+            <div className='w-[40%]'>
+                <Button className='w-full' onClick={handleRun} >Run</Button>
+            </div>
+
         </div>
         {editor.trigger ? (
                 <NodeCard funcType='edit' nodeType='Trigger' node={editor.trigger}

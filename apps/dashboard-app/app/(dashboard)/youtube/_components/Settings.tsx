@@ -103,7 +103,7 @@ const Settings = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={getChannels} className='font-bold'>Get Channels</Button>
+            <Button onClick={getChannels} size="lg">Get Channels</Button>
           </div>
           <div className='flex flex-wrap items-center justify-center border-b-2 border-border py-10 gap-4 '>
             <div className='font-bold w-[200px]'> Insert in Videos Notion Db from Videos of Youtube Channels</div>
@@ -121,7 +121,7 @@ const Settings = () => {
                 ))}
               </SelectContent>
             </Select>
-            <Button onClick={getVideos} className='font-bold'>Get Videos</Button>
+            <Button onClick={getVideos} size="lg">Get Videos</Button>
           </div>
         </div> 
     </div>

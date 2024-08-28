@@ -23,7 +23,8 @@ const WebhookAction = ({funcType,nodeType,type,subType,node}:any) => {
             headers:  JSON.stringify(node?.metadata?.headers) || JSON.stringify({"Content-Type": "application/json"})
         }
     })
-    const { editorId } = useParams()
+    const params = useParams()
+    const editorId = params?.editorId
     const editor =  useContext(EditorContext);
     const router = useRouter();
     if (subType.name == 'External Webhook'){
@@ -110,7 +111,7 @@ const WebhookAction = ({funcType,nodeType,type,subType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                            <Button  className='mt-4 ' variant="default" type="submit" > Add Action</Button>
+                            <Button  size="lg" variant="default" type="submit" > Add Action</Button>
                         </div>
                     </form>
                 </Form>

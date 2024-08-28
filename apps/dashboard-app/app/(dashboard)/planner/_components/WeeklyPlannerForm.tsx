@@ -55,7 +55,7 @@ const WeeklyPlannerForm = () => {
             </Select>
             <DatePicker className='w-[300px]' placeholder='Select Week to Work On' value={weekToWorkOn} onChange={setWeekToWorkOn} />
         </div>
-        <Button onClick={handleAddWeeklyWork} className='font-bold w-[300px]'  variant='secondary'> Add a Weekly Deep Work Task</Button>
+        <Button onClick={handleAddWeeklyWork} size="lg" variant='secondary'> Add a Weekly Deep Work Task</Button>
     </div>
   )
 }

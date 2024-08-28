@@ -28,7 +28,7 @@ const AreaCard = ({page,type,testGrades,revisionTimeTaken}:any) => {
           <div className='font-extralight text-sm'>{page.Description ? page.Description : 'No Description Available'}</div>
           <div className='mt-2 flex items-center gap-4'>
             {type==="Notes" && <Button variant='outline' onClick={() => calculateAndUpdateNextRevisionDate(page,apiToken)}>Revision Done</Button>}
-            <Button variant='outline' onClick={() => handlePageClick(page)}>Open Notion Page</Button>
+            <Button size="lg" variant='outline' onClick={() => handlePageClick(page)}>Open Notion Page</Button>
           </div>
       </div>
   )

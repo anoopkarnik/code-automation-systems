@@ -92,7 +92,7 @@ const Workflowform = ({onSubmit,userId}:any) => {
               )}
             />
             <Button
-              className="mt-4"
+              size="lg"
               disabled={isLoading}
               type="submit"
             >

@@ -97,7 +97,7 @@ const CreateBooksForm = () => {
             <FloatingLabelInput className='w-[300px]' label='Books or Chapters Read' value={booksOrChaptersRead} onChange={(event)=>setBooksOrChaptersRead(Number(event.target.value))} />
             <Textarea className='w-[300px]' placeholder='Details' value={details} onChange={(event)=>setDetails(event.target.value)} />  
         </div>
-        <Button onClick={handleAddBooks} className='font-bold w-[300px]'  variant='secondary'> Add a Book</Button>
+        <Button onClick={handleAddBooks} size="lg"  variant='secondary'> Add a Book</Button>
     </div>
   )
 }

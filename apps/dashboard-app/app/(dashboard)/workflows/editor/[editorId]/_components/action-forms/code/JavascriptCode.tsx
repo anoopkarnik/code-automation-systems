@@ -14,7 +14,8 @@ import { set } from 'date-fns';
 
 export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {
     const {toast} = useToast();
-    const { editorId} = useParams();
+    const params = useParams();
+    const editorId = params?.editorId
     const router = useRouter();
     const editor = useContext(EditorContext);
     const [code, setCode] = useState(node?.metadata?.code || '// Write your javascript code here');
@@ -97,8 +98,8 @@ export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {
                 className="border rounded"
             />
             <div className='flex w-full justify-center gap-4'>
-                <Button className='w-[30%]' onClick={compileCode}>Compile and Run</Button>
-                <Button className='w-[30%]' variant="default" type="submit" onClick={onSubmit} > Add Action</Button>
+                <Button size="lg" onClick={compileCode}>Compile and Run</Button>
+                <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add Action</Button>
             </div>
             {output && (
                 <Alert>

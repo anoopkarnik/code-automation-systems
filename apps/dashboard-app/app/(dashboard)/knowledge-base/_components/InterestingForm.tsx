@@ -43,7 +43,7 @@ const InterestingForm = () => {
             <FloatingLabelInput className='w-[300px]' label='URL' value={url} onChange={(event)=>setUrl(event.target.value)} />
             <Textarea className='w-[300px]' placeholder='Details' value={details} onChange={(event)=>setDetails(event.target.value)} />  
         </div>
-        <Button onClick={handleAddInteresting} className='font-bold w-[300px]'  variant='secondary'> Add a Interesting Info</Button>
+        <Button onClick={handleAddInteresting} size="lg" variant='secondary'> Add a Interesting Info</Button>
     </div>
   )
 }

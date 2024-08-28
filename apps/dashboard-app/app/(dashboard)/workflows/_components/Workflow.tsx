@@ -77,7 +77,7 @@ const Workflow = ({workflow}:any) => {
                     </Label>
                     <Switch id='airplane-mode' onClick={onToggle} defaultChecked={workflow.publish!} />
                 </div>
-                <Button className='text-lg px-6 ' onClick={()=>router.push(`/workflows/editor/${workflow.id}`)}>Edit</Button>
+                <Button size="lg" onClick={()=>router.push(`/workflows/editor/${workflow.id}`)}>Edit</Button>
             </div>
         </CardFooter>
     </Card>

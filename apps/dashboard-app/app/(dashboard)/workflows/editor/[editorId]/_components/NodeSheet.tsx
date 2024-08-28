@@ -12,9 +12,11 @@ const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
                 <div>{subType.name}</div>
                 <div>{subType.description}</div>
             </div>: 
-            <Button className='text-lg font-medium mt-2'>
-                Edit Node
-            </Button>}
+            <div className='w-full flex mt-2 '>
+                <Button size="lg" className='w-full'>
+                    Edit Node
+                </Button>
+            </div>}
         </SheetTrigger>
         <SheetContent side='rightLarge'>
             <SheetHeader>

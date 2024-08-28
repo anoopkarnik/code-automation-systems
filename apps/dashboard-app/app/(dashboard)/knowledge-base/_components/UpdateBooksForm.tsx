@@ -130,7 +130,7 @@ const UpdateBooksForm = () => {
             <FloatingLabelInput className='w-[300px]' label='Books or Chapters Published' value={booksOrChaptersPublished} onChange={(event)=>setBooksOrChaptersPublished(Number(event.target.value))} />
             <FloatingLabelInput className='w-[300px]' label='Books or Chapters Read' value={booksOrChaptersRead} onChange={(event)=>setBooksOrChaptersRead(Number(event.target.value))} /> 
         </div>
-        <Button onClick={handleUpdateBooks} className='font-bold w-[300px]'  variant='secondary'>Update Book</Button>
+        <Button onClick={handleUpdateBooks} size="lg"  variant='secondary'>Update Book</Button>
     </div>
   )
 }

@@ -20,7 +20,8 @@ const Schedule = ({funcType,nodeType,type,subType,node}:any) => {
             startDate: node?.metadata?.startDate || ''
         }
     })
-    const { editorId } = useParams()
+    const params = useParams()
+    const editorId = params?.editorId
     const editor =  useContext(EditorContext);
     const router = useRouter();
     if (subType.name == 'Cron'){
@@ -85,7 +86,7 @@ const Schedule = ({funcType,nodeType,type,subType,node}:any) => {
                                 </FormControl>
                             </FormItem>
                         )}/>
-                        <Button  className='mt-4 ' variant="default" type="submit" > Add Node</Button>
+                        <Button  size="lg"  variant="default" type="submit" > Add Node</Button>
                     </div>
                 </form>
             </Form>

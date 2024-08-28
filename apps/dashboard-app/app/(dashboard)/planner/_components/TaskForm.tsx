@@ -47,7 +47,7 @@ const TaskForm = () => {
             </div>
             <DatePicker className='w-[300px]' placeholder='select Deadline' value={deadlines} onChange={setDeadlines} />
         </div>
-        <Button onClick={handleAddTask} className='font-bold w-[300px]' variant='secondary'> Add a Task</Button>
+        <Button onClick={handleAddTask} size="lg" variant='secondary'> Add a Task</Button>
     </div>
   )
 }

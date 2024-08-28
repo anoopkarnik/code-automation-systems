@@ -34,7 +34,8 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
 
     const {toast} = useToast();
 
-    const { editorId } = useParams()
+    const params = useParams()
+    const editorId = params?.editorId
     const editor = useContext(EditorContext);
     const router = useRouter();
     const onSubmit = async () => {
@@ -179,7 +180,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             {selectedDb && <div className='flex flex-col gap-2 mt-4'>
                 <div className='flex items-center justify-between '>
                     <Label className='ml-2 text-xl mb-4'>Filters</Label>
-                    <Button className='' variant='secondary' onClick={addFilter}>Add This Filter</Button>
+                    <Button size="lg" variant='secondary' onClick={addFilter}>Add This Filter</Button>
                 </div>
                 {selectedFilters.length > 0 && selectedFilters.map((filter:any, index:number) => (
                     <div key={index} className='flex items-center justify-start gap-4'>
@@ -216,8 +217,8 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                 
             </div>}
             {selectedDb && <div className='flex w-full items-center justify-between gap-4'>
-                <Button  className='mt-4 ' variant="default" type="submit" onClick={onSubmit}> Add Action</Button>
-                <Button  className='mt-4 ' variant="default" type="submit" onClick={getTestResults}> Test</Button>
+                <Button  size="lg" variant="default" type="submit" onClick={onSubmit}> Add Action</Button>
+                <Button  size="lg" variant="default" type="submit" onClick={getTestResults}> Test</Button>
             </div>}
             <Accordion type='single' collapsible className='w-full'>
                 <AccordionItem value='item-1'>

@@ -259,7 +259,7 @@ const DbSelection = ({title,name,fieldName}:any) => {
                 ))}
             </SelectContent>
         </Select>
-        <Button onClick={updateDatabase} className='font-bold'> Update Database</Button>
+        <Button onClick={updateDatabase} size="lg"> Update Database</Button>
     </div>
   )
 }

@@ -25,7 +25,8 @@ const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
 
     const {toast} = useToast();
 
-    const { editorId } = useParams()
+    const params = useParams()
+    const editorId = params?.editorId
     const editor = useContext(EditorContext);
     const router = useRouter();
     const onSubmit = async () => {
@@ -125,7 +126,7 @@ const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
           
             </div>}
             {selectedDb && <div className='flex w-full items-center justify-between gap-4'>
-                <Button  className='mt-4 ' variant="default" type="submit" onClick={onSubmit}> Add Action</Button>
+                <Button size="lg" variant="default" type="submit" onClick={onSubmit}> Add Action</Button>
             </div>}
         </div>
     </div>

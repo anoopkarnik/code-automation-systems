@@ -105,7 +105,7 @@ const SchedulerForm = () => {
             onChange={setDaysOfWeek} />}
             
         </div>
-        <Button onClick={handleAddScheduler} className='font-bold w-[300px]'  variant='secondary'> Add a Schedule</Button>
+        <Button onClick={handleAddScheduler} size="lg" variant='secondary'> Add a Schedule</Button>
     </div>
   )
 }

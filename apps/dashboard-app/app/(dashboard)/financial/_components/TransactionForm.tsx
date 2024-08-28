@@ -84,7 +84,7 @@ const TransactionForm = () => {
               </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleAddTransaction} className='font-bold w-[300px]' variant='secondary'> Add a Transaction</Button>
+        <Button onClick={handleAddTransaction} size="lg" variant='secondary'> Add a Transaction</Button>
     </div>
   )
 }

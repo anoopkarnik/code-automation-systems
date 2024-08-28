@@ -39,7 +39,7 @@ const AddConnectionsModal = ({callback_url,formElements}:Props) => {
               )}/>
             ))}
           </div>
-          <Button className='bg-destructive text-white w-full ' variant="default" type="submit" > Save</Button>
+          <Button size="lg" variant="default" type="submit" > Save</Button>
         </form>
       </FormProvider> 
 )

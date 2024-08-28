@@ -17,8 +17,8 @@ const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
 
     useEffect(() =>{
         const fetchSkillTrees = async () => {
-            const parentId = searchParams.get('parentId')
-            const type = searchParams.get('type')
+            const parentId = searchParams?.get('parentId')
+            const type = searchParams?.get('type')
 
             let skillTrees;
 
@@ -59,7 +59,7 @@ const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
     },[skillTreeItems,skillTrees])
 
     const selectParentId  = (parentId:any) =>{
-        const params = new URLSearchParams(searchParams.toString())
+        const params = new URLSearchParams(searchParams?.toString())
         params.set('parentId', parentId)
         router.push(`?${params.toString()}`)
     }
@@ -67,7 +67,7 @@ const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
     const handleBreadcrumbClick = (index: number) => {
         if (index < parents.length-1){
             const selectedParent = parents[index];
-            const params = new URLSearchParams(searchParams.toString());
+            const params = new URLSearchParams(searchParams?.toString());
             params.set('parentId', selectedParent.id);
             router.push(`?${params.toString()}`);
             setParents(parents.slice(0, index  )); // Trim parents array up to the clicked breadcrumb

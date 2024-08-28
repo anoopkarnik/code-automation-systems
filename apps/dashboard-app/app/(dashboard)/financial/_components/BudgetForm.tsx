@@ -119,7 +119,7 @@ const BudgetForm = () => {
               </SelectContent>
           </Select>
         </div>
-        <Button onClick={handleAddBudget} className='font-bold w-[300px]'  variant='secondary'> Add a Budget</Button>
+        <Button onClick={handleAddBudget} size="lg"  variant='secondary'> Add a Budget</Button>
     </div>
   )
 }

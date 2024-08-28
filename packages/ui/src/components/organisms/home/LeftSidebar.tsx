@@ -69,7 +69,7 @@ const LeftSidebar = ({ sidebarStartItems, sidebarEndItems, redirect }: LeftSideb
 
     return (
         <>
-            <div ref={sidebarRef} className={cn('group/sidebar min-h-screen bg-secondary overflow-auto sticky flex flex-col z-10 overflow-y-auto',
+            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-auto sticky flex flex-col z-10 overflow-y-auto',
                 isResetting && "transition-all ease-in-out duration-300",
                 isMobile && "w-0",
                 isNotMobile && "min-w-[240px]"

@@ -19,7 +19,7 @@ const NodeModal = ({node, type, types}: any) => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className='text-xl font-medium mt-2'>
+          <Button size="lg">
             {node.length === 0 ? "Create" : "Edit"} {type}
           </Button>
         </DialogTrigger>
