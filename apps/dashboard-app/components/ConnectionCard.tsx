@@ -4,7 +4,7 @@ import { set } from 'date-fns'
 import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 
 import { Dialog,DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@repo/ui/molecules/shadcn/Dialog'
 import AddConnectionsModal from './AddConnectionModal'

@@ -4,8 +4,10 @@
   "private": true,
   "exports": {
     "./stories/*": "./src/stories/*.tsx",
+    "./atoms/*": "./src/components/atoms/*.tsx",
     "./molecules/*": "./src/components/molecules/*.tsx",
     "./organisms/*": "./src/components/organisms/*.tsx",
+    "./templates/*": "./src/components/templates/*.tsx",
     "./styles/*": "./src/styles/*.css",
     "./lib/*": "./src/lib/*.ts",
     "./postcss.config": "./postcss.config.js",

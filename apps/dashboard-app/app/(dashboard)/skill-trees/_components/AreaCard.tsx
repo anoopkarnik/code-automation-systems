@@ -1,6 +1,6 @@
 'use cient'
 import { cn } from '@repo/ui/lib/utils'
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { format } from 'date-fns';
 import React, { useContext } from 'react'
 import { calculateAndUpdateNextRevisionDate } from '../_action/notionUpdate';
