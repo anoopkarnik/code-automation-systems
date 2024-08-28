@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "./Badge";
+import { Badge } from "../../atoms/shadcn/Badge";
 import {
   Command,
   CommandItem,

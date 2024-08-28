@@ -11,7 +11,7 @@ import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import { Input } from '@repo/ui/molecules/shadcn/Input';
 import { Switch } from '@repo/ui/molecules/shadcn/Switch';
 import { Label } from '@repo/ui/molecules/shadcn/Label';
-import ConfirmDialog from '@repo/ui/molecules/common/ConfirmDialog';
+import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 import { getWorkflow } from '../../../../../../actions/workflows/workflow';
 import NodeModal from './NodeModal';
 import DynamicIcon from '../../../../../../components/DynamicIcon';

@@ -6,7 +6,7 @@ import { EditIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { deleteConnectionById, updateConnectionById } from '../actions/connections/user-connections'
 import { Input } from '@repo/ui/molecules/shadcn/Input'
-import ConfirmDialog from '@repo/ui/molecules/common/ConfirmDialog'
+import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog'
 
 
 

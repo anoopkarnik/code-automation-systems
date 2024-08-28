@@ -10,8 +10,8 @@ import {  modifyNotionPageAction, queryNotionDatabaseAction } from '../../../../
 import Image from 'next/image'
 import { format } from 'date-fns'
 import Modal from './Modal'
-import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/molecules/shadcn/Tooltip'
+import { Checkbox } from '../../../../../../packages/ui/src/components/atoms/shadcn/Checkbox'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../../../../packages/ui/src/components/atoms/shadcn/Tooltip'
 import { useSearchParams } from 'next/navigation'
 import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 

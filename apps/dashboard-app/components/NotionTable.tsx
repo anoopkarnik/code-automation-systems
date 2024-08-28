@@ -6,7 +6,7 @@ import React, { use, useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { deleteNotionPages, queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../actions/notion/notion'
 import { ArrowUpDown } from "lucide-react"
-import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox'
+import { Checkbox } from '../../../packages/ui/src/components/atoms/shadcn/Checkbox'
 import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 import { table } from 'console'
 import { useRouter } from 'next/navigation'

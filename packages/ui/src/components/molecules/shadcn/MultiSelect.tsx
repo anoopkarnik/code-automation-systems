@@ -13,7 +13,7 @@ import {
 import { cn } from "../../../lib/utils";
 import { Separator } from "./Separator";
 import { Button } from "./Button";
-import { Badge } from "./Badge";
+import { Badge } from "../../atoms/shadcn/Badge";
 import {
   Popover,
   PopoverContent,

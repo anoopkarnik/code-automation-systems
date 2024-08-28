@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import HeaderCard from '@repo/ui/molecules/common/HeaderCard';
+import HeaderCard from '@repo/ui/molecules/custom/HeaderCard';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { getAreasDatabaseSummary, getBooksDatabaseSummary, getInterestingDatabaseSummary, getQuickCaptureDatabaseSummary } from '../../../../actions/notion/knowledgeBase';
 import InterestingForm from './InterestingForm';
-import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox';
+import { Checkbox } from '../../../../../../packages/ui/src/components/atoms/shadcn/Checkbox';
 import { modifyNotionPageAction } from '../../../../actions/notion/notion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card';
 import Link from 'next/link';
