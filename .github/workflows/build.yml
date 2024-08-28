@@ -2,27 +2,27 @@ name: Build Succeeds on PR
 
 on:
   pull_request:
-      branches:
-          - main
+    branches:
+      - main
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+            node-version: '20'
 
-            - name: Install dependencies
-              run: npm install
+      - name: Install dependencies
+        run: npm install
 
-            - name: Generate Prisma Client
-              run: npm run db:generate
+      - name: Generate Prisma Client
+        run: npm run db:generate
 
-            - name: Build
-              run: npm run build
+      - name: Build
+        run: npm run build
 
             
