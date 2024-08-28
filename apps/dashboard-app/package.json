@@ -41,11 +41,9 @@
     "react-dom": "^18",
     "react-use": "^17.5.0",
     "reactflow": "^11.11.4",
-    "safe-eval": "^0.4.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuidv4": "^6.2.13",
-    "vm2": "^3.9.19",
     "winston": "^3.13.0"
   },
   "devDependencies": {
