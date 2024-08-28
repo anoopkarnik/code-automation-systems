@@ -13,7 +13,7 @@ export default function ResetPasswordClient() {
     const [error, setError] = useState<string | undefined>('')
     const [success, setSuccess] = useState<string | undefined>('')
     const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const token = searchParams?.get('token');
     
     useEffect(()=>{
         if (!token){
