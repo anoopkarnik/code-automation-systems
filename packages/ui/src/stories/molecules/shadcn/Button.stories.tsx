@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 
-import { Button } from '../../../components/molecules/shadcn/Button';
+import { Button } from '../../../components/atoms/shadcn/Button';
 
 import {action} from "@storybook/addon-actions";
 
