@@ -1,9 +1,10 @@
 name: Build and Deploy to Docker Hub
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - prod
+
 
 jobs:
   build-and-push:
