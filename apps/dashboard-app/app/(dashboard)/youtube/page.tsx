@@ -9,8 +9,8 @@ import Settings from './_components/Settings';
 import YoutubeChannels from './_components/YoutubeChannels';
 import YoutubeVideos from './_components/YoutubeVideos';
 import { useRouter, useSearchParams } from 'next/navigation';
-import {RadioGroup, RadioGroupItem} from '@repo/ui/molecules/shadcn/Radio'
-import { Label } from '@repo/ui/molecules/shadcn/Label';
+import {RadioGroup, RadioGroupItem} from '../../../../../packages/ui/src/components/atoms/shadcn/Radio'
+import { Label } from '@repo/ui/atoms/shadcn/Label';
 
 const YoutubePage = () => {
   const isMobile = useMedia("(max-width: 1324px)", false);

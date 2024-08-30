@@ -4,10 +4,10 @@ import React, {  useContext, useEffect, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { getDatabases } from '../actions/notion/notion'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { updateNotionDatabase } from '../actions/notion/notion'
 import { useSession } from 'next-auth/react'
-import { Input } from '@repo/ui/molecules/shadcn/Input'
+import { Input } from '@repo/ui/atoms/shadcn/Input'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)

@@ -2,7 +2,7 @@
 
 import { BellIcon, Moon, Sun } from "lucide-react"
 
-import { Button } from "../../molecules/shadcn/Button"
+import { Button } from "../../atoms/shadcn/Button"
 import {
   DropdownMenu,
   DropdownMenuContent,

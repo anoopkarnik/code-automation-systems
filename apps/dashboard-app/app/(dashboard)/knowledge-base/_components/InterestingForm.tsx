@@ -3,9 +3,9 @@ import { Input } from '@repo/ui/molecules/shadcn/Input'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { createNotionPageAction } from '../../../../actions/notion/notion'
-import { Checkboxes } from '@repo/ui/molecules/common/Checkboxes'
-import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
-import { FloatingLabelInput } from '@repo/ui/molecules/common/FloatingLabelInput'
+import { Checkboxes } from '@repo/ui/molecules/custom/Checkboxes'
+import { Textarea } from '@repo/ui/atoms/shadcn/Textarea'
+import { FloatingLabelInput } from '@repo/ui/molecules/custom/FloatingLabelInput'
 
 const InterestingForm = () => {
     const connectionsContext = useContext(ConnectionsContext)

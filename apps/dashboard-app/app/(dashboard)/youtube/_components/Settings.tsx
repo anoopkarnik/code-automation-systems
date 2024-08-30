@@ -4,7 +4,7 @@ import DbSelection from '../../../../components/DbSelection'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/molecules/shadcn/Select'
 import { useSession } from 'next-auth/react'
 import { getYoutubeConnection, getAndUpdateChannels, getAndUpdateVideos } from '../../../../actions/connections/youtube-connections'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { useToast } from '../../../../hooks/useToast'
 
 const Settings = () => {

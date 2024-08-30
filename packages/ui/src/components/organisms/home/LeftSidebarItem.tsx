@@ -1,7 +1,7 @@
 'use client'
 import { cn } from '@repo/ui/lib/utils'
 import { usePathname } from 'next/navigation'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../molecules/shadcn/Tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../atoms/shadcn/Tooltip";
 import { CircleChevronDown, CircleChevronUp } from "lucide-react";
 import { useState } from "react";
 

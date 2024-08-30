@@ -1,9 +1,8 @@
-import { Button } from '../../molecules/shadcn/Button';
-import { Avatar, AvatarImage,AvatarFallback } from '../../molecules/shadcn/Avatar';
+import { Button } from '../../atoms/shadcn/Button';
+import { Avatar, AvatarImage,AvatarFallback } from '../../atoms/shadcn/Avatar';
 import { Theme } from './Theme';
 import { GoTriangleDown } from "react-icons/go";
 import { UserDropdown } from './UserDropdown';
-import { BellIcon } from 'lucide-react';
 import { Notification } from './Notification';
 
 interface NavbarProps {

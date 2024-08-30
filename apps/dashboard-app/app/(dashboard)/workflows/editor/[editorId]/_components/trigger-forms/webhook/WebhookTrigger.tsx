@@ -1,7 +1,7 @@
 'use client'
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@repo/ui/molecules/shadcn/Form'
-import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
+import { Textarea } from '@repo/ui/atoms/shadcn/Textarea'
 import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';
 import { getSession } from 'next-auth/react';

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import React from 'react'
 import DynamicIcon from '../../../../../../components/DynamicIcon'
-import ConfirmDialog from '@repo/ui/molecules/common/ConfirmDialog'
+import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog'
 import { TrashIcon } from 'lucide-react'
 import NodeSheet from './NodeSheet'
 import NodeAccordion from './NodeAccordion'

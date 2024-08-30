@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { createNotionPageAction } from '../../../../actions/notion/notion'
-import { Checkboxes } from '@repo/ui/molecules/common/Checkboxes'
+import { Checkboxes } from '@repo/ui/molecules/custom/Checkboxes'
 import { DatePicker } from '@repo/ui/molecules/shadcn/DatePicker'
 
 const SchedulerForm = () => {

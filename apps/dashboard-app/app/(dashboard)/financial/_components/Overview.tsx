@@ -5,11 +5,11 @@ import { DatePickerWithRange } from '@repo/ui/molecules/shadcn/DateRange';
 import { ConnectionsContext } from '../../../../providers/connections-provider';
 import { getAccountsSummary, getDateSpecificFinancialSummary, getLastMonthsFinancialSummary, getYearlyBudgetSummary,
     getMonthlyBudgetSummary, getPastMonthsBudgetSummary,  } from '../../../../actions/notion/financial'
-import ChartCard from '@repo/ui/molecules/common/ChartCard';
+import ChartCard from '@repo/ui/molecules/custom/ChartCard';
 import { ChartConfig } from '@repo/ui/molecules/shadcn/Chart';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import {Skeleton} from '@repo/ui/molecules/shadcn/Skeleton'
-import HeaderCard from '@repo/ui/molecules/common/HeaderCard';
+import HeaderCard from '@repo/ui/molecules/custom/HeaderCard';
 import { queryNotionDatabaseAction } from '../../../../actions/notion/notion';
 import TransactionForm from './TransactionForm';
 import BudgetForm from './BudgetForm';

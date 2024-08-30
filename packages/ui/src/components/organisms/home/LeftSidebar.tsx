@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon, CircleChevronDown, CircleChevronUp } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../../components/molecules/shadcn/Tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../atoms/shadcn/Tooltip'
 import LeftSidebarItem from './LeftSidebarItem'
 
 interface LeftSidebarProps {

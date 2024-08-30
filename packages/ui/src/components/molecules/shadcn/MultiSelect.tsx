@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 
 import { cn } from "../../../lib/utils";
-import { Separator } from "./Separator";
+import { Separator } from "../../atoms/shadcn/Separator";
 import { Button } from "./Button";
-import { Badge } from "./Badge";
+import { Badge } from "../../atoms/shadcn/Badge";
 import {
   Popover,
   PopoverContent,

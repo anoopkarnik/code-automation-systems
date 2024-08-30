@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "./Button";
-import { Input } from "./Input";
+import { Button } from "../../atoms/shadcn/Button";
+import { Input } from "../../atoms/shadcn/Input";
 
 import {
   ColumnDef,

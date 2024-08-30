@@ -1,14 +1,12 @@
 'use client'
 
 import { DataTable } from '@repo/ui/molecules/shadcn/DataTable'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
-import React, { use, useContext, useEffect, useState } from 'react'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
+import React, {  useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { deleteNotionPages, queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../actions/notion/notion'
 import { ArrowUpDown } from "lucide-react"
-import { Checkbox } from '@repo/ui/molecules/shadcn/Checkbox'
-import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
-import { table } from 'console'
+import { Checkbox } from '@repo/ui/atoms/shadcn/Checkbox'
 import { useRouter } from 'next/navigation'
 
 

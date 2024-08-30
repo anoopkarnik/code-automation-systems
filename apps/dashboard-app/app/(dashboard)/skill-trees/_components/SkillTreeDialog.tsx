@@ -1,7 +1,7 @@
 'use client' 
 import React from 'react';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@repo/ui/molecules/shadcn/Dialog';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import Notes from './Notes';
 
 

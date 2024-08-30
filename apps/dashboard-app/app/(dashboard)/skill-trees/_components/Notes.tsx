@@ -4,7 +4,7 @@ import { ConnectionsContext } from '../../../../providers/connections-provider';
 import { difficultyToName, fetchDetailsOfPages, fetchDetailsOfPagesWithSummary, selfGradeToName } from '../_action/summary';
 import InfoCard from './InfoCard';
 import AreaCard from './AreaCard';
-import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
 
 
 const Notes = ({ title, ids,  data}: any) => {

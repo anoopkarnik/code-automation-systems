@@ -3,9 +3,9 @@ import { Input } from '@repo/ui/molecules/shadcn/Input'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { createNotionPageAction } from '../../../../actions/notion/notion'
-import { Textarea } from '@repo/ui/molecules/shadcn/TextArea'
+import { Textarea } from '@repo/ui/atoms/shadcn/Textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
-import {FloatingLabelInput} from '@repo/ui/molecules/common/FloatingLabelInput'
+import {FloatingLabelInput} from '@repo/ui/molecules/custom/FloatingLabelInput'
 
 const CreateBooksForm = () => {
     const connectionsContext = useContext(ConnectionsContext)

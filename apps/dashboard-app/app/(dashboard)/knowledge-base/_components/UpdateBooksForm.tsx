@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import {  modifyNotionPageAction, queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
-import {FloatingLabelInput} from '@repo/ui/molecules/common/FloatingLabelInput'
+import {FloatingLabelInput} from '@repo/ui/molecules/custom/FloatingLabelInput'
 
 const UpdateBooksForm = () => {
     const connectionsContext = useContext(ConnectionsContext)

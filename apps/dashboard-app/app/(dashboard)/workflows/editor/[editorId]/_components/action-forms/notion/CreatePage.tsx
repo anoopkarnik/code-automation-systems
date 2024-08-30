@@ -4,13 +4,13 @@ import { useToast } from '../../../../../../../../hooks/useToast'
 import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import {  useSession } from 'next-auth/react';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
 import { getNotionConnection } from '../../../../../../../../actions/connections/notion-connections';
-import { Label } from '@repo/ui/molecules/shadcn/Label';
+import { Label } from '@repo/ui/atoms/shadcn/Label';
 import { getDatabases} from '../../../../../../../../actions/notion/notion';
 import { createActionAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
-import { Textarea } from '@repo/ui/molecules/shadcn/TextArea';
+import { Textarea } from '@repo/ui/atoms/shadcn/Textarea';
 
 const CreatePage = ({funcType,nodeType,type,subType,node}:any) => {
     const  [ notionAccounts, setNotionAccounts ] = useState([]);
