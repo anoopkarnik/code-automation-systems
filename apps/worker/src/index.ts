@@ -129,8 +129,9 @@ async function main() {
                 let updatedMetadata:any = {...eventMetadata, [stageString] : {result:result, logs: newLogs}};
                 logger.info('Result got is ', result);
                 const lastStage = (eventDetails?.Workflows?.actions.length || 1) - 1;
+                logger.info(`updatedMetadata is ${JSON.stringify(updatedMetadata)}`);
                 if (lastStage!==stage){
-                    updateEventMetadata(eventId, updatedMetadata);
+                    await updateEventMetadata(eventId, updatedMetadata);
                     await producer.send({
                         topic: TOPIC_NAME,
                         messages: [
@@ -142,8 +143,8 @@ async function main() {
                 }
                 else{
                     try{
-                        updateEvent(eventId, "COMPLETED");
-                        updateEventMetadata(eventId, updatedMetadata);
+                        await updateEvent(eventId, "COMPLETED");
+                        await updateEventMetadata(eventId, updatedMetadata);
                     }
                     catch (error){
                         logger.error(`Error updating event ${eventId} to COMPLETED`);
