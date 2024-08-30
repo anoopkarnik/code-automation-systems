@@ -4,7 +4,7 @@ import HeaderCard from '@repo/ui/molecules/custom/HeaderCard';
 import { getCalendarSummary, getTasksSummary, getWeeklyPlannerSummary } from '../../../../actions/notion/planner';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { Checkbox } from '../../../../../../packages/ui/src/components/atoms/shadcn/Checkbox';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { createNotionPageAction, modifyNotionPageAction } from '../../../../actions/notion/notion';
 import SchedulerForm from './SchedulerForm';
 import TaskForm from './TaskForm';

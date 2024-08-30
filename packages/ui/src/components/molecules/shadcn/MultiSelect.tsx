@@ -12,7 +12,7 @@ import {
 
 import { cn } from "../../../lib/utils";
 import { Separator } from "../../atoms/shadcn/Separator";
-import { Button } from "./Button";
+import { Button } from "../../atoms/shadcn/Button";
 import { Badge } from "../../atoms/shadcn/Badge";
 import {
   Popover,
