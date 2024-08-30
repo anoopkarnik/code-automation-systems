@@ -1,4 +1,4 @@
-import { Button } from '../../molecules/shadcn/Button';
+import { Button } from '../../atoms/shadcn/Button';
 interface NavbarProps {
     appName?: string;
     appIcon?: string;
