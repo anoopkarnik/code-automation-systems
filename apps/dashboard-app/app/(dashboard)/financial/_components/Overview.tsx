@@ -17,6 +17,7 @@ import BudgetForm from './BudgetForm';
 const Overview = () => {
 
   const connectionsContext = useContext(ConnectionsContext)
+
   const apiToken = connectionsContext?.notionNode?.accessToken
   const transactionsDbId = connectionsContext?.notionNode?.transactionsDb?.id
   const accountsDbId = connectionsContext?.notionNode?.accountsDb?.id

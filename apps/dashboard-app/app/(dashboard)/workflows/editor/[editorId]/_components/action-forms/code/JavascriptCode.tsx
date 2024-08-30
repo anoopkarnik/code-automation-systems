@@ -3,7 +3,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { useContext, useState } from 'react';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import  { Alert, AlertDescription } from '../../../../../../../../../../packages/ui/src/components/atoms/shadcn/Alert';
 import { useToast } from '../../../../../../../../hooks/useToast';
 import { getSession } from 'next-auth/react';

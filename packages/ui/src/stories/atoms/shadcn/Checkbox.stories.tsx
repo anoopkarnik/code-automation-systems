@@ -19,5 +19,7 @@ type Story = StoryObj<typeof Checkbox>;
 export const Default: Story = {
     args: {
         children: "Default Checkbox",
+        className: "col-span-1"
+        
     }
 }

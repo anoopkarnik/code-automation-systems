@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadcn/Card';
 import { useTransition } from 'react';
-import { Button } from '../../molecules/shadcn/Button';
+import { Button } from '../../atoms/shadcn/Button';
 import { ResetPasswordSchema } from '@repo/zod/index'
 import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../molecules/shadcn/Form"
-import { Input } from '../../molecules/shadcn/Input';
+import { Input } from '../../atoms/shadcn/Input';
 import { FormResult } from '../auth/FormResult';
 
 interface ResetPasswordCardProps {
@@ -64,7 +64,7 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input disabled={isPending} className='bg-white' type="password" placeholder='******' {...field}/>
+                    <Input disabled={isPending}type="password" placeholder='******' {...field}/>
                   </FormControl>
                   <FormMessage/>
                 </FormItem>
@@ -72,7 +72,7 @@ const ResetPasswordCard = ({errorMessage,successMessage,token,resetFunction,back
             </div>
             <FormResult type="error" message={error }/>
             <FormResult type="success" message={success}/>
-            <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Reset Password</Button>
+            <Button  disabled={isPending} variant="default" type="submit">Reset Password</Button>
           </form>
         </Form>
       </CardContent>

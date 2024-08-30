@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadc
 import { useTransition } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Button } from '../../molecules/shadcn/Button';
+import { Button } from '../../atoms/shadcn/Button';
 import { RegisterSchema } from '@repo/zod/index'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../molecules/shadcn/Form"
-import { Input } from '../../molecules/shadcn/Input';
+import { Input } from '../../atoms/shadcn/Input';
 import { FormResult } from './FormResult';
 
 interface RegisterCardProps {
@@ -56,7 +56,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
     })
   }
   return (
-    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
+    <Card className='w-[400px] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
         <div className='text-6xl font-bold text-center text-black'>Register</div>
         <div className='text-md font-extralight text-center'>Create an account</div>
@@ -70,7 +70,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-white' type="name" placeholder='first name' {...field}/>
+                      <Input disabled={isPending} type="name" placeholder='first name' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -79,7 +79,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
+                      <Input disabled={isPending} type="email" placeholder='example@gmail.com' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -88,7 +88,7 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-white' placeholder='******' type="password" {...field}/>
+                      <Input disabled={isPending} placeholder='******' type="password" {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -96,17 +96,17 @@ const RegisterCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinke
               </div>
               <FormResult type="error" message={error}/>
               <FormResult type="success" message={success}/>
-              <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit" > Register</Button>
+              <Button  disabled={isPending}  variant="default" className="w-full" type="submit" > Register</Button>
             </form>
           </Form>
         </CardContent>}
       <CardFooter className='fle rounded-2xl gap-4 '>
         {showGoogleProvider && 
-        <Button onClick={onGoogleProviderSubmit} variant='outline' className='bg-white w-full'>
+        <Button onClick={onGoogleProviderSubmit} variant='secondary' className="w-full" >
           <FcGoogle/>
         </Button>}
-        {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
-        {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='outline' className='bg-white w-full'><FaLinkedin/></Button>}
+        {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='secondary' className="w-full"><FaGithub/></Button>}
+        {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='secondary' className="w-full"><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
         <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>

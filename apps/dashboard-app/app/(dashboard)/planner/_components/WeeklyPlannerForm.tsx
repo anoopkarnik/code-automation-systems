@@ -1,5 +1,5 @@
-import { Button } from '@repo/ui/molecules/shadcn/Button'
-import { Input } from '@repo/ui/molecules/shadcn/Input'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
+import { Input } from '@repo/ui/atoms/shadcn/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
@@ -37,8 +37,8 @@ const WeeklyPlannerForm = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-4 border-2 border-border/20 p-4 m-2 my-10'>
         <div className='flex items-center justify-between gap-4 w-[95%] flex-wrap my-2 mx-2 '>
-            <Input className='w-[300px]' placeholder='Name' value={name} onChange={(event)=>setName(event.target.value)} />
-            <Input className='w-[300px]' placeholder='Time' value={actualTime} onChange={(event)=>setActualTime(Number(event.target.value))} />
+            <Input className='w-[300px]' placeholder='Name' value={name} onChange={(event:any)=>setName(event.target.value)} />
+            <Input className='w-[300px]' placeholder='Time' value={actualTime} onChange={(event:any)=>setActualTime(Number(event.target.value))} />
             <Select value={difficulty} onValueChange={(value) => setDifficulty(value)} >
                 <SelectTrigger className='w-[300px]'>
                     <SelectValue placeholder={`Select Difficulty`}/>

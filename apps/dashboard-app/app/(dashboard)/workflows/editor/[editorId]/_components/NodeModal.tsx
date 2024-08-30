@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import React, { useState } from 'react'
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@repo/ui/molecules/shadcn/Dialog';
 import 'reactflow/dist/style.css';

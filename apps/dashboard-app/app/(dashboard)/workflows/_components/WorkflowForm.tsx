@@ -14,8 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@repo/ui/molecules/shadcn/Form'
-import { Input } from '@repo/ui/molecules/shadcn/Input'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Input } from '@repo/ui/atoms/shadcn/Input'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { Loader2 } from 'lucide-react'
 import { useToast } from '../../../../hooks/useToast'
 
