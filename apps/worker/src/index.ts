@@ -68,6 +68,8 @@ async function main() {
                 let result:any = {};
                 let metadata:any = currentAction?.metadata;
                 const prevMetadata:any = eventDetails?.metadata;
+                logger.info(`Metadata for action ${currentAction?.type?.name} before replacement ${JSON.stringify(metadata)}`);
+                logger.info(`Previous metadata for event ${eventId} is ${JSON.stringify(prevMetadata)}`);
                 metadata = await modifyMetadata(metadata, prevMetadata);
                 logger.info(`Metadata for action ${currentAction?.type?.name} is ${JSON.stringify(metadata)}`);
                 if (currentAction?.type?.name === 'External Webhook'){
