@@ -18,6 +18,7 @@ type Story = StoryObj<typeof Textarea>;
 
 export const Default: Story = {
     args: {
-        children: "Default Textarea",
+        placeholder: "Default Textarea",
+        className: "w-[300px]"
     }
 }

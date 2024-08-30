@@ -11,7 +11,7 @@ const ErrorCard = ({errorMessage,backFunction}
 ) => {
 
   return (
-    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
+    <Card className='w-[400px] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
         <div className='text-6xl font-bold text-center flex items-center justify-center gap-4 my-4'>
           <BsExclamationTriangle/> Error

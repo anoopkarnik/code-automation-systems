@@ -6,7 +6,7 @@ export const queryAllNotionDatabaseAction = async ({apiToken,database_id,filters
         return {result: response, log: 'Query all notion database action success'}
     }
     catch(err){
-        return {log: err}
+        return {result: {results:[]}, log: err}
     }
 }
 

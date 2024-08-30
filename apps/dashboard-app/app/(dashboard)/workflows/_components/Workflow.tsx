@@ -1,14 +1,14 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
-import { Label } from '@repo/ui/molecules/shadcn/Label'
+import { Label } from '@repo/ui/atoms/shadcn/Label'
 import { Switch } from '@repo/ui/molecules/shadcn/Switch'
 import React, { useState } from 'react'
 import { deleteFlow, publishFlow } from '../../../../actions/workflows/workflow'
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog'
 import { ArrowRightIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 import DynamicIcon from '../../../../components/DynamicIcon'
 import { useToast } from '../../../../hooks/useToast'
 

@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadc
 import { useTransition } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Button } from '../../molecules/shadcn/Button';
+import { Button } from '../../atoms/shadcn/Button';
 import { LoginSchema } from '@repo/zod/index'
 import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,7 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../molecules/shadcn/Form"
-import { Input } from '../../molecules/shadcn/Input';
+import { Input } from '../../atoms/shadcn/Input';
 import { FormResult } from './FormResult';
 
 interface LoginCardProps {
@@ -75,7 +75,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
+                      <Input disabled={isPending} type="email" placeholder='example@gmail.com' {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -84,7 +84,7 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input disabled={isPending} className='bg-white' placeholder='******' type="password" {...field}/>
+                      <Input disabled={isPending} placeholder='******' type="password" {...field}/>
                     </FormControl>
                     <FormMessage/>
                   </FormItem>
@@ -93,14 +93,14 @@ const LoginCard = ({showEmail,showGoogleProvider,showGithubProvider,showLinkedin
               <div onClick={forgotPasswordFunction} className='text-sm text-left text-black/60 hover:text-black cursor-pointer hover:underline'>Forgot Password</div>
               <FormResult type="error" message={error }/>
               <FormResult type="success" message={success}/>
-              <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Login</Button>
+              <Button className='w-full' disabled={isPending} variant="default" type="submit">Login</Button>
             </form>
           </Form>
         </CardContent>}
-      <CardFooter className='fle rounded-2xl gap-4 '>
-        {showGoogleProvider && <Button onClick={onGoogleProviderSubmit} variant='outline' className='bg-white w-full'><FcGoogle/></Button>}
-        {showGithubProvider && <Button onClick={onGithubProviderSubmit} variant='outline' className='bg-white w-full'><FaGithub/></Button>}
-        {showLinkedinProvider && <Button onClick={onLinkedinProviderSubmit} variant='outline' className='bg-white w-full'><FaLinkedin/></Button>}
+      <CardFooter className='flexrounded-2xl gap-4 '>
+        {showGoogleProvider && <Button className='w-full' onClick={onGoogleProviderSubmit} variant='secondary'> <FcGoogle/></Button>}
+        {showGithubProvider && <Button className='w-full' onClick={onGithubProviderSubmit} variant='secondary'><FaGithub/></Button>}
+        {showLinkedinProvider && <Button className='w-full' onClick={onLinkedinProviderSubmit} variant='secondary'><FaLinkedin/></Button>}
       </CardFooter>
       <CardFooter className='flex justify-center'>
         <div onClick={backFunction} className='text-sm text-center text-black/60 hover:text-black cursor-pointer hover:underline'>Don't have an Account?</div>

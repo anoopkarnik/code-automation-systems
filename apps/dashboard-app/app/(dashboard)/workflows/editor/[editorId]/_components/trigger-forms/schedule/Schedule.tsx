@@ -1,6 +1,6 @@
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@repo/ui/molecules/shadcn/Form'
-import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import React, { useContext } from 'react'
 import {  useForm } from 'react-hook-form';

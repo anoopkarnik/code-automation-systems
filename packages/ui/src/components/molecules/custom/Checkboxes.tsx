@@ -3,7 +3,7 @@
 import * as React from "react"
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 
-import { Button } from "../shadcn/Button"
+import { Button } from "../../../components/atoms/shadcn/Button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,

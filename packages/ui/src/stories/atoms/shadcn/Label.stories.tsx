@@ -19,5 +19,20 @@ type Story = StoryObj<typeof Label>;
 export const Default: Story = {
     args: {
         children: "Default Label",
+        htmlFor: "airplane-mode"
+    }
+}
+
+export const SelectLabel: Story = {
+    args: {
+        children: "Select Label",
+        className: "ml-2"
+    }
+}
+
+export const DbLabel: Story = {
+    args: {
+        children: "Db Label",
+        className: "ml-2 text-xl mb-4"
     }
 }

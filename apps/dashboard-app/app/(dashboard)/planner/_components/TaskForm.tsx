@@ -1,5 +1,5 @@
-import { Button } from '@repo/ui/molecules/shadcn/Button'
-import { Input } from '@repo/ui/molecules/shadcn/Input'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
+import { Input } from '@repo/ui/atoms/shadcn/Input'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import { createNotionPageAction } from '../../../../actions/notion/notion'
@@ -36,7 +36,7 @@ const TaskForm = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-4 border-2 border-border/20 p-4 m-2 my-10'>
         <div className='flex items-center justify-between gap-4 w-[95%] flex-wrap my-2 mx-2 '>
-            <Input className='w-[300px]' placeholder='Name' value={name} onChange={(event)=>setName(event.target.value)} />
+            <Input className='w-[300px]' placeholder='Name' value={name} onChange={(event:any)=>setName(event.target.value)} />
             <div className='flex flex-col items-center justify-center gap-1 w-[300px]'>
                 <div className='text-xs'>Importance</div>
                 <Checkbox onCheckedChange={()=>setImportance(!importance)} />

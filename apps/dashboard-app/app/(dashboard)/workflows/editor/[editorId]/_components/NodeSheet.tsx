@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet'
 import React from 'react'
 import SelectedForm from './SelectedForm'
-import { Button } from '@repo/ui/molecules/shadcn/Button'
+import { Button } from '@repo/ui/atoms/shadcn/Button'
 
 const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
   return (

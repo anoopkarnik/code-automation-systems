@@ -18,6 +18,23 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
     args: {
-        children: "Default Input",
+        type: "text",
+        placeholder: "Default Input",
+        className: "w-full"
+    }
+}
+
+export const Password: Story = {
+    args: {
+        type: "password",
+        placeholder: "Password Input",
+        className: "w-[300px]"
+    }
+}
+
+export const SearchNotes: Story = {
+    args: {
+        placeholder: "Search Notes",
+        className: "w-[70vw] m-4"
     }
 }

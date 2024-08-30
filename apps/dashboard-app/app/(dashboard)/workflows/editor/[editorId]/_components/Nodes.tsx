@@ -8,17 +8,15 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
-import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Switch } from '@repo/ui/molecules/shadcn/Switch';
-import { Label } from '@repo/ui/molecules/shadcn/Label';
-import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
+import { Label } from '@repo/ui/atoms/shadcn/Label';
 import { getWorkflow } from '../../../../../../actions/workflows/workflow';
 import NodeModal from './NodeModal';
-import DynamicIcon from '../../../../../../components/DynamicIcon';
-import NodeSheet from './NodeSheet';
+
 import NodeCard from './NodeCard';
 import { useToast } from '../../../../../../hooks/useToast';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { useSearchParam } from 'react-use';
 
 const Nodes = () => {

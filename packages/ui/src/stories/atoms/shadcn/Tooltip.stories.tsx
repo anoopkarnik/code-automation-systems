@@ -1,23 +1,21 @@
-import type {Meta, StoryObj} from '@storybook/react';
 
-import { Tooltip } from '../../../components/atoms/shadcn/Tooltip';
+import { Meta, StoryObj } from '@storybook/react';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../../../components/atoms/shadcn/Tooltip';
 
-import {action} from "@storybook/addon-actions";
+export default {
+  title: 'Atoms/shadcn/Tooltip',
+  component: Tooltip,
+  subcomponents: { TooltipTrigger, TooltipContent, TooltipProvider },
 
-const meta: Meta<typeof Tooltip> = {
-    title: "atoms/shadcn/Tooltip",
-    component: Tooltip,
-    tags: ['autodocs'],
-    parameters: {
-        layout: "centered",
-    }
-}
+} as Meta;
 
-export default meta;
+type TooltipStoryProps = {
+  sideOffset?: number;
+  className?: string;
+};
 type Story = StoryObj<typeof Tooltip>;
-
 export const Default: Story = {
-    args: {
-        children: "Default Tooltip",
-    }
-}
+  args: {
+    children: 'Hover me',
+  }
+};

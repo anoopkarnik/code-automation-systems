@@ -10,7 +10,7 @@ import { EditorContext } from '../../../../../../../../providers/editor-provider
 import { useRouter } from 'next/navigation';
 import { createActionAction, createTriggerAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
-import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { useToast } from '../../../../../../../../hooks/useToast';
 
 const WebhookAction = ({funcType,nodeType,type,subType,node}:any) => {

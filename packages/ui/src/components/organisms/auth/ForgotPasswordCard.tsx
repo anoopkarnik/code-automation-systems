@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {z} from "zod"
 import { Card, CardContent, CardFooter, CardHeader } from '../../molecules/shadcn/Card';
 import { useTransition } from 'react';
-import { Button } from '../../molecules/shadcn/Button';
+import { Button } from '../../atoms/shadcn/Button';
 import { ForgotPasswordSchema } from '@repo/zod/index'
 import {  useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../molecules/shadcn/Form"
-import { Input } from '../../molecules/shadcn/Input';
+import { Input } from '../../atoms/shadcn/Input';
 import { FormResult } from './FormResult';
 
 interface ForgotPasswordCardProps {
@@ -50,7 +50,7 @@ const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction,backFunct
     })
   }
   return (
-    <Card className='w-[40%] bg-white text-black shadow-xl shadow-white/20'>
+    <Card className='w-[400px] bg-white text-black shadow-xl shadow-white/20'>
       <CardHeader>
         <div className='text-6xl font-bold text-center'>Forgot Password</div>
         <div className='text-md font-extralight text-center'>Send Reset Password Mail</div>
@@ -63,7 +63,7 @@ const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction,backFunct
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input disabled={isPending} className='bg-white' type="email" placeholder='example@gmail.com' {...field}/>
+                    <Input disabled={isPending}  type="email" placeholder='example@gmail.com' {...field}/>
                   </FormControl>
                   <FormMessage/>
                 </FormItem>
@@ -71,7 +71,7 @@ const ForgotPasswordCard = ({errorMessage,successMessage,resetFunction,backFunct
             </div>
             <FormResult type="error" message={error }/>
             <FormResult type="success" message={success}/>
-            <Button  disabled={isPending} className='bg-black text-white w-full ' variant="default" type="submit">Send Email</Button>
+            <Button  disabled={isPending}  variant="default" type="submit">Send Email</Button>
           </form>
         </Form>
       </CardContent>

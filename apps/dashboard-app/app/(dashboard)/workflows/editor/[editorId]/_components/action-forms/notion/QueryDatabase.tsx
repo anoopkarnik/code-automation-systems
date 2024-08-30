@@ -4,12 +4,12 @@ import { useToast } from '../../../../../../../../hooks/useToast'
 import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import {  useSession } from 'next-auth/react';
-import { Button } from '@repo/ui/molecules/shadcn/Button';
+import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
 import { getNotionConnection } from '../../../../../../../../actions/connections/notion-connections';
-import { Label } from '@repo/ui/molecules/shadcn/Label';
+import { Label } from '@repo/ui/atoms/shadcn/Label';
 import { getDatabases, queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../../../../../../../../actions/notion/notion';
-import { Input } from '@repo/ui/molecules/shadcn/Input';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { DeleteIcon } from 'lucide-react';
 import { createActionAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
