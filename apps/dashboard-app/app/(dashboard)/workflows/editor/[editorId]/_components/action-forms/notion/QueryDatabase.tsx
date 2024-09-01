@@ -13,12 +13,13 @@ import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { DeleteIcon } from 'lucide-react';
 import { createActionAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
+import { set } from 'date-fns';
 
 const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const  [ notionAccounts, setNotionAccounts ] = useState([]);
     const  [ databases, setDatabases ] = useState([]);
     const [filteredDatabases, setFilteredDatabases] = useState([])
-    const [selectedDb, setSelectedDb] =  useState<any>(node?.metadata?.databaseId || '');
+    const [selectedDb, setSelectedDb] =  useState<any>({});
     const  [ properties, setProperties ] = useState([]);
     const [currentPropertyName, setCurrentPropertyName] = useState('');
     const [currentPropertyType, setCurrentPropertyType] = useState('');
@@ -31,7 +32,6 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const session = useSession()
     const userId = session?.data?.user?.id;
     
-
     const {toast} = useToast();
 
     const params = useParams()
@@ -78,6 +78,12 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             const databases:any = await getDatabases(selectedNotionAccount);
             setDatabases(databases);
             setFilteredDatabases(databases);
+            if (!node?.metadata?.databaseId) return;
+            const currentDb = databases.find((db:any) => db.id == node?.metadata?.databaseId);
+            if (!currentDb) return;
+            setSelectedDb(JSON.stringify({id:currentDb.id, icon: currentDb.icon, name: currentDb.name, accessToken: currentDb.accessToken}))
+            const res2:any = await queryNotionDatabaseProperties({apiToken: selectedNotionAccount, database_id:currentDb.id});
+            setProperties(res2.properties)
 
         }
         fetchOptions();

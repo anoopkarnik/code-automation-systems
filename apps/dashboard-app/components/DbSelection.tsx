@@ -1,6 +1,6 @@
 'use selection'
 
-import React, {  useContext, useEffect, useState } from 'react'
+import React, {  useContext, useEffect, useRef, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { getDatabases } from '../actions/notion/notion'
@@ -8,6 +8,7 @@ import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { updateNotionDatabase } from '../actions/notion/notion'
 import { useSession } from 'next-auth/react'
 import { Input } from '@repo/ui/atoms/shadcn/Input'
+import { getDefaultDbFromContext } from '../actions/notion/common'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
@@ -18,6 +19,7 @@ const DbSelection = ({title,name,fieldName}:any) => {
     const [filteredDatabases, setFilteredDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('')
     const [searchQuery, setSearchQuery] = useState('')
+    const inputRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         const fetchDatabases = async () => {
@@ -29,113 +31,32 @@ const DbSelection = ({title,name,fieldName}:any) => {
         fetchDatabases()
     },[accessToken,userId])
 
-    const handleSearch = (event:any) => {
+    const handleSearch = (event: any) => {
         const query = event.target.value.toLowerCase();
         setSearchQuery(query);
-        setFilteredDatabases(databases?.filter((database:any) =>{
-            if (database.name == null) return
-            return  database.name.toLowerCase().includes(query)
+    
+        const filtered:any = databases?.filter((database: any) => {
+            if (database.name == null) return false;
+            return database.name.toLowerCase().includes(query);
+        });
+    
+        // Check if the selected database is already in the filtered list
+        const selectedDatabase:any = selectedDb ? JSON.parse(selectedDb) : null;
+        if (selectedDatabase && !filtered.some((db: any) => db.id === selectedDatabase.id)) {
+            // Add the selected database to the filtered list if it isn't already included
+            filtered.push(selectedDatabase);
         }
-        ));
+    
+        setFilteredDatabases(filtered);
     };
-
+    
     useEffect(() => {
-        if (!connectionsContext) return
-        if (name == 'Accounts'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.accountsDb || {}))
+        if (connectionsContext) {
+            const defaultDb = getDefaultDbFromContext(name, connectionsContext)
+            setSelectedDb(JSON.stringify(defaultDb || {}))
         }
-        else if (name == 'Transactions'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.transactionsDb || {}))
-        }
-        else if (name == 'BudgetPlan'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.budgetPlanDb || {}))
-        }
-        else if (name == 'MonthlyBudget'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.monthlyBudgetDb || {}))
-        }
-        else if (name == 'FinancialGoals'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.financialGoalsDb || {}))
-        }
-        else if (name == 'Projects'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.projectsDb || {}))
-        }
-        else if (name == 'Blogs'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.blogsDb || {}))
-        }
-        else if (name == 'Place Of Work'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.placeOfWorkDb || {}))
-        }
-        else if (name == 'Books'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.booksDb || {}))
-        }
-        else if (name == 'Quick Capture'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.quickCaptureDb || {}))
-        }
-        else if (name == 'Areas'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.areasDb || {}))
-        }
-        else if (name == 'Archive'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.archiveDb || {}))
-        }
-        else if (name == 'Interesting'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.interestingDb || {}))
-        }
-        else if (name == 'Podcasts'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.podcastsDb || {}))
-        }
-        else if (name == 'Channels'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.channelsDb || {}))
-        }
-        else if (name == 'Videos'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.videosDb || {}))
-        }
-        else if (name == 'Skill Trees'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.skillTreesDb || {}))
-        }
+    }, [name, connectionsContext])
 
-        else if (name == 'Scheduler'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.schedulerDb || {}))
-        }
-        else if (name == 'Calendar'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.calendarDb || {}))
-        }
-        else if (name == 'Eisenhower Matrix'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.eisenhowerMatrixDb || {}))
-        }
-        else if (name == 'Actions'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.actionsDb || {}))
-        }
-        else if (name == 'Time Tracking'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.timeTrackingDb || {}))
-        }
-        else if (name == 'Weekly Planner'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.weeklyPlannerDb || {}))
-        }
-        else if (name == 'Social Sphere'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.socialSphereDb || {}))
-        }
-        else if (name == 'Passwords'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.passwordsDb || {}))
-        }
-        else if (name == 'Journal'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.journalDb || {}))
-        }
-        else if (name == 'Inventory'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.inventoryDb || {}))
-        }
-        else if (name == 'Status'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.statusDb || {}))
-        }
-        else if (name == 'Goals'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.goalsDb || {}))
-        }
-        else if (name == 'Rewards'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.rewardsDb || {}))
-        }
-        else if (name == 'Punishments'){
-            setSelectedDb(JSON.stringify(connectionsContext.notionNode?.punishmentsDb || {}))
-        }
-    },[name,connectionsContext])
 
     const updateDatabase = async () => {
         const selectedDatabase = selectedDb ? JSON.parse(selectedDb) : null;
@@ -235,16 +156,27 @@ const DbSelection = ({title,name,fieldName}:any) => {
         await updateNotionDatabase(connectionsContext.notionNode?.notionId,fieldName,selectedDatabase)
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        if (isOpen && inputRef.current) {
+            setTimeout(() => {
+                inputRef.current?.focus()
+            }, 0)
+        }
+    }, [isOpen])
+
   return (
     <div className='flex flex-wrap items-center justify-center border-b-2 border-border py-10 gap-4 '>
         <div className='font-bold w-[200px]'> {title}</div>
 
-        <Select value={selectedDb} onValueChange={(value) => setSelectedDb(value)} >
+        <Select value={selectedDb} onValueChange={(value) => setSelectedDb(value)}
+          onOpenChange={(isOpen) => setIsOpen(isOpen)}> 
             <SelectTrigger className='w-[380px] py-8'>
                 <SelectValue placeholder={`Select ${name} Notion Db`}/>
             </SelectTrigger>
             <SelectContent>
-                <Input placeholder='Search Database' className='w-full' value={searchQuery} onChange={handleSearch} />
+                <Input ref={inputRef} placeholder='Search Database' className='w-full text-black' value={searchQuery} onChange={handleSearch} />
                 {filteredDatabases.length> 0 && filteredDatabases?.map((database:any) => (
                     <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon, 
                     name: database.name, accessToken: database.accessToken})}>
