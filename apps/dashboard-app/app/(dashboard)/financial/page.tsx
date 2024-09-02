@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState }  from 'react'
+import React, { useContext, useEffect, useState }  from 'react'
 import { financeItems } from '../../../lib/constant'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import Overview from './_components/Overview'
@@ -24,7 +24,6 @@ const FinancialPage = () => {
   const handleSelect = (value:any) => {
     setSelectedValue(value)
   }
-
 
   if (isMobile){
     return (

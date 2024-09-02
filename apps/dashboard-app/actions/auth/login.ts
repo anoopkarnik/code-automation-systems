@@ -7,6 +7,7 @@ import { AuthError } from 'next-auth';
 import { createVerificationToken } from '@repo/prisma-db/repo/verification';
 import { getUserByEmail } from '@repo/prisma-db/repo/user';
 import { sendVerificationEmail } from '@repo/resend-email/mail';
+import { DEFAULT_LOGIN_REDIRECT } from '../../routes';
 
 export const login = async (values:z.infer<typeof LoginSchema>) =>{
     const validatedFields = LoginSchema.safeParse(values);
@@ -27,7 +28,7 @@ export const login = async (values:z.infer<typeof LoginSchema>) =>{
     }
 
     try{
-        await signIn('credentials', {email, password});
+        await signIn('credentials', {email, password,redirectTo: DEFAULT_LOGIN_REDIRECT});
     }
     catch(err){
         if (err instanceof AuthError ){

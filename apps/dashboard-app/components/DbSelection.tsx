@@ -9,6 +9,7 @@ import { updateNotionDatabase } from '../actions/notion/notion'
 import { useSession } from 'next-auth/react'
 import { Input } from '@repo/ui/atoms/shadcn/Input'
 import { getDefaultDbFromContext } from '../actions/notion/common'
+import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect'
 
 const DbSelection = ({title,name,fieldName}:any) => {
     const connectionsContext = useContext(ConnectionsContext)
@@ -16,39 +17,17 @@ const DbSelection = ({title,name,fieldName}:any) => {
     const session = useSession()
     const userId = session?.data?.user?.id
     const [databases, setDatabases] = useState([])
-    const [filteredDatabases, setFilteredDatabases] = useState([])
     const [selectedDb, setSelectedDb] =  useState<any>('')
-    const [searchQuery, setSearchQuery] = useState('')
-    const inputRef = useRef<HTMLInputElement | null>(null)
 
     useEffect(() => {
         const fetchDatabases = async () => {
             if (!accessToken) return
             const databases = await getDatabases(accessToken)
             setDatabases(databases)
-            setFilteredDatabases(databases)
         }
         fetchDatabases()
     },[accessToken,userId])
 
-    const handleSearch = (event: any) => {
-        const query = event.target.value.toLowerCase();
-        setSearchQuery(query);
-    
-        const filtered:any = databases?.filter((database: any) => {
-            if (database.name == null) return false;
-            return database.name.toLowerCase().includes(query);
-        });
-    
-        // Check if the selected database is already in the filtered list
-        const selectedDatabase:any = selectedDb ? JSON.parse(selectedDb) : null;
-        if (selectedDatabase && !filtered.some((db: any) => db.id === selectedDatabase.id)) {
-            // Add the selected database to the filtered list if it isn't already included
-            filtered.push(selectedDatabase);
-        }
-    
-        setFilteredDatabases(filtered);
-    };
     
     useEffect(() => {
         if (connectionsContext) {
@@ -156,41 +135,19 @@ const DbSelection = ({title,name,fieldName}:any) => {
         await updateNotionDatabase(connectionsContext.notionNode?.notionId,fieldName,selectedDatabase)
     }
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        if (isOpen && inputRef.current) {
-            setTimeout(() => {
-                inputRef.current?.focus()
-            }, 0)
-        }
-    }, [isOpen])
-
+    const handleDatabaseChange = (database: any) => {
+        setSelectedDb(database);
+    };
   return (
     <div className='flex flex-wrap items-center justify-center border-b-2 border-border py-10 gap-4 '>
         <div className='font-bold w-[200px]'> {title}</div>
 
-        <Select value={selectedDb} onValueChange={(value) => setSelectedDb(value)}
-          onOpenChange={(isOpen) => setIsOpen(isOpen)}> 
-            <SelectTrigger className='w-[380px] py-8'>
-                <SelectValue placeholder={`Select ${name} Notion Db`}/>
-            </SelectTrigger>
-            <SelectContent>
-                <Input ref={inputRef} placeholder='Search Database' className='w-full text-black' value={searchQuery} onChange={handleSearch} />
-                {filteredDatabases.length> 0 && filteredDatabases?.map((database:any) => (
-                    <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon, 
-                    name: database.name, accessToken: database.accessToken})}>
-                        <div className='flex items-center justify-center gap-4'>
-                            <div>{database.icon|| "⛁"}</div>
-                            <div className='flex flex-col items-start justify-center w-[400px]'>
-                                <div>{database.name}</div>
-                                <div>{database.id}</div>
-                            </div>
-                        </div>
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
+        <SearchableSelect
+            name="Database"
+            options={databases || []}
+            selectedOption={selectedDb}
+            onChange={handleDatabaseChange}
+        />
         <Button onClick={updateDatabase} size="lg"> Update Database</Button>
     </div>
   )

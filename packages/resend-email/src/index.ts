@@ -10,19 +10,20 @@ export const sendVerificationEmail = async (email: string, token:string) => {
         return {error: "Verification Mail Template Not Found!"}
     }
     let html = emailTemplate.html;
-    html = html.replace('{{confirmation_link}}', confirmLink);
+    html = html.replaceAll('{{verification_link}}', confirmLink);
     let from = emailTemplate.from;
     let subject = emailTemplate.subject;
-    await resend.emails.send({
+    const res = await resend.emails.send({
         from: from,
         to: email,
         subject: subject,
         html: html
     })
+    console.log(res)
 }
 
 export const sendResetEmail = async (email: string, token:string) => {
-    const confirmLink = `http://localhost:4000/auth/reset-password?token=${token}`
+    const confirmLink = `${process.env.NEXT_PUBLIC_URL}/auth/reset-password?token=${token}`
     const emailTemplate = await getEmailTemplateByName('reset-password');
     if (!emailTemplate) {
         return {error: "Email template not found!"}
