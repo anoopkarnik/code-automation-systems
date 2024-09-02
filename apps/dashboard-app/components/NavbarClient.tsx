@@ -3,7 +3,6 @@
 import { Navbar } from "@repo/ui/organisms/home/Navbar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
-import { useCurrentUser } from "../hooks/useCurrentUser";
 import { resetPasswordSettings } from "../actions/settings/reset-password-settings";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
