@@ -19,15 +19,17 @@ const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
             </div>}
         </SheetTrigger>
         <SheetContent side='rightLarge'>
-            <SheetHeader>
-                <SheetTitle>Create a {subType.name} </SheetTitle>
-                <SheetDescription>
-                    {subType.description}
-                </SheetDescription>
-            </SheetHeader>
-            <SelectedForm funcType={funcType} nodeType={nodeType} type={type} subType={subType} node={node}/>
-            <SheetFooter >
-            </SheetFooter>
+            <div className="relative z-[999999]"> 
+                <SheetHeader>
+                    <SheetTitle>Create a {subType.name} </SheetTitle>
+                    <SheetDescription>
+                        {subType.description}
+                    </SheetDescription>
+                </SheetHeader>
+                <SelectedForm funcType={funcType} nodeType={nodeType} type={type} subType={subType} node={node}/>
+                <SheetFooter >
+                </SheetFooter>
+            </div>
         </SheetContent>
     </Sheet> 
   )

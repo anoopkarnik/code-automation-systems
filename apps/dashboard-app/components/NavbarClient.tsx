@@ -3,15 +3,25 @@
 import { Navbar } from "@repo/ui/organisms/home/Navbar"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation";
-import { useCurrentUser } from "../hooks/useCurrentUser";
 import { resetPasswordSettings } from "../actions/settings/reset-password-settings";
-import { signOut } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function NavbarClient() {
     const { theme, setTheme } = useTheme()
     const router = useRouter();
-    const user = useCurrentUser();
+    const [user, setUser] = useState<any>(null);
+    const { data, status } = useSession();
 
+    useEffect(() => {
+        const refreshSession = async () => {
+            const session = await getSession();
+            setUser(session?.user);
+        };
+
+         refreshSession();
+        
+    }, [status]);
     return (
             <Navbar 
                 appName="Personal Automation Dashboard"

@@ -13,12 +13,14 @@ import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { DeleteIcon } from 'lucide-react';
 import { createActionAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
+import { set } from 'date-fns';
+import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
 
 const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const  [ notionAccounts, setNotionAccounts ] = useState([]);
     const  [ databases, setDatabases ] = useState([]);
     const [filteredDatabases, setFilteredDatabases] = useState([])
-    const [selectedDb, setSelectedDb] =  useState<any>(node?.metadata?.databaseId || '');
+    const [selectedDb, setSelectedDb] =  useState<any>('')
     const  [ properties, setProperties ] = useState([]);
     const [currentPropertyName, setCurrentPropertyName] = useState('');
     const [currentPropertyType, setCurrentPropertyType] = useState('');
@@ -31,7 +33,6 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const session = useSession()
     const userId = session?.data?.user?.id;
     
-
     const {toast} = useToast();
 
     const params = useParams()
@@ -78,6 +79,12 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             const databases:any = await getDatabases(selectedNotionAccount);
             setDatabases(databases);
             setFilteredDatabases(databases);
+            if (!node?.metadata?.databaseId) return;
+            const currentDb = databases.find((db:any) => db.id == node?.metadata?.databaseId);
+            if (!currentDb) return;
+            setSelectedDb(JSON.stringify({id:currentDb.id, icon: currentDb.icon, name: currentDb.name, accessToken: currentDb.accessToken}))
+            const res2:any = await queryNotionDatabaseProperties({apiToken: selectedNotionAccount, database_id:currentDb.id});
+            setProperties(res2.properties)
 
         }
         fetchOptions();
@@ -139,6 +146,13 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
 
     }
 
+    const handleDatabaseChange = (value:any) => {
+        setSelectedDb(value);
+        const res:any = databases.find((db:any) => db.id == JSON.parse(selectedDb).id);
+        const properties = res.properties;
+        setProperties(properties)
+    }
+
   return (
     <div className='mt-10'>
         <div className='space-y-4 m-4 my-10'>
@@ -157,25 +171,13 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             </div>
             {selectedNotionAccount && <div className='flex flex-col gap-2 '>
                 <Label className='ml-2'>Notion Databases</Label>
-                <Select value={selectedDb} onValueChange={(value) => fetchDatabaseProperties(value)} >
-                    <SelectTrigger className='py-8'>
-                        <SelectValue placeholder={`Select Notion Database`}/>
-                    </SelectTrigger>
-                    <SelectContent>   
-                        {filteredDatabases.length> 0 && filteredDatabases?.map((database:any) => (
-                            <SelectItem key={database.id} value={JSON.stringify({id:database.id, icon: database.icon, 
-                            name: database.name, accessToken: database.accessToken})}>
-                                <div className='flex items-center justify-center gap-4'>
-                                    <div>{database.icon|| "⛁"}</div>
-                                    <div className='flex flex-col items-start justify-center w-[400px]'>
-                                        <div>{database.name}</div>
-                                        <div>{database.id}</div>
-                                    </div>
-                                </div>
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                <SearchableSelect
+                    name="Database"
+                    options={databases || []}
+                    selectedOption={selectedDb }
+                    onChange={handleDatabaseChange}
+                />
+                
             </div>}
             {selectedDb && <div className='flex flex-col gap-2 mt-4'>
                 <div className='flex items-center justify-between '>
