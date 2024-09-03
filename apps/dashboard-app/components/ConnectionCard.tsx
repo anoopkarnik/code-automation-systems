@@ -10,6 +10,7 @@ import AddConnectionsModal from './AddConnectionModal'
 import { useSession } from 'next-auth/react'
 import { createOpenAIConnection } from '../app/actions/connections/openai-connections'
 import { useRouter } from 'next/navigation'
+import { getEnvironmentVariables } from '../app/actions/env/env'
 
 
 const ConnectionCard = ({connection}:any) => {
@@ -32,14 +33,18 @@ const ConnectionCard = ({connection}:any) => {
   }
 
   useEffect(() => {
-    setAppType(connection.title)
-    if (connection.title === 'Notion'){
-      setOauthUrl(process.env.NEXT_PUBLIC_NOTION_OAUTH_URL as string) 
+    const updateEnvironmentVariables = async () => {
+      setAppType(connection.title)
+      const res = await getEnvironmentVariables();
+      if (connection.title === 'Notion'){
+        setOauthUrl(res["NEXT_PUBLIC_NOTION_OAUTH_URL"] )
+      }
+      else if (connection.title === 'Youtube'){
+        setCallbackUrl(res["NEXT_PUBLIC_URL"]+'/api/callback/youtube')
+        setOauthUrl(res["NEXT_PUBLIC_YOUTUBE_OAUTH_URL"])
+      }
     }
-    else if (connection.title === 'Youtube'){
-      setCallbackUrl(process.env.NEXT_PUBLIC_URL+'/api/callback/youtube')
-      setOauthUrl(process.env.NEXT_PUBLIC_YOUTUBE_OAUTH_URL as string)
-    }
+    updateEnvironmentVariables()
   },[connection.title])
 
   const handleConnect = () => {
