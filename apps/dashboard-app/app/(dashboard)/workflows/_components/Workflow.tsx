@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@repo/ui/atoms/shadcn/Label'
 import { Switch } from '@repo/ui/molecules/shadcn/Switch'
 import React, { useState } from 'react'
-import { deleteFlow, publishFlow } from '../../../../actions/workflows/workflow'
+import { deleteFlow, publishFlow } from '../../../actions/workflows/workflow'
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog'
 import { ArrowRightIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'

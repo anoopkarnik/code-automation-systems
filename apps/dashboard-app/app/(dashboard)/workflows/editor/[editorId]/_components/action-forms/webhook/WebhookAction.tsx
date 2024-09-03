@@ -8,7 +8,7 @@ import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
-import { createActionAction, createTriggerAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
+import { createActionAction, createTriggerAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
 import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { useToast } from '../../../../../../../../hooks/useToast';

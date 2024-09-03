@@ -3,8 +3,8 @@
 import React, {createContext, useContext, useEffect, useState} from 'react'
 import useConnection from '../hooks/useConnection'
 import { useSession } from 'next-auth/react'
-import { getNotionInfo } from '../actions/notion/notion'
-import { getYoutubeConnection } from '../actions/connections/youtube-connections'
+import { getNotionInfo } from '../app/actions/notion/notion'
+import { getYoutubeConnection } from '../app/actions/connections/youtube-connections'
 
 export type ConnectionProviderProps = {
     notionNode: {

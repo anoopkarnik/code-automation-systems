@@ -4,7 +4,7 @@ import { createConnection, getConnectionByAccessToken, getConnectionByUserIdAndT
 import axios from 'axios'
 import { getNotionConnection } from './notion-connections'
 import { createNotionPageAction, queryAllNotionDatabaseAction } from '../notion/notion'
-import { delay } from '../../lib/utils'
+import { delay } from '../../../lib/utils'
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;

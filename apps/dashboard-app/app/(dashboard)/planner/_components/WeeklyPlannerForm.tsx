@@ -3,7 +3,7 @@ import { Input } from '@repo/ui/atoms/shadcn/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { createNotionPageAction} from '../../../../actions/notion/notion'
+import { createNotionPageAction} from '../../../actions/notion/notion'
 import { DatePicker } from '@repo/ui/molecules/shadcn/DatePicker'
 
 const WeeklyPlannerForm = () => {

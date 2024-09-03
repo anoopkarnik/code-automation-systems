@@ -2,7 +2,7 @@ import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { Input } from '@repo/ui/atoms/shadcn/Input'
 import React, { useContext, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { createNotionPageAction } from '../../../../actions/notion/notion'
+import { createNotionPageAction } from '../../../actions/notion/notion'
 import { DatePicker } from '@repo/ui/molecules/shadcn/DatePicker'
 import { Checkbox } from '../../../../../../packages/ui/src/components/atoms/shadcn/Checkbox'
 

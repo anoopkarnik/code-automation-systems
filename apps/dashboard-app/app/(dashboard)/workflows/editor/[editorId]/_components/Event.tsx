@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getEventsByWorkflowId } from '../../../../../../actions/workflows/workflow';
+import { getEventsByWorkflowId } from '../../../../../actions/workflows/workflow';
 import { useParams } from 'next/navigation';
 import { format } from 'date-fns';
 

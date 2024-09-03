@@ -3,7 +3,7 @@ import { getConnectionsByUserAndType, updateNotionDb} from "@repo/prisma-db/repo
 import { createNotionPage, getNotionDatabaseProperties, modifyNotionPage, queryAllNotionDatabase, queryNotionDatabase,
     getNotionPage
  } from '@repo/notion/notion-client'
-import { deletePage } from "../../../../packages/notion/src";
+import { deletePage } from "../../../../../packages/notion/src";
 
 export const getDatabases = async (token: string) => {
     try{

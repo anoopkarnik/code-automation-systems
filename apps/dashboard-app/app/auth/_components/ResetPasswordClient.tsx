@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ResetPasswordCard from '@repo/ui/organisms/settings/ResetPasswordCard';
-import { resetPassword} from '../../../actions/auth/reset-password';
-import { verifyResetToken } from '../../../actions/auth/verify-reset-token';
+import { resetPassword} from '../../actions/auth/reset-password';
+import { verifyResetToken } from '../../actions/auth/verify-reset-token';
 import ErrorCard from '@repo/ui/organisms/auth/ErrorCard';
 
 
