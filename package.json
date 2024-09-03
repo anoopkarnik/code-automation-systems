@@ -7,6 +7,7 @@
     "lint": "turbo lint -- --max-warnings 20",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "cd packages/prisma-db && npx prisma generate && cd ../..",
+    "build-dashboard-app": "cd ./apps/dashboard-app && npm run build",
     "start-dashboard-app": "cd ./apps/dashboard-app && npm run start",
     "start-scheduler": "cd ./apps/scheduler && npm run dev",
     "start-worker": "cd ./apps/worker && npm run dev",
