@@ -5,13 +5,13 @@ import React, {  useContext, useEffect, useState } from 'react'
 import 'reactflow/dist/style.css';
 import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from '@repo/ui/molecules/shadcn/Card';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../../actions/workflows/workflow';
+import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Switch } from '@repo/ui/molecules/shadcn/Switch';
 import { Label } from '@repo/ui/atoms/shadcn/Label';
-import { getWorkflow } from '../../../../../../actions/workflows/workflow';
+import { getWorkflow } from '../../../../../actions/workflows/workflow';
 import NodeModal from './NodeModal';
 
 import NodeCard from './NodeCard';

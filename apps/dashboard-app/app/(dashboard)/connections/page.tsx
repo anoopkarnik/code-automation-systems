@@ -9,10 +9,10 @@ import { ConnectionsContext } from '../../../providers/connections-provider'
 import Connected from './_components/Connected'
 import Connections from './_components/Connections'
 import { useSession } from 'next-auth/react';
-import { getUserInfo } from '../../../actions/connections/user-connections';
-import { onNotionConnection } from '../../../actions/connections/notion-connections';
-import { onOpenAIConnection } from '../../../actions/connections/openai-connections';
-import { onYoutubeConnection } from '../../../actions/connections/youtube-connections';
+import { getUserInfo } from '../../actions/connections/user-connections';
+import { onNotionConnection } from '../../actions/connections/notion-connections';
+import { onOpenAIConnection } from '../../actions/connections/openai-connections';
+import { onYoutubeConnection } from '../../actions/connections/youtube-connections';
 import { useToast } from '../../../hooks/useToast';
 
 const PlannerPage = () => {

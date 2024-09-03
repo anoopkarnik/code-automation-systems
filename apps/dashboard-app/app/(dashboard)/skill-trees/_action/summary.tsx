@@ -1,6 +1,6 @@
 'use server'
 
-import { queryNotionPageAction } from "../../../../actions/notion/notion"
+import { queryNotionPageAction } from "../../../actions/notion/notion"
 
 export const calculateTotalLength = async (skillTree:any, skillTrees:any) => {
     let totalNotes = skillTree["Self"]

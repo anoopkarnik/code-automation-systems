@@ -3,7 +3,7 @@ import { Input } from '@repo/ui/atoms/shadcn/Input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import React, { useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { createNotionPageAction, queryNotionDatabaseAction } from '../../../../actions/notion/notion'
+import { createNotionPageAction, queryNotionDatabaseAction } from '../../../actions/notion/notion'
 
 const BudgetForm = () => {
     const connectionsContext = useContext(ConnectionsContext)

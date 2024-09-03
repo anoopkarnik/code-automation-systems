@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../../../../../../hooks/useToast';
-import { createTriggerAction } from '../../../../../../../../actions/workflows/workflow';
+import { createTriggerAction } from '../../../../../../../actions/workflows/workflow';
 
 const Schedule = ({funcType,nodeType,type,subType,node}:any) => {
     const {toast} = useToast();

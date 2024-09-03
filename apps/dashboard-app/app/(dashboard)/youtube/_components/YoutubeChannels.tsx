@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
-import { queryAllNotionDatabaseAction } from '../../../../actions/notion/notion'
+import { queryAllNotionDatabaseAction } from '../../../actions/notion/notion'
 import Image from 'next/image'
 import LoadingCard from '@repo/ui/organisms/auth/LoadingCard'
 

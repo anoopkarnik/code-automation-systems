@@ -9,7 +9,7 @@ import { useToast } from '../../../../../../../../hooks/useToast';
 import { getSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
-import { createActionAction, updateActionAction } from '../../../../../../../../actions/workflows/workflow';
+import { createActionAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';
 import { set } from 'date-fns';
 
 export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {

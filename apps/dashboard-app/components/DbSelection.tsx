@@ -3,12 +3,12 @@
 import React, {  useContext, useEffect, useRef, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
 import { ConnectionsContext } from '../providers/connections-provider'
-import { getDatabases } from '../actions/notion/notion'
+import { getDatabases } from '../app/actions/notion/notion'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
-import { updateNotionDatabase } from '../actions/notion/notion'
+import { updateNotionDatabase } from '../app/actions/notion/notion'
 import { useSession } from 'next-auth/react'
 import { Input } from '@repo/ui/atoms/shadcn/Input'
-import { getDefaultDbFromContext } from '../actions/notion/common'
+import { getDefaultDbFromContext } from '../app/actions/notion/common'
 import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect'
 
 const DbSelection = ({title,name,fieldName}:any) => {

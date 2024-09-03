@@ -1,4 +1,4 @@
-import { modifyNotionPageAction } from "../../../../actions/notion/notion";
+import { modifyNotionPageAction } from "../../../actions/notion/notion";
 
 export const calculateAndUpdateNextRevisionDate = async (page:any, apiToken:any) =>{
     const baseInterval = 1; // Base interval in days

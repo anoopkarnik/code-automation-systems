@@ -4,7 +4,7 @@ import { DataTable } from '@repo/ui/molecules/shadcn/DataTable'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
 import React, {  useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../providers/connections-provider'
-import { deleteNotionPages, queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../actions/notion/notion'
+import { deleteNotionPages, queryNotionDatabaseAction, queryNotionDatabaseProperties } from '../app/actions/notion/notion'
 import { ArrowUpDown } from "lucide-react"
 import { Checkbox } from '@repo/ui/atoms/shadcn/Checkbox'
 import { useRouter } from 'next/navigation'

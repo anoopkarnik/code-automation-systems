@@ -1,7 +1,7 @@
 'use client'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion'
 import React, { useEffect, useState } from 'react'
-import {  getLatestEventByWorkflowIdAction } from '../../../../../../actions/workflows/workflow'
+import {  getLatestEventByWorkflowIdAction } from '../../../../../actions/workflows/workflow'
 
 const NodeAccordion = ({node}:any) => {
 

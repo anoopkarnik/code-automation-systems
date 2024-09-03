@@ -8,7 +8,7 @@ import { getSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
-import { createTriggerAction } from '../../../../../../../../actions/workflows/workflow';
+import { createTriggerAction } from '../../../../../../../actions/workflows/workflow';
 import { useToast } from '../../../../../../../../hooks/useToast';
 
 const WebhookTrigger = ({funcType,nodeType,type,subType,node}:any) => {

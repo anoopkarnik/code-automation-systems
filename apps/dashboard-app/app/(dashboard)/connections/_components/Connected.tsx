@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CONNECTIONS } from '../../../../lib/constant'
 import { useSession } from 'next-auth/react'
-import { getUserInfo } from '../../../../actions/connections/user-connections'
+import { getUserInfo } from '../../../actions/connections/user-connections'
 import { ConnectionsContext } from '../../../../providers/connections-provider'
 import ConnectedCard from '../../../../components/ConnectedCard'
 
