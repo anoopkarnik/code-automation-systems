@@ -7,8 +7,6 @@ COPY package.json package-lock.json turbo.json tsconfig.json ./
 COPY apps/dashboard-app ./apps/dashboard-app
 COPY packages ./packages
 
-ENV NODE_ENV=production
-
 RUN npm install
 RUN npm run db:generate
 
