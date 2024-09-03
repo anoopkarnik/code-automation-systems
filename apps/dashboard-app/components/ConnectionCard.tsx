@@ -44,8 +44,9 @@ const ConnectionCard = ({connection}:any) => {
   },[connection.title])
 
   const handleConnect = () => {
+    console.log('oauthUrl',oauthUrl)
     if (oauthUrl) {
-      router.push(oauthUrl)
+      location.assign(oauthUrl)
     }
   }
 
