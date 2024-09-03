@@ -3,7 +3,7 @@
 import { createConnection, getConnectionByAPIKey, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
 
 
-export const onOpenAIConnection = async ({apiKey,userId}:any) => {
+export const createOpenAIConnection = async ({apiKey,userId}:any) => {
     if(!apiKey) return {error: "API Key not present in the query"}
     const openai_connected = await getConnectionByAPIKey(apiKey)
     if (openai_connected) return {success: "OpenAI Connection already exists"}

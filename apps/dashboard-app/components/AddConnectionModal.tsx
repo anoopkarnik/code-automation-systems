@@ -3,25 +3,42 @@ import { FormControl, FormField, FormItem, FormLabel } from '@repo/ui/molecules/
 import { Input } from '@repo/ui/atoms/shadcn/Input'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { useRouter } from 'next/navigation';
+import { useToast } from '../hooks/useToast';
+
 
 type Props = {
-    callback_url: string
+    addConnection: any,
     formElements: {
       name: string
       label: string
       placeholder: string
       type: string
-    }[]
+    }[],
+    userId: string | undefined
 }
 
-const AddConnectionsModal = ({callback_url,formElements}:Props) => {
+const AddConnectionsModal = ({addConnection,formElements,userId}:Props) => {
   const form = useForm()
   const router = useRouter();
+  const {toast} = useToast();
 
   const onSubmit = (data:any) => {
     const apiKey = data.apiKey;  // Assuming apiKey is a form field
-    const redirectUrl = `${callback_url}?apiKey=${apiKey}`;
-    router.push(redirectUrl);
+    const response = addConnection({userId,apiKey});
+    if (response?.success){
+      toast({
+        title: "Success",
+        description: response?.success,
+        variant: "default"
+      })
+    }
+    else if (response?.error){
+      toast({
+        title: "Error",
+        description: response?.error,
+        variant: "destructive"
+      })
+    }
   }
 
   return (  

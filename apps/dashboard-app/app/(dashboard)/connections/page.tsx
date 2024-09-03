@@ -11,7 +11,6 @@ import Connections from './_components/Connections'
 import { useSession } from 'next-auth/react';
 import { getUserInfo } from '../../actions/connections/user-connections';
 import { onNotionConnection } from '../../actions/connections/notion-connections';
-import { onOpenAIConnection } from '../../actions/connections/openai-connections';
 import { onYoutubeConnection } from '../../actions/connections/youtube-connections';
 import { useToast } from '../../../hooks/useToast';
 
@@ -48,10 +47,6 @@ const PlannerPage = () => {
         if (type === 'Notion'){    
           response = await onNotionConnection({access_token,workspace_id,workspace_icon,workspace_name,database_id,userId})
           connectionsContext.setNotionNode(response.result)
-        }
-        if (type === 'OpenAI'){
-          response = await onOpenAIConnection({apiKey,userId})
-          connectionsContext.setOpenAINode(response.result)
         }
         if (type === 'Youtube'){
           response = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
@@ -127,7 +122,6 @@ const PlannerPage = () => {
       <TabsContent value='Connections'>
         <Connections/> 
       </TabsContent>
-     
     </Tabs>
   )
 }
