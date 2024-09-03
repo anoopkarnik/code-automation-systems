@@ -46,7 +46,7 @@ const ConnectionCard = ({connection}:any) => {
   const handleConnect = () => {
     console.log('oauthUrl',oauthUrl)
     if (oauthUrl) {
-      location.assign(oauthUrl)
+      window.location.href = oauthUrl
     }
   }
 
