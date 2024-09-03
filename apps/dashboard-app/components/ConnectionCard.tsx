@@ -1,6 +1,6 @@
-import React, { use, useEffect, useState } from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 
-import { set } from 'date-fns'
 import { Card, CardDescription, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,22 +8,33 @@ import { Button } from '@repo/ui/atoms/shadcn/Button'
 
 import { Dialog,DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@repo/ui/molecules/shadcn/Dialog'
 import AddConnectionsModal from './AddConnectionModal'
+import { useSession } from 'next-auth/react'
+import { createOpenAIConnection } from '../app/actions/connections/openai-connections'
+import { useRouter } from 'next/navigation'
 
 
 const ConnectionCard = ({connection}:any) => {
 
   const [appType, setAppType] = useState(connection.title)
   const [callbackUrl, setCallbackUrl] = useState('')
-  const [oauthUrl, setOauthUrl] = useState('')  
+  const [oauthUrl, setOauthUrl] = useState('')
+  const session = useSession();
+  const user = session?.data?.user
+  const router = useRouter()
+
+  const addConnection = async ({apiKey}:any) => {
+    if (connection.title === 'OpenAI'){
+      const response = await createOpenAIConnection({apiKey,userId:user?.id})
+      location.reload()
+    }
+    else if (connection.title === 'Notion'){
+      router.push('/connections/notion')
+    }
+  }
 
   useEffect(() => {
     setAppType(connection.title)
-    if (connection.title === 'OpenAI'){
-      setCallbackUrl(process.env.NEXT_PUBLIC_URL+'/api/callback/openai')
-      setOauthUrl('')
-    }
-    else if (connection.title === 'Notion'){
-      setCallbackUrl('')
+    if (connection.title === 'Notion'){
       setOauthUrl(process.env.NEXT_PUBLIC_NOTION_OAUTH_URL as string) 
     }
     else if (connection.title === 'Youtube'){
@@ -31,6 +42,12 @@ const ConnectionCard = ({connection}:any) => {
       setOauthUrl(process.env.NEXT_PUBLIC_YOUTUBE_OAUTH_URL as string)
     }
   },[connection.title])
+
+  const handleConnect = () => {
+    if (oauthUrl) {
+      router.push(oauthUrl)
+    }
+  }
 
   return (
     <Card className="flex flex-col items-center justify-between ">
@@ -59,16 +76,14 @@ const ConnectionCard = ({connection}:any) => {
               </DialogTitle>
               <DialogDescription className='py-4 '>{connection.description}</DialogDescription>
             </DialogHeader>
-            <AddConnectionsModal formElements={connection.formElements || []} callback_url={callbackUrl}/>
+            <AddConnectionsModal formElements={connection.formElements || []} addConnection={addConnection} userId={user?.id}/>
           </DialogContent>
         </Dialog>
       ):(
-      <div className=''>
-        <Link href={oauthUrl || ''}>
-          <Button size="lg"  >
-            Connect
-          </Button>
-        </Link>
+      <div className=''>    
+        <Button size="lg" onClick={handleConnect}>
+          Connect
+        </Button>
       </div>)}
     </div>}
     {!connection.published && 
