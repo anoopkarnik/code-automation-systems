@@ -46,7 +46,9 @@ const ConnectionCard = ({connection}:any) => {
   const handleConnect = () => {
     console.log('oauthUrl',oauthUrl)
     if (oauthUrl) {
-      location.assign(oauthUrl)
+      window.location.href = oauthUrl
+    } else {
+      console.error('No oauth url found')
     }
   }
 
@@ -66,7 +68,7 @@ const ConnectionCard = ({connection}:any) => {
         <Dialog>
           <DialogTrigger>
             <Button size="lg"  >
-              Connect
+              Connect using Keys
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -83,7 +85,7 @@ const ConnectionCard = ({connection}:any) => {
       ):(
       <div className=''>    
         <Button size="lg" onClick={handleConnect}>
-          Connect
+          Connect using OAuth
         </Button>
       </div>)}
     </div>}
