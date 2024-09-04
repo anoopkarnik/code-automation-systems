@@ -66,8 +66,10 @@ const PlannerPage = () => {
           })
         }
         const user_info = await getUserInfo(userId || '')
-      
         setConnections(user_info?.connections)
+        setTimeout(() => {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }, 1000);
     }
     }
     onUserConnection()
