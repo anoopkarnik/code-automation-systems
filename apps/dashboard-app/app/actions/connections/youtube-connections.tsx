@@ -5,6 +5,8 @@ import axios from 'axios'
 import { getNotionConnection } from './notion-connections'
 import { createNotionPageAction, queryAllNotionDatabaseAction } from '../notion/notion'
 import { delay } from '../../../lib/utils'
+import { google } from 'googleapis';
+import { redirect } from 'next/navigation'
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
@@ -221,4 +223,22 @@ const getAccessTokenByRefreshToken = async (refresh_token: string) => {
     }catch(err){
         return null
     }
+}
+
+export const createYoutubeOAuthUrl = async () => {
+    const oauth2Client = new google.auth.OAuth2(
+        process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_ID,
+        process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET,
+        process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI
+    );
+    const scopes = ['https://www.googleapis.com/auth/youtube','https://www.googleapis.com/auth/youtube.force-ssl',
+        'https://www.googleapis.com/auth/youtube.readonly','https://www.googleapis.com/auth/youtube.upload',];
+    const url = oauth2Client.generateAuthUrl({
+        // 'online' (default) or 'offline' (gets refresh_token)
+            access_type: 'offline',
+            // If you only need one scope you can pass it as a string
+            scope: scopes
+        });
+
+    return url;
 }
