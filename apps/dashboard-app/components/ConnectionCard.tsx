@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react'
 import { createOpenAIConnection } from '../app/actions/connections/openai-connections'
 import { useRouter } from 'next/navigation'
 import { getEnvironmentVariables } from '../app/actions/env/env'
+import { createYoutubeOAuthUrl } from '../app/actions/connections/youtube-connections'
 
 
 const ConnectionCard = ({connection}:any) => {
@@ -47,9 +48,14 @@ const ConnectionCard = ({connection}:any) => {
     updateEnvironmentVariables()
   },[connection.title])
 
-  const handleConnect = () => {
+  const handleConnect = async() => {
     console.log('oauthUrl',oauthUrl)
-    if (oauthUrl) {
+    if (connection.title === "Youtube"){
+      const url = await createYoutubeOAuthUrl()
+      console.log('url',url)
+      window.location.href = url
+    }
+    else if (connection.title === "Notion"){
       window.location.href = oauthUrl
     } else {
       console.error('No oauth url found')
