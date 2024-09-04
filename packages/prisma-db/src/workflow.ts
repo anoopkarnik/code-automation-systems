@@ -86,11 +86,14 @@ export const getWorkflowsByUserId = async (userId: string) => {
     }
 }
 
-export const getEventsById = async(workflowId:string) => {
+export const getEventsByIdAndUserId = async(workflowId:string, userId: string) => {
     let events;
     if (workflowId === ''){
         events = await db.event.findMany({
             where:{
+                Workflows:{
+                    userId
+                }
             },
             include:{
                 Workflows:true
@@ -277,7 +280,7 @@ export const updateEvent = async(eventId:string, status:string) => {
     })
     return event;
 }
-
+         
 export const updateEventMetadata = async(eventId:string, metadata:any) => {
     const event = await db.event.update({
         where:{

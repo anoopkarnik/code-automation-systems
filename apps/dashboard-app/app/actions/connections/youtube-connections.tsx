@@ -1,6 +1,6 @@
 'use server'
 
-import { createConnection, getConnectionByAccessToken, getConnectionByUserIdAndTypeAndName, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
+import { createConnection, getConnectionByAccessTokenAndUserId, getConnectionByUserIdAndTypeAndName, getConnectionsByUserAndType } from '@repo/prisma-db/repo/connection'
 import axios from 'axios'
 import { getNotionConnection } from './notion-connections'
 import { createNotionPageAction, queryAllNotionDatabaseAction } from '../notion/notion'
@@ -13,7 +13,7 @@ const RETRY_DELAY = 1000;
 
 export const onYoutubeConnection = async ({access_token, refresh_token, scopes, userId}: any) => {
     if(access_token && userId){
-        const connected = await getConnectionByAccessToken(access_token)
+        const connected = await getConnectionByAccessTokenAndUserId(access_token,userId)
         if (connected) return {success: "Youtube Connection already exists"}
         const youtube:any = await createConnection({type:'Youtube', accessToken: access_token, refreshToken:refresh_token, scopes, userId})
         if(!youtube) return {error: "Youtube Connection not created successfully"}

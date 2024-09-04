@@ -69,11 +69,12 @@ export const getConnectionsByUserAndType = async (userId: string, type: string) 
     }
 }
 
-export const getConnectionByAccessToken = async (accessToken: string) => {
+export const getConnectionByAccessTokenAndUserId = async (accessToken: string, userId: string) => {
     try{
         const connection = await db.connection.findFirst({
             where: {
-                accessToken
+                accessToken,
+                userId
             }
         });
         return connection;
