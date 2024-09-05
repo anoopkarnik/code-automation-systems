@@ -1,9 +1,10 @@
 'use client'
+
 import { cn } from '@repo/ui/lib/utils'
 import { usePathname } from 'next/navigation'
 import { ElementRef, useEffect, useRef, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import { ChevronsLeft, AlignJustifyIcon, PlusIcon, MinusIcon, CircleChevronDown, CircleChevronUp } from 'lucide-react'
+import { ChevronsLeft, AlignJustifyIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../atoms/shadcn/Tooltip'
 import LeftSidebarItem from './LeftSidebarItem'
 
@@ -15,7 +16,7 @@ interface LeftSidebarProps {
     redirect: (href: string) => void
 }
 
-const LeftSidebar = ({ appName, appIcon,sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
+const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 640px)");
     const isNotMobile = useMediaQuery("(min-width: 640px)");
@@ -71,31 +72,32 @@ const LeftSidebar = ({ appName, appIcon,sidebarStartItems, sidebarEndItems, redi
 
     return (
         <>
-            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-auto sticky flex flex-col z-10 overflow-y-auto',
+            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto',
                 isResetting && "transition-all ease-in-out duration-300",
-                isMobile && "w-0",
-                isNotMobile && "min-w-[240px]"
+                isMobile && "min-w-[70px]",
             )}>
                 <div onClick={collapse} className={cn('rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition cursor-pointer',
                     isMobile && "opacity-100",
                 )}>
-                    {isMobile && <ChevronsLeft className='h-6 w-6' />}
+                    {isMobile && !isCollapsed &&  <ChevronsLeft className='h-6 w-6' />}
                 </div>
-                <div className='py-4 px-2 flex flex-col justify-between flex-grow'>
+                <div className='py-4  flex flex-col justify-between flex-grow'>
                     <div>
-                        <div className='flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4'>
-                            {appIcon && <img src={appIcon} alt={appName} className='w-8 h-8'/>}
-                            {appName && <h1 className='text-xl font-bold '>{appName}</h1>}
+                        <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
+                            isMobile && isCollapsed && 'border-none'
+                        )}>
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-8 h-8' />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-xl font-bold '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (
-                            <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
+                                <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} isMobile={isMobile} isCollapsed={isCollapsed}/>
                             ))}
                         </div>
                     </div>
                     <div>
                         {sidebarEndItems.map((item: any, index: number) => (
-                        <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
+                            <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} isMobile={isMobile} isCollapsed={isCollapsed} />
                         ))}
                     </div>
                 </div>
