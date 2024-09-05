@@ -146,13 +146,6 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
 
     }
 
-    const handleDatabaseChange = (value:any) => {
-        setSelectedDb(value);
-        const res:any = databases.find((db:any) => db.id == JSON.parse(selectedDb).id);
-        const properties = res.properties;
-        setProperties(properties)
-    }
-
   return (
     <div className='mt-10'>
         <div className='space-y-4 m-4 my-10'>
@@ -175,7 +168,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                     name="Database"
                     options={databases || []}
                     selectedOption={selectedDb }
-                    onChange={handleDatabaseChange}
+                    onChange={fetchDatabaseProperties}
                 />
                 
             </div>}
@@ -202,7 +195,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                                 <SelectValue placeholder='Select Notion Property Name'/>  
                             </SelectTrigger>
                             <SelectContent>
-                                {Object.keys(properties)?.map((prop:any) => (
+                                {properties && Object.keys(properties)?.map((prop:any) => (
                                     <SelectItem key={prop} value={prop}>{prop}</SelectItem>
                                 ))}
                             </SelectContent>
