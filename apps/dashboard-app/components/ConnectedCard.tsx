@@ -29,7 +29,7 @@ const ConnectedCard = ({connection}:any) => {
 
   const handleDelete = async(id:string) => {
     await deleteConnectionById(id)
-    router.refresh()
+    window.location.reload()
   }
 
 

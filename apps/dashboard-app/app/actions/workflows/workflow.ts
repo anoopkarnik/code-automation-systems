@@ -1,6 +1,6 @@
 'use server'
 
-import {createWorkflow, editWorkflow, getWorkflowsByUserId, publishWorkflow,  deleteWorkflow, getEventsById, 
+import {createWorkflow, editWorkflow, getWorkflowsByUserId, publishWorkflow,  deleteWorkflow, getEventsByIdAndUserId, 
     getActiveWorkflowsByUserId, getWorkflowById,
     deleteTrigger,
     deleteAction,
@@ -62,8 +62,8 @@ export const getLatestEventByWorkflowIdAction = async (workflowId:string) => {
     return event;
 }
 
-export const getEventsByWorkflowId = async (workflowId:string) => {
-    const events:any = await getEventsById(workflowId);
+export const getEventsByWorkflowId = async (workflowId:string, userId: string) => {
+    const events:any = await getEventsByIdAndUserId(workflowId,userId);
     return events;
 }
 

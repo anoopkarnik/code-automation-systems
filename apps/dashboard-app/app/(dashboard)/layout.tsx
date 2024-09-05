@@ -5,14 +5,15 @@ import NavbarClient  from "../../components/NavbarClient";
 export default async function Layout({children}:{children: React.ReactNode}){
 
     return (
-        <div className="flex flex-col min-h-screen max-h-screen overflow-hidden">
-        <NavbarClient />
-        <div className="flex flex-grow overflow-hidden">
+      <div className="flex min-h-screen max-h-screen overflow-hidden">
           <LeftSidebarClient />
-          <div className="flex-grow overflow-auto ">
-            {children}
+          
+          <div className="flex flex-col flex-grow  overflow-hidden">
+            <NavbarClient />
+            <div className="flex-grow overflow-auto ">
+              {children}
+            </div>
           </div>
-        </div>
       </div>
     )
 }

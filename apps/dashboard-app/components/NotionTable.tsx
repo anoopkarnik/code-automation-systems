@@ -99,7 +99,7 @@ const NotionTable = ({dbId}:any) => {
 
   return (
     <>
-        <div className="overflow-x-auto  ">
+        <div className="overflow-x-auto mx-4  ">
             <DataTable columns={databaseKeys} data={database} onDelete={onDelete} onEdit={onEdit}/>
         </div>
     </>

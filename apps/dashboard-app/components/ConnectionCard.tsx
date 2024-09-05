@@ -49,10 +49,8 @@ const ConnectionCard = ({connection}:any) => {
   },[connection.title])
 
   const handleConnect = async() => {
-    console.log('oauthUrl',oauthUrl)
     if (connection.title === "Youtube"){
       const url = await createYoutubeOAuthUrl()
-      console.log('url',url)
       window.location.href = url
     }
     else if (connection.title === "Notion"){

@@ -23,7 +23,7 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({ name, options, sele
         });
 
         // Ensure the selected database is included in the filtered list
-        if (selectedOption) {
+        if (selectedOption?.id) {
             const selectedOptionVar = JSON.parse(selectedOption);
             if (!filtered.some((db) => db.id === selectedOptionVar.id)) {
                 filtered.push(selectedOptionVar);
@@ -48,14 +48,14 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({ name, options, sele
     return (
         <>
           <Select value={selectedOption} onValueChange={onChange} onOpenChange={setIsOpen}>
-              <SelectTrigger className='w-[380px] py-8  z-[500]'>
+              <SelectTrigger className='w-[380px] py-8 '>
                   <SelectValue placeholder={`Select ${name}`} />
               </SelectTrigger>
               <SelectContent className='z-[500]'>
                   <Input
                       ref={inputRef}
                       placeholder={`Search ${name}`}
-                      className='w-full  z-[500]'
+                      className='w-full '
                       value={searchQuery}
                       onChange={handleSearch}
                   />

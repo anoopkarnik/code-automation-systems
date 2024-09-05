@@ -6,14 +6,12 @@ import Overview from './_components/Overview'
 import Settings from './_components/Settings'
 import { useMedia } from "react-use";
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/molecules/shadcn/Select'
-import { useRouter } from 'next/navigation'
 import { ConnectionsContext } from '../../../providers/connections-provider'
 import NotionTable from '../../../components/NotionTable'
 
 const FinancialPage = () => {
   const isMobile = useMedia("(max-width: 1324px)", false);
   const [selectedValue, setSelectedValue] = useState('Overview')
-  const router = useRouter()
   const connectionsContext = useContext(ConnectionsContext);
   const accountsDbId = connectionsContext?.notionNode?.accountsDb?.id
   const budgetPlanDbId = connectionsContext?.notionNode?.budgetPlanDb?.id
@@ -21,9 +19,39 @@ const FinancialPage = () => {
   const transactionsDbId = connectionsContext?.notionNode?.transactionsDb?.id
   const financialGoalsDbId = connectionsContext?.notionNode?.financialGoalsDb?.id
 
+  const [filteredFinanceItems, setFilteredFinanceItems] = useState([])
+
   const handleSelect = (value:any) => {
     setSelectedValue(value)
   }
+
+  useEffect(() =>{
+    const updateFinanceItems = async () => {
+      if (!connectionsContext) return
+      let items:any = []
+      items.push(financeItems.find((item) => item.title === 'settings'))
+      if(accountsDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Account'))
+      }
+      if(budgetPlanDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Budget Plan'))
+      }
+      if(monthlyBudgetDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Monthly Budget'))
+      }
+      if (transactionsDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Transactions'))
+      }
+      if (financialGoalsDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Financial Goals'))
+      }
+      if (accountsDbId && budgetPlanDbId && monthlyBudgetDbId && transactionsDbId && financialGoalsDbId){
+        items.unshift(financeItems.find((item) => item.title === 'Overview'))
+      }
+      setFilteredFinanceItems(items)
+    }
+    updateFinanceItems()
+  },[connectionsContext])
 
   if (isMobile){
     return (
@@ -33,7 +61,7 @@ const FinancialPage = () => {
             <div>{selectedValue}</div>
           </SelectTrigger>
           <SelectContent className='w-[200px]'>
-            {financeItems.map((item:any) =>(
+            {filteredFinanceItems.map((item:any) =>(
               <SelectItem key={item.title} value={item.title}>
                 <div className='flex items-center justify-start gap-4 w-[200px]'>
                   <item.icon/>
@@ -57,8 +85,8 @@ const FinancialPage = () => {
 
   return (
     <Tabs className='w-full' defaultValue='overview'>
-      <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
-        {financeItems.map((item:any) =>(
+      <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit '>
+        {filteredFinanceItems.map((item:any) =>(
             <TabsTrigger key={item.title} value={item.title} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
               <item.icon/>
               <div>{item.title}</div>

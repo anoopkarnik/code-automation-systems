@@ -49,7 +49,7 @@ model Connection {
   accessToken      String?
   refreshToken     String?
   scopes           String?
-  workspaceId      String?         @unique
+  workspaceId      String?         
   workspaceName    String?
   workspaceIcon    String?
   apiKey           String?

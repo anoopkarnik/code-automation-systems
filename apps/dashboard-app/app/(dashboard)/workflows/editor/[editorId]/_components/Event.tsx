@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getEventsByWorkflowId } from '../../../../../actions/workflows/workflow';
 import { useParams } from 'next/navigation';
 import { format } from 'date-fns';
+import { useSession } from 'next-auth/react';
 
 interface Event {
   id: string;
@@ -16,15 +17,18 @@ interface Event {
 const EventComponent = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const param = useParams();
-  const workflowId = param?.editorId;
+  const workflowId:any = param?.editorId;
+  const session = useSession();
+  let userId = session?.data?.user?.id;
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await getEventsByWorkflowId(workflowId as string);
+      if (!workflowId || !userId) return;
+      const res = await getEventsByWorkflowId(workflowId,userId);
       setEvents(res);
     };
     fetchEvents();
-  }, [workflowId]);
+  }, [workflowId,userId]);
 
   return (
     <div className='flex flex-col h-screen border-x-2 border-border/50 pr-2 px-2 bg-secondary/70'>
