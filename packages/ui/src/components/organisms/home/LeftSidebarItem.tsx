@@ -6,7 +6,7 @@ import { CircleChevronDown, CircleChevronUp } from "lucide-react";
 import { useState } from "react";
 
 
-const LeftSidebarItem = ({index,item,redirect}:any) =>{
+const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
     const [showSubItems, setShowSubItems] = useState<any>({});
     const pathname = usePathname();
     
@@ -34,18 +34,20 @@ const LeftSidebarItem = ({index,item,redirect}:any) =>{
                         </Tooltip>
                     </TooltipProvider>
                     <div className='flex items-center justify-between w-full'>
-                        {item.title} 
+                        {(!isMobile || (isMobile && !isCollapsed)) && item.title} 
                         {showSubItems[index] ?
-                         <CircleChevronUp className='w-4 h-4'/> :
-                          <CircleChevronDown className='w-4 h-4'/>
+                         <CircleChevronUp className='w-4 h-4 opacity-60'/> :
+                          <CircleChevronDown className='w-4 h-4 opacity-60'/>
                         }
                     </div>
                 </div>
                 <>
                 {showSubItems[index] && item.subItems.map((subItem: any, subIndex: number) => (
                     <div key={subIndex} onClick={() => redirect(subItem.href)}
-                        className={cn('flex items-center gap-2 p-2 mx-8 rounded-lg text-sm hover:bg-destructive/10 transition cursor-pointer  ',
-                            pathname === subItem.href && 'bg-destructive/30'
+                        className={cn('flex items-center gap-2 p-2  rounded-lg text-sm hover:bg-destructive/10 transition cursor-pointer  ',
+                            pathname === subItem.href && 'bg-destructive/30',
+                            isMobile && 'ml-4',
+                            !isMobile && 'mx-8'
                         )}>
                         <TooltipProvider>
                             <Tooltip>
@@ -54,7 +56,7 @@ const LeftSidebarItem = ({index,item,redirect}:any) =>{
                                 <TooltipContent>{subItem.title}</TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
-                        {<span>{subItem.title}</span>}
+                        {(!isMobile || (isMobile && !isCollapsed)) && <span>{subItem.title}</span>}
                     </div>
                 ))} 
                 </>
@@ -73,7 +75,7 @@ const LeftSidebarItem = ({index,item,redirect}:any) =>{
                         <TooltipContent >{item.title}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
-                {<span>{item.title}</span>}
+                {(!isMobile || (isMobile && !isCollapsed)) && <span>{item.title}</span>}
             </div>
 }
         
