@@ -4,6 +4,8 @@ import { Theme } from './Theme';
 import { GoTriangleDown } from "react-icons/go";
 import { UserDropdown } from './UserDropdown';
 import { Notification } from './Notification';
+import { useMediaQuery } from 'usehooks-ts';
+import { cn } from '../../../lib/utils';
 
 interface NavbarProps {
     title?: string;
@@ -22,14 +24,16 @@ interface NavbarProps {
 
 export const Navbar = ({title, screens, user,setTheme,
     onSignout,resetFunction}:NavbarProps) => {
-
+        const isMobile = useMediaQuery("(max-width: 640px)");
     
   return (
     <div className=' p-1 flex items-center justify-between bg-inherit sticky top-0 z-20  px-4 py-2'>
         <div className='flex items-center'>
-           {title && <div className='text-lg font-semibold'>{title}</div>}
+           {!isMobile && title && <div className='text-lg font-semibold'>{title}</div>}
         </div>
-        <div className='flex items-center gap-4'>
+        <div className={cn('flex items-center gap-4',
+            isMobile && 'gap-2'
+        )}>
             <Notification/>
             <Theme setTheme={setTheme}/>
             <UserDropdown 
