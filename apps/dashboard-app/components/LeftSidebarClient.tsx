@@ -14,7 +14,12 @@ const LeftSidebarClient = () => {
 
   return (
     <>
-        <LeftSidebar sidebarStartItems={sidebarStartItems} sidebarEndItems={sidebarEndItems} redirect={redirect}/>
+        <LeftSidebar
+          appName="Personal Automation Dashboard"
+          appIcon="https://raw.githubusercontent.com/anoopkarnik/personal-apps/main/apps/dashboard-app/public/apps.png"
+          sidebarStartItems={sidebarStartItems}
+          sidebarEndItems={sidebarEndItems}
+          redirect={redirect}/>
     </>
   )
 }

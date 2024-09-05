@@ -8,12 +8,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../
 import LeftSidebarItem from './LeftSidebarItem'
 
 interface LeftSidebarProps {
+    appName: string
+    appIcon: string
     sidebarStartItems: any
     sidebarEndItems: any
     redirect: (href: string) => void
 }
 
-const LeftSidebar = ({ sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
+const LeftSidebar = ({ appName, appIcon,sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 640px)");
     const isNotMobile = useMediaQuery("(min-width: 640px)");
@@ -79,11 +81,17 @@ const LeftSidebar = ({ sidebarStartItems, sidebarEndItems, redirect }: LeftSideb
                 )}>
                     {isMobile && <ChevronsLeft className='h-6 w-6' />}
                 </div>
-                <div className='py-4 pl-2 flex flex-col justify-between flex-grow'>
+                <div className='py-4 px-2 flex flex-col justify-between flex-grow'>
                     <div>
-                        {sidebarStartItems.map((item: any, index: number) => (
-                        <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
-                        ))}
+                        <div className='flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4'>
+                            {appIcon && <img src={appIcon} alt={appName} className='w-8 h-8'/>}
+                            {appName && <h1 className='text-xl font-bold '>{appName}</h1>}
+                        </div>
+                        <div className='pt-4'>
+                            {sidebarStartItems.map((item: any, index: number) => (
+                            <LeftSidebarItem key={index} index={index} item={item} redirect={redirect} />
+                            ))}
+                        </div>
                     </div>
                     <div>
                         {sidebarEndItems.map((item: any, index: number) => (
