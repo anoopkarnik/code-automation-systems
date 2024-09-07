@@ -62,7 +62,7 @@ export const getLatestEventByWorkflowIdAction = async (workflowId:string) => {
     return event;
 }
 
-export const getEventsByWorkflowId = async (workflowId:string, userId: string) => {
+export const getEventsByWorkflowIdAndUserId = async (workflowId:string, userId: string) => {
     const events:any = await getEventsByIdAndUserId(workflowId,userId);
     return events;
 }

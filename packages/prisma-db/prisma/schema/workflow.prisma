@@ -27,7 +27,7 @@ model WorkflowAction {
   id                String   @id @default(uuid())
   workflowId        String
   actionId          String
-  metadata          Json?    @default("{}")
+  metadata          Json?    @default("{}")  @db.JsonB
   sortingOrder      Int      @default(0)
 
   workflow          Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade, onUpdate: Cascade)

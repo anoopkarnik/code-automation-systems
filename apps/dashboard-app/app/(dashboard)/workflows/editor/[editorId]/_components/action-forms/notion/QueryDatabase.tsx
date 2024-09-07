@@ -13,8 +13,8 @@ import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
 import { DeleteIcon } from 'lucide-react';
 import { createActionAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';
-import { set } from 'date-fns';
 import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
+import {FancyMultiSelect} from "@repo/ui/molecules/custom/FancyMultiSelect";
 
 const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const  [ notionAccounts, setNotionAccounts ] = useState([]);
@@ -30,6 +30,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const [selectedFilters, setSelectedFilters] = useState(node?.metadata?.filters || []);
     const [selectedSorts, setSelectedSorts] = useState(node?.metadata?.sorts || []);
     const [testResults, setTestResults] = useState([]);
+    const [selectedProperties, setSelectedProperties] = useState<any[]>(node?.metadata?.properties || []);
     const session = useSession()
     const userId = session?.data?.user?.id;
     
@@ -45,6 +46,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             databaseId: JSON.parse(selectedDb).id,
             filters: selectedFilters,
             sorts: selectedSorts,
+            properties: selectedProperties
         }
         const params = {
             workflowId: editorId,
@@ -100,6 +102,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
     const fetchDatabaseProperties = async (value:any) => {
         setSelectedDb(value);
         const res:any = await queryNotionDatabaseProperties({apiToken: selectedNotionAccount, database_id:JSON.parse(value).id});
+        console.log(Object.keys(properties).map(prop => ({label: prop, value: prop})))
         setProperties(res.properties)
     }
 
@@ -162,7 +165,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                     </SelectContent>
                 </Select>
             </div>
-            {selectedNotionAccount && <div className='flex flex-col gap-2 '>
+            {selectedNotionAccount && <div className='flex flex-col gap-2 w-full '>
                 <Label className='ml-2'>Notion Databases</Label>
                 <SearchableSelect
                     name="Database"
@@ -172,6 +175,17 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                 />
                 
             </div>}
+            {/* {selectedDb && 
+                <div className='flex flex-col gap-2 w-full '>
+                    <Label className='ml-2'>Properties</Label>
+                    <FancyMultiSelect
+                        placeholder="Select properties to return"
+                        options={Object.keys(properties).map(prop => ({label: prop, value: prop}))}
+                        selected={selectedProperties}
+                        setSelected={setSelectedProperties}
+                    />
+                </div>
+                  } */}
             {selectedDb && <div className='flex flex-col gap-2 mt-4'>
                 <div className='flex items-center justify-between '>
                     <Label className='ml-2 text-xl mb-4'>Filters</Label>
@@ -211,6 +225,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
                 </div>
                 
             </div>}
+
             {selectedDb && <div className='flex w-full items-center justify-between gap-4'>
                 <Button  size="lg" variant="default" type="submit" onClick={onSubmit}> Add Action</Button>
                 <Button  size="lg" variant="default" type="submit" onClick={getTestResults}> Test</Button>
