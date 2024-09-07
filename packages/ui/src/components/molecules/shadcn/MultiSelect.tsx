@@ -131,9 +131,9 @@ export const MultiSelect = React.forwardRef<
       defaultValue = [],
       placeholder = "Select options",
       animation = 0,
-      maxCount = 3,
-      modalPopover = false,
-      asChild = false,
+      maxCount = 30,
+      modalPopover = true,
+      asChild = true,
       className,
       ...props
     },
@@ -287,8 +287,10 @@ export const MultiSelect = React.forwardRef<
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-auto p-0"
+          className="w-auto p-0 z-[9999999]"
           align="start"
+          sideOffset={5}
+          onClick={(e) => e.stopPropagation()} 
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
           <Command>
@@ -316,7 +318,7 @@ export const MultiSelect = React.forwardRef<
                   </div>
                   <span>(Select All)</span>
                 </CommandItem>
-                {options.map((option) => {
+                {options?.map((option) => {
                   const isSelected = selectedValues.includes(option.value);
                   return (
                     <CommandItem

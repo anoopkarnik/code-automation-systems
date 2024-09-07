@@ -48,7 +48,7 @@ const SearchableSelect: React.FC<SearchableSelectProps> = ({ name, options, sele
     return (
         <>
           <Select value={selectedOption} onValueChange={onChange} onOpenChange={setIsOpen}>
-              <SelectTrigger className='w-[380px] py-8 '>
+              <SelectTrigger className='w-full py-8 '>
                   <SelectValue placeholder={`Select ${name}`} />
               </SelectTrigger>
               <SelectContent className='z-[500]'>
