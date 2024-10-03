@@ -1,36 +1,43 @@
 model NotionDb {
   id            String        @id @default(uuid())
-  accountsDb    Json?
+  projectsDb    Json?
+  epicsDb       Json?
+  projectTasksDb Json?
+  sprintsDb     Json?
+  bugsDb        Json?
+  assetsDb      Json?
   transactionsDb Json?
-  monthlyBudgetDb Json?
-  budgetPlanDb   Json?
-  financialGoalsDb Json?
-  booksDb       Json?
+  budgetDb      Json?
+  fundsDb       Json?
+  tasksDb       Json?
+  schedulerDb   Json?
+  calendarDb    Json?
+  durationBasedActionsDb Json?
+  timeTrackingDb Json?
+  weeklyFocusWorkPlannerDb Json?
   quickCaptureDb Json?
+  skillTreesDb  Json?
   areasDb       Json?
   archiveDb     Json?
   interestingDb Json?
+  booksDb       Json?
   podcastsDb    Json?
+  youtubeChannelsDb Json?
   videosDb      Json?
-  skillTreesDb   Json?
-  channelsDb    Json?
-  projectsDb    Json?
-  blogsDb      Json?
-  placeOfWorkDb Json?
-  schedulerDb   Json?
-  calendarDb    Json?
-  eisenhowerMatrixDb Json?
-  actionsDb     Json?
-  timeTrackingDb Json?
-  weeklyPlannerDb Json?
+  inventoryDb   Json?
   socialSphereDb Json?
-  passwordsDb   Json?
-  journalDb     Json? 
-  inventoryDb  Json?
-  statusDb     Json?
-  goalsDb      Json?
-  rewardsDb    Json?
+  statusDb      Json?
+  exercisesDb   Json?
+  journalDb     Json?
+  moodCategoryDb Json?
+  moodTrackerDb Json?
+  blogDb        Json?
+  goalsDb       Json?
+  rewardsDb     Json?
   punishmentsDb Json?
+  decisionsDb   Json?
+  levelSettingsDb Json?
+  peopleDb      Json?
 
   connection    Connection?   @relation(fields: [connectionId], references: [id])
   connectionId  String?       @unique

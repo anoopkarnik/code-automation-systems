@@ -270,7 +270,12 @@ function unmodifyProperty(prop:any) {
             return prop.array.map((x:any) => unmodifyProperty(x));
         case 'files':
             if (prop.files.length > 0) {
-                return prop.files[0].external.url;
+                if(prop.files[0].type === 'external'){
+                    return prop.files[0].external.url;
+                }
+                else if(prop.files[0].type === 'file'){
+                    return prop.files[0].file.url;
+                }
             }
             return '';
         case 'url':

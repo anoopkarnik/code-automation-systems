@@ -40,7 +40,7 @@ export const getNotionInfo = async (userId: string) => {
 }
 
 export const updateNotionDatabase = async (notionId: string, field:string, value: any) => {
-
+    
     const notionDb = await updateNotionDb({id:notionId, field, value} );
     return notionDb;
 }

@@ -47,7 +47,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
                         className={cn('flex items-center gap-2 p-2  rounded-lg text-sm hover:bg-destructive/10 transition cursor-pointer  ',
                             pathname === subItem.href && 'bg-destructive/30',
                             isMobile && 'ml-4',
-                            !isMobile && 'mx-8'
+                            !isMobile && 'mx-4'
                         )}>
                         <TooltipProvider>
                             <Tooltip>

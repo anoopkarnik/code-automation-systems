@@ -28,47 +28,133 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   VideoIcon,
   DatabaseIcon,
   SproutIcon,
-  FolderIcon} from "lucide-react";
+  FolderIcon,
+  StoreIcon,
+  HeartPulseIcon,
+  BrainIcon,
+  Gamepad2Icon,
+  MehIcon,
+  Clapperboard,
+  HomeIcon} from "lucide-react";
 import { Connection } from "./types";
+
+export const tablesInDatabase:any = {
+  "Project Management":{'Projects':"projectsDb",'Epics / Features':"epicsDb", 'Tasks':"projectTasksDb", 
+    'Sprints':"sprintsDb",'Bugs':"bugsDb", "People":"peopleDb"},
+  "Personal Finance":{'Assets and Liabilities':"assetsDb",'Financial Transaction':"transactionsDb",
+    'Budget':"budgetDb",'Funds':"fundsDb", "People":"peopleDb"},
+  "Personal Productivity": {"Tasks": "tasksDb", "Scheduler": "schedulerDb", "Calendar": "calendarDb",
+    "Duration Based Actions": "durationBasedActionsDb", "Time Tracking": "timeTrackingDb",
+    "Weekly Focus Work Planner": "weeklyFocusWorkPlannerDb", "People":"peopleDb"},
+  "Knowledge & Skill Development": {'Quick Capture':"quickCaptureDb",'Skill Trees':"skillTreesDb",
+    'Areas':"areasDb",'Archive':"archiveDb",'Interesting':"interestingDb",'Books':"booksDb",
+    'Podcasts':"podcastsDb",'Youtube Channels':"youtubeChannelsDb",'Videos':"videosDb", "People":"peopleDb"},
+  "Resource Management": {'Inventory':"inventoryDb", "People":"peopleDb"},
+  "Social & Relationships": {'Social Sphere':"socialSphereDb", "People":"peopleDb"},
+  "Health & Fitness": {'Status':"statusDb",'Exercises':"exercisesDb", "People":"peopleDb"},
+  "Emotional & Mental": {'Journal':"journalDb",'Mood Category':"moodCategoryDb",'Mood Tracker':"moodTrackerDb",
+     "People":"peopleDb"},
+  "Content Creation": {"Blog": "blogDb", "People":"peopleDb"},
+  "Personal Goals": { "Goals": "goalsDb", "Rewards": "rewardsDb", "Punishments": "punishmentsDb", "People":"peopleDb"},
+  "Decision Making": {"Decisions": "decisionsDb", "People":"peopleDb"},
+  "Gamification": {"Level Settings": "levelSettingsDb", "People":"peopleDb"}
+   
+}
 
 export const sidebarStartItems = [
   {
-      title: "Notion Dbs",
-      image: '/notion.png',
-      show: true,
-      subItems: [
-        {
-            title: "Financial",
-            icon: BadgeCentIcon,
-            href: "/financial"
-        },
-        {
-            title: "Projects",
-            icon: BriefcaseIcon,
-            href: "/projects"
-        },
-        {
-            title: "Planner",
-            icon: NotebookIcon,
-            href: "/planner"
-        },
-        {
-            title: "Knowledge Base",
-            icon: LibraryIcon,
-            href: "/knowledge-base"
-        },
-        {
-            title: "Personal Info",
-            icon: BadgeCentIcon,
-            href: "/personal-info"
-        },
-      ]
-
+    title: "Home",
+    icon: HomeIcon,
+    href: "/home"
   },
   {
-      title: "Workflows",
+    title: "Systems",
+    icon: BrainIcon,
+    show: true,
+    subItems: [
+      {
+        title: "Project Management",
+        icon: BriefcaseIcon,
+        href: "/project-management",
+      },
+      {
+        title: "Personal Finance",
+        icon: BadgeCentIcon,
+        href: "/personal-finance",
+        tables: {'Assets and Liabilities':"assetsDb",'Financial Transaction':"transactionsDb",
+          'Budget':"budgetDb",'Funds':"fundsDb"}
+      },
+      {
+        title: "Personal Productivity",
+        icon: CalendarCheck2Icon,
+        href: "/personal-productivity",
+        tables: ['Tasks','Scheduler','Calendar','Duration Based Actions','Time Tracking',"Weekly Focus Work Planner"]
+      },
+      {
+        title: "Knowledge & Skill Development",
+        icon: NetworkIcon,
+        href: "/knowledge-skill-development",
+        tables: ['Quick Capture','Skill Trees (Notion Db)','Areas','Archive','Interesting','Books','Podcasts',
+          'Youtube Channels','Videos'
+        ]
+      },
+      {
+        title: "Resource Management",
+        icon: StoreIcon,
+        href: "/personal-info",
+        tables: ['Inventory']
+      },
+      {
+        title: "Social & Relationships",
+        icon: ContactIcon,
+        href: "social",
+        tables: ['Social Sphere']
+      },
+      {
+        title: "Health & Fitness",
+        icon: HeartPulseIcon,
+        href: "/health",
+        tables: ['Status','Exercises']
+      },
+      {
+        title: "Emotional & Mental",
+        icon: MehIcon,
+        href: "/emotional",
+        tables: ['Journal','Mood Category','Mood Tracker']
+      },
+      {
+        title: "Content Creation",
+        icon: Clapperboard,
+        href: "/content-creation"
+      },
+      {
+        title: "Personal Goals",
+        icon: GoalIcon,
+        href: "/personal-goals",
+        tables: ['Goals','Rewards','Punishments']
+      },
+      {
+        title: "Decision Making",
+        icon: RouteIcon,
+        href: "/decision-making",
+        tables: ['Decisions']
+      },
+      {
+        title: "Gamification",
+        icon: Gamepad2Icon,
+        href: "/gamification",
+        tables: ['Level Settings']
+      }
+    ],
+  },
+  {
+    title: "Portfolio",
+    icon: DatabaseIcon,
+  },
+  {
+      title: "Automations",
       icon: WorkflowIcon,
-      href: "/workflows"
+      href: "/automations"
   },
   {
       title: "Connections",
@@ -84,11 +170,6 @@ export const sidebarStartItems = [
       title: "OpenAI",
       image: '/openai.png',
       href: "/openai"
-  },
-  {
-      title: "Skill Trees",
-      icon: NetworkIcon,
-      href: "/skill-trees"
   }
 ]
 
@@ -136,7 +217,7 @@ export const knowledgeBaseItems = [
   {title: 'Videos', icon: ClapperboardIcon, },
   {title: 'Skill Trees', icon: NetworkIcon, },
   {title: 'settings',icon: Settings, }
-]
+] 
 
 export const projectItems = [
   {title: 'Overview',icon: FileBarChartIcon,},
