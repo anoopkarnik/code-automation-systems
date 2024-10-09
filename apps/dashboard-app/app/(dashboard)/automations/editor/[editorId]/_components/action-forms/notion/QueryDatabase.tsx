@@ -52,7 +52,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
             workflowId: editorId,
             actionId: subType.id,
             metadata,
-            sortingOrder: editor.actions.length
+            sortingOrder: editor.actions.length+1
         }
         let res;
         if (funcType == 'create'){
@@ -64,7 +64,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
         if (res.success){
             toast({title: "Success", description: res?.success, variant: 'default'})
             router.refresh()
-            router.push(`/workflows/editor/${editorId}`)
+            router.push(`/automations/editor/${editorId}`)
         }
         else if (res.error){
             toast({title: "Error", description: res?.error, variant: 'destructive'})

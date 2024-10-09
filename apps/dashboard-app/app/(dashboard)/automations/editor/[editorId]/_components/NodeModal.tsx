@@ -1,16 +1,29 @@
 'use client'
 
 import { Button } from '@repo/ui/atoms/shadcn/Button';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@repo/ui/molecules/shadcn/Dialog';
 import 'reactflow/dist/style.css';
 import DynamicIcon from '../../../../../../components/DynamicIcon';
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet';
 import NodeSheet from './NodeSheet';
+import { TRIGGER_TYPES,ACTION_TYPES } from '../../../../../../lib/constant';
+import { getActionTypesAction, getTriggerTypesAction } from '../../../../../actions/workflows/workflow';
 
-const NodeModal = ({node, type, types}: any) => {
+const NodeModal = ({node, type}: any) => {
 
   const [selectedType, setSelectedType] = useState<any>({})
+  const [actionTypes, setActionTypes] = useState<any>([])
+  const [triggerTypes, setTriggerTypes] = useState<any>([])
+
+  useEffect(() => {
+    const setTypes = async () =>{
+      const actionTypes = await getActionTypesAction()
+      setActionTypes(actionTypes)
+      const triggerTypes = await getTriggerTypesAction()
+      setTriggerTypes(triggerTypes)
+    }
+    setTypes() 
+  },[])
 
   const onTypeSelect = (type: any) => {
     setSelectedType(type)
@@ -26,11 +39,20 @@ const NodeModal = ({node, type, types}: any) => {
         <DialogContent className="w-1/2 max-w-3xl">
           <div className='flex w-full h-[50vh] '>
             <div className='flex flex-col w-1/3 overflow-auto border-border/30 border-r-2'>
-              {types.map((type: any) => (
-                <div onClick={() => onTypeSelect(type)} key={type.id}
+              {type=="Action" && actionTypes.map((type: any) => (
+                <div onClick={() => onTypeSelect(type)} key={type.name}
                 className='flex justify-start items-center gap-2 p-2 mr-4 hover:bg-destructive/10 cursor-pointer'>
                     <div>
-                        <DynamicIcon icon={type.icon} />
+                      <DynamicIcon icon={type.icon}/>
+                    </div>
+                    <div>{type.name}</div>
+                </div>
+              ))}
+              {type=="Trigger" &&  triggerTypes.map((type: any) => (
+                <div onClick={() => onTypeSelect(type)} key={type.name}
+                className='flex justify-start items-center gap-2 p-2 mr-4 hover:bg-destructive/10 cursor-pointer'>
+                    <div>
+                      <DynamicIcon icon={type.icon}/>
                     </div>
                     <div>{type.name}</div>
                 </div>
@@ -44,7 +66,7 @@ const NodeModal = ({node, type, types}: any) => {
                   <DialogDescription>{selectedType?.description}</DialogDescription>
                 </div>
                 {selectedType?.types?.map((subType: any) => (
-                  <NodeSheet key={subType.id} funcType="create" nodeType={type} type={selectedType} subType={subType} />
+                  <NodeSheet key={subType.name} funcType="create" nodeType={type} type={selectedType} subType={subType} />
                 ))}
               </>)
             }

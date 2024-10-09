@@ -78,6 +78,7 @@ model Event {
   status           String
   metadata         Json?
   eventOutbox      EventOutbox?
+  serverType       String?
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,6 +89,7 @@ model Event {
 model EventOutbox {
   id                String   @id @default(uuid())
   eventId           String @unique
+  serverType        String?
   event             Event @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   @@schema("workflow_schema")
 }

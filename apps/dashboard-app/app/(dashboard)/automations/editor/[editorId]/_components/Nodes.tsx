@@ -3,7 +3,6 @@
 import React, {  useContext, useEffect, useState } from 'react'
 
 import 'reactflow/dist/style.css';
-import { Card,CardHeader,CardTitle,CardFooter,CardDescription,CardContent } from '@repo/ui/molecules/shadcn/Card';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
@@ -17,7 +16,6 @@ import NodeModal from './NodeModal';
 import NodeCard from './NodeCard';
 import { useToast } from '../../../../../../hooks/useToast';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
-import { useSearchParam } from 'react-use';
 
 const Nodes = () => {
     const params = useParams()
@@ -28,26 +26,12 @@ const Nodes = () => {
     const [toggle,setToggle] = useState(editor.publish || false)
     const router = useRouter();
     const [loading,setLoading] = useState(false)
-    const [workflow,setWorkflow] = useState({});
-
-    const [triggerTypes, setTriggerTypes] = useState([]);
-    const [actionTypes, setActionTypes] = useState([]);
     const {toast} = useToast();
 
     const onToggle = async () =>{
         setToggle(!toggle)
         await publishFlow(editorId as string,!toggle)
     }
-
-    useEffect(() => { 
-        const fetchTypes = async () => {
-            const triggerTypes:any = await getTriggerTypesAction();
-            setTriggerTypes(triggerTypes);
-            const actionTypes:any = await getActionTypesAction();
-            setActionTypes(actionTypes);
-        }
-        fetchTypes();
-    },[])
 
     useEffect(() => {
         const refreshNodes = async () => {
@@ -133,7 +117,7 @@ const Nodes = () => {
                 <NodeCard funcType='edit' nodeType='Trigger' node={editor.trigger}
                  type={editor.trigger.type.triggerType} subType={editor.trigger.type} handleDelete={handleDelete}/>
               ):(
-            <NodeModal node={[]} type='Trigger' types={triggerTypes}/>
+            <NodeModal node={[]} type='Trigger'/>
         )}
         <ArrowBigDownDash/>
         {editor.actions.length > 0 && editor.actions?.map((action:any) => (
@@ -143,7 +127,7 @@ const Nodes = () => {
                 <ArrowBigDownDash/>
             </>
         ))}
-        <NodeModal node={[]} type='Action' types={actionTypes}/>
+        <NodeModal node={[]} type='Action'/>
     </>
   )
 }

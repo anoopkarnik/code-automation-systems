@@ -19,7 +19,6 @@ const SkillTrees = ({skillTreeItems,selfAreaItems}:any) => {
         const fetchSkillTrees = async () => {
             const parentId = searchParams?.get('parentId')
             const type = searchParams?.get('type')
-
             let skillTrees;
 
             if (!type) return;

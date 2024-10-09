@@ -4,7 +4,7 @@ require('dotenv').config();
 import { logger } from '@repo/winston-logger/index';
 import { updateEvent } from '@repo/prisma-db/repo/workflow';
 
-const TOPIC_NAME = 'workflow-events';
+const TOPIC_NAME = 'nodejs-server-events';
 const kafka = new Kafka({
     clientId: 'workflow-event-outbox-processor',
     brokers: [process.env.BOOTSTRAP_SERVER || '']
@@ -20,18 +20,27 @@ async function main() {
             where:{},
             take: 10
         })
-        pendingRows.forEach(row =>{
-            producer.send({
-                topic: TOPIC_NAME,
-                messages: pendingRows.map(row => {
-                   return {
-                        value: JSON.stringify({eventId: row.eventId, stage: 0})
-                   }
-                })
-            })
-            updateEvent(row.eventId, 'PROCESSING')
-            logger.info(`Sent event ${row.eventId} to Kafka`)
-        })
+
+        // Prepare the messages to send to Kafka
+        const messages = pendingRows.map(row => ({
+            value: JSON.stringify({ eventId: row.eventId, stage: 1 })
+        }));
+
+        // Send all messages to Kafka in a single call
+        await producer.send({
+            topic: TOPIC_NAME,
+            messages: messages
+        });
+
+        // Update each event to 'PROCESSING' status after sending to Kafka
+        await Promise.all(
+            pendingRows.map(row => updateEvent(row.eventId, 'PROCESSING'))
+        );
+
+        // Log each sent event
+        pendingRows.forEach(row => {
+            logger.info(`Sent event ${row.eventId} to Kafka`);
+        });
 
         await db.eventOutbox.deleteMany({
             where:{

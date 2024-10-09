@@ -10,8 +10,9 @@ import { tablesInDatabase } from '../../../lib/constant'
 
 const SocialRelationshipsPage = () => {
   let database = "Social & Relationships"
+  let notionTemplateUrl = "https://anoopkarnik.notion.site/Social-and-Relationship-System-1121d3faa0a080ce87f0fd335e77228f"
   const isMobile = useMedia("(max-width: 1324px)", false);
-  const [selectedValue, setSelectedValue] = useState('Overvi ew')
+  const [selectedValue, setSelectedValue] = useState('Overview')
   const [tables, setTables] = useState({})
   const handleSelect = (value:any) => {
     setSelectedValue(value)
@@ -50,7 +51,7 @@ const SocialRelationshipsPage = () => {
         </Select>
         {selectedValue === 'Overview' && <Overview/>}
         {selectedValue === 'Notion Tables' && <NotionTables tables={tables}/>}
-        {selectedValue === 'Settings' && <Settings tables={tables}/>}
+        {selectedValue === 'Settings' && <Settings tables={tables} notionTemplateUrl={notionTemplateUrl}/>}
       </div>
     )
   }
@@ -75,7 +76,7 @@ const SocialRelationshipsPage = () => {
         <NotionTables tables={tables}/>
       </TabsContent>
       <TabsContent value='Settings'>
-        <Settings tables={tables}/>
+        <Settings tables={tables}  notionTemplateUrl={notionTemplateUrl}/>
       </TabsContent>
     </Tabs>
   )

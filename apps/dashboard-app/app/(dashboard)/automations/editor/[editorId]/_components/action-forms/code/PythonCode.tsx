@@ -1,6 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror';
 // @ts-ignore
-import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
+import React from 'react';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { useContext, useState } from 'react';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
@@ -11,13 +12,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { createActionAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';;
 
-export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {
+export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const {toast} = useToast();
     const params = useParams();
     const editorId = params?.editorId
     const router = useRouter();
     const editor = useContext(EditorContext);
-    const [code, setCode] = useState(node?.metadata?.code || '// Write your javascript code here');
+    const [code, setCode] = useState(node?.metadata?.code || '// Write your python code here');
     const [output, setOutput] = useState('');
     const [error, setError] = useState('');
     const [logs, setLogs] = useState('');
@@ -94,7 +95,7 @@ export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {
                 onChange={(value) => modifyCode(value)}
                 height="500px"
                 theme="dark"
-                extensions={[javascript({ jsx: true })]}
+                extensions={[python()]}
                 className="border rounded"
             />
             <div className='flex w-full justify-center gap-4'>

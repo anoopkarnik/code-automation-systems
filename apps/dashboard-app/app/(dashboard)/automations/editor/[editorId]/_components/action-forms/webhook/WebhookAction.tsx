@@ -53,7 +53,7 @@ const WebhookAction = ({funcType,nodeType,type,subType,node}:any) => {
             if (res.success){
                 toast({title: "Success", description: res?.success, variant: 'default'})
                 router.refresh()
-                router.push(`/workflows/editor/${editorId}`)
+                router.push(`/automations/editor/${editorId}`)
             }
             else if (res.error){
                 toast({title: "Error", description: res?.error, variant: 'destructive'})

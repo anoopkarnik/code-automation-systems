@@ -29,7 +29,6 @@ const NotionTable = ({dbId}:any) => {
     useEffect(() => {
         const updateDatabase = async () => {    
             if (!apiToken) return
-            console.log('dbId',dbId)
             const db = await queryNotionDatabaseAction({apiToken ,database_id: dbId})
             const dbProps = await queryNotionDatabaseProperties({apiToken ,database_id: dbId})
             setDatabase(db.results)

@@ -2,7 +2,7 @@ import React from 'react'
 import Schedule from './trigger-forms/schedule/Schedule'
 import WebhookTrigger from './trigger-forms/webhook/WebhookTrigger'
 import WebhookAction from './action-forms/webhook/WebhookAction'
-import { JavascriptCode } from './action-forms/code/JavascriptCode'
+import Code  from './action-forms/code/Code'
 import Notion from './action-forms/notion/Notion'
 
 const SelectedForm = ({funcType, nodeType,type,subType,node}: any) => {
@@ -19,7 +19,7 @@ const SelectedForm = ({funcType, nodeType,type,subType,node}: any) => {
         return <WebhookAction funcType={funcType} type={type} subType={subType} node={node}/>
     }
     else if (type.name == 'Code'){
-        return <JavascriptCode funcType={funcType} type={type} subType={subType} node={node}/>
+        return <Code funcType={funcType} type={type} subType={subType} node={node}/>
     }
   
 }

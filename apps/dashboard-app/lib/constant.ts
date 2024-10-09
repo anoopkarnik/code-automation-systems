@@ -35,8 +35,11 @@ import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon
   Gamepad2Icon,
   MehIcon,
   Clapperboard,
-  HomeIcon} from "lucide-react";
+  HomeIcon,
+  Code,
+  CodeIcon} from "lucide-react";
 import { Connection } from "./types";
+import { types } from "util";
 
 export const tablesInDatabase:any = {
   "Project Management":{'Projects':"projectsDb",'Epics / Features':"epicsDb", 'Tasks':"projectTasksDb", 
@@ -64,7 +67,7 @@ export const tablesInDatabase:any = {
 export const sidebarStartItems = [
   {
     title: "Home",
-    icon: HomeIcon,
+    image: "/home.png",
     href: "/home"
   },
   {
@@ -101,25 +104,25 @@ export const sidebarStartItems = [
       {
         title: "Resource Management",
         icon: StoreIcon,
-        href: "/personal-info",
+        href: "/resource-management",
         tables: ['Inventory']
       },
       {
         title: "Social & Relationships",
         icon: ContactIcon,
-        href: "social",
+        href: "social-relationships",
         tables: ['Social Sphere']
       },
       {
         title: "Health & Fitness",
         icon: HeartPulseIcon,
-        href: "/health",
+        href: "/health-fitness",
         tables: ['Status','Exercises']
       },
       {
         title: "Emotional & Mental",
         icon: MehIcon,
-        href: "/emotional",
+        href: "/emotional-mental",
         tables: ['Journal','Mood Category','Mood Tracker']
       },
       {
@@ -149,16 +152,16 @@ export const sidebarStartItems = [
   },
   {
     title: "Portfolio",
-    icon: DatabaseIcon,
+    image: "/portfolio.png",
   },
   {
       title: "Automations",
-      icon: WorkflowIcon,
+      image: "/automations.png",
       href: "/automations"
   },
   {
       title: "Connections",
-      icon: BluetoothConnectedIcon,
+      image: '/connection.png',
       href: "/connections"
   },
   {
@@ -416,27 +419,52 @@ export const CONNECTIONS: Connection[] = [
 
 export const TRIGGER_TYPES:any = [
   {
-    actionType: 'Schedule',
+    name: 'Schedule',
     icon: ClockIcon,
-    subActions: ['Cron' ]
+    description: "Schedule your workflow",
+    types: [
+      {name:'Cron',description:"", serverType: 'nodejs'}
+    ]
   },
   {
-    actionType: 'Webhook',
+    name: 'Webhook',
     icon: WebhookIcon,
-    subActions: ['Internal Webhook']
+    description: "Start your workflow by a webhook",
+    types: [
+      {name:'Internal Webhook',description:"", serverType: 'nodejs'}
+    ]
   },
 ]
 
 export const ACTION_TYPES:any = [
   {
-    actionType: 'Webhook',
+    name: 'Webhook',
     icon: WebhookIcon,
-    subActions: ['Internal Webhook']
+    description: "Run the Webhook Actions",
+    types: [
+      {name:'Internal Webhook',description:"", serverType: 'nodejs'}
+    ]
   },
   {
-    actionType: 'Notion',
+    name: 'Notion',
     image: '/notion.png',
-    subActions: ['Create Page','Update Page','Append Block', 'Delete Page']
+    description: "Notion Commands",
+    types: [
+      {name:'Create Page',description:"Create a New Notion Page", serverType: 'nodejs'},
+      {name:'Update Page',description:"Update an Existing Notion Page", serverType: 'nodejs'},
+      {name:'Append Block', description:"Append a block to a Notion Page", serverType: 'nodejs'},
+      {name:'Delete Page', description: "Delete a Notion Page", serverType: 'nodejs'},
+      {name:'Notion Python Code',description:"Run Python Notion API", serverType: 'flask'}
+    ]
+  },
+  {
+    name: 'Code',
+    icon: CodeIcon,
+    description: "Run this Code",
+    types:[
+      {name:'Javascript Code',description:"Run the javascript code", serverType: 'nodejs'},
+      {name:'Python Code',description:"Run the python code", serverType: 'flask'}
+    ]
   }
 ]
 

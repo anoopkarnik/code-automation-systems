@@ -12,7 +12,7 @@ const ProjectsPage = () => {
   let database = "Project Management"
   let notionTemplateUrl = "https://anoopkarnik.notion.site/Solopreneur-Project-Management-System-1011d3faa0a080e582e2c2e8f2d6bed0"
   const isMobile = useMedia("(max-width: 1324px)", false);
-  const [selectedValue, setSelectedValue] = useState('Overvi ew')
+  const [selectedValue, setSelectedValue] = useState('Overview')
   const [tables, setTables] = useState({})
   const handleSelect = (value:any) => {
     setSelectedValue(value)

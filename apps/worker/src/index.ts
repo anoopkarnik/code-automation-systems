@@ -7,7 +7,8 @@ import { javascriptCode } from "./javascriptCode";
 import { modifyMetadata } from "./utils";
 import { createNotionPages, modifyNotionPages, queryAllNotionDatabaseAction } from "./notion";
 
-const TOPIC_NAME = "workflow-events";
+const NODE_TOPIC_NAME = "nodejs-server-events";
+const FLASK_TOPIC_NAME = "flask-server-events";
 
 const kafka = new Kafka({
   clientId: "workflow-event-outbox-processor",
@@ -20,8 +21,8 @@ async function main() {
     const producer = kafka.producer();
     await producer.connect();
     logger.info("Connected to Kafka Consumer");
-    await consumer.subscribe({ topic: TOPIC_NAME, fromBeginning: true });
-    logger.info(`Subscribed to topic ${TOPIC_NAME}`);
+    await consumer.subscribe({ topic: NODE_TOPIC_NAME, fromBeginning: true });
+    logger.info(`Subscribed to topic ${NODE_TOPIC_NAME}`);
     await consumer.run({
         autoCommit: false,
         eachMessage: async ({ topic, partition, message }) => {
@@ -124,30 +125,45 @@ async function main() {
                     newLogs.push(log);
                 }
 
+
                 const eventMetadata:any = eventDetails?.metadata;
                 let stageString = `action${stage}`
                 let updatedMetadata:any = {...eventMetadata, [stageString] : {result:result, logs: newLogs}};
                 logger.info('Result got is ', result);
                 const lastStage = (eventDetails?.Workflows?.actions.length || 1) - 1;
                 logger.info(`updatedMetadata is ${JSON.stringify(updatedMetadata)}`);
-                if (lastStage!==stage){
+                if (currentAction?.type?.name === 'Python Code'){
+                    console.log('Sending message to Topic ', FLASK_TOPIC_NAME);
                     await updateEventMetadata(eventId, updatedMetadata);
                     await producer.send({
-                        topic: TOPIC_NAME,
+                        topic: FLASK_TOPIC_NAME,
                         messages: [
                             {
-                                value: JSON.stringify({eventId, stage: stage+1})   
+                                value: JSON.stringify({eventId, stage: stage})   
                             }
                         ]
                     })
                 }
                 else{
-                    try{
-                        await updateEvent(eventId, "COMPLETED");
+                    if (lastStage!==stage){
                         await updateEventMetadata(eventId, updatedMetadata);
+                        await producer.send({
+                            topic: NODE_TOPIC_NAME,
+                            messages: [
+                                {
+                                    value: JSON.stringify({eventId, stage: stage+1})   
+                                }
+                            ]
+                        })
                     }
-                    catch (error){
-                        logger.error(`Error updating event ${eventId} to COMPLETED`);
+                    else{
+                        try{
+                            await updateEvent(eventId, "COMPLETED");
+                            await updateEventMetadata(eventId, updatedMetadata);
+                        }
+                        catch (error){
+                            logger.error(`Error updating event ${eventId} to COMPLETED`);
+                        }
                     }
                 }
                 await consumer.commitOffsets([{ 

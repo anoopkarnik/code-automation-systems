@@ -48,6 +48,17 @@ services:
       - .env.worker
     volumes:
       - /home/ubuntu/logs/worker:/app/apps/worker/logs
+  flask-worker:
+    image: anoopkarnik/flask-worker:latest
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - turborepo-network
+    env_file:
+      - .env.flask-worker
+    volumes:
+      - /home/ubuntu/logs/flask-worker:/app/apps/flask-worker/app/logs
       
 networks:
   turborepo-network:

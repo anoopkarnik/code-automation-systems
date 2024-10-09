@@ -1,34 +1,28 @@
 'use client'
-import React, { useContext, useState }  from 'react'
-import { knowledgeBaseItems, projectItems, plannerItems, personalInfoItems } from '../../../lib/constant'
+import React, { useEffect, useState }  from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import Overview from './_components/Overview'
-import Settings from './_components/Settings'
+import Settings from '../../../components/Settings'
+import NotionTables from '../../../components/NotionTables'
 import { useMedia } from "react-use";
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/molecules/shadcn/Select'
-import { useRouter } from 'next/navigation'
-import { ConnectionsContext } from '../../../providers/connections-provider'
-import NotionTable from '../../../components/NotionTable'
+import { tablesInDatabase } from '../../../lib/constant'
 
-const ProjectsPage = () => {
+const ResourceManagementPage = () => {
+  let database = "Resource Management"
+  let notionTemplateUrl = ""
   const isMobile = useMedia("(max-width: 1324px)", false);
   const [selectedValue, setSelectedValue] = useState('Overview')
-  const router = useRouter()
-  const connectionsContext = useContext(ConnectionsContext);
-  const socialSphereDbId = connectionsContext?.notionNode?.socialSphereDb?.id
-  const passwordsDbId = connectionsContext?.notionNode?.passwordsDb?.id
-  const journalDbId = connectionsContext?.notionNode?.journalDb?.id
-  const inventoryDbId = connectionsContext?.notionNode?.inventoryDb?.id
-  const statusDbId = connectionsContext?.notionNode?.statusDb?.id
-  const goalsDbId = connectionsContext?.notionNode?.goalsDb?.id
-  const rewardsDbId = connectionsContext?.notionNode?.rewardsDb?.id
-  const punishmentsDbId = connectionsContext?.notionNode?.punishmentsDb?.id
-
-
+  const [tables, setTables] = useState({})
   const handleSelect = (value:any) => {
     setSelectedValue(value)
   }
 
+  useEffect(() =>{
+    if (tablesInDatabase && tablesInDatabase[database]) {
+      setTables(tablesInDatabase[database])
+    }
+  }, [tablesInDatabase])
 
   if (isMobile){
     return (
@@ -38,27 +32,26 @@ const ProjectsPage = () => {
             <div>{selectedValue}</div>
           </SelectTrigger>
           <SelectContent className='w-[200px]'>
-            {personalInfoItems.map((item:any) =>(
-              <SelectItem key={item.title} value={item.title}>
+              <SelectItem key="Overview" value="Overview">
                 <div className='flex items-center justify-start gap-4 w-[200px]'>
-                  <item.icon/>
-                  <div>{item.title}</div>
+                  <div>Overview</div>
                 </div>
               </SelectItem>
-            ))}
-
+              <SelectItem key="Notion Tables" value="Notion Tables">
+                <div className='flex items-center justify-start gap-4 w-[200px]'>
+                  <div>Notion Tables</div>
+                </div>
+              </SelectItem>
+              <SelectItem key="Settings" value="Settings">
+                <div className='flex items-center justify-start gap-4 w-[200px]'>
+                  <div>Settings</div>
+                </div>
+              </SelectItem>
           </SelectContent>
         </Select>
         {selectedValue === 'Overview' && <Overview/>}
-        {selectedValue === 'Notion Tables' && <NotionTable/>}
-        {selectedValue === 'Passwords' && <NotionTable dbId={passwordsDbId}/>}
-        {selectedValue === 'Journal' && <NotionTable dbId={journalDbId}/>}
-        {selectedValue === 'Inventory' && <NotionTable dbId={inventoryDbId}/>}
-        {selectedValue === 'Status' && <NotionTable dbId={statusDbId}/>}
-        {selectedValue === 'Goals' && <NotionTable dbId={goalsDbId}/>}
-        {selectedValue === 'Rewards' && <NotionTable dbId={rewardsDbId}/>}
-        {selectedValue === 'Punishments' && <NotionTable dbId={punishmentsDbId}/>}
-        {selectedValue === 'Settings' && <Settings/>}
+        {selectedValue === 'Notion Tables' && <NotionTables tables={tables}/>}
+        {selectedValue === 'Settings' && <Settings tables={tables} notionTemplateUrl={notionTemplateUrl}/>}
       </div>
     )
   }
@@ -66,45 +59,26 @@ const ProjectsPage = () => {
   return (
     <Tabs className='w-full' defaultValue='overview'>
       <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
-        {personalInfoItems.map((item:any) =>(
-            <TabsTrigger key={item.title} value={item.title} className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
-              <item.icon/>
-              <div>{item.title}</div>
-            </TabsTrigger>
-        ))}
+          <TabsTrigger key="Overview" value="Overview" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+            <div>Overview</div>
+          </TabsTrigger>
+          <TabsTrigger key="Notion Tables" value="Notion Tables" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+            <div>Notion Tables</div>
+          </TabsTrigger>
+          <TabsTrigger key="Settings" value="Settings" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+            <div>Settings</div>
+          </TabsTrigger>
       </TabsList>
       <TabsContent value='Overview'>
         <Overview/>
       </TabsContent>
-      <TabsContent value='Social Sphere'>
-        <NotionTable dbId={socialSphereDbId}/>
+      <TabsContent value='Notion Tables'>
+        <NotionTables tables={tables}/>
       </TabsContent>
-      <TabsContent value='Passwords'>
-        <NotionTable dbId={passwordsDbId}/>
-      </TabsContent>
-      <TabsContent value='Journal'>
-        <NotionTable dbId={journalDbId}/>
-      </TabsContent>
-      <TabsContent value='Inventory'>
-        <NotionTable dbId={inventoryDbId}/>
-      </TabsContent>
-      <TabsContent value='Status'>
-        <NotionTable dbId={statusDbId}/>
-      </TabsContent>
-      <TabsContent value='Goals'>
-        <NotionTable dbId={goalsDbId}/>
-      </TabsContent>
-      <TabsContent value='Rewards'>
-        <NotionTable dbId={rewardsDbId}/>
-      </TabsContent>
-      <TabsContent value='Punishments'>
-        <NotionTable dbId={punishmentsDbId}/>
-      </TabsContent>
-      <TabsContent value='settings'>
-        <Settings/>
+      <TabsContent value='Settings'>
+        <Settings tables={tables} notionTemplateUrl={notionTemplateUrl}/>
       </TabsContent>
     </Tabs>
   )
 }
-
-export default ProjectsPage
+export default ResourceManagementPage
