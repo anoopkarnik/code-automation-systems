@@ -17,15 +17,3 @@ interface actionProps {
         }
     }
 }
-
-export const createAction = async ({name,description, actionType,template}: actionProps) => {
-    const action = await db.action.create({
-        data: {
-            name,
-            description,
-            actionType,
-            
-        }
-    })
-    return action
-}

@@ -72,9 +72,10 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
 
     return (
         <>
-            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto',
+            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto text-sm font-light',
                 isResetting && "transition-all ease-in-out duration-300",
                 isMobile && "min-w-[70px]",
+                isNotMobile && "min-w-[240px]",
             )}>
                 <div onClick={collapse} className={cn('rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition cursor-pointer',
                     isMobile && "opacity-100",
@@ -87,7 +88,7 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                             isMobile && isCollapsed && 'border-none'
                         )}>
                             {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-8 h-8' />}
-                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-xl font-bold '>{appName}</h1>}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-md  '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (

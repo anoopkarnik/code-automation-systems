@@ -21,7 +21,8 @@ export default function NavbarClient() {
         const refreshSession = async () => {
             const session = await getSession();
             const pathSegments = location?.pathname?.split('/').filter(Boolean);
-            const extractedTitle:any = pathSegments && pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
+            let extractedTitle:any = pathSegments && pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
+            extractedTitle = extractedTitle.replaceAll("-"," ")
             const formattedTitle = extractedTitle.charAt(0).toUpperCase() + extractedTitle.slice(1);
             setTitle(formattedTitle);
             setUser(session?.user);

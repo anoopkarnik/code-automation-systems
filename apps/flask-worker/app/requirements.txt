@@ -1,0 +1,8 @@
+flask
+gunicorn
+python-dotenv
+kafka-python
+psycopg2-binary
+pytz
+schedule
+requests

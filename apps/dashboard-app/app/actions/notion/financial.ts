@@ -13,13 +13,11 @@ export const getDateSpecificFinancialSummary = async ({apiToken, transactionsDbI
 
     let expenseTypes =  response.results.reduce((acc:any, item:any) => {
         acc.add(item['Expense Type'][0])
-        acc.add(item['Old Expense Type'][0])
         return acc
     },new Set())
 
     let monthlyBudgetTypes =  response.results.reduce((acc:any, item:any) => {
         acc.add(item['Monthly Budget Name'][0])
-        acc.add(item['Old Monthly Budget Name'][0])
         return acc
     },new Set())
 

@@ -15,7 +15,6 @@ const NotionTable = ({dbId}:any) => {
     const apiToken = connectionsContext?.notionNode?.accessToken
     const [database, setDatabase] = useState<any>([])
     const [databaseKeys, setDatabaseKeys] = useState<any>([])
-    const [selectedRows, setSelectedRows] = useState<any>([])
     const router = useRouter()
 
     const onDelete = async (row:any) => {
@@ -26,8 +25,6 @@ const NotionTable = ({dbId}:any) => {
 
     const onEdit = async (row:any) => {
     }
-
-      
 
     useEffect(() => {
         const updateDatabase = async () => {    
@@ -99,7 +96,7 @@ const NotionTable = ({dbId}:any) => {
 
   return (
     <>
-        <div className="overflow-x-auto mx-4  ">
+        <div className="overflow-x-auto w-[85%] ">
             <DataTable columns={databaseKeys} data={database} onDelete={onDelete} onEdit={onEdit}/>
         </div>
     </>

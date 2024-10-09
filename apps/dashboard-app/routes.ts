@@ -10,7 +10,7 @@ export const authRoutes =[
 
 export const apiAuthPrefix = "/api/auth"
 
-export const DEFAULT_LOGIN_REDIRECT = "/financial"
+export const DEFAULT_LOGIN_REDIRECT = "/home"
 
 export const protectedRoutes = [
     "/"

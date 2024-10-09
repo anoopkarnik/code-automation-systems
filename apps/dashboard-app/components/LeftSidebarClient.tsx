@@ -15,7 +15,7 @@ const LeftSidebarClient = () => {
   return (
     <>
         <LeftSidebar
-          appName="Personal Automation Dashboard"
+          appName="Personal Automation System"
           appIcon="https://raw.githubusercontent.com/anoopkarnik/personal-apps/main/apps/dashboard-app/public/apps.png"
           sidebarStartItems={sidebarStartItems}
           sidebarEndItems={sidebarEndItems}

@@ -199,6 +199,7 @@ async function modifyProperty(property:any) {
         case 'text':
             return { rich_text: [{ text: { content: property.value } }] };
         case 'title':
+
             return { title: [{ text: { content: property.value } }] };
         case 'date':
             return { date: { start: property.value || '1900-01-01' } };
@@ -239,7 +240,12 @@ function unmodifyProperty(prop:any) {
         case 'select':
             return prop.select ? prop.select.name : null;
         case 'title':
-            return prop.title[0].text.content;
+            if (prop.title.length > 0) {
+                return prop.title[0].plain_text;
+            }
+            else{
+                return '';
+            }
         case 'rich_text':
             return prop.rich_text.length > 0 ? prop.rich_text[0].text.content : '';
         case 'rollup':
@@ -270,7 +276,12 @@ function unmodifyProperty(prop:any) {
             return prop.array.map((x:any) => unmodifyProperty(x));
         case 'files':
             if (prop.files.length > 0) {
-                return prop.files[0].external.url;
+                if(prop.files[0].type === 'external'){
+                    return prop.files[0].external.url;
+                }
+                else if(prop.files[0].type === 'file'){
+                    return prop.files[0].file.url;
+                }
             }
             return '';
         case 'url':
