@@ -1,14 +1,11 @@
 'use selection'
 
-import React, {  useContext, useEffect, useRef, useState } from 'react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select'
+import React, {  useContext, useEffect, useState } from 'react'
 import { ConnectionsContext } from '../providers/connections-provider'
 import { getDatabases, getNotionInfo } from '../app/actions/notion/notion'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
 import { updateNotionDatabase } from '../app/actions/notion/notion'
 import { useSession } from 'next-auth/react'
-import { Input } from '@repo/ui/atoms/shadcn/Input'
-import { getDefaultDbFromContext } from '../app/actions/notion/common'
 import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect'
 
 const   DbSelection = ({title,name,fieldName}:any) => {
@@ -42,7 +39,7 @@ const   DbSelection = ({title,name,fieldName}:any) => {
         //     console.log('defaultDb',JSON.stringify(defaultDb || {}))
         //     setSelectedDb(JSON.stringify(defaultDb || {}))
         // }
-    }, [userId])
+    }, [userId,fieldName])
 
 
     const updateDatabase = async () => {

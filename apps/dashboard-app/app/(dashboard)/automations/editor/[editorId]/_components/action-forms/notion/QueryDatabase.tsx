@@ -90,7 +90,7 @@ const QueryDatabase = ({funcType,nodeType,type,subType,node}:any) => {
 
         }
         fetchOptions();
-    },[userId,selectedNotionAccount])
+    },[userId,selectedNotionAccount,node])
 
     const fetchDatabases = async (value:string) => {
         setSelectedNotionAccount(value);

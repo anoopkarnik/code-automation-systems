@@ -22,7 +22,7 @@ const PersonalProductivityPage = () => {
     if (tablesInDatabase && tablesInDatabase[database]) {
       setTables(tablesInDatabase[database])
     }
-  }, [tablesInDatabase])
+  }, [tablesInDatabase,database])
 
   if (isMobile){
     return (
