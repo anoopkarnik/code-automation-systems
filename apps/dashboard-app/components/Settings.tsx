@@ -31,7 +31,7 @@ const Settings = ({tables,notionTemplateUrl}:any) => {
                 <AccordionContent>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-2'>
                         {tables && Object.keys(tables).map((table:any) => (
-                            <DbSelection title={table +" Notion Table"} name={table} fieldName={tables[table]}/>
+                            <DbSelection key={table} title={table +" Notion Table"} name={table} fieldName={tables[table]}/>
                         ))}
                     </div>
                 </AccordionContent>

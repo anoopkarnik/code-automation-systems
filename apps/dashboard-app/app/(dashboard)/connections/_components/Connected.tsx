@@ -1,6 +1,6 @@
 'use client'
 import React, {  useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { SessionContext, useSession } from 'next-auth/react'
 import ConnectedCard from '../../../../components/ConnectedCard'
 import { getConnectionsAction } from '../../../actions/connections/common-connection'
 
@@ -8,6 +8,7 @@ const Connected = () => {
 
   const session = useSession()
   const [connections,setConnections] = useState<any>([])
+
 
   useEffect(() => {
     const getConnections = async () => {
@@ -17,7 +18,7 @@ const Connected = () => {
       }
     };
     getConnections();
-  }, []);
+  }, [session]);
 
   if (!session) {
     return <div>loading...</div>
