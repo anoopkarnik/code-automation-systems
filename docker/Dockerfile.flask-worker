@@ -1,6 +1,16 @@
 FROM python:3.8.12
+
+# Set the working directory inside the container
 WORKDIR /app
+
+# Copy the Flask app into the container
 COPY apps/flask-worker ./apps/flask-worker
+
+# Install dependencies from requirements.txt
 RUN pip install --no-cache-dir -r apps/flask-worker/app/requirements.txt
+
+# Expose port 5000 for the Flask app
 EXPOSE 5000
-CMD ["gunicorn", "-w 1", "-b 0.0.0.0:5000", "--access-logfile", "apps/flask-worker/app/logs/access.log", "--error-logfile","apps/flask-worker/app/logs/error.log", "app:app"]
+
+# CMD for running gunicorn
+CMD ["python3", "apps/flask-worker/app/app.py"]
