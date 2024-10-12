@@ -1,5 +1,5 @@
 import psycopg2
-
+import logging
 # Set up your PostgreSQL connection
 def get_db_connection():
     connection = psycopg2.connect(
@@ -13,9 +13,9 @@ def get_db_connection():
 
 # Function to fetch event details by event ID
 def get_event_details_by_id(event_id: str):
-    print("Connecting to DB")
+    logging.info("Connecting to DB")
     connection = get_db_connection()
-    print("Connected to DB")
+    logging.info("Connected to DB")
     cursor = connection.cursor()
 
     # Raw SQL query to get event details with workflows, actions, and action types
