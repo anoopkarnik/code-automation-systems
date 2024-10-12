@@ -1,13 +1,25 @@
 import psycopg2
 import logging
+import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
+POSTGRES_DB = os.environ.get('POSTGRES_DB')
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
+
 # Set up your PostgreSQL connection
 def get_db_connection():
     connection = psycopg2.connect(
-        host="bayesian-samaritans.c07q770mtb5c.ap-south-1.rds.amazonaws.com",  # Update with your DB host
-        database="postgres",  # Update with your DB name
-        user="anoop",  # Update with your DB username
-        password="dasika#1992", # Update with your DB password
-        port=5432  # Update with your DB port
+        host=POSTGRES_HOST,  
+        database=POSTGRES_DB, 
+        user=POSTGRES_USER, 
+        password=POSTGRES_PASSWORD,
+        port=POSTGRES_PORT
     )
     return connection
 
@@ -28,7 +40,8 @@ def get_event_details_by_id(event_id: str):
             a."sortingOrder" as action_sorting_order,
             at.id as action_type_id,
             at.name as action_type_name,
-            e.metadata as event_metadata
+            e.metadata as event_metadata,
+            at."serverType" as server_type
         FROM
             workflow_schema."Event" e
         LEFT JOIN
@@ -62,6 +75,7 @@ def get_event_details_by_id(event_id: str):
         action_type_id = row[5]
         action_type_name = row[6]
         event_metadata = row[7]
+        server_type = row[8]
 
         
         if workflow_id not in workflows:
@@ -72,7 +86,8 @@ def get_event_details_by_id(event_id: str):
             "metadata": action_metadata,
             "sorting_order": sorting_order,
             "type": {
-                "name": action_type_name
+                "name": action_type_name,
+                "server_type": server_type
             }
         })
 
@@ -82,3 +97,41 @@ def get_event_details_by_id(event_id: str):
     connection.close()
 
     return event_details
+
+def update_event_status(event_id: str, status: str):
+    logging.info("Connecting to DB")
+    connection = get_db_connection()
+    logging.info("Connected to DB")
+    cursor = connection.cursor()
+
+    # Raw SQL query to update the status of an event
+    query = """
+        UPDATE workflow_schema."Event"
+        SET status = %s
+        WHERE id = %s;
+    """
+
+    cursor.execute(query, (status, event_id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    logging.info(f"Updated status of event {event_id} to {status}")
+
+def update_event_metadata(event_id: str, metadata: dict):
+    logging.info("Connecting to DB")
+    connection = get_db_connection()
+    logging.info("Connected to DB")
+    cursor = connection.cursor()
+
+    # Raw SQL query to update the metadata of an event
+    query = """
+        UPDATE workflow_schema."Event"
+        SET metadata = %s
+        WHERE id = %s;
+    """
+
+    cursor.execute(query, (json.dumps(metadata), event_id))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    logging.info(f"Updated metadata of event {event_id}")
