@@ -66,6 +66,7 @@ model WorkflowActionSubType {
   id                String   @id @default(uuid())
   name              String
   typeId            String
+  serverType        String @default("nodejs")
   actionType        WorkflowActionType @relation(fields: [typeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   actions           WorkflowAction[]
   @@schema("workflow_schema")

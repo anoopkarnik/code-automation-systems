@@ -7,8 +7,8 @@ import { javascriptCode } from "./javascriptCode";
 import { modifyMetadata } from "./utils";
 import { createNotionPages, modifyNotionPages, queryAllNotionDatabaseAction } from "./notion";
 
-const NODE_TOPIC_NAME = "nodejs-server-events";
-const FLASK_TOPIC_NAME = "flask-server-events";
+const NODE_TOPIC_NAME = process.env.NODE_TOPIC_NAME || "nodejs-server-events";
+const FLASK_TOPIC_NAME = process.env.FLASK_TOPIC_NAME || "flask-server-events";
 
 const kafka = new Kafka({
   clientId: "workflow-event-outbox-processor",
@@ -53,6 +53,9 @@ async function main() {
                 const stage = parsedValue.stage;
                 const eventDetails = await getEventDetailsById(eventId);
                 const currentAction = eventDetails?.Workflows?.actions.find(x=> x.sortingOrder === stage)
+                log = `Processing ${eventId} at stage ${stage} with action ${JSON.stringify(currentAction?.type)}`;
+                newLogs.push(log);
+                logger.info(log);   
                 if (!currentAction) {
                     logger.error(`No action found for event ${eventId} at stage ${stage}`);
                     try{
@@ -63,78 +66,8 @@ async function main() {
                     }
                     return;
                 }
-                log = `Processing ${eventId} at stage ${stage} with action ${currentAction?.type?.name}`;
-                newLogs.push(log);
-                logger.info(log);
-                let result:any = {};
-                let metadata:any = currentAction?.metadata;
-                const prevMetadata:any = eventDetails?.metadata;
-                logger.info(`Metadata for action ${currentAction?.type?.name} before replacement ${JSON.stringify(metadata)}`);
-                logger.info(`Previous metadata for event ${eventId} is ${JSON.stringify(prevMetadata)}`);
-                metadata = await modifyMetadata(metadata, prevMetadata);
-                logger.info(`Metadata for action ${currentAction?.type?.name} is ${JSON.stringify(metadata)}`);
-                if (currentAction?.type?.name === 'External Webhook'){
-                    const res = await webhook(metadata?.url, metadata?.body, metadata?.headers,metadata?.method);
-
-                    if (res.result){
-                        result = res.result;
-                    }
-                    let log = res.log;
-                    logger.info(log);
-                    newLogs.push(log);
-                }
-                else if (currentAction?.type?.name === 'Javascript Code'){
-                    const res = await javascriptCode(metadata?.code);
-                    if (res.result){
-                        result = res.result;
-                    }
-                    let log = res.log;
-                    logger.info(log);
-                    newLogs.push(log);
-                }
-                else if (currentAction?.type?.name === 'Query Database'){
-                    const res = await queryAllNotionDatabaseAction({database_id: metadata?.databaseId, 
-                        apiToken: metadata?.notionAccountId, filters: metadata?.filters, sorts: metadata?.sorts});
-                    if (res.result){
-                        result = res.result;
-                    }
-                    let log = res.log;
-                    logger.info(log);
-                    newLogs.push(log);
-
-                }
-
-                else if (currentAction?.type?.name === 'Create Page'){
-                    const res = await createNotionPages({apiToken: metadata?.notionAccountId, 
-                        dbId: metadata?.databaseId, pagesProperties: metadata?.allProperties});
-                    if (res.result){
-                        result = res.result;
-                    }
-                    let log = res.log;
-                    logger.info(log);
-                    newLogs.push(log);
-                }
-                else if (currentAction?.type?.name === 'Update Page'){
-                    const res = await modifyNotionPages({apiToken: metadata?.notionAccountId, 
-                        pageIds: metadata?.pageIds, pagesProperties: metadata?.allProperties});
-                    if (res.result){
-                        result = res.result;
-                    }
-                    let log = res.log;
-                    logger.info(log);
-                    newLogs.push(log);
-                }
-
-
-                const eventMetadata:any = eventDetails?.metadata;
-                let stageString = `action${stage}`
-                let updatedMetadata:any = {...eventMetadata, [stageString] : {result:result, logs: newLogs}};
-                logger.info('Result got is ', result);
-                const lastStage = (eventDetails?.Workflows?.actions.length || 1) - 1;
-                logger.info(`updatedMetadata is ${JSON.stringify(updatedMetadata)}`);
-                if (currentAction?.type?.name === 'Python Code'){
+                if (currentAction?.type?.serverType === 'flask'){
                     console.log('Sending message to Topic ', FLASK_TOPIC_NAME);
-                    await updateEventMetadata(eventId, updatedMetadata);
                     await producer.send({
                         topic: FLASK_TOPIC_NAME,
                         messages: [
@@ -145,6 +78,72 @@ async function main() {
                     })
                 }
                 else{
+                    let result:any = {};
+                    let metadata:any = currentAction?.metadata;
+                    const prevMetadata:any = eventDetails?.metadata;
+                    logger.info(`Metadata for action ${currentAction?.type?.name} before replacement ${JSON.stringify(metadata)}`);
+                    logger.info(`Previous metadata for event ${eventId} is ${JSON.stringify(prevMetadata)}`);
+                    metadata = await modifyMetadata(metadata, prevMetadata);
+                    logger.info(`Metadata for action ${currentAction?.type?.name} is ${JSON.stringify(metadata)}`);
+    
+                    if (currentAction?.type?.name === 'External Webhook'){
+                        const res = await webhook(metadata?.url, metadata?.body, metadata?.headers,metadata?.method);
+    
+                        if (res.result){
+                            result = res.result;
+                        }
+                        let log = res.log;
+                        logger.info(log);
+                        newLogs.push(log);
+                    }
+                    else if (currentAction?.type?.name === 'Javascript Code'){
+                        const res = await javascriptCode(metadata?.code);
+                        if (res.result){
+                            result = res.result;
+                        }
+                        let log = res.log;
+                        logger.info(log);
+                        newLogs.push(log);
+                    }
+                    else if (currentAction?.type?.name === 'Query Database'){
+                        const res = await queryAllNotionDatabaseAction({database_id: metadata?.databaseId, 
+                            apiToken: metadata?.notionAccountId, filters: metadata?.filters, sorts: metadata?.sorts});
+                        if (res.result){
+                            result = res.result;
+                        }
+                        let log = res.log;
+                        logger.info(log);
+                        newLogs.push(log);
+    
+                    }
+    
+                    else if (currentAction?.type?.name === 'Create Page'){
+                        const res = await createNotionPages({apiToken: metadata?.notionAccountId, 
+                            dbId: metadata?.databaseId, pagesProperties: metadata?.allProperties});
+                        if (res.result){
+                            result = res.result;
+                        }
+                        let log = res.log;
+                        logger.info(log);
+                        newLogs.push(log);
+                    }
+                    else if (currentAction?.type?.name === 'Update Page'){
+                        const res = await modifyNotionPages({apiToken: metadata?.notionAccountId, 
+                            pageIds: metadata?.pageIds, pagesProperties: metadata?.allProperties});
+                        if (res.result){
+                            result = res.result;
+                        }
+                        let log = res.log;
+                        logger.info(log);
+                        newLogs.push(log);
+                    }
+    
+                    const eventMetadata:any = eventDetails?.metadata;
+                    let stageString = `action${stage}`
+                    let updatedMetadata:any = {...eventMetadata, [stageString] : {result:result, logs: newLogs}};
+                    logger.info('Result got is ', result);
+                    const lastStage = eventDetails?.Workflows?.actions.length;
+                    logger.info(`updatedMetadata is ${JSON.stringify(updatedMetadata)}`);
                     if (lastStage!==stage){
                         await updateEventMetadata(eventId, updatedMetadata);
                         await producer.send({
@@ -165,13 +164,14 @@ async function main() {
                             logger.error(`Error updating event ${eventId} to COMPLETED`);
                         }
                     }
+                    await consumer.commitOffsets([{ 
+                        topic, 
+                        partition, 
+                        offset: (parseInt(message.offset) + 1).toString() 
+                    }])
+                    logger.info(`Processed message ${message.offset} from topic ${topic}`);
                 }
-                await consumer.commitOffsets([{ 
-                    topic, 
-                    partition, 
-                    offset: (parseInt(message.offset) + 1).toString() 
-                }])
-                logger.info(`Processed message ${message.offset} from topic ${topic}`);
+               
             }
             catch (error){
                 logger.error(`Error processing message ${message.offset} from topic ${topic}`);

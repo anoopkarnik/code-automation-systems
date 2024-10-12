@@ -4,7 +4,7 @@ require('dotenv').config();
 import { logger } from '@repo/winston-logger/index';
 import { updateEvent } from '@repo/prisma-db/repo/workflow';
 
-const TOPIC_NAME = 'nodejs-server-events';
+const NODE_TOPIC_NAME = process.env.NODE_TOPIC_NAME || 'nodejs-server-events';
 const kafka = new Kafka({
     clientId: 'workflow-event-outbox-processor',
     brokers: [process.env.BOOTSTRAP_SERVER || '']
@@ -28,7 +28,7 @@ async function main() {
 
         // Send all messages to Kafka in a single call
         await producer.send({
-            topic: TOPIC_NAME,
+            topic: NODE_TOPIC_NAME,
             messages: messages
         });
 

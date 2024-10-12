@@ -1,5 +1,5 @@
 # Function to run the Kafka consumer
-from kafka import KafkaConsumer
+from kafka import KafkaConsumer,KafkaProducer
 import threading
 import json
 from main.repositories import Repository as repo
@@ -29,6 +29,10 @@ def consume_kafka_messages():
         group_id='flask-kafka-group',
         value_deserializer=lambda x: json.loads(x.decode('utf-8'))
     )
+    producer = KafkaProducer(
+        bootstrap_servers=[BOOTSTRAP_SERVER],
+        retries=3)
+
     for message in consumer:
         log = f"Received message: {message.offset} from topic {message.topic}"
         logging.info(log)
@@ -47,7 +51,7 @@ def consume_kafka_messages():
             logging.info(log)
             eventDetails = repo.get_event_details_by_id(event_id)
             log = f"Event details: {eventDetails}"
-            # logging.info(log)
+            logging.info(log)
             newLogs.append(log)
             currentAction = [action for action in eventDetails['Workflows']['actions'] if action['sorting_order'] == stage]
             if len(currentAction) == 0:
@@ -62,16 +66,16 @@ def consume_kafka_messages():
             newLogs.append(log)
             result = {}
             log = f"Metadata for action {currentAction['type']['name']} before replacement {currentAction['metadata']}"
-            # logging.info(log)
+            logging.info(log)
             newLogs.append(log)
             log = f"Metadata for event {event_id} is {eventDetails['metadata']}"
-            # logging.info(log)
+            logging.info(log)
             newLogs.append(log)
             actionMetadata = currentAction['metadata']
             eventMetadata = eventDetails['metadata']
             metadata = utils.modify_metadata(actionMetadata, eventMetadata)
             log = f"Replaced metadata {event_id} is {metadata}"
-            # logging.info(log)
+            logging.info(log)
             newLogs.append(log)
             if currentAction['type']['name'] == 'Python Code':
                 res = pythonCode.pythonCode(metadata['code'])
@@ -84,10 +88,18 @@ def consume_kafka_messages():
             updatedEventMetadata = eventMetadata
             updatedEventMetadata[stageString] = {"result": result, "logs": newLogs}
             logging.info(f'Result got is {result}')
-            lastStage = len(eventDetails['Workflows']['actions']) - 1
-
+            lastStage = len(eventDetails['Workflows']['actions']) 
+            log = f"updated Metadata is {updatedEventMetadata}"
+            logging.info(log)
+            newLogs.append(log)
+            if (lastStage!=stage):
+                repo.update_event_metadata(event_id, updatedEventMetadata)
+                producer.send(NODE_TOPIC_NAME, json.dumps({"eventId": event_id, "stage": stage+1}))
+            else:
+                repo.update_event_metadata(event_id, updatedEventMetadata)
+                repo.update_event_status(event_id, "Completed")
             consumer.commit()
-
+            continue
 
         except Exception as e:
             log = f"Error Processing message: {message.offset} from topic {message.topic} ---- {e}"
