@@ -29,18 +29,23 @@ const EventComponent = () => {
     };
     fetchEvents();
   }, [workflowId,userId]);
+  if (events.length==0) return null;
 
   return (
-    <div className='flex flex-col h-[800px] border-x-2 border-border/50 pr-2 px-2 rounded-lg border bg-card text-card-foreground shadow-sm ml-4'>
-      <div className='text-xl font-medium text-center mb-4'>Events</div>
-      {events.slice(0,10).map((event) => (
-        <div key={event.id} className='flex items-center justify-between gap-4 border-b-2 border-border/40 text-xs'>
-          <div>{format(new Date(event.createdAt), 'HH:mm')}</div>
-          <div>{format(new Date(event.createdAt), 'ddMMM')}</div>
-          <div>{event.Workflows.name}</div>
-          <div>{event.status}</div>
-        </div>
-      ))}
+    <div className= 'flex flex-col gap-4'>
+      <div className='rounded-lg border bg-card text-card-foreground shadow-sm ml-4'>
+        <div className='text-xl font-medium text-center mt-1 mb-2 '>Events</div>
+      </div>
+      <div className='flex flex-col border-x-2 border-border/50 p-4 rounded-lg border bg-card text-card-foreground shadow-sm ml-4'>
+        {events.slice(0,24).map((event) => (
+          <div key={event.id} className='flex items-center justify-between gap-4 border-b-2 border-border/40 text-xs'>
+            <div>{format(new Date(event.createdAt), 'HH:mm')}</div>
+            <div>{format(new Date(event.createdAt), 'ddMMM')}</div>
+            <div>{event.Workflows.name}</div>
+            <div>{event.status}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

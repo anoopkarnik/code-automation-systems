@@ -35,3 +35,10 @@ export const getDefaultDbFromContext = (name: string, context: any) => {
         default: return null
     }
 }
+import {NotionAPI} from 'notion-client'
+                                                 
+export const getNotionPage = async (pageId: string) => {
+    const notion  = new NotionAPI()
+    const recordMap = await notion.getPage(pageId)
+    return recordMap
+}

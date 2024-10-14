@@ -18,7 +18,7 @@ const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
                 </Button>
             </div>}
         </SheetTrigger>
-        <SheetContent side='rightLarge'>
+        <SheetContent className="overflow-y-auto" side='rightLarge'>
             <SheetHeader>
                 <SheetTitle>Create a {subType.name} </SheetTitle>
                 <SheetDescription>

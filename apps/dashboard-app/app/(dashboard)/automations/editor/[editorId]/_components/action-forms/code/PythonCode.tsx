@@ -1,16 +1,24 @@
 import CodeMirror from '@uiw/react-codemirror';
 // @ts-ignore
 import { python } from '@codemirror/lang-python';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { useContext, useState } from 'react';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
 import  { Alert, AlertDescription } from '@repo/ui/atoms/shadcn/Alert';
 import { useToast } from '../../../../../../../../hooks/useToast';
-import { getSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
-import { createActionAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';;
+import { createActionAction, updateActionAction } from '../../../../../../../actions/workflows/workflow';import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@repo/ui/molecules/shadcn/Accordion';
+import { Label } from '@repo/ui/atoms/shadcn/Label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
+import { getDatabases } from '../../../../../../../actions/notion/notion';
+import { getNotionConnection } from '../../../../../../../actions/connections/notion-connections';
+import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
+import { Input } from '@repo/ui/atoms/shadcn/Input';
+import GetVariables from './GetVariables';
+;
 
 export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const {toast} = useToast();
@@ -22,34 +30,8 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const [output, setOutput] = useState('');
     const [error, setError] = useState('');
     const [logs, setLogs] = useState('');
-    const compileCode = () => {
-        setError('');
-        setOutput('');
-    
-        try {
-          // Create a new Function from the code string
-          const compiledFunction = new Function(code);
 
-          // Capture console.log output
-          const originalLog = console.log;
-          let logs:any = [];
-          console.log = (...args) => {
-            logs.push(args.join(' '));
-          };
-    
-          // Execute the compiled function
-          const res = compiledFunction();
-    
-          // Restore original console.log
-          console.log = originalLog;
-          setOutput(res);
-    
-          setLogs(logs.join('\n'));
-        } catch (err:any) {
-          setError(err.toString());
-        }
-      };
-      const onSubmit = async () => {
+    const onSubmit = async () => {
         const session = await getSession()
         const userId = session?.user?.id
         let metadata = {
@@ -88,8 +70,10 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         }
     }
 
+
     return (
         <div className='flex flex-col gap-4'>
+            <GetVariables/>
             <CodeMirror
                 value={code}
                 onChange={(value) => modifyCode(value)}
@@ -99,8 +83,8 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
                 className="border rounded"
             />
             <div className='flex w-full justify-center gap-4'>
-                <Button size="lg" onClick={compileCode}>Compile and Run</Button>
-                <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add Action</Button>
+                <Button size="lg" variant="default" onClick={() => modifyCode('// Write your python code here')}>Clear</Button>
+                <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add / Edit Action</Button>
             </div>
             {output && (
                 <Alert>

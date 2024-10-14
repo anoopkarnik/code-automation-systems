@@ -20,7 +20,8 @@
     "@repo/prisma-db": "*",
     "@repo/zod": "*",
     "bcryptjs": "^2.4.3",
-    "next-auth": "^5.0.0-beta.19",
+    "next": "14.2.15",
+    "next-auth": "^5.0.0-beta.22",
     "prisma": "^5.15.0"
   }
 }

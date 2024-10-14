@@ -6,6 +6,14 @@ import { SessionProviders } from "../providers/session-provider";
 import { ConnectionsProvider } from "../providers/connections-provider";
 import useConnection from "../hooks/useConnection";
 import { Toaster } from "../components/Toaster";
+// core styles shared by all of react-notion-x (required)
+import 'react-notion-x/src/styles.css'
+
+// used for code syntax highlighting (optional)
+import 'prismjs/themes/prism-tomorrow.css'
+
+// used for rendering equations (optional)
+import 'katex/dist/katex.min.css'
 
 
 const font = Roboto_Mono({
