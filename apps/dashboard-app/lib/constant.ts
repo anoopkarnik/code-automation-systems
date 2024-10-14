@@ -72,7 +72,7 @@ export const sidebarStartItems = [
   },
   {
     title: "Systems",
-    icon: BrainIcon,
+    image: "/systems.png",
     show: true,
     subItems: [
       {
