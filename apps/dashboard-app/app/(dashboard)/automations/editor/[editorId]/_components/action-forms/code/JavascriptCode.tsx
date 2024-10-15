@@ -98,6 +98,7 @@ export const JavascriptCode = ({funcType,nodeType,type,subType,node}: any) => {
                 className="border rounded"
             />
             <div className='flex w-full justify-center gap-4'>
+                <Button size="lg" variant="default" onClick={() => modifyCode('// Write your javascript code here')}>Clear</Button>
                 <Button size="lg" onClick={compileCode}>Compile and Run</Button>
                 <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add Action</Button>
             </div>

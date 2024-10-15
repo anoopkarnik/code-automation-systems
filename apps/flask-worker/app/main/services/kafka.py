@@ -78,7 +78,12 @@ def consume_kafka_messages():
             logging.info(log)
             newLogs.append(log)
             if currentAction['type']['name'] == 'Python Code':
-                res = pythonCode.pythonCode(metadata['code'])
+                if 'codeBlocks' not in metadata:
+                    code = metadata['code']
+                else:
+                    codeBlocks = metadata['codeBlocks']
+                    code = codeBlocks.map(lambda block: block.code).join('\n')
+                res = pythonCode.pythonCode(code)
                 log = res['log']
                 if 'result' in res:
                     result = res['result']

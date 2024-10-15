@@ -1,9 +1,12 @@
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@repo/ui/molecules/shadcn/Sheet'
-import React from 'react'
+import React, { useState } from 'react'
 import SelectedForm from './SelectedForm'
 import { Button } from '@repo/ui/atoms/shadcn/Button'
+import { ExpandIcon, ShrinkIcon } from 'lucide-react'
+import { set } from 'date-fns'
 
 const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
+    const [size, setSize] = useState<any>("rightLarge")
   return (
     <Sheet>
         <SheetTrigger asChild>
@@ -18,9 +21,16 @@ const NodeSheet = ({funcType,nodeType,type,subType,node}:any) => {
                 </Button>
             </div>}
         </SheetTrigger>
-        <SheetContent className="overflow-y-auto" side='rightLarge'>
+        <SheetContent className="overflow-y-auto" side={size}>
             <SheetHeader>
-                <SheetTitle>Create a {subType.name} </SheetTitle>
+                <SheetTitle>
+                    <div className='flex items-center justify-start gap-4'>
+                        <div>Create a {subType.name}</div>
+                        {size=="rightLarge" && <ExpandIcon className='cursor-pointer w-5 h-5' onClick={()=>setSize("rightXLarge")}/>}
+                        {size=="rightXLarge" && <ShrinkIcon className='cursor-pointer w-5 h-5' onClick={()=>setSize("rightLarge")}/>}
+                    </div>
+                    
+                </SheetTitle>
                 <SheetDescription>
                     {subType.description}
                 </SheetDescription>

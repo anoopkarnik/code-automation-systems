@@ -165,3 +165,22 @@ export const runWorkflow = async (editorId:string) => {
         return {error: "Workflow run failed"}
     }
 }
+
+export const runPythonCode = async (code:string) => {
+    const body = JSON.stringify({"code_string":code});
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: body,
+    }
+    try{
+        const res = await fetch(`http://0.0.0.0:5000/payload`, options)
+        const data = await res.json();
+        return {success: "Python code executed successfully", result: data}
+    }
+    catch (error) {
+        return {error: "Python code execution failed"}
+    }
+}
