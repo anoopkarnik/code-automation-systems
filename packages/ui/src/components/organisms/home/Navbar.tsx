@@ -29,7 +29,7 @@ export const Navbar = ({title, screens, user,setTheme,
   return (
     <div className=' p-1 flex items-center justify-between bg-inherit sticky top-0 z-20  px-4 py-2'>
         <div className='flex items-center'>
-           {!isMobile && title && <div className='text-lg font-normal'>{title}</div>}
+           {!isMobile && title && <div className='text-subtitle '>{title}</div>}
         </div>
         <div className={cn('flex items-center gap-4',
             isMobile && 'gap-2'

@@ -40,7 +40,7 @@ export const getNotionInfo = async (userId: string) => {
 }
 
 export const updateNotionDatabase = async (notionId: string, field:string, value: any) => {
-    
+
     const notionDb = await updateNotionDb({id:notionId, field, value} );
     return notionDb;
 }
@@ -56,6 +56,8 @@ export const queryAllNotionDatabaseAction = async ({apiToken,database_id,filters
 }
 
 export const queryNotionDatabaseProperties = async ({apiToken,database_id}:any) => {
+    console.log('apiToken', apiToken)
+    console.log('database_id', database_id)
     const response = await getNotionDatabaseProperties({apiToken,database_id })
     return response;
 }

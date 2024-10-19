@@ -20,6 +20,9 @@ export default function NavbarClient() {
     useEffect(() => {
         const refreshSession = async () => {
             const session = await getSession();
+            if(location?.pathname?.includes('/editor/')){
+                return 
+            }
             const pathSegments = location?.pathname?.split('/').filter(Boolean);
             let extractedTitle:any = pathSegments && pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
             extractedTitle = extractedTitle.replaceAll("-"," ")

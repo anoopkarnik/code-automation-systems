@@ -1,3 +1,4 @@
+import { sub } from "date-fns";
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
@@ -76,6 +77,17 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontSize:{
+        "title-h1": ["36px", {fontWeight: "900"}],
+        "title-h2": ["30px", {fontWeight: "700"}],
+        "title-h3": ["24px", {fontWeight: "600"}],
+        "subtitle": ["20px", {fontWeight: "500"}],
+        "emphasized": ["18px", {fontWeight: "600"}],
+        "button": ["16px", {fontWeight: "400"}],
+        "paragraph": ["14px", {fontWeight: "300"}],
+        "description": ["12px", {fontWeight: "200"}],
+        "code-snippet": ["12px", {fontWeight: "200"}],
+      }
     },
   },
   plugins: [tailwindcssAnimate],

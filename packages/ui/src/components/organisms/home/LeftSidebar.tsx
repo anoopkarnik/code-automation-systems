@@ -72,7 +72,7 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
 
     return (
         <>
-            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto text-sm font-light',
+            <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto ',
                 isResetting && "transition-all ease-in-out duration-300",
                 isMobile && "min-w-[70px]",
                 isNotMobile && "min-w-[240px]",
@@ -88,7 +88,7 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                             isMobile && isCollapsed && 'border-none'
                         )}>
                             {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-8 h-8' />}
-                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-md  '>{appName}</h1>}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-subtitle text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (
@@ -110,7 +110,7 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                 isMobile && "left-[0px] w-full"
             )}>
                 <nav className='bg-transparent px-3 py-2 w-full '>
-                    {isCollapsed && <AlignJustifyIcon onClick={resetWidth} role="button" className='text-black dark:text-white h-6 w-6' />}
+                    {isCollapsed && <AlignJustifyIcon onClick={resetWidth} role="button" className='text-button h-6 w-6' />}
                 </nav>
 
             </div>

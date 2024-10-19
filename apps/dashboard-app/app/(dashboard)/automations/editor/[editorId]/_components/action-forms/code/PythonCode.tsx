@@ -1,8 +1,9 @@
 import CodeMirror from '@uiw/react-codemirror';
 // @ts-ignore
 import { python } from '@codemirror/lang-python';
+import { autocompletion } from '@codemirror/autocomplete';
+
 import React, { useEffect } from 'react';
-import { oneDark } from '@codemirror/theme-one-dark';
 import { useContext, useState } from 'react';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
 import  { Alert, AlertDescription } from '@repo/ui/atoms/shadcn/Alert';
@@ -12,9 +13,10 @@ import { useParams, useRouter } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { createActionAction, runPythonCode, updateActionAction } from '../../../../../../../actions/workflows/workflow';
 
-import { ForwardIcon, PlayIcon, SquarePlusIcon, TrashIcon } from 'lucide-react';
+import { ArrowDownFromLineIcon, ForwardIcon, PlayIcon, SquarePlusIcon, TrashIcon } from 'lucide-react';
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 import CodeConstruction from './CodeConstruction';
+import { set } from 'date-fns';
 
 
 export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
@@ -25,11 +27,12 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const editor = useContext(EditorContext);
     // const [codeBlocks, setCodeBlocks] = useState(node?.metdata?.code||[{ id: 0, code: '# Write your python code here' }]);
     const [codeBlocks, setCodeBlocks] = useState<any>([]);
-
+    const [codeBlockHeights, setCodeBlockHeights] = useState<any>([]);
 
     const [output, setOutput] = useState<any>('');
     const [error, setError] = useState<any>('');
     const [logs, setLogs] = useState<any>('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (node?.metadata?.code){
@@ -39,6 +42,13 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
             setCodeBlocks(node?.metadata?.codeBlocks || [{ id: 0, code: '# Write your python code here' }])
         }
     },[node])
+
+    // Set the heights after codeBlocks are updated
+    useEffect(() => {
+        if (codeBlocks.length > 0) {
+            setCodeBlockHeights(codeBlocks.map((block: any) => ({ id: block.id, expanded: true })));
+        }
+    }, [codeBlocks]);
     // Function to add a new code block
     const addCodeBlock = (id:number) => {
         const newCodeBlock = { id: id+1, code: '# Write your python code here' };
@@ -58,7 +68,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const runCode = async (code:string) => {
         setError('');
         setOutput('');
-
+        setLoading(true);
         try {
             const res = await runPythonCode(code);
             setOutput(res?.result);
@@ -68,11 +78,13 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         } catch (err:any) {
             setError(err.toString());
         }
+        setLoading(false);
     };
 
     const runTillCurrentCode = async (id:number) => {
         setError('');
         setOutput('');
+        setLoading(true);
         let completeCode = codeBlocks.slice(0,id+1).map((block:any) => block.code).join('\n')
         try {
             const res = await runPythonCode(completeCode);
@@ -83,11 +95,13 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         } catch (err:any) {
             setError(err.toString());
         }
+        setLoading(false);
     };
 
     const runAllCode = async () => {
         setError('');
         setOutput('');
+        setLoading(true);
         let completeCode = codeBlocks.map((block:any) => block.code).join('\n')
         try {
             const res = await runPythonCode(completeCode);
@@ -98,6 +112,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         } catch (err:any) {
             setError(err.toString());
         }
+        setLoading(false);
     }
 
     const onSubmit = async () => {
@@ -137,6 +152,12 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         );
     };
 
+    const modifyHeight = (id: number) => {
+        setCodeBlockHeights(
+            codeBlockHeights.map((height: any) => (height.id === id ? { ...height, expanded: !height.expanded } : height))
+        );
+    }
+
 
 
     return (
@@ -150,19 +171,23 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
             {codeBlocks.map((block: any) => (
                 <div
                 key={block.id}
-                className='relative flex gap-4 border rounded p-2 hover:shadow-lg group'
+                className='relative  gap-4 border rounded p-2 hover:shadow-lg group'
                 >
                 <CodeMirror
                     value={block.code}
                     onChange={(value) => modifyCode(block.id, value)}
-                    height="500px"
                     theme="dark"
-                    extensions={[python()]}
+                    height={codeBlockHeights.find((height: any) => height.id === block.id)?.expanded ? '' : '100px'}
+                    extensions={[
+                        python(), // Syntax highlighting for Python
+                        autocompletion() // Enable autocompletion
+                      ]}
                     className="border rounded overflow-auto"
                 />
 
                 {/* Icon buttons, only visible on hover */}
-                <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-3 right-8 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowDownFromLineIcon size={18} className='cursor-pointer' onClick={() => modifyHeight(block.id)}/>
                     <PlayIcon size={18} className='cursor-pointer' onClick={() => runCode(block.code)}/>
                     <ForwardIcon size={18} className='cursor-pointer' onClick={() => runTillCurrentCode(block.id)}/>
                     <ConfirmDialog
@@ -176,6 +201,16 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
                 </div>
                 </div>
             ))}
+
+            {loading && (
+                <Alert>
+                <AlertDescription>
+                    <pre className="whitespace-pre-wrap break-words overflow-auto">
+                        Currently Running Code ......
+                    </pre>
+                </AlertDescription>
+                </Alert>
+            )}
 
             {output && (
                 <Alert>

@@ -23,7 +23,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
         {item.subItems && item.subItems.length > 0 ? (
             <div >
                 <div onClick={() => toggleSubItems(index)}
-                    className={cn('flex items-center gap-2 p-2 mx-2 text-md rounded-lg hover:bg-destructive/10 transition cursor-pointer ',
+                    className={cn('flex items-center gap-2 p-2 mx-2 text-button rounded-lg hover:bg-destructive/10 transition cursor-pointer ',
                         pathname === item.href && 'bg-destructive/30'
                     )}>
                     <TooltipProvider>
@@ -44,7 +44,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
                 <>
                 {showSubItems[index] && item.subItems.map((subItem: any, subIndex: number) => (
                     <div key={subIndex} onClick={() => redirect(subItem.href)}
-                        className={cn('flex items-center gap-2 p-2  rounded-lg text-sm hover:bg-destructive/10 transition cursor-pointer  ',
+                        className={cn('flex items-center gap-2 p-2  rounded-lg text-paragraph hover:bg-destructive/10 transition cursor-pointer  ',
                             pathname === subItem.href && 'bg-destructive/30',
                             isMobile && 'ml-4',
                             !isMobile && 'mx-4'
@@ -63,7 +63,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
             </div> )
             :
             <div onClick={() => redirect(item.href)}
-                className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg text-md hover:bg-destructive/10 transition cursor-pointer',
+                className={cn('flex items-center gap-2 p-2 mx-2 rounded-lg text-button hover:bg-destructive/10 transition cursor-pointer',
                     pathname === item.href && 'bg-destructive/30'
                 )}>
                 <TooltipProvider>
