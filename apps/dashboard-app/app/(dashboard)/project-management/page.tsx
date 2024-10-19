@@ -31,7 +31,7 @@ const ProjectsPage = () => {
           <SelectTrigger className='my-4 mx-8 w-[200px]'>
             <div>{selectedValue}</div>
           </SelectTrigger>
-          <SelectContent className='w-[200px]'>
+          <SelectContent className='w-[200px] text-emphasized'>
               <SelectItem key="Overview" value="Overview">
                 <div className='flex items-center justify-start gap-4 w-[200px]'>
                   <div>Overview</div>
@@ -58,7 +58,7 @@ const ProjectsPage = () => {
 
   return (
     <Tabs className='w-full' defaultValue='overview'>
-      <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
+      <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit text-emphasized'>
           <TabsTrigger key="Overview" value="Overview" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
             <div>Overview</div>
           </TabsTrigger>

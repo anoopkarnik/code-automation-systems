@@ -1,0 +1,97 @@
+#Get All Pages in a Notion Db
+
+notion_url = "https://api.notion.com/v1"
+token = "{{token}}"
+db_id = "{{db_id}}"
+headers = {
+    "Authorization": f"Bearer {token}",
+    "Notion-Version":"2022-02-22",
+    "Content-Type":"application/json"
+}
+notion_channel_url = os.path.join(notion_url,'databases',db_id,"query")
+has_more = True
+cursor = None 
+results = []
+filter_body = {{filter_body}}
+while has_more:
+    if cursor:
+        filter_body['start_cursor'] = cursor
+    temp_results = requests.post(notion_channel_url,headers=headers,data=json.dumps(filter_body)).json()
+    if len(temp_results)>0:
+        has_more = temp_results['has_more']
+        cursor = temp_results['next_cursor']
+        results.extend(temp_results['results'])
+    else:
+        has_more=False
+
+#Modify Results 
+
+modified_results = []
+
+for result in results:
+    modified_result = {}
+    modified_result['id'] = result['id']
+    
+    for prop in result['properties'].keys():
+        property = result['properties'][prop]
+        
+        # Using if-elif to handle the different types
+        if property['type'] == "unique_id":
+            modified_result[prop] = property['unique_id']['prefix'] + "-" + str(property['unique_id']['number'])
+        
+        elif property['type'] == "relation":
+            modified_result[prop] = [x['id'] for x in property['relation']]
+        
+        elif property['type'] == "number":
+            modified_result[prop] = property['number']
+        
+        elif property['type'] == "select":
+            modified_result[prop] = property['select']['name'] if property['select'] else None
+        
+        elif property['type'] == "title":
+            if len(property['title']) > 0:
+                modified_result[prop] = property['title'][0]['plain_text']
+            else:
+                modified_result[prop] = ''
+        
+        elif property['type'] == "rich_text":
+            modified_result[prop] = property['rich_text'][0]['text']['content'] if len(property['rich_text']) > 0 else ''
+        
+        elif property['type'] == "people":
+            modified_result[prop] = [x['name'] for x in property['people']]
+        
+        elif property['type'] == "status":
+            modified_result[prop] = property['status']['name'] if property['status'] else None
+        
+        elif property['type'] == "date":
+            modified_result[prop] = property['date']['start'] if property['date'] else None
+        
+        elif property['type'] == "multi_select":
+            modified_result[prop] = [x['name'] for x in property['multi_select']]
+        
+        elif property['type'] == "files":
+            if len(property['files']) > 0:
+                if property['files'][0]['type'] == 'external':
+                    modified_result[prop] = property['files'][0]['external']['url']
+                elif property['files'][0]['type'] == 'file':
+                    modified_result[prop] = property['files'][0]['file']['url']
+            else:
+                modified_result[prop] = ''
+
+        elif property['type'] == "checkbox":
+            modified_result[prop] = property['checkbox']
+        
+        elif property['type'] == "formula":
+            modified_result[prop] = property['formula']['number'] if 'number' in property['formula']  else property['formula']['string']
+        
+        elif property['type'] == "url":
+            modified_result[prop] = property['url']
+
+        elif property['type'] == "checkbox":
+            modified_result[prop] = property['checkbox']
+        
+        elif property['type'] == "file_url":
+            modified_result[prop] = property['files'][0]['external']['url']
+    
+    modified_results.append(modified_result)
+

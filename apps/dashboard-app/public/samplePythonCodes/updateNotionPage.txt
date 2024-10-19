@@ -1,0 +1,16 @@
+#Update a Notion Page 
+
+notion_url = "https://api.notion.com/v1"
+token = "{{token}}"
+page_id = "{{page_id}}"
+headers = {
+    "Authorization": f"Bearer {token}",
+    "Notion-Version":"2022-02-22",
+    "Content-Type":"application/json"
+}
+notion_page_url = os.path.join(notion_url,'pages')
+notion_page_id_url = os.path.join(notion_page_url,page_id)
+body = {}
+properties = {{properties}}
+body['properties'] = properties
+response = requests.request("PATCH",notion_page_id_url,headers=headers,data=json.dumps(body))

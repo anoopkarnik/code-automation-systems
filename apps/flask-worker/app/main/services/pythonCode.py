@@ -9,6 +9,7 @@ import io
 import sys
 
 def pythonCode(code_string):
+    print("Executing code")
     local_namespace = {"os": os, "json": json, "datetime": datetime, "pytz": pytz, "requests": requests, "schedule": schedule, "time": time}
     output_buffer = io.StringIO()
     sys.stdout = output_buffer

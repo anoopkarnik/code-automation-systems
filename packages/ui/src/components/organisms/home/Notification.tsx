@@ -22,7 +22,7 @@ export function Notification({notifications}:any) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center" className="z-[9999999] px-6 py-2">
-       <DropdownMenuLabel className="text-sm">No New Notifications</DropdownMenuLabel>
+       <DropdownMenuLabel className="text-description">No New Notifications</DropdownMenuLabel>
       </DropdownMenuContent>
     </DropdownMenu>
   )

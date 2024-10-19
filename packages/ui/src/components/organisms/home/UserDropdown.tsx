@@ -26,26 +26,26 @@ import { useState } from "react"
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 static">
                 <DropdownMenuLabel>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-button">
                     <div>{user?.name}</div>
-                    <div className="text-xs text-gray-500">{user?.email}</div>
+                    <div className="text-description">{user?.email}</div>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                         <HomeIcon className="mr-2 h-4 w-4" />
-                        <span>Home</span>
+                        <span className="text-paragraph">Home</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
                         <Settings className="mr-2 h-4 w-4" />
-                        <span>Settings</span>
+                        <span className="text-paragraph">Settings</span>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logoutFunction}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
+                    <span className="text-paragraph">Log out</span>
                 </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

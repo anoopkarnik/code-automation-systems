@@ -22,7 +22,7 @@ export function Theme({setTheme}:any) {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="z-[9999999]">
+      <DropdownMenuContent align="end" className="z-[9999999] text-paragraph">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>

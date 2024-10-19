@@ -54,7 +54,7 @@ const   DbSelection = ({title,name,fieldName}:any) => {
     };
   return (
     <div className='flex flex-wrap items-center justify-center py-10 gap-4 '>
-        <div className='font-normal '> {title}</div>
+        <div className='text-button'> {title}</div>
 
         <SearchableSelect
             name="Database"
