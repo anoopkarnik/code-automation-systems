@@ -19,7 +19,7 @@ const Workflows = () => {
         fetchWorkflows()
     },[userId])
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 w-full p-10 overflow-y-auto gap-4'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full py-10 overflow-y-auto gap-4'>
         {workflows?.map((workflow:any) => (
             <Workflow key={workflow.id} workflow={workflow}/>
         ))}

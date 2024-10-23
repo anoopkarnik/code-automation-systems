@@ -164,24 +164,24 @@ export const sidebarStartItems = [
       image: '/connection.png',
       href: "/connections"
   },
-  {
-      title: 'Youtube',
-      image: '/youtube.png',
-      href: '/youtube'
-  },
-  {
-      title: "OpenAI",
-      image: '/openai.png',
-      href: "/openai"
-  }
+  // {
+  //     title: 'Youtube',
+  //     image: '/youtube.png',
+  //     href: '/youtube'
+  // },
+  // {
+  //     title: "OpenAI",
+  //     image: '/openai.png',
+  //     href: "/openai"
+  // }
 ]
 
 export const sidebarEndItems = [
-  {
-      title: "Settings",
-      icon: Settings,
-      href: "/settings"
-  },
+  // {
+  //     title: "Settings",
+  //     icon: Settings,
+  //     href: "/settings"
+  // },
   {
       title: "Documentation",
       icon: FolderIcon,

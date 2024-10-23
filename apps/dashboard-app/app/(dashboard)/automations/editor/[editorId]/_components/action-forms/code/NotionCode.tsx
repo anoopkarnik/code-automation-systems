@@ -9,6 +9,8 @@ import { getDatabases } from '../../../../../../../actions/notion/notion';
 import { getNotionConnection } from '../../../../../../../actions/connections/notion-connections';
 import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
 import NotionFilterComponent from './NotionFilterComponent';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs';
+import NotionPropertiesComponent from './NotionPropertiesComponent';
 
 
 const NotionCode = () => {
@@ -49,8 +51,18 @@ const NotionCode = () => {
             let text = await response.text();
             text = text.replaceAll("{{token}}", selectedNotionAccount);
             text = text.replaceAll("{{db_id}}", JSON.parse(selectedDatabase).id.replaceAll("-",""));
-            text = text.replaceAll("{{properties}}", JSON.stringify(properties));
-            setSampleCode(text);
+
+            let lines = text.split('\n')
+            let propertiesIndex= -1
+            // Find the index of the line where `properties = {}` is located
+            lines.forEach((line:any, index:any) => {
+                if (line.includes('properties = {}')) {
+                    propertiesIndex = index;
+                }
+                
+            });
+            lines.splice(propertiesIndex+1,0,properties.join('\n'))
+            setSampleCode(lines.join('\n'));
 
         } catch (error) {
             console.error('Error fetching sample query:', error);
@@ -63,8 +75,20 @@ const NotionCode = () => {
             const response = await fetch('/samplePythonCodes/updateNotionPage.txt'); // Assuming the file is in the public folder
             let text = await response.text();
             text = text.replaceAll("{{token}}", selectedNotionAccount);
-            text = text.replaceAll("{{properties}}", JSON.stringify(properties));
-            setSampleCode(text);
+
+            
+            let lines = text.split('\n')
+            let propertiesIndex= -1
+            // Find the index of the line where `properties = {}` is located
+            lines.forEach((line:any, index:any) => {
+                if (line.includes('properties = {}')) {
+                    propertiesIndex = index;
+                }
+                
+            });
+            lines.splice(propertiesIndex+1,0,properties.join('\n'))
+            setSampleCode(lines.join('\n'));
+
 
         } catch (error) {
             console.error('Error fetching sample query:', error);
@@ -92,6 +116,68 @@ const NotionCode = () => {
 
     }
 
+    const modifyProperties = (properties:any) => {
+        let lines:any = []
+        properties.forEach((property:any) => {
+            if (property.type === 'text'){
+                lines.push(
+                    `properties["${property.name}"] = {"rich_text": [{"text": {"content": ${property.value}}}]}`
+                )
+            }
+            else if (property.type === "title"){
+                lines.push(
+                    `properties["${property.name}"] = {"title": [{"text": {"content": "${property.value}"}}]}`
+                )
+            }
+            else if (property.type === "date"){
+                lines.push(
+                    `properties["${property.name}"] = {"date": {"start": "${property.value}"}}`
+                )
+            }
+            else if (property.type === "number"){
+                lines.push(
+                    `properties["${property.name}"] = {"number": ${property.value}}`
+                )
+            }
+            else if (property.type === "file_url"){
+                lines.push(
+                    `properties["${property.name}"] = {"files": [{"type": "external", "name":"Cover", "external": {"url": "${property.value}"}}]}`
+                )
+            }
+            else if (property.type === "url"){
+                lines.push(
+                    `properties["${property.name}"] = {"url": "${property.value}"}`
+                )
+            }
+            else if (property.type === "checkbox"){
+                lines.push(
+                    `properties["${property.name}"] = {"checkbox": "${property.value}"}`
+                )
+            }
+            else if (property.type === "select"){
+                lines.push(
+                    `properties["${property.name}"] = {"select": {"name": "${property.value}"}}`
+                )
+            }
+            else if (property.type === "multi_select"){
+                lines.push(
+                    `properties["${property.name}"] = {"multi_select":[{"name": "${property.value}"}]}`
+                )
+            }
+            else if (property.type === "relation"){
+                lines.push(
+                    `properties["${property.name}"] = {"relation": [{"id": "${property.value}"}]}`
+                )
+            }
+            else if (property.type === "status"){
+                lines.push(
+                    `properties["${property.name}"] = {"status": {"name": "${property.value}"}}`
+                )
+            }
+        })
+        setProperties(lines)
+    }
+
     useEffect(() => {
         const fetchNotionDetails = async () => {
             if (!userId) return;
@@ -104,6 +190,7 @@ const NotionCode = () => {
 
         fetchNotionDetails()
     },[userId, selectedNotionAccount,selectedDatabase])
+
   return (
     <div>
         <div className='flex flex-col gap-4  mt-4 ml-2 w-[80%]'>
@@ -128,14 +215,31 @@ const NotionCode = () => {
                     selectedOption={selectedDatabase }
                     onChange={(value:any)=>{setSelectedDatabase(value)}}/>
                 </div>}
-        {selectedDatabase &&
-            <div className='flex flex-col gap-4  mt-4 ml-2 w-[80%] '> 
-                <Label className='ml-2'>Notion Filters</Label>
-                <NotionFilterComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
-                 access_token={selectedNotionAccount}
-                 modifyFilterBody={modifyFilterBody}/>
+        {selectedDatabase && 
+            <div>
+                <Tabs className='w-full' defaultValue='Filters'>
+                    <TabsList className='flex items-center justify-start flex-wrap rounded-none my-4 gap-4 bg-inherit'>
+                        <TabsTrigger key="Filters" value="Filters" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+                          <div>Filters</div>
+                        </TabsTrigger>
+                        <TabsTrigger key="Properties" value="Properties" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+                          <div>Properties</div>
+                        </TabsTrigger>
+                    </TabsList>
+                    <TabsContent value='Filters'>
+                        <NotionFilterComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
+                            access_token={selectedNotionAccount}
+                            modifyFilterBody={modifyFilterBody}/>
+                    </TabsContent>
+                    <TabsContent value='Properties'>
+                        <NotionPropertiesComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
+                            access_token={selectedNotionAccount}
+                            modifyProperties={modifyProperties}/>
+                    </TabsContent>
+
+                </Tabs>
             </div>}
-        <div className='flex gap-2 mt-4 ml-2 items-center'>
+        <div className='flex flex-wrap gap-2 mt-4 ml-2 items-center'>
             {selectedNotionAccount && 
                 <Button size="sm" variant="outline"  onClick={() => setVariable(selectedNotionAccount)}>
                     Get Access Token
@@ -147,6 +251,14 @@ const NotionCode = () => {
             {selectedDatabase && 
                 <Button size="sm" variant="outline"  onClick={fetchSampleQueryDatabaseCode}>
                     Query Database Sample Code
+                </Button>}
+            {selectedDatabase && 
+                <Button size="sm" variant="outline"  onClick={fetchSampleCreatePageCode}>
+                    Create Notion Page Sample Code
+                </Button>}
+            {selectedDatabase && 
+                <Button size="sm" variant="outline"  onClick={fetchSampleUpdatePageCode}>
+                    Update Notion Page Sample Code
                 </Button>}
         </div>
         {variable && <input className='p-2 mt-4 w-full' type="text" value={variable} placeholder='Variable Value' />}

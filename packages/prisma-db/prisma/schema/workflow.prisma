@@ -3,6 +3,7 @@ model Workflow {
   name              String
   description       String
   publish           Boolean? @default(false)
+  shared            Boolean? @default(false)
   lastRun           String?
   userId            String
   events            Event[]

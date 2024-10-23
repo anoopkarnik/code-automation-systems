@@ -16,7 +16,7 @@ import { createActionAction, runPythonCode, updateActionAction } from '../../../
 import { ArrowDownFromLineIcon, ForwardIcon, PlayIcon, SquarePlusIcon, TrashIcon } from 'lucide-react';
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 import CodeConstruction from './CodeConstruction';
-import { set } from 'date-fns';
+import { add, set } from 'date-fns';
 
 
 export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
@@ -27,7 +27,6 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const editor = useContext(EditorContext);
     // const [codeBlocks, setCodeBlocks] = useState(node?.metdata?.code||[{ id: 0, code: '# Write your python code here' }]);
     const [codeBlocks, setCodeBlocks] = useState<any>([]);
-    const [codeBlockHeights, setCodeBlockHeights] = useState<any>([]);
 
     const [output, setOutput] = useState<any>('');
     const [error, setError] = useState<any>('');
@@ -43,23 +42,28 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         }
     },[node])
 
-    // Set the heights after codeBlocks are updated
-    useEffect(() => {
-        if (codeBlocks.length > 0) {
-            setCodeBlockHeights(codeBlocks.map((block: any) => ({ id: block.id, expanded: true })));
-        }
-    }, [codeBlocks]);
     // Function to add a new code block
-    const addCodeBlock = (id:number) => {
-        const newCodeBlock = { id: id+1, code: '# Write your python code here' };
-        const updatedCodeBlocks = [
-            ...codeBlocks.slice(0,id+1),
-            newCodeBlock,
-            ...codeBlocks.slice(id+1)
-        ]
-        setCodeBlocks(updatedCodeBlocks);
-    };
+    const addCodeBlock = (id: number) => {
 
+        const newCodeBlock = { id: id + 1, code: '# Write your python code here' };
+    
+        // Increment the IDs of the code blocks after the insertion point
+        const updatedCodeBlocks = codeBlocks.map((block:any) => {
+            if (block.id > id) {
+                return { ...block, id: block.id + 1 }; // Increment id for blocks after the current one
+            }
+            return block;
+        });
+    
+        // Insert the new code block at the correct position
+        const finalCodeBlocks = [
+            ...updatedCodeBlocks.slice(0, id + 1), // Keep the blocks before and at the insertion point
+            newCodeBlock,                          // Add the new code block
+            ...updatedCodeBlocks.slice(id + 1),    // Add the remaining blocks
+        ];
+    
+        setCodeBlocks(finalCodeBlocks); // Update state with new code blocks
+    };
     // Function to remove a code block
     const removeCodeBlock = (id: number) => {
         setCodeBlocks(codeBlocks.filter((block:any) => block.id !== id));
@@ -150,13 +154,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         setCodeBlocks(
             codeBlocks.map((block:any) => (block.id === id ? { ...block, code: value } : block))
         );
-    };
-
-    const modifyHeight = (id: number) => {
-        setCodeBlockHeights(
-            codeBlockHeights.map((height: any) => (height.id === id ? { ...height, expanded: !height.expanded } : height))
-        );
-    }
+     };
 
 
 
@@ -165,9 +163,21 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
             <CodeConstruction/>
             <div className='flex w-full justify-center gap-4'>
                 <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add / Edit Action</Button>
-                <Button size="lg" onClick={runAllCode}>Run All Code Blocks</Button>
+                <Button size="lg" onClick={runAllCode}>Run all Code Blocks</Button>
+                <Button size="lg" onClick={()=> addCodeBlock(-1)}>Add code block </Button>
                 
             </div>
+
+            {loading && (
+                <Alert>
+                <AlertDescription>
+                    <pre className="whitespace-pre-wrap break-words overflow-auto">
+                        Currently Running Code ......
+                    </pre>
+                </AlertDescription>
+                </Alert>
+            )}
+
             {codeBlocks.map((block: any) => (
                 <div
                 key={block.id}
@@ -177,7 +187,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
                     value={block.code}
                     onChange={(value) => modifyCode(block.id, value)}
                     theme="dark"
-                    height={codeBlockHeights.find((height: any) => height.id === block.id)?.expanded ? '' : '100px'}
+                    height={''}
                     extensions={[
                         python(), // Syntax highlighting for Python
                         autocompletion() // Enable autocompletion
@@ -187,7 +197,6 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
 
                 {/* Icon buttons, only visible on hover */}
                 <div className="absolute top-3 right-8 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowDownFromLineIcon size={18} className='cursor-pointer' onClick={() => modifyHeight(block.id)}/>
                     <PlayIcon size={18} className='cursor-pointer' onClick={() => runCode(block.code)}/>
                     <ForwardIcon size={18} className='cursor-pointer' onClick={() => runTillCurrentCode(block.id)}/>
                     <ConfirmDialog
@@ -201,16 +210,6 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
                 </div>
                 </div>
             ))}
-
-            {loading && (
-                <Alert>
-                <AlertDescription>
-                    <pre className="whitespace-pre-wrap break-words overflow-auto">
-                        Currently Running Code ......
-                    </pre>
-                </AlertDescription>
-                </Alert>
-            )}
 
             {output && (
                 <Alert>

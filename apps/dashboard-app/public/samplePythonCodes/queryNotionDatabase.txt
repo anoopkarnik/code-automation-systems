@@ -82,7 +82,12 @@ for result in results:
             modified_result[prop] = property['checkbox']
         
         elif property['type'] == "formula":
-            modified_result[prop] = property['formula']['number'] if 'number' in property['formula']  else property['formula']['string']
+            if 'number' in property['formula']:
+                modified_result[prop] = property['formula']['number']
+            elif 'string' in property['formula']:
+                modified_result[prop] = property['formula']['string']
+            elif 'boolean' in property['formula']:
+                modified_result[prop] = property['formula']['boolean']
         
         elif property['type'] == "url":
             modified_result[prop] = property['url']

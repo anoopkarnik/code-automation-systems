@@ -33,17 +33,17 @@ import { useState } from "react"
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="cursor-pointer">
                         <HomeIcon className="mr-2 h-4 w-4" />
                         <span className="text-paragraph">Home</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={()=>setShowModal(!showModal)}>
+                    <DropdownMenuItem  className="cursor-pointer" onClick={()=>setShowModal(!showModal)}>
                         <Settings className="mr-2 h-4 w-4" />
                         <span className="text-paragraph">Settings</span>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logoutFunction}>
+                <DropdownMenuItem onClick={logoutFunction} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span className="text-paragraph">Log out</span>
                 </DropdownMenuItem>

@@ -86,7 +86,68 @@ export const getWorkflowsByUserId = async (userId: string) => {
     }
 }
 
-export const getEventsByIdAndUserId = async(workflowId:string, userId: string) => {
+//Get Functions 
+export const getWorkflowsById = async (id: string) => {
+    const workflow = await db.workflow.findUnique({
+        where:{
+            id
+        },
+        include:{
+            actions: {
+                include:{
+                    type: {
+                        include:{
+                            actionType: true
+                        }
+                    }
+                }
+            },
+            trigger: {
+                include:{
+                    type: {
+                        include:{
+                            triggerType: true
+                        }
+                    }
+                }
+            }
+        },
+    })
+    return workflow;
+    
+}
+
+
+export const getPublicWorkflows = async () => {
+    const workflows = await db.workflow.findMany({
+        where:{
+            shared: true
+        },
+        include:{
+            actions: {
+                include:{
+                    type: {
+                        include:{
+                            actionType: true
+                        }
+                    }
+                }
+            },
+            trigger: {
+                include:{
+                    type: {
+                        include:{
+                            triggerType: true
+                        }
+                    }
+                }
+            }
+        },
+    })
+    return workflows;
+}
+
+export const getEventsByIdAndUserId = async(workflowId:string, userId: string, offset: number) => {
     let events;
     if (workflowId === ''){
         events = await db.event.findMany({
@@ -101,7 +162,8 @@ export const getEventsByIdAndUserId = async(workflowId:string, userId: string) =
             orderBy:{
                 createdAt: 'desc'
             },
-            take:20
+            take:20,
+            skip: offset
         })
     }
     else{
@@ -255,6 +317,19 @@ export const publishWorkflow = async (workflowId: string, state:boolean) => {
     })
     if(workflow.publish) return 'Workflow published'
     return 'Workflow unpublished'
+}
+
+export const makeWorkflowPublic = async (workflowId: string, state:boolean) => {
+    const workflow = await db.workflow.update({
+        where:{
+            id: workflowId
+        },
+        data:{
+            shared: state
+        }
+    })
+    if(workflow.shared) return 'Workflow made public'
+    return 'Workflow made private'
 }
 
 export const updateWorkflowLastRun = async (workflowId: string, lastRun: string) => {

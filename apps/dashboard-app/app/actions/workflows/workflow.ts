@@ -10,7 +10,9 @@ import {createWorkflow, editWorkflow, getWorkflowsByUserId, publishWorkflow,  de
     createAction,
     getLatestEventByWorkflowId,
     updateAction,
-    updateTrigger
+    updateTrigger,
+    makeWorkflowPublic,
+    getPublicWorkflows
 } from '@repo/prisma-db/repo/workflow';
 import {logger} from '@repo/winston-logger/index';
 
@@ -30,6 +32,11 @@ export const getWorkflows = async (userId:string) => {
     return workflows;
 }
 
+export const getPublicWorkflowsAction = async () => {
+    const workflows = await getPublicWorkflows();
+    return workflows;
+}
+
 export const editFlow = async (workflowId:string, name:string, description: string) => {
     logger.info('Editing workflow',workflowId, name, description);
     const workflow = await editWorkflow(workflowId,name,description);
@@ -43,6 +50,16 @@ export const publishFlow = async (workflowId:string, state:boolean) => {
     }
     catch (error) {
         return {error: "Workflow published/unpublished successfully"}
+    }
+}
+
+export const makeFlowPublic = async (workflowId:string, state:boolean) => {
+    try{
+        await makeWorkflowPublic(workflowId,state);
+        return {success: "Workflow made public/unpublic successfully"}
+    }
+    catch (error) {
+        return {error: "Workflow made public/unpublic successfully"}
     }
 }
 
@@ -62,8 +79,8 @@ export const getLatestEventByWorkflowIdAction = async (workflowId:string) => {
     return event;
 }
 
-export const getEventsByWorkflowIdAndUserId = async (workflowId:string, userId: string) => {
-    const events:any = await getEventsByIdAndUserId(workflowId,userId);
+export const getEventsByWorkflowIdAndUserId = async (workflowId:string, userId: string, offset: number) => {
+    const events:any = await getEventsByIdAndUserId(workflowId,userId,offset);
     return events;
 }
 
@@ -128,6 +145,27 @@ export const createActionAction = async({workflowId, actionId, metadata,sortingO
     }
 }
 
+export const duplicateWorkflow = async (workflowId:string,userId:any) => {
+    try{
+        const workflow = await getWorkflowById(workflowId);
+        const newWorkflow = await createWorkflow({
+            name: workflow?.name +" Duplicated", description: workflow?.description, userId:userId, publish: false,share:false});
+        const trigger:any = workflow?.trigger;
+
+        const actions:any = workflow?.actions;
+        await createTrigger({workflowId: newWorkflow.id, triggerId: trigger.triggerId, metadata: trigger.metadata});
+        for (let i=0; i<actions.length; i++){
+            await createAction({
+                workflowId: newWorkflow.id, actionId: actions[i].actionId, metadata: actions[i].metadata,
+                sortingOrder: actions[i].sortingOrder});
+        }
+        return {success: "Workflow duplicated successfully", result: newWorkflow}
+    }
+    catch (error) {
+        return {error: "Workflow duplication failed"}
+    }
+}
+
 export const updateTriggerAction = async({id,triggerId, metadata}:any) => {
     try{
         const trigger = await updateTrigger(id, triggerId, metadata);
@@ -176,7 +214,7 @@ export const runPythonCode = async (code:string) => {
         body: body,
     }
     try{
-        const res = await fetch(`http://0.0.0.0:5000/payload`, options)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_FLASK_WORKER_URL}/payload`, options)
         const data = await res.json();
         return {success: "Python code executed successfully", result: data}
     }

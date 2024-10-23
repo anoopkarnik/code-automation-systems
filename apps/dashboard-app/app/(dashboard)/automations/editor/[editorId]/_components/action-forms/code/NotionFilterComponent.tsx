@@ -24,7 +24,7 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
     const [properties, setProperties] = useState<any>({})
     const [groupCondition, setGroupCondition] = useState('and')
     const [filterGroups, setFilterGroups] = useState<FilterGroup[]>([
-        { logic: 'and', rules: [{ name: 'Name', type: 'rich_text', condition: 'Contains', value: '' }] },
+        { logic: 'and', rules: [{ name: '', type: '', condition: '', value: '' }] },
     ]);
   
     let conditions:any = {
@@ -50,7 +50,7 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
     // Function to add a new rule to a filter group
     const addRuleToGroup = (groupIndex: number) => {
         const updatedGroups:any = [...filterGroups];
-        updatedGroups[groupIndex].rules.push({ name: 'Tags', condition: 'Contains', value: '' });
+        updatedGroups[groupIndex].rules.push({ name: '', condition: '', value: '' });
         modifyFilterBody(groupCondition,updatedGroups)
         setFilterGroups(updatedGroups);
     };
@@ -66,6 +66,7 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
         if (key === 'name') {
             const type = properties[value].type;
             updatedGroups[groupIndex].rules[ruleIndex]['type'] = properties[value].type;
+            updatedGroups[groupIndex].rules[ruleIndex][key] = value;
         }
         else if (key === 'value') {
             if ( updatedGroups[groupIndex].rules[ruleIndex]['type'] === 'number') {
@@ -97,7 +98,6 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
         if (!dbId) return;
         if (!access_token) return;
         const res:any = await queryNotionDatabaseProperties({apiToken: access_token, database_id:dbId.replaceAll("-","")});
-        console.log(res.properties)
         setProperties(res.properties)
     }
     fetchDatabaseProperties()
@@ -153,8 +153,8 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
                 </Select>}
                 {ruleIndex !== 1 && <div className='col-span-2' ></div>}
                 <Select onValueChange={(value) => handleRuleChange(groupIndex, ruleIndex, 'name', value)}>
-                  <SelectTrigger className='col-span-3'>
-                    <SelectValue>{rule.name}</SelectValue>
+                  <SelectTrigger className='col-span-3'> 
+                    <SelectValue>{filterGroups[groupIndex]?.rules[ruleIndex]?.name}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {Object.keys(properties).map((property:any) => (
@@ -201,7 +201,7 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
         </div>
       ))}
 
-      <Button onClick={addFilterGroup} variant="default">
+      <Button onClick={addFilterGroup} variant="outline">
         + Add Filter Group
       </Button>
     </div>

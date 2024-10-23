@@ -13,6 +13,6 @@ body = {}
 body['parent'] = {}
 body['parent']['type'] = 'database_id'
 body['parent']['database_id'] = db_id
-properties = {{properties}}
+properties = {}
 body['properties'] = properties
 response = requests.post(notion_page_url,headers=headers,data=json.dumps(body))
