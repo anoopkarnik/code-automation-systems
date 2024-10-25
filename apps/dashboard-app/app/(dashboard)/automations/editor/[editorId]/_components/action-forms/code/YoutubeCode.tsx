@@ -71,7 +71,7 @@ const YoutubeCode = () => {
                 </SelectTrigger>
                 <SelectContent>
                     {youtubeAccounts?.map((account:any) => (
-                        <SelectItem key={account.id} value={account.access_token}>{account.name}</SelectItem>
+                        <SelectItem key={account.id} value={account.refresh_token}>{account.name}</SelectItem>
                     ))}
                 </SelectContent>
             </Select>
