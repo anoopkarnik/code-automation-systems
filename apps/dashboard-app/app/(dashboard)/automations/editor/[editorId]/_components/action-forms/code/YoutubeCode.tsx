@@ -17,6 +17,7 @@ const YoutubeCode = () => {
     const youtubeClientSecret:any = process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET;
 
     const [variable, setVariable] = useState<any>('');
+    const [sampleCode, setSampleCode] = useState<any>('');
     const session = useSession();
     const userId = session?.data?.user?.id;
 
@@ -29,6 +30,37 @@ const YoutubeCode = () => {
         }
         fetchYoutubeDetails()
     },[userId,selectedYoutubeAccount])
+
+    const fetchAccessTokenCode = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/youtube/getAccessToken.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
+            text = text.replaceAll("{{client_id}}", youtubeClientId);
+            text = text.replaceAll("{{client_secret}}", youtubeClientSecret);
+            text = text.replaceAll("{{refresh_token}}", selectedYoutubeAccount);
+            setSampleCode(text);
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    };
+
+    const fetchSubscribedChannelsDataCode = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/youtube/getSubscribedChannelsData.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
+            text = text.replaceAll("{{client_id}}", youtubeClientId);
+            text = text.replaceAll("{{client_secret}}", youtubeClientSecret);
+            text = text.replaceAll("{{access_token}}", selectedYoutubeAccount);
+            setSampleCode(text);
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    }
+
   return (
     <div>
         <div className='flex flex-col gap-4  mt-4 ml-2 w-[80%]'>
@@ -56,9 +88,16 @@ const YoutubeCode = () => {
             <Button size="sm" variant="outline"  onClick={() => setVariable(youtubeClientSecret)}>
                 Get Youtube Client Secret
             </Button>
+            {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchAccessTokenCode}>
+                Get Access Token
+            </Button>}
+            {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchSubscribedChannelsDataCode}>
+                Get Subscribed Channels
+            </Button>}
         </div>
 
-        <input className='p-2 mt-4 w-full' type="text" value={variable} placeholder='Variable Value' />
+        {variable && <input className='p-2 mt-4 w-full' type="text" value={variable} placeholder='Variable Value' />}
+        {sampleCode && <textarea className='p-2 mt-4 w-full h-96' value={sampleCode} placeholder='Sample Code' />}
     </div>
   )
 }

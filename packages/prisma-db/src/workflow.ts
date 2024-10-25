@@ -177,7 +177,8 @@ export const getEventsByIdAndUserId = async(workflowId:string, userId: string, o
             orderBy:{
                 createdAt: 'desc'
             },
-            take:20
+            take:20,
+            skip: offset
         })
     }
     return events;

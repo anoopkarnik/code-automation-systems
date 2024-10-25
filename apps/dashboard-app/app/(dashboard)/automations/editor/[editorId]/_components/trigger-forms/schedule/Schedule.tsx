@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation';
 import { EditorContext } from '../../../../../../../../providers/editor-provider';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../../../../../../../../hooks/useToast';
-import { createTriggerAction } from '../../../../../../../actions/workflows/workflow';
+import { createTriggerAction, updateTriggerAction } from '../../../../../../../actions/workflows/workflow';
 
 const Schedule = ({funcType,nodeType,type,subType,node}:any) => {
     const {toast} = useToast();
@@ -38,7 +38,13 @@ const Schedule = ({funcType,nodeType,type,subType,node}:any) => {
                 triggerId: subType.id,
                 metadata
             }
-            const res = await createTriggerAction(params)
+            let res;
+            if (funcType == 'create'){
+                res = await createTriggerAction(params)
+            }
+            else{
+                res = await updateTriggerAction({id:node.id, triggerId:node.triggerId, metadata:metadata })
+            }
             if (res.success){
                 toast({title: "Success", description: res?.success, variant: 'default'})
                 router.refresh()

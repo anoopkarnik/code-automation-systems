@@ -1,0 +1,67 @@
+#Get Access Token from RefreshToken
+
+url = "https://oauth2.googleapis.com/token"
+client_id="{{client_id}}"
+client_secret="{{client_secret}}"
+refresh_token="{{refresh_token}}"
+grant_type="refresh_token"
+payload = f"client_id={client_id}&client_secret={client_secret}&refresh_token={refresh_token}&grant_type={grant_type}"
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+}
+response = requests.request("POST", url, headers=headers, data=payload)
+access_token = response.json()['access_token']
+
+#Get Subscribed Channels
+youtube_results = []
+base_url = 'https://www.googleapis.com/youtube/v3'
+headers = {'Authorization': f'Bearer {access_token}'}
+
+next_page_token = None
+while True:
+  # Fetch subscriptions
+  subscriptions_url = f"{base_url}/subscriptions?part=snippet&mine=true&maxResults=50"
+  if next_page_token:
+      subscriptions_url += f"&pageToken={next_page_token}"
+  
+  subscriptions_response = requests.get(subscriptions_url, headers=headers)
+  if subscriptions_response.status_code != 200:
+      raise Exception(f"HTTP error! status: {subscriptions_response.status_code}")
+  
+  subscriptions_data = subscriptions_response.json()
+  # Fetch channel details in batches
+  channel_ids = ','.join([item['snippet']['resourceId']['channelId'] for item in subscriptions_data['items']])
+  channels_url = f"{base_url}/channels?part=snippet,statistics,contentDetails&id={channel_ids}"
+  
+  channels_response = requests.get(channels_url, headers=headers)
+  if channels_response.status_code != 200:
+      raise Exception(f"HTTP error! status: {channels_response.status_code}")
+  
+  channels_data = channels_response.json()
+
+  # Process and store results
+  for subscription in subscriptions_data['items']:
+      channel_id = subscription['snippet']['resourceId']['channelId']
+      channel = None
+  
+      for c in channels_data['items']:
+          if c['id'] == channel_id:
+              channel = c
+              break
+      if channel:
+          youtube_results.append({
+              'id': subscription['id'],
+              'name': subscription['snippet']['title'],
+              'description': subscription['snippet']['description'],
+              'imageId': subscription['snippet']['thumbnails']['high']['url'],
+              'channelId': subscription['snippet']['resourceId']['channelId'],
+              'publishedAt': channel['snippet']['publishedAt'],
+              'totalVideos': channel['statistics']['videoCount'],
+              'totalSubscribers': channel['statistics']['subscriberCount'],
+              'totalViews': channel['statistics']['viewCount'],
+              'uploadId': channel['contentDetails']['relatedPlaylists']['uploads']
+          })
+  
+  next_page_token = subscriptions_data.get('nextPageToken')
+  if not next_page_token:
+      break

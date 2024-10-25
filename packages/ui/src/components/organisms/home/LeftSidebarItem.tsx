@@ -28,7 +28,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
                     )}>
                     <TooltipProvider>
                         <Tooltip>
-                            {item.icon && <item.icon className='h-4 w-4' />}
+                            {item.icon && <item.icon className='h-4 w-4 opacity-60' />}
                             {!item.icon && <img src={item.image} className='h-4 w-4' />}
                             <TooltipContent>{item.title}</TooltipContent>
                         </Tooltip>
@@ -51,7 +51,7 @@ const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
                         )}>
                         <TooltipProvider>
                             <Tooltip>
-                                {subItem.icon && <subItem.icon className='h-4 w-4' />}
+                                {subItem.icon && <subItem.icon className='h-4 w-4 opacity-60' />}
                                 {!subItem.icon && <img src={subItem.image} className='h-4 w-4' />}
                                 <TooltipContent>{subItem.title}</TooltipContent>
                             </Tooltip>

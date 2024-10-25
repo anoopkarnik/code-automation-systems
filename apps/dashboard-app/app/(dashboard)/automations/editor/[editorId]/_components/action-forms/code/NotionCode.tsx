@@ -119,7 +119,7 @@ const NotionCode = () => {
     const modifyProperties = (properties:any) => {
         let lines:any = []
         properties.forEach((property:any) => {
-            if (property.type === 'text'){
+            if (property.type === 'text' || property.type === 'rich_text'){
                 lines.push(
                     `properties["${property.name}"] = {"rich_text": [{"text": {"content": ${property.value}}}]}`
                 )
@@ -139,7 +139,7 @@ const NotionCode = () => {
                     `properties["${property.name}"] = {"number": ${property.value}}`
                 )
             }
-            else if (property.type === "file_url"){
+            else if (property.type === "file_url" || property.type === "files"){
                 lines.push(
                     `properties["${property.name}"] = {"files": [{"type": "external", "name":"Cover", "external": {"url": "${property.value}"}}]}`
                 )

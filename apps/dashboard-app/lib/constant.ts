@@ -101,59 +101,59 @@ export const sidebarStartItems = [
           'Youtube Channels','Videos'
         ]
       },
-      {
-        title: "Resource Management",
-        icon: StoreIcon,
-        href: "/resource-management",
-        tables: ['Inventory']
-      },
+      // {
+      //   title: "Resource Management",
+      //   icon: StoreIcon,
+      //   href: "/resource-management",
+      //   tables: ['Inventory']
+      // },
       {
         title: "Social & Relationships",
         icon: ContactIcon,
         href: "social-relationships",
         tables: ['Social Sphere']
       },
-      {
-        title: "Health & Fitness",
-        icon: HeartPulseIcon,
-        href: "/health-fitness",
-        tables: ['Status','Exercises']
-      },
-      {
-        title: "Emotional & Mental",
-        icon: MehIcon,
-        href: "/emotional-mental",
-        tables: ['Journal','Mood Category','Mood Tracker']
-      },
-      {
-        title: "Content Creation",
-        icon: Clapperboard,
-        href: "/content-creation"
-      },
-      {
-        title: "Personal Goals",
-        icon: GoalIcon,
-        href: "/personal-goals",
-        tables: ['Goals','Rewards','Punishments']
-      },
-      {
-        title: "Decision Making",
-        icon: RouteIcon,
-        href: "/decision-making",
-        tables: ['Decisions']
-      },
-      {
-        title: "Gamification",
-        icon: Gamepad2Icon,
-        href: "/gamification",
-        tables: ['Level Settings']
-      }
+      // {
+      //   title: "Health & Fitness",
+      //   icon: HeartPulseIcon,
+      //   href: "/health-fitness",
+      //   tables: ['Status','Exercises']
+      // },
+      // {
+      //   title: "Emotional & Mental",
+      //   icon: MehIcon,
+      //   href: "/emotional-mental",
+      //   tables: ['Journal','Mood Category','Mood Tracker']
+      // },
+      // {
+      //   title: "Content Creation",
+      //   icon: Clapperboard,
+      //   href: "/content-creation"
+      // },
+      // {
+      //   title: "Personal Goals",
+      //   icon: GoalIcon,
+      //   href: "/personal-goals",
+      //   tables: ['Goals','Rewards','Punishments']
+      // },
+      // {
+      //   title: "Decision Making",
+      //   icon: RouteIcon,
+      //   href: "/decision-making",
+      //   tables: ['Decisions']
+      // },
+      // {
+      //   title: "Gamification",
+      //   icon: Gamepad2Icon,
+      //   href: "/gamification",
+      //   tables: ['Level Settings']
+      // }
     ],
   },
-  {
-    title: "Portfolio",
-    image: "/portfolio.png",
-  },
+  // {
+  //   title: "Portfolio",
+  //   image: "/portfolio.png",
+  // },
   {
       title: "Automations",
       image: "/automations.png",
