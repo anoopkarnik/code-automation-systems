@@ -60,7 +60,7 @@ const SkillTreePage = () => {
         if (tablesInDatabase && tablesInDatabase[database]) {
           setTables(tablesInDatabase[database])
         }
-      }, [tablesInDatabase,database])
+      }, [database])
 
     const selectType  = (type:any) =>{
         setSelectedValue(type)
