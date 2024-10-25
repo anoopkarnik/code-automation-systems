@@ -43,7 +43,6 @@ const CodeConstruction = () => {
             if (!userId) return;
             const res:any = await getOpenAIConnection(userId);
             setOpenAIAccounts(res);
-            console.log('openaiAccounts',res)
         }
         fetchYoutubeDetails()
         fetchOpenAIDetails()

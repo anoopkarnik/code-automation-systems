@@ -1,28 +1,42 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@repo/ui/molecules/shadcn/Card'
-import { ArrowRightIcon, CircleCheck, CircleCheckIcon, CirclePauseIcon, CircleStopIcon, CircleXIcon, EllipsisVerticalIcon, GripIcon, GripVertical, GripVerticalIcon, TrashIcon } from 'lucide-react'
+import { ArrowRightIcon, CopyIcon } from 'lucide-react'
 import DynamicIcon from '../../../../components/DynamicIcon'
-import { DropdownMenu, DropdownMenuTrigger } from '@repo/ui/molecules/shadcn/Dropdown'
-import WorkflowDropdown from './WorkflowDropdown'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useToast } from '../../../../hooks/useToast'
+import { duplicateWorkflow } from '../../../actions/workflows/workflow'
 
-const Workflow = ({workflow}:any) => {
 
+const PublicWorkflow = ({workflow}:any) => {
+    const router = useRouter();
+    const session = useSession();
+    const userId = session.data?.user?.id;
+
+    const {toast} = useToast();
+
+
+
+    const onDuplication = async () => {
+        const res = await duplicateWorkflow(workflow.id,userId)
+        if (res.success){
+            toast({title: "Success", description: res?.success, variant: 'default'})
+        }
+        else if (res.error){
+            toast({title: "Error", description: res?.error, variant: 'destructive'})
+        }
+    }
   return (
     <Card className=''>
         <CardHeader className=''>
             <CardTitle className='flex items-start justify-between leading-3 '>
                 <div className='flex items-center gap-2 text-button leading-normal'>
                     {workflow.name}
-                    {workflow.publish && <CircleCheckIcon className='w-4 h-4 text-green-400'/>}
-                    {!workflow.publish && <CirclePauseIcon className='w-4 h-4 text-red-400'/>}
                 </div>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <EllipsisVerticalIcon className='cursor-pointer w-5 h-5'/>
-                    </DropdownMenuTrigger>
-                    <WorkflowDropdown workflow={workflow}/>
-                </DropdownMenu>
+                <div className='flex items-center gap-2 cursor-pointer'>
+                    <CopyIcon onClick={onDuplication} className=' w-4 h-4'/>
+                </div>
 
             </CardTitle>
             <CardDescription className='text-description text-xs leading-snug mr-4'>{workflow.description}</CardDescription>
@@ -47,4 +61,4 @@ const Workflow = ({workflow}:any) => {
   )
 }
 
-export default Workflow
+export default PublicWorkflow

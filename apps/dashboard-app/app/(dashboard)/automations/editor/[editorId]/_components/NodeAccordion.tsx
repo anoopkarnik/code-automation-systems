@@ -67,12 +67,21 @@ const NodeAccordion = ({node}:any) => {
       </AccordionTrigger>
       <AccordionContent>
         {
-          eventMetadata && eventMetadata.result && Object.keys(eventMetadata.result).map((key) => (
-            <div key={key} className='flex justify-between items-center w-full mr-2 flex-wrap overflow-clip font-extralight'>
-              <div>{key}</div>
-              <div>{typeof eventMetadata.result[key] === 'object' ? JSON.stringify(eventMetadata.result[key]) : eventMetadata.result[key]}</div>
+          eventMetadata && eventMetadata.result &&
+            <div className='flex justify-between items-center w-full mr-2 flex-wrap overflow-clip font-extralight'>
+              <div>
+                {
+                  typeof eventMetadata.result === 'object' &&  
+                    Object.keys(eventMetadata.result).map((key) => (
+                      <div className='flex justify-between items-center w-full mr-2 flex-wrap '>
+                        <div>{key}</div>
+                        <div>{JSON.stringify(eventMetadata.result[key])}</div>
+                      </div>
+                    ))
+                }
+                <div>{typeof eventMetadata.result === 'string' &&  eventMetadata.result}</div>
+              </div>
             </div>
-          ))
         }
       </AccordionContent>
     </AccordionItem>

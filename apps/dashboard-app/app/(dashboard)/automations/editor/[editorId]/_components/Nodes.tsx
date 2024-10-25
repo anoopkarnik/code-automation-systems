@@ -16,13 +16,16 @@ import NodeModal from './NodeModal';
 import NodeCard from './NodeCard';
 import { useToast } from '../../../../../../hooks/useToast';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
+import { Textarea } from '@repo/ui/atoms/shadcn/Textarea';
 
 const Nodes = () => {
     const params = useParams()
     const editorId = params?.editorId
     const editor =  useContext(EditorContext);
-    const [showEdit,setShowEdit] = useState(false);
+    const [showNameEdit,setShowNameEdit] = useState(false);
+    const [showDescriptionEdit,setShowDescriptionEdit] = useState(false);
     const [name, setName] = useState(editor.name);
+    const [description, setDescription] = useState(editor.description);
     const [toggle,setToggle] = useState(editor.publish || false)
     const router = useRouter();
     const [loading,setLoading] = useState(false)
@@ -41,20 +44,29 @@ const Nodes = () => {
             editor.setTrigger(res?.trigger);
             editor.setActions(res?.actions);
             editor.setPublish(res?.publish || false);
-            editor.setName(res?.name || '');
-            editor.setDescription(res?.description || '');
+            editor.setName(res?.name || 'Add Name Here');
+            editor.setDescription(res?.description || 'Add Description Here');
         }
         refreshNodes();
     },[editorId] )
 
-    const handleEdit = async () =>{
-        if (showEdit) {
-            editor.setName(name);
+    const handleEditName = async () =>{
+        if (showNameEdit) {
+            editor.setName(name)
             await editFlow(editorId as string,name,editor.description);
         }
-        setShowEdit(!showEdit);
-        router.refresh();
+        setShowNameEdit(!showNameEdit);
+        // router.refresh();
     }
+
+    const handleEditDescription = async () =>{
+        if (showDescriptionEdit){
+            editor.setDescription(description)
+            await editFlow(editorId as string,editor.name,description);
+        }
+        setShowDescriptionEdit(!showDescriptionEdit);
+    }
+
 
     const handleDelete = async (id:string,type:string) => {
         if (type === 'Trigger') {
@@ -102,11 +114,35 @@ const Nodes = () => {
                 <Switch id='airplane-mode' onClick={onToggle} defaultChecked={editor.publish!} />
             </div>
             <div className='flex items-center justify-between gap-2'>
-                {showEdit ? 
-                    <Input placeholder={editor.name} onChange={(e:any) => setName(e.target.value)}/>:
-                    <div>{editor.name}</div>
-                }
-                <Edit2Icon onClick={handleEdit}/>
+                {showNameEdit ? (
+                    <Input
+                        placeholder={editor.name}
+                        onChange={(e: any) => setName(e.target.value)}
+                        onBlur={handleEditName} // Exit edit mode when clicking outside the input
+                        autoFocus // Automatically focus the input when entering edit mode
+                    />
+                ) : (
+                    // Add onDoubleClick to enable editing on double click
+                    <div onDoubleClick={handleEditName}>
+                        {editor.name}
+                    </div>
+                )}
+            </div>
+            <div className='flex items-center justify-center gap-2 text-sm text-description w-[40%] '>
+                {showDescriptionEdit ? (
+                    <Textarea
+                        placeholder={editor.description}
+                        onChange={(e: any) => setDescription(e.target.value)}
+                        onBlur={handleEditDescription} // Exit edit mode when clicking outside the input
+                        autoFocus // Automatically focus the input when entering edit mode
+                        className='w-full'
+                    />
+                ) : (
+                    // Add onDoubleClick to enable editing on double click
+                    <div onDoubleClick={handleEditDescription}>
+                        {editor.description || 'Add Description Here'}
+                    </div>
+                )}
             </div>
             <div className='w-[40%]'>
                 <Button className='w-full' onClick={handleRun} >Run</Button>
