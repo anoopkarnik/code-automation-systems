@@ -26,7 +26,7 @@ const EventComponent = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       if (!userId) return;
-      const res = await getEventsByWorkflowIdAndUserId(workflowId,userId,offset);
+      const res = await getEventsByWorkflowIdAndUserId(workflowId,userId,0);
       setEvents(res);
     };
     fetchEvents();

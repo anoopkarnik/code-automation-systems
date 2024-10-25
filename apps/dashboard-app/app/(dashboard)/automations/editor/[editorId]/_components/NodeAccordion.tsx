@@ -73,7 +73,7 @@ const NodeAccordion = ({node}:any) => {
                 {
                   typeof eventMetadata.result === 'object' &&  
                     Object.keys(eventMetadata.result).map((key) => (
-                      <div className='flex justify-between items-center w-full mr-2 flex-wrap '>
+                      <div key={key} className='flex justify-between items-center w-full mr-2 flex-wrap '>
                         <div>{key}</div>
                         <div>{JSON.stringify(eventMetadata.result[key])}</div>
                       </div>

@@ -54,7 +54,7 @@ const SkillTreePage = () => {
             }
             fetchSkillTreesAndAreas()
         }
-    },[ userId])
+    },[ userId,skillTreeType])
 
     useEffect(() =>{
         if (tablesInDatabase && tablesInDatabase[database]) {
