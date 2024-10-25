@@ -22,7 +22,7 @@ const EmotionalMentalPage = () => {
     if (tablesInDatabase && tablesInDatabase[database]) {
       setTables(tablesInDatabase[database])
     }
-  }, [tablesInDatabase,database])
+  }, [database])
 
   if (isMobile){
     return (
