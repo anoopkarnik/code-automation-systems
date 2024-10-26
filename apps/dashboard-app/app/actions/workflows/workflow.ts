@@ -213,12 +213,12 @@ export const runPythonCode = async (code:string) => {
         },
         body: body,
     }
-    try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_FLASK_WORKER_URL}/payload`, options)
-        const data = await res.json();
-        return {success: "Python code executed successfully", result: data}
+    const res = await fetch(`${process.env.NEXT_PUBLIC_FLASK_WORKER_URL}/payload`, options)
+    console.log('res',res)
+    if (!res.ok){
+        return {error: "Python code execution failed", result: res.text() + " " + res.status,success:"wtf"}
     }
-    catch (error) {
-        return {error: "Python code execution failed"}
-    }
+    const data = await res.json();
+    return {success: "Python code executed successfully", result: data,error:""}
+    
 }

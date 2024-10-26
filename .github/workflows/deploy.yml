@@ -41,6 +41,7 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
+        timeout: 600
         script: |
           cd /home/ubuntu/saas-apps && sudo docker-compose pull
           cd /home/ubuntu/saas-apps && sudo docker-compose rm -f
