@@ -17,6 +17,7 @@ import { ArrowDownFromLineIcon, ForwardIcon, PlayIcon, SquarePlusIcon, TrashIcon
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 import CodeConstruction from './CodeConstruction';
 import { add, set } from 'date-fns';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/atoms/shadcn/Tooltip';
 
 
 export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
@@ -156,58 +157,102 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         );
      };
 
+     // Function to copy all code blocks to clipboard
+    const copyAllCode = () => {
+        const allCode = codeBlocks.map((block: any) => block.code).join('\n\n');
+        navigator.clipboard.writeText(allCode).then(() => {
+            toast({title: "Copied", description: "All code blocks copied to clipboard!", variant: 'default'})
+        }).catch(err => {
+            toast({title: "Error", description: "Failed to copy code.", variant: 'destructive'})
+            console.error("Error copying code:", err);
+        });
+    };
 
 
     return (
-        <div className='flex flex-col gap-4'>
+        <div className='relative flex flex-col gap-4'>
+
+              {/* Overlay for loading */}
+            {loading && (
+                <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center z-[5000]">
+                    <div className="text-white text-lg">Currently Running Code...</div>
+                </div>
+            )}
             <CodeConstruction/>
             <div className='flex w-full justify-center gap-4'>
                 <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add / Edit Action</Button>
                 <Button size="lg" onClick={runAllCode}>Run all Code Blocks</Button>
+                <Button size="lg" onClick={copyAllCode}>Copy All Code</Button>
                 <Button size="lg" onClick={()=> addCodeBlock(-1)}>Add code block </Button>
                 
             </div>
-
-            {loading && (
-                <Alert>
-                <AlertDescription>
-                    <pre className="whitespace-pre-wrap break-words overflow-auto">
-                        Currently Running Code ......
-                    </pre>
-                </AlertDescription>
-                </Alert>
-            )}
 
             {codeBlocks.map((block: any) => (
                 <div
                 key={block.id}
                 className='relative  gap-4 border rounded p-2 hover:shadow-lg group'
                 >
-                <CodeMirror
-                    value={block.code}
-                    onChange={(value) => modifyCode(block.id, value)}
-                    theme="dark"
-                    height={''}
-                    extensions={[
-                        python(), // Syntax highlighting for Python
-                        autocompletion() // Enable autocompletion
-                      ]}
-                    className="border rounded overflow-auto"
-                />
-
-                {/* Icon buttons, only visible on hover */}
-                <div className="absolute top-3 right-8 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <PlayIcon size={18} className='cursor-pointer' onClick={() => runCode(block.code)}/>
-                    <ForwardIcon size={18} className='cursor-pointer' onClick={() => runTillCurrentCode(block.id)}/>
-                    <ConfirmDialog
-                        alertActionFunction={() => removeCodeBlock(block.id)} 
-                        alertTitle='Delete Code Block' 
-                        alertDescription='Are you sure you want to delete this codeblock permanently?'
-                        buttonDiv={<TrashIcon size={18} className='cursor-pointer'/>}
-                        alertActionText='Delete'
+                    <CodeMirror
+                        value={block.code}
+                        onChange={(value) => modifyCode(block.id, value)}
+                        theme="dark"
+                        height={''}
+                        extensions={[
+                            python(), // Syntax highlighting for Python
+                            autocompletion() // Enable autocompletion
+                        ]}
+                        className="border rounded overflow-auto"
                     />
-                    <SquarePlusIcon className='cursor-pointer' size={18}  onClick={()=>addCodeBlock(block.id)}/>
-                </div>
+
+                    {/* Icon buttons, only visible on hover */}
+                    <div className="absolute top-3 right-8 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <PlayIcon size={18} className='cursor-pointer' onClick={() => runCode(block.code)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    Run this code block
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <ForwardIcon size={18} className='cursor-pointer' onClick={() => runTillCurrentCode(block.id)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    Run this + all previous code blocks
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                <ConfirmDialog
+                                    alertActionFunction={() => removeCodeBlock(block.id)} 
+                                    alertTitle='Delete Code Block' 
+                                    alertDescription='Are you sure you want to delete this codeblock permanently?'
+                                    buttonDiv={<TrashIcon size={18} className='cursor-pointer'/>}
+                                    alertActionText='Delete'
+                                />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    Delete this code block
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <SquarePlusIcon className='cursor-pointer' size={18}  onClick={()=>addCodeBlock(block.id)}/>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    Add a empty code block after this
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
                 </div>
             ))}
 

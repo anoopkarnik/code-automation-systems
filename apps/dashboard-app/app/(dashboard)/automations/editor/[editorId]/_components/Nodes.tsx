@@ -113,10 +113,11 @@ const Nodes = () => {
                 </Label>
                 <Switch id='airplane-mode' onClick={onToggle} defaultChecked={editor.publish!} />
             </div>
-            <div className='flex items-center justify-between gap-2'>
+            <div className='flex items-center gap-2 w-full justify-center'>
                 {showNameEdit ? (
                     <Input
-                        placeholder={editor.name}
+                        className='w-full'
+                        placeholder={name}
                         onChange={(e: any) => setName(e.target.value)}
                         onBlur={handleEditName} // Exit edit mode when clicking outside the input
                         autoFocus // Automatically focus the input when entering edit mode
@@ -128,7 +129,7 @@ const Nodes = () => {
                     </div>
                 )}
             </div>
-            <div className='flex items-center justify-center gap-2 text-sm text-description w-[40%] '>
+            <div className='flex items-center justify-center gap-2 text-sm text-description w-full '>
                 {showDescriptionEdit ? (
                     <Textarea
                         placeholder={editor.description}

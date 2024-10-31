@@ -1,0 +1,61 @@
+#Get Access Token from RefreshToken
+
+url = "https://oauth2.googleapis.com/token"
+client_id="{{client_id}}"
+client_secret="{{client_secret}}"
+refresh_token="{{refresh_token}}"
+grant_type="refresh_token"
+payload = f"client_id={client_id}&client_secret={client_secret}&refresh_token={refresh_token}&grant_type={grant_type}"
+headers = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+}
+response = requests.request("POST", url, headers=headers, data=payload)
+access_token = response.json()['access_token']
+
+
+#Get Liked Videos
+youtube_results = []
+base_url = 'https://www.googleapis.com/youtube/v3'
+headers = {'Authorization': f'Bearer {access_token}'}
+
+next_page_token = None
+while True:
+  # Fetch videos
+  videos_url = f"{base_url}/playlistItems?part=snippet&playlistId=LL&maxResults=50"
+  if next_page_token:
+      videos_url += f"&pageToken={next_page_token}"
+  
+  videos_response = requests.get(videos_url, headers=headers)
+  if videos_response.status_code != 200:
+      raise Exception(f"HTTP error! status: {videos_response.status_code}")
+  
+  videos_data = videos_response.json()
+  # Fetch video details in batches
+  video_ids = ','.join([item['snippet']['resourceId']['videoId'] for item in videos_data['items']])
+  video_details_url = f"{base_url}/videos?part=snippet,statistics,contentDetails&id={video_ids}"
+  
+  video_details_response = requests.get(video_details_url, headers=headers)
+  if video_details_response.status_code != 200:
+      raise Exception(f"HTTP error! status: {video_details_response.status_code}")
+  
+  video_details_data = video_details_response.json()
+  for video in video_details_data['items']:
+      youtube_results.append({
+          'id': video['id'],
+          'publishedAt': video['snippet']['publishedAt'],
+          'channelId': video['snippet']['channelId'],
+          'title': video['snippet']['title'],
+          'description': video['snippet']['description'],
+          'thumbnailId': video['snippet']['thumbnails']['default']['url'],
+          'channelTitle': video['snippet']['channelTitle'],
+          'tags': video['snippet'].get('tags',[]),
+          'duration': video['contentDetails']['duration'],
+          'views': video['statistics'].get('viewCount',0),
+          'likes': video['statistics'].get('likeCount',0),
+          'comments': video['statistics'].get('commentCount',0),
+          'favorites': video['statistics']['favoriteCount'],
+          'language': video['snippet'].get('defaultAudioLanguage','')
+      })
+  next_page_token = videos_data.get('nextPageToken')
+  if not next_page_token:
+      break

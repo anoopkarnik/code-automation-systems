@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@repo/ui/atoms/shadcn/Button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@repo/ui/molecules/shadcn/Select';
-import { Checkbox } from '@repo/ui/atoms/shadcn/Checkbox';
 import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { queryNotionDatabaseProperties } from '../../../../../../../actions/notion/notion';
-import { Switch } from '@repo/ui/molecules/shadcn/Switch';
 import { CircleXIcon, RecycleIcon, Trash2Icon } from 'lucide-react';
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 

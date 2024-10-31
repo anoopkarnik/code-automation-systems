@@ -11,6 +11,8 @@ import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
 import NotionFilterComponent from './NotionFilterComponent';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs';
 import NotionPropertiesComponent from './NotionPropertiesComponent';
+import { child } from 'winston';
+import NotionChildrenComponent from './NotionChildrenComponent';
 
 
 const NotionCode = () => {
@@ -21,6 +23,7 @@ const NotionCode = () => {
     const [databases, setDatabases] = useState<any>([])
     const [selectedDatabase, setSelectedDatabase] = useState('')
     const [filterBody, setFilterBody] = useState<any>({})
+    const [children, setChildren] = useState<any>({})
     const [properties, setProperties] = useState<any>({})
 
     const [sampleCode, setSampleCode] = useState('');
@@ -32,7 +35,7 @@ const NotionCode = () => {
 
     const fetchSampleQueryDatabaseCode = async () => {
         try {
-            const response = await fetch('/samplePythonCodes/queryNotionDatabase.txt'); // Assuming the file is in the public folder
+            const response = await fetch('/samplePythonCodes/notion/queryNotionDatabase.txt'); // Assuming the file is in the public folder
             let text = await response.text();
             text = text.replaceAll("{{token}}", selectedNotionAccount);
             text = text.replaceAll("{{db_id}}", JSON.parse(selectedDatabase).id.replaceAll("-",""));
@@ -47,7 +50,7 @@ const NotionCode = () => {
 
     const fetchSampleCreatePageCode = async () => {
         try {
-            const response = await fetch('/samplePythonCodes/createNotionPage.txt'); // Assuming the file is in the public folder
+            const response = await fetch('/samplePythonCodes/notion/createNotionPage.txt'); // Assuming the file is in the public folder
             let text = await response.text();
             text = text.replaceAll("{{token}}", selectedNotionAccount);
             text = text.replaceAll("{{db_id}}", JSON.parse(selectedDatabase).id.replaceAll("-",""));
@@ -72,7 +75,7 @@ const NotionCode = () => {
 
     const fetchSampleUpdatePageCode = async () => {
         try {
-            const response = await fetch('/samplePythonCodes/updateNotionPage.txt'); // Assuming the file is in the public folder
+            const response = await fetch('/samplePythonCodes/notion/updateNotionPage.txt'); // Assuming the file is in the public folder
             let text = await response.text();
             text = text.replaceAll("{{token}}", selectedNotionAccount);
 
@@ -87,6 +90,32 @@ const NotionCode = () => {
                 
             });
             lines.splice(propertiesIndex+1,0,properties.join('\n'))
+            setSampleCode(lines.join('\n'));
+
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    };
+
+    const fetchAppendBlockChildren = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/notion/appendBlockChildren.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
+            text = text.replaceAll("{{token}}", selectedNotionAccount);
+
+            
+            let lines = text.split('\n')
+            let childrenIndex= -1
+            // Find the index of the line where `children = []` is located
+            lines.forEach((line:any, index:any) => {
+                if (line.includes('children = []')) {
+                    childrenIndex = index;
+                }
+                
+            });
+            lines.splice(childrenIndex+1,0,children.join('\n'))
             setSampleCode(lines.join('\n'));
 
 
@@ -151,7 +180,7 @@ const NotionCode = () => {
             }
             else if (property.type === "checkbox"){
                 lines.push(
-                    `properties["${property.name}"] = {"checkbox": "${property.value}"}`
+                    `properties["${property.name}"] = {"checkbox": ${property.value}}`
                 )
             }
             else if (property.type === "select"){
@@ -176,6 +205,23 @@ const NotionCode = () => {
             }
         })
         setProperties(lines)
+    }
+
+    const modifyChildrenBody = (children:any) => {
+        let lines:any = []
+        children.forEach((child:any) => {
+            if (child.type === "table_of_contents"){
+                lines.push(
+                    `children.append({"type": "${child.type}"`
+                )
+            }
+            else if(child.type === "embed"){
+                lines.push(
+                    `children.append({"type": "${child.type}", "${child.type}": {"url"; "${child.value}"}})`
+                )
+            }
+        })
+        setChildren(lines)
     }
 
     useEffect(() => {
@@ -225,6 +271,9 @@ const NotionCode = () => {
                         <TabsTrigger key="Properties" value="Properties" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
                           <div>Properties</div>
                         </TabsTrigger>
+                        <TabsTrigger key="Children" value="Children" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+                          <div>Children</div>
+                        </TabsTrigger>
                     </TabsList>
                     <TabsContent value='Filters'>
                         <NotionFilterComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
@@ -235,6 +284,11 @@ const NotionCode = () => {
                         <NotionPropertiesComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
                             access_token={selectedNotionAccount}
                             modifyProperties={modifyProperties}/>
+                    </TabsContent>
+                    <TabsContent value='Children'>
+                        <NotionChildrenComponent dbId={JSON.parse(selectedDatabase).id.replaceAll("-","")}
+                            access_token={selectedNotionAccount}
+                            modifyChildrenBody={modifyChildrenBody}/>
                     </TabsContent>
 
                 </Tabs>
@@ -259,6 +313,10 @@ const NotionCode = () => {
             {selectedDatabase && 
                 <Button size="sm" variant="outline"  onClick={fetchSampleUpdatePageCode}>
                     Update Notion Page Sample Code
+                </Button>}
+            {selectedDatabase && 
+                <Button size="sm" variant="outline"  onClick={fetchAppendBlockChildren}>
+                    Append Children Block Sample Code
                 </Button>}
         </div>
         {variable && <input className='p-2 mt-4 w-full' type="text" value={variable} placeholder='Variable Value' />}

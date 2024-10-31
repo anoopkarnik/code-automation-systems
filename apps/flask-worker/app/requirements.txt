@@ -6,3 +6,4 @@ psycopg2-binary
 pytz
 schedule
 requests
+youtube_transcript_api
