@@ -12,7 +12,7 @@ const Workflow = ({workflow}:any) => {
     <Card className=''>
         <CardHeader className=''>
             <CardTitle className='flex items-start justify-between leading-3 '>
-                <div className='flex items-center gap-2 text-button leading-normal'>
+                <div className='flex justify-start items-center flex-wrap gap-2 text-button leading-normal'>
                     {workflow.name}
                     {workflow.publish && <CircleCheckIcon className='w-4 h-4 text-green-400'/>}
                     {!workflow.publish && <CirclePauseIcon className='w-4 h-4 text-red-400'/>}

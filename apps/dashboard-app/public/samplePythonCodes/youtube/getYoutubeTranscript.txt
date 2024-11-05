@@ -1,0 +1,8 @@
+video_id = ""
+try:
+    present = True
+    dicts = youtube_transcript_api.YouTubeTranscriptApi.get_transcript(video_id)
+    text = ' '.join([x['text'] for x in dicts])
+except: 
+    present = False
+    text = "Subtitles disabled for this video so cannot summarize"

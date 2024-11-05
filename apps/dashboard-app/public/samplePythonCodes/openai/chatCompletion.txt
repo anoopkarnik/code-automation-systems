@@ -1,0 +1,24 @@
+#Chat Completion 
+
+openai_url = "https://api.openai.com/v1/chat/completions"
+token = "{{token}}"
+headers = {
+    "Authorization": f"Bearer {token}",
+    "Content-Type":"application/json"
+}
+model = "{{model}}"
+system_instructions = """{{systemInstructions}}"""
+response_format = "{{responseFormat}}"
+messages = """{{messages}}"""
+
+body = {}
+body["model"] = model
+body["response_format"] = {}
+body["response_format"]["type"] = response_format
+body["messages"] = []
+body["messages"].append({"role": "system", "content": system_instructions})
+body["messages"].append({"role": "user", "content": messages})
+
+response = requests.request("POST",openai_url ,headers=headers,data=json.dumps(body))
+result = response.json()
+content = json.loads(result['choices'][0]['message']['content'])

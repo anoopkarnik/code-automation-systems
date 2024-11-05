@@ -255,7 +255,7 @@ export const personalInfoItems = [
   {title: 'settings',icon: Settings, }
 ]
 
-export const CONNECTIONS: Connection[] = [
+export const CONNECTIONS: any = [
     {
       title: 'Notion',
       description: 'Create entries in your notion dashboard and automate tasks.',
@@ -320,12 +320,12 @@ export const CONNECTIONS: Connection[] = [
       ]   
     },
     {
-      title: 'Google Drive',
+      title: 'Drive',
       description: 'Connect to your Google Drive',
       image: '/googleDrive.png',
       accessTokenKey: 'accessToken',
       showModal: false,
-      published: false
+      published: true
     },
     {
       title: 'Youtube',

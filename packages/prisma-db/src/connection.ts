@@ -142,6 +142,19 @@ export const createConnection = async ({type, userId, accessToken, workspaceName
         })
         return connection;
     }
+    else if (type === 'Drive'){
+        const connection = await db.connection.create({
+            data:{
+                name: 'My Drive Account',
+                userId: userId,
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+                scopes: scopes,
+                type: type,
+            }
+        })
+        return connection;
+    }
     return null;
 }
 

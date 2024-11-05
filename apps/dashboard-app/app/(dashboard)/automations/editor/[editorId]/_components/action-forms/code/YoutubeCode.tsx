@@ -52,7 +52,35 @@ const YoutubeCode = () => {
             let text = await response.text();
             text = text.replaceAll("{{client_id}}", youtubeClientId);
             text = text.replaceAll("{{client_secret}}", youtubeClientSecret);
-            text = text.replaceAll("{{access_token}}", selectedYoutubeAccount);
+            text = text.replaceAll("{{refresh_token}}", selectedYoutubeAccount);
+            setSampleCode(text);
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    }
+
+
+    const fetchLikedVideosCode = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/youtube/getLikedVideos.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
+            text = text.replaceAll("{{client_id}}", youtubeClientId);
+            text = text.replaceAll("{{client_secret}}", youtubeClientSecret);
+            text = text.replaceAll("{{refresh_token}}", selectedYoutubeAccount);
+            setSampleCode(text);
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    }
+
+    const fetchYoutubeTranscriptCode = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/youtube/getYoutubeTranscript.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
             setSampleCode(text);
 
         } catch (error) {
@@ -88,11 +116,17 @@ const YoutubeCode = () => {
             <Button size="sm" variant="outline"  onClick={() => setVariable(youtubeClientSecret)}>
                 Get Youtube Client Secret
             </Button>
+            {<Button size="sm" variant="outline"  onClick={fetchYoutubeTranscriptCode}>
+                Get Youtube Transcription
+            </Button>}
             {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchAccessTokenCode}>
                 Get Access Token
             </Button>}
             {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchSubscribedChannelsDataCode}>
                 Get Subscribed Channels
+            </Button>}
+            {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchLikedVideosCode}>
+                Get Liked Videos
             </Button>}
         </div>
 

@@ -1,0 +1,8 @@
+#Chat Completion 
+
+openai_url = "https://api.openai.com/v1/models"
+token = "{{token}}"
+headers = {
+    "Authorization": f"Bearer {token}",
+}
+response = requests.request("GET",openai_url ,headers=headers)

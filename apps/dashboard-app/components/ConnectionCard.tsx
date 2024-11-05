@@ -12,6 +12,7 @@ import { createOpenAIConnection } from '../app/actions/connections/openai-connec
 import { useRouter } from 'next/navigation'
 import { getEnvironmentVariables } from '../app/actions/env/env'
 import { createYoutubeOAuthUrl } from '../app/actions/connections/youtube-connections'
+import { createDriveOAuthUrl } from '../app/actions/connections/drive-connections'
 
 
 const ConnectionCard = ({connection}:any) => {
@@ -44,6 +45,10 @@ const ConnectionCard = ({connection}:any) => {
         setCallbackUrl(res["NEXT_PUBLIC_URL"]+'/api/callback/youtube')
         setOauthUrl(res["NEXT_PUBLIC_YOUTUBE_OAUTH_URL"])
       }
+      else if (connection.title === 'Drive'){
+        setCallbackUrl(res["NEXT_PUBLIC_URL"]+'/api/callback/drive')
+        setOauthUrl(res["NEXT_PUBLIC_DRIVE_OAUTH_URL"])
+      }
     }
     updateEnvironmentVariables()
   },[connection.title])
@@ -55,7 +60,12 @@ const ConnectionCard = ({connection}:any) => {
     }
     else if (connection.title === "Notion"){
       window.location.href = oauthUrl
-    } else {
+    } 
+    else if (connection.title === "Drive"){
+      const url = await createDriveOAuthUrl()
+      window.location.href = url
+    }
+    else {
       console.error('No oauth url found')
     }
   }
