@@ -15,7 +15,7 @@ const Connections = () => {
         Connect all your apps directly from here. You may need to connect these apps regularly to refresh verfication.
       </div>
       <div className='mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
-        {CONNECTIONS.map((connection) => (
+        {CONNECTIONS.map((connection:any) => (
               <ConnectionCard
                 key={connection.title}
                 connection={connection}

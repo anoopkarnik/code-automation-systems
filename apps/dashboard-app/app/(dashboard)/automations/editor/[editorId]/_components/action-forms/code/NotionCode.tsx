@@ -11,7 +11,6 @@ import SearchableSelect from '@repo/ui/molecules/custom/SearchableSelect';
 import NotionFilterComponent from './NotionFilterComponent';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs';
 import NotionPropertiesComponent from './NotionPropertiesComponent';
-import { child } from 'winston';
 import NotionChildrenComponent from './NotionChildrenComponent';
 
 
@@ -217,7 +216,12 @@ const NotionCode = () => {
             }
             else if(child.type === "embed"){
                 lines.push(
-                    `children.append({"type": "${child.type}", "${child.type}": {"url"; "${child.value}"}})`
+                    `children.append({"type": "${child.type}", "${child.type}": {"url": "${child.value}"}})`
+                )
+            }
+            else {
+                lines.push(
+                    `children.append({"type": "${child.type}", "${child.type}": {"rich_text": [{"type": "text", "text": {"content": "${child.value}"}}]}})`
                 )
             }
         })

@@ -179,7 +179,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
                 </div>
             )}
             <CodeConstruction/>
-            <div className='flex w-full justify-center gap-4'>
+            <div className='flex flex-wrap w-full justify-center gap-4'>
                 <Button size="lg" variant="default" type="submit" onClick={onSubmit} > Add / Edit Action</Button>
                 <Button size="lg" onClick={runAllCode}>Run all Code Blocks</Button>
                 <Button size="lg" onClick={copyAllCode}>Copy All Code</Button>

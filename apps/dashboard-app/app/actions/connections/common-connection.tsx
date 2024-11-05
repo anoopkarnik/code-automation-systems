@@ -11,7 +11,7 @@ export const getConnectionsAction = async(userId:string) => {
 
     const newConnections = await Promise.all(
         userInfo.connections.map(async (connection: any) => {
-            const cons = CONNECTIONS.find((con) => con.title === connection.type);
+            const cons = CONNECTIONS.find((con:any) => con.title === connection.type);
             if (cons) {
                 const newConnection = { ...cons, ...connection };
                 return newConnection;

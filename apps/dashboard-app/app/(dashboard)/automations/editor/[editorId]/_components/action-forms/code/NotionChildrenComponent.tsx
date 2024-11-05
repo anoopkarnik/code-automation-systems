@@ -6,8 +6,8 @@ import { Trash2Icon } from 'lucide-react';
 import React, { useState } from 'react'
 
 const NotionChildrenComponent = ({dbId,access_token,modifyChildrenBody}:any) => {
-   let types = ["embed","callout","table_of_contents","heading_1","heading_2","heading_3","paragraph","bulleted_list_item",
-    "to_do"]
+   let types = ["embed","callout","table_of_contents","heading_1","heading_2","heading_3","paragraph",
+    "bulleted_list_item","to_do", "numbered_list_item"]
    const [selectedChildren, setSelectedChildren] = useState<any>([
     {type: "", value: ""}
    ]);

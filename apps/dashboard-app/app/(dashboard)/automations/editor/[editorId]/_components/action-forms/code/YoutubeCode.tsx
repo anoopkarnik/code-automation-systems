@@ -77,6 +77,18 @@ const YoutubeCode = () => {
         }
     }
 
+    const fetchYoutubeTranscriptCode = async () => {
+        try {
+            const response = await fetch('/samplePythonCodes/youtube/getYoutubeTranscript.txt'); // Assuming the file is in the public folder
+            let text = await response.text();
+            setSampleCode(text);
+
+        } catch (error) {
+            console.error('Error fetching sample query:', error);
+            setSampleCode('// Error fetching the sample query.');
+        }
+    }
+
   return (
     <div>
         <div className='flex flex-col gap-4  mt-4 ml-2 w-[80%]'>
@@ -104,6 +116,9 @@ const YoutubeCode = () => {
             <Button size="sm" variant="outline"  onClick={() => setVariable(youtubeClientSecret)}>
                 Get Youtube Client Secret
             </Button>
+            {<Button size="sm" variant="outline"  onClick={fetchYoutubeTranscriptCode}>
+                Get Youtube Transcription
+            </Button>}
             {selectedYoutubeAccount && <Button size="sm" variant="outline"  onClick={fetchAccessTokenCode}>
                 Get Access Token
             </Button>}

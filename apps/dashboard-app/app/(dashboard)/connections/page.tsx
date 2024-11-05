@@ -13,6 +13,7 @@ import { getUserInfo } from '../../actions/connections/user-connections';
 import { onNotionConnection } from '../../actions/connections/notion-connections';
 import { onYoutubeConnection } from '../../actions/connections/youtube-connections';
 import { useToast } from '../../../hooks/useToast';
+import { onDriveConnection } from '../../actions/connections/drive-connections';
 
 const PlannerPage = () => {
   const isMobile = useMedia("(max-width: 1324px)", false);
@@ -50,6 +51,9 @@ const PlannerPage = () => {
         }
         if (type === 'Youtube'){
           response = await onYoutubeConnection({access_token,refresh_token,scopes,userId})
+        }
+        if (type === 'Drive'){
+          response = await onDriveConnection({access_token,refresh_token,scopes,userId})
         }
         if (response?.success){
           toast({
