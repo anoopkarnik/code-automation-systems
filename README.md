@@ -16,11 +16,11 @@ Clone the Notion Templates for the below systems.
 
 ### Automations
 1) **Triggers**
-   Schedule - Cron
-   Webhook - Internal Webhook
+   i) Schedule - Cron
+   ii) Webhook - Internal Webhook
 2) **Actions**
-   Webhook - External Webhook
-   Code - Python Code, Javascript Code
+   i) Webhook - External Webhook
+   ii) Code - Python Code, Javascript Code
    
 ### Connections
 1)  **Notion**
