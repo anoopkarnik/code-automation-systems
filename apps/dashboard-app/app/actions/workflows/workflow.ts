@@ -189,7 +189,7 @@ export const updateActionAction = async({id,actionId, metadata}:any) => {
 export const runWorkflow = async (editorId:string) => {
     logger.info('Running workflow',editorId);
     try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/hooks/catch/${editorId}`, {
+        const res = await fetch(`/api/hooks/catch/${editorId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

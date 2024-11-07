@@ -4,7 +4,7 @@ import React, {  useContext, useEffect, useState } from 'react'
 
 import 'reactflow/dist/style.css';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow, runWorkflow } from '../../../../../actions/workflows/workflow';
+import { deleteActionAction, deleteTriggerAction, editFlow,  getActionTypesAction,  getTriggerTypesAction,  publishFlow } from '../../../../../actions/workflows/workflow';
 import { EditorContext } from '../../../../../../providers/editor-provider';
 import { ArrowBigDownDash, Edit2Icon, TrashIcon } from 'lucide-react';
 import { Input } from '@repo/ui/atoms/shadcn/Input';
@@ -91,8 +91,22 @@ const Nodes = () => {
         }
     }
 
-  if (loading) return (<div>Loading...</div>)
-
+    const runWorkflow = async (editorId:string) => {
+        try{
+            const res = await fetch(`/api/hooks/catch/${editorId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({'runType': 'Just a Trial Run','runTime': new Date().toISOString()})
+            })
+            const data = await res.json();
+            return {success: "Workflow run successfully", result: data}
+        }
+        catch (error) {
+            return {error: "Workflow run failed"}
+        }
+    }
     const handleRun = async () => {
         toast({title: "Running", description: "Workflow has started", variant: 'default'})
         const res = await runWorkflow(editorId as string);
@@ -103,6 +117,10 @@ const Nodes = () => {
             toast({title: "Error", description: res?.error, variant: 'destructive'})
         }
     }
+
+  if (loading) return (<div>Loading...</div>)
+
+ 
 
   return (
     <>
