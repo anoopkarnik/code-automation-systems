@@ -15,7 +15,6 @@ import logging
 def pythonCode(code_string):
     print("Executing code")
     logging.info("Executing code")
-    logging.info("Code: " + code_string)
     local_namespace = {"os": os, "json": json, "datetime": datetime, "pytz": pytz, "requests": requests, "schedule": schedule,
                        "time": time, "youtube_transcript_api": youtube_transcript_api, "openai": openai}
     output_buffer = io.StringIO()
