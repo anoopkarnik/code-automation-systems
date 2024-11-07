@@ -25,7 +25,7 @@ def consume_kafka_messages():
         FLASK_TOPIC_NAME,
         bootstrap_servers=[BOOTSTRAP_SERVER],
         auto_offset_reset='earliest',
-        enable_auto_commit=False,
+        enable_auto_commit=True,
         group_id='flask-kafka-group',
         max_poll_interval_ms=600000,
         max_poll_records=10,
