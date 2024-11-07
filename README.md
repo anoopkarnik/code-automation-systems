@@ -15,18 +15,20 @@ Clone the Notion Templates for the below systems.
 5) **Social & Relationships**
 
 ### Automations
-1) **Triggers**
-   i) Schedule - Cron
-   ii) Webhook - Internal Webhook
-2) **Actions**
-   i) Webhook - External Webhook
-   ii) Code - Python Code, Javascript Code
+
+**Triggers**
+i) Schedule - Cron
+ii) Webhook - Internal Webhook
+   
+**Actions**
+i) Webhook - External Webhook
+ii) Code - Python Code, Javascript Code
    
 ### Connections
-1)  **Notion**
-2)  **OpenAI**
-3)  **Google Drive**
-4)  **Youtube**
+1)  Notion
+2)  OpenAI
+3)  Google Drive
+4)  Youtube
 
 ## Installation Guide
 
