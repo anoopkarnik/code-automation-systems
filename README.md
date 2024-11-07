@@ -21,12 +21,6 @@ Clone the Notion Templates for the below systems.
 2) **Actions**
    Webhook - External Webhook
    Code - Python Code, Javascript Code
-3) **Templates**
-   i) Scheduler Template
-   ii) Subscribed Channels Addition Template
-   iii) Storing Youtube Liked Videos Template
-   iv) Summarize Youtube Transcripts Template
-   v) Voice Recording to Journal Template
    
 ### Connections
 1)  **Notion**
@@ -34,13 +28,21 @@ Clone the Notion Templates for the below systems.
 3)  **Google Drive**
 4)  **Youtube**
 
+## Installation Guide
 
 1) npm i
 2) npm run db:generate
 3) npm run dev to run all the apps
 
+## Usage
 
+i) **Scheduler Template**
+From a Scheduler Notion Database based on properties of pages which define schedule of habits, tasks and financial obligations, we create calendar pages in notion with notifications for reminding using a Cron Scheduler Trigger every 30 Minutes and Python Code with Query Database, Create Page in Database and Update Page Sample Codes.
 
-![image](https://github.com/user-attachments/assets/67a9be68-0cb9-4ae4-8855-12b0d2862711)
+ii) **Subscribed Channels Addition Template**
+From a Youtube Account Add Details of all channels subscribed to a Notion Youtube Channel Database every Day at 12.
+
+iii) **Storing Youtube Liked Videos Template**
+From a Youtube Account Add Liked videos properties and youtube embedding as a page in Notion Videos Database Every Hour.
 
 
