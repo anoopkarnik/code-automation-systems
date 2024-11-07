@@ -31,18 +31,3 @@ jobs:
       run: |
         docker-compose build 
         docker-compose push 
-       
-
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      env:
-        DB_URL: ${{ secrets.DB_URL }}
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        timeout: 600
-        script: |
-          cd /home/ubuntu/saas-apps && sudo docker-compose pull
-          cd /home/ubuntu/saas-apps && sudo docker-compose rm -f
-          cd /home/ubuntu/saas-apps && sudo docker-compose up -d
