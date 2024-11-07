@@ -1,6 +1,6 @@
 # BSamaritan: Code Automations and Systems for Gamifying Life
 
-**Bsamaritan** is a customizable automation and productivity solution integrating third-party services with Notion for gamifying life.
+**BSamaritan** is a customizable automation and productivity solution integrating third-party services with Notion for gamifying life.
 
 ## Overview
 
