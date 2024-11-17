@@ -33,7 +33,12 @@
   ],
   "dependencies": {
     "fs": "^0.0.1-security",
+    "fumadocs-mdx": "^11.1.1",
     "install": "^0.13.0",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.0"
   }
 }

@@ -34,6 +34,9 @@ Clone the Notion Templates for the below systems.
 
 ## Installation Guide
 
+### Without Docker
+
+### With Docker
 1) npm i
 2) npm run db:generate
 3) npm run dev to run all the apps

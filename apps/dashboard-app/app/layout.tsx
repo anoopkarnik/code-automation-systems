@@ -7,14 +7,12 @@ import { ConnectionsProvider } from "../providers/connections-provider";
 import useConnection from "../hooks/useConnection";
 import { Toaster } from "../components/Toaster";
 
-
-
 const font = Roboto_Mono({
   subsets: ["latin"]
 })
 
 export const metadata: Metadata = {
-  title: "Personal Automation System",
+  title: "Code Automation Systems",
   description: "Personal Automation System for all your personal and professional automation needs",
 };
 
@@ -29,7 +27,7 @@ export default function RootLayout({
         <SessionProviders>
           <ThemeProvider attribute="class"  defaultTheme="dark" enableSystem disableTransitionOnChange>
             <ConnectionsProvider>
-              <main>{children}</main>
+                <main>{children}</main>
               <Toaster/>
             </ConnectionsProvider>
           </ThemeProvider>
