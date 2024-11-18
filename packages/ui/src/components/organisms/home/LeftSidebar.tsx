@@ -87,8 +87,8 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                         <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
                             isMobile && isCollapsed && 'border-none'
                         )}>
-                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-8 h-8' />}
-                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-subtitle text-wrap '>{appName}</h1>}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-10 h-10' />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-emphasized text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (

@@ -4,48 +4,54 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  path: string;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Notion Systems',
+    path: "./img/notion_systems.png",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+         Links of Notion Pages which can be duplicated with different Systems to gamify all aspect of your life.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Automations',
+    path: "./img/automations.png",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Create Automations by creating series of trigger and actions of multiple code blocks.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Third Party Connections',
+    path: "./img/third_party_connections.png",
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        OAuth and API key connections with lot of third party apps.
+      </>
+    ),
+  },
+  {
+    title: 'Sample Code Generation',
+    path: "./img/sample_code_generation.png",
+    description: (
+      <>
+        Generate Code Blocks related to third party api calls to Notion, OpenAI, Youtube, Google Drive, etc.
       </>
     ),
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, path, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        <img src={path} alt={title} className='w-4 h-4' />
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>

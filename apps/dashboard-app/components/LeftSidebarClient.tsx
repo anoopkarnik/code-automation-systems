@@ -16,7 +16,7 @@ const LeftSidebarClient = () => {
     <>
         <LeftSidebar
           appName="Code Automation System"
-          appIcon="https://raw.githubusercontent.com/anoopkarnik/code-automation-systems/main/apps/dashboard-app/public/logo_full.png"
+          appIcon="./logo.png"
           sidebarStartItems={sidebarStartItems}
           sidebarEndItems={sidebarEndItems}
           redirect={redirect}/>

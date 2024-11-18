@@ -16,9 +16,19 @@ import { createActionAction, runPythonCode, updateActionAction } from '../../../
 import { ArrowDownFromLineIcon, ForwardIcon, PlayIcon, SquarePlusIcon, TrashIcon } from 'lucide-react';
 import ConfirmDialog from '@repo/ui/molecules/custom/ConfirmDialog';
 import CodeConstruction from './CodeConstruction';
-import { add, set } from 'date-fns';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/ui/atoms/shadcn/Tooltip';
 
+interface VariablesProps {
+    key: string;
+    value: string;
+}
+
+interface CodeBlockProps {
+    id: number;
+    title?: string;
+    variables?: VariablesProps[];
+    code: string;
+}
 
 export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const {toast} = useToast();
@@ -27,7 +37,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
     const router = useRouter();
     const editor = useContext(EditorContext);
     // const [codeBlocks, setCodeBlocks] = useState(node?.metdata?.code||[{ id: 0, code: '# Write your python code here' }]);
-    const [codeBlocks, setCodeBlocks] = useState<any>([]);
+    const [codeBlocks, setCodeBlocks] = useState<CodeBlockProps[]>([]);
 
     const [output, setOutput] = useState<any>('');
     const [error, setError] = useState<any>('');
@@ -36,7 +46,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
 
     useEffect(() => {
         if (node?.metadata?.code){
-            setCodeBlocks([{ id: 0, code: node?.metadata?.code}])
+            setCodeBlocks([{ id: 0, title: "Untitled", code: node?.metadata?.code}])
         }
         else{
             setCodeBlocks(node?.metadata?.codeBlocks || [{ id: 0, code: '# Write your python code here' }])

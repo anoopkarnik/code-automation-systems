@@ -7,38 +7,38 @@ import { resetPasswordSettings } from "../app/actions/settings/reset-password-se
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-use";
+import { usePathname } from "next/navigation";
+
 
 export default function NavbarClient() {
     const { theme, setTheme } = useTheme()
     const router = useRouter();
     const [user, setUser] = useState<any>(null);
-    const { data, status } = useSession();
+    const { data:session, status } = useSession();
     const [title, setTitle] = useState('');
-    const location = useLocation();
-
+    const pathname = usePathname();
+    
 
     useEffect(() => {
         const refreshSession = async () => {
-            const session = await getSession();
-            if(location?.pathname?.includes('/editor/')){
+            if(pathname?.includes('/editor/')){
                 return 
             }
-            const pathSegments = location?.pathname?.split('/').filter(Boolean);
-            let extractedTitle:any = pathSegments && pathSegments.length > 0 ? pathSegments[pathSegments.length - 1] : '';
-            extractedTitle = extractedTitle.replaceAll("-"," ")
+            const pathSegments = pathname?.split('/').filter(Boolean);
+            let extractedTitle:any = pathSegments?.length > 0 ? pathSegments[pathSegments.length - 1]?.replaceAll("-","") : '';
             const formattedTitle = extractedTitle.charAt(0).toUpperCase() + extractedTitle.slice(1);
             setTitle(formattedTitle);
-            setUser(session?.user);
+            console.log('session',session?.user)
         };
 
          refreshSession();
         
-    }, [status,location.pathname]);
+    }, [status,pathname]);
     return (
             <Navbar 
                 title={title}
                 screens={[]}
-                user= {user}
+                user= {session?.user}
                 setTheme={setTheme}
                 onSignin={()=>{router.push('/auth/login')}}
                 onSignout={async() => await signOut()}
