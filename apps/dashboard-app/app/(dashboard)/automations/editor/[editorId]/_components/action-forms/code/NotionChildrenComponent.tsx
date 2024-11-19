@@ -44,7 +44,7 @@ const NotionChildrenComponent = ({dbId,access_token,modifyChildrenBody}:any) => 
                 </Select>
                 <Input 
                     placeholder='Enter Value'  
-                    className='col-span-4' 
+                    className='col-span-4 bg-background dark:bg-background text-foreground dark:text-foreground' 
                     onChange={(e) => modifyChild(index,"value",e.target.value)}
                 />
                 <ConfirmDialog
