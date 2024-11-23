@@ -6,4 +6,3 @@ sidebar_position: 5
 
 1. 
 2. 
-3. 
