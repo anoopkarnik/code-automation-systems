@@ -8,6 +8,7 @@
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
+    "deploy-s3": "docusaurus build && dotenv -e .env -- aws s3 rm s3://docs.bsamaritan.com --recursive && dotenv -e .env -- aws s3 sync ./build s3://docs.bsamaritan.com",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
@@ -19,6 +20,7 @@
     "@docusaurus/preset-classic": "3.6.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "dotenv-cli": "^7.4.4",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

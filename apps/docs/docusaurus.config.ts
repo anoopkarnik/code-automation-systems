@@ -40,7 +40,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/anoopkarnik/code-automation-systems/tree/main/apps/docs/docs/',
+            'https://github.com/anoopkarnik/code-automation-systems/tree/main/apps/docs',
         },
         blog: {
           showReadingTime: true,
