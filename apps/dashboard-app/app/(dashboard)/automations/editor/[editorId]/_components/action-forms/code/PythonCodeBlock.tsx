@@ -15,6 +15,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@repo/
 import { Input } from '@repo/ui/atoms/shadcn/Input';
 import { Label } from '@repo/ui/atoms/shadcn/Label';
 import  { Alert, AlertDescription } from '@repo/ui/atoms/shadcn/Alert';
+import PythonCodeBlockVariables from './PythonCodeBlockVariables';
 
 interface VariablesProps {
     key: string;
@@ -29,7 +30,7 @@ interface CodeBlockProps {
 }
 
 const PythonCodeBlock = ({block,modifyTitle,removeVariable,addVariable,modifyCode,addCodeBlock,removeCodeBlock,
-    runTillCurrentCode,index}:any) => {
+    runTillCurrentCode,modifyVariable,index}:any) => {
 
     const [output, setOutput] = useState<any>('');
     const [error, setError] = useState<any>('');
@@ -45,6 +46,9 @@ const PythonCodeBlock = ({block,modifyTitle,removeVariable,addVariable,modifyCod
         setKey('')
         setValue('')
     }
+
+
+
 
     const runCode = async (block:any) => {
         setError('');
@@ -120,22 +124,8 @@ const PythonCodeBlock = ({block,modifyTitle,removeVariable,addVariable,modifyCod
                 <Label className='text-description ml-[1px]'>Variables</Label>
                 <div className='flex flex-col gap-2'>
                     {block.variables?.map((variable: any,index:any) => (
-                        <div className='flex gap-2 items-center'>
-                            <div className='w-[30%] border-[1px] rounded-md p-2 break-words whitespace-normal text-wrap text-paragraph'>
-                                {variable.key}
-                            </div>
-                            <div className='w-[50%] border-[1px] rounded-md p-2 break-words whitespace-normal text-wrap text-paragraph'>
-                                {variable.value}
-                            </div>
-                            
-                            <ConfirmDialog
-                                alertActionFunction={() => removeVariable(block.id, index)} 
-                                alertTitle='Delete Property' 
-                                alertDescription='Are you sure you want to delete this property?'
-                                buttonDiv={<Trash2Icon className='w-5 h-5 cursor-pointer col-span-1 text-foreground/50' />}
-                                alertActionText='Delete'
-                            />
-                        </div>
+                        <PythonCodeBlockVariables variable={variable} removeVariable={removeVariable} block={block}
+                         index={index} modifyVariable={modifyVariable} key={index}/>
                     ))}
                     <div className='flex gap-2 items-center'>
                         <Input

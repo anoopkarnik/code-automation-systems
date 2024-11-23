@@ -198,6 +198,17 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
         setCodeBlocks(updatedCodeBlocks);
      }
 
+     const modifyVariable = (blockId: number,index: number,key: string,value: string) => {
+        const updatedCodeBlocks = codeBlocks.map((block:any) => {
+            if (block.id === blockId) {
+                block.variables[index] = { key, value };
+            }
+            return block;
+        });
+        setCodeBlocks(updatedCodeBlocks); 
+        
+    }
+
 
 
     return (
@@ -222,7 +233,8 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
             {codeBlocks.map((block: any,index: number) => (
                 <PythonCodeBlock block={block} modifyTitle={modifyTitle} removeVariable={removeVariable} 
                 addVariable={addVariable} modifyCode={modifyCode} addCodeBlock={addCodeBlock} 
-                removeCodeBlock={removeCodeBlock} runTillCurrentCode={runTillCurrentCode} index={index}/>
+                removeCodeBlock={removeCodeBlock} runTillCurrentCode={runTillCurrentCode} 
+                modifyVariable={modifyVariable} index={index}/>
             ))}
 
             {output && (

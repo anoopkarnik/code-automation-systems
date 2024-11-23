@@ -4,6 +4,7 @@ model Workflow {
   description       String
   publish           Boolean? @default(false)
   shared            Boolean? @default(false)
+  template          Boolean? @default(false)
   lastRun           String?
   userId            String
   events            Event[]

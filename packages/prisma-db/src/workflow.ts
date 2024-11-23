@@ -2,12 +2,15 @@ import { WorkflowAction, WorkflowTrigger } from '@prisma/client'
 import db from './index'
 
 //Create functions
-export const createWorkflow = async ({name,description,userId}:any) => {
+export const createWorkflow = async ({name,description,userId,publish,shared,template}:any) => {
     const workflow = await db.workflow.create({
         data:{
             name,
             description,
             userId,
+            publish,
+            shared,
+            template
         }
     })
     return workflow;
@@ -59,7 +62,8 @@ export const getWorkflowsByUserId = async (userId: string) => {
     if (userId){
         const workflows = await db.workflow.findMany({
             where:{
-                userId
+                userId,
+                template: false
             },
             include:{
                 actions: {
@@ -86,6 +90,37 @@ export const getWorkflowsByUserId = async (userId: string) => {
     }
 }
 
+export const getTemplatesByUserId = async (userId: string) => {
+    if (userId){
+        const workflows = await db.workflow.findMany({
+            where:{
+                userId,
+                template: true
+            },
+            include:{
+                actions: {
+                    include:{
+                        type: {
+                            include:{
+                                actionType: true
+                            }
+                        }
+                    }
+                },
+                trigger: {
+                    include:{
+                        type: {
+                            include:{
+                                triggerType: true
+                            }
+                        }
+                    }
+                }
+            },
+        })
+        return workflows;
+    }
+}
 //Get Functions 
 export const getWorkflowsById = async (id: string) => {
     const workflow = await db.workflow.findUnique({
@@ -121,7 +156,8 @@ export const getWorkflowsById = async (id: string) => {
 export const getPublicWorkflows = async () => {
     const workflows = await db.workflow.findMany({
         where:{
-            shared: true
+            shared: true,
+            template: true
         },
         include:{
             actions: {
@@ -332,6 +368,7 @@ export const makeWorkflowPublic = async (workflowId: string, state:boolean) => {
     if(workflow.shared) return 'Workflow made public'
     return 'Workflow made private'
 }
+
 
 export const updateWorkflowLastRun = async (workflowId: string, lastRun: string) => {
     const workflow = await db.workflow.update({
