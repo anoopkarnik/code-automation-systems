@@ -24,9 +24,7 @@ jobs:
     
             # Step 3: Install dependencies and build the app
             - name: Install dependencies and build
-              run: |
-                npm ci
-                npm run build
+              run: npm run build-docs
     
             # Step 4: Configure AWS CLI
             - name: Configure AWS CLI
