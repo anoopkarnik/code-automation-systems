@@ -185,7 +185,7 @@ export const sidebarEndItems = [
   {
       title: "Documentation",
       icon: FolderIcon,
-      href: "/docs"
+      href: "https://docs.bsamaritan.com/"
   }
 ]
 
