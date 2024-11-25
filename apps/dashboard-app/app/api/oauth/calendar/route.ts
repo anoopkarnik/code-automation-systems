@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         process.env.NEXT_PUBLIC_CALENDAR_REDIRECT_URI
     );
 
-    // generate a url that asks permissions for Blogger and Google Calendar scopes
+    // generate a url that asks permissions for Google Calendar scopes
     const scopes = [
     'https://www.googleapis.com/auth/calendar',
     ];

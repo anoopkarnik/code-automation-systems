@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Google Drive OAuth
+# Gmail Login OAuth
 
 ## Create Google Cloud Project
 
@@ -14,13 +14,6 @@ sidebar_position: 3
 4. Enter a name for your project and click "Create".
 5. Once your project is created, select it from the project dropdown.
 
-## Enable Google Drive API
-
-1. In the left sidebar, navigate to "APIs & Services" > "Library".
-   ![Library](/img/google-cloud-left-sidebar.png)
-2. Search for "Google Drive API" and click on it.
-3. Click the "Enable" button to enable the API for your project.
-
 ## Create OAuth Consent Screen
 
 1. After enabling the API, go to "APIs & Services" > "OAuth consent screen".
@@ -29,8 +22,7 @@ sidebar_position: 3
 3. Insert your App name (CASY), User support email, application home page (*https://bsamaritan.com*), authorized domain(*https://bsamaritan.com*), developer contact information, and privacy policy link which you can generate
 from [Termsfeed Privacy Policy Generator Site](https://www.termsfeed.com).
    ![OAuth Consent Screen](/img/app-info-consent-screen.png)
-4. In the "Scopes for Google APIs" section, add the following scope in the Manually add scopes field and add to table then click Update:
-   - *https://www.googleapis.com/auth/drive*
+4. In the "Scopes for Google APIs" section, select the top three scopes (userinfo.email, userinfo.profile, and openid) and click Update.
    ![OAuth Consent Screen](/img/add-remove-scope.png)
    Save and Continue to the next step.
 5. In the "Test Users" section, click on the "Add Users" button and add the email address of the user who will be testing the integration.
@@ -42,7 +34,7 @@ from [Termsfeed Privacy Policy Generator Site](https://www.termsfeed.com).
 1. In the left sidebar, navigate to "APIs & Services" > "Credentials" and click on "Create Credentials" and select "OAuth Client ID".
    ![Create Credentials](/img/create-credentials.png)
 2. Choose "Web application" as the application type.
-3. Enter a name for your OAuth client, specify the authorized javascript origin as *http://localhost:4000* and specify the authorized redirect URIs 1 - *http://localhost:4000/api/callback/drive*.
+3. Enter a name for your OAuth client, specify the authorized javascript origin as *http://localhost:4000* and specify the authorized redirect URIs 1 - *http://localhost:4000/api/auth/callback/google*.
    ![Create Credentials](/img/create-credential-detes.png)
 4. Click "Create" to generate your OAuth client ID and secret.
 5. Download the JSON file containing your credentials for future use

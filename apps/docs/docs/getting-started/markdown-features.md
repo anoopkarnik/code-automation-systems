@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Markdown Features
 
-<!-- Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
+Docusaurus supports **[Markdown](https://daringfireball.net/projects/markdown/syntax)** and a few **additional features**.
 
 ## Front Matter
 
@@ -149,4 +149,4 @@ export const Highlight = ({children, color}) => (
 
 This is <Highlight color="#25c2a0">Docusaurus green</Highlight> !
 
-This is <Highlight color="#1877F2">Facebook blue</Highlight> ! -->
+This is <Highlight color="#1877F2">Facebook blue</Highlight> !
