@@ -4,11 +4,11 @@ sidebar_position: 1
 
 # Overview
 
-CASY (Code Automation System) is  a open source semi code automation solution to automate every aspect of your life with sample code generation and public workflows with third party connections like Notion, Open AI, Youtube and Google Drive using the above boilerplate. 
+CANSY (Code Automations & Notion System) is  a open source semi code automation solution to automate every aspect of your life with sample code generation and public workflows with third party connections like Notion, Open AI, Youtube and Google Drive using the above boilerplate. 
 
 ## Key Features
 
-CASY comes with a fully customizable features that cater to a diverse set of users. Here are some of the key features:
+CANSY comes with a fully customizable features that cater to a diverse set of users. Here are some of the key features:
 
 * **Automations**: Create Automations by creating series of trigger and actions of multiple code blocks.
 * **Sample Code Generation**: Generate Code Blocks related to third party api calls to Notion, OpenAI, Youtube, Google Drive, etc.
@@ -19,7 +19,7 @@ CASY comes with a fully customizable features that cater to a diverse set of use
 
 This documentation is intended for:
 
-* **New Users**: If you're new to CASY, this guide will help you get started, set up your account, and begin using the application effectively.
+* **New Users**: If you're new to CANSY, this guide will help you get started, set up your account, and begin using the application effectively.
 * **Experienced Users**:  If you're already familiar with our application, this documentation serves as a valuable resource for advanced configurations, best practices, and troubleshooting.
 
 ## How to Use This Documentation

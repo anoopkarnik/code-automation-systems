@@ -26,8 +26,7 @@ sidebar_position: 3
 1. After enabling the API, go to "APIs & Services" > "OAuth consent screen".
    ![OAuth Consent Screen](/img/consent-screen.png)
 2. Select External User Type and Create OAuth Consent Screen.
-3. Insert your App name (CASY), User support email, application home page (*https://bsamaritan.com*), authorized domain(*https://bsamaritan.com*), developer contact information, and privacy policy link which you can generate
-from [Termsfeed Privacy Policy Generator Site](https://www.termsfeed.com).
+3. Insert your App name (CANSY), User support email, application home page (*https://bsamaritan.com*), authorized domain(*https://bsamaritan.com*, *https://www.termsfeed.com*, *https://www.termsofusegenerator.net*), developer contact information, privacy policy link which you can generate from [Termsfeed Privacy Policy Generator Site](https://www.termsfeed.com) and terms of service from [Terms of Use Generator Site](https://www.termsofusegenerator.net) and click on Save.
    ![OAuth Consent Screen](/img/app-info-consent-screen.png)
 4. In the "Scopes for Google APIs" section, add the following scope in the Manually add scopes field and add to table then click Update:
    - *https://www.googleapis.com/auth/drive*

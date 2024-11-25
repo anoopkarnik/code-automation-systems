@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'CASY Documentations',
-  tagline: 'Code Automations and Systems for Gamifying Life',
+  title: 'CANSY Documentations',
+  tagline: 'Code Automations and NotionSystems for Gamifying Life',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -18,7 +18,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Bayesian Labs', // Usually your GitHub org/user name.
-  projectName: 'code automation systems', // Usually your repo name.
+  projectName: 'code automation & notion systems', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -40,7 +40,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/anoopkarnik/code-automation-systems/tree/main/apps/docs',
+            'https://github.com/anoopkarnik/code-automations-notion-systems/tree/main/apps/docs',
         },
         blog: {
           showReadingTime: true,
@@ -51,7 +51,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/anoopkarnik/code-automation-systems/tree/main/apps/docs/blog/',
+            'https://github.com/anoopkarnik/code-automations-notion-systems/tree/main/apps/docs/blog/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -68,7 +68,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Code Automation Systems',
+      title: 'Code Automation & Notion Systems',
       logo: {
         alt: 'CAS',
         src: 'img/logo.png',
@@ -82,7 +82,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/anoopkarnik/code-automation-systems',
+          href: 'https://github.com/anoopkarnik/code-automations-notion-systems',
           label: 'GitHub',
           position: 'right',
         },
@@ -118,12 +118,12 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/anoopkarnik/code-automation-systems',
+              href: 'https://github.com/anoopkarnik/code-automations-notion-systems',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Code Automation Systems, Inc.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Code Automations & Notion Systems, Inc.`,
     },
     prism: {
       theme: prismThemes.github,

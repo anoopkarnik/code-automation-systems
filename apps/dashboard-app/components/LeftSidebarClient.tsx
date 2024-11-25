@@ -15,8 +15,9 @@ const LeftSidebarClient = () => {
   return (
     <>
         <LeftSidebar
-          appName="Code Automation System"
+          appName="Code Automations & Notion System"
           appIcon="./logo.png"
+          appDarkIcon="./logo-dark.png"
           sidebarStartItems={sidebarStartItems}
           sidebarEndItems={sidebarEndItems}
           redirect={redirect}/>

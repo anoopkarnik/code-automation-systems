@@ -7,16 +7,17 @@ import { useMediaQuery } from 'usehooks-ts'
 import { ChevronsLeft, AlignJustifyIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../atoms/shadcn/Tooltip'
 import LeftSidebarItem from './LeftSidebarItem'
-
+import { useTheme } from 'next-themes';
 interface LeftSidebarProps {
     appName: string
     appIcon: string
+    appDarkIcon: string
     sidebarStartItems: any
     sidebarEndItems: any
     redirect: (href: string) => void
 }
 
-const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
+const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 640px)");
     const isNotMobile = useMediaQuery("(min-width: 640px)");
@@ -25,6 +26,7 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+    const {theme} = useTheme();
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -87,8 +89,8 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                         <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
                             isMobile && isCollapsed && 'border-none'
                         )}>
-                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-10 h-10' />}
-                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-emphasized text-wrap '>{appName}</h1>}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={theme === "dark" ? appDarkIcon : appIcon} alt={appName} className='w-10 h-10' />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-paragraph text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (
