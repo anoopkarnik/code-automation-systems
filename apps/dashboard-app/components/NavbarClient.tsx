@@ -28,12 +28,11 @@ export default function NavbarClient() {
             let extractedTitle:any = pathSegments?.length > 0 ? pathSegments[pathSegments.length - 1]?.replaceAll("-","") : '';
             const formattedTitle = extractedTitle.charAt(0).toUpperCase() + extractedTitle.slice(1);
             setTitle(formattedTitle);
-            console.log('session',session?.user)
         };
 
          refreshSession();
         
-    }, [status,pathname]);
+    }, [status,pathname,session]);
     return (
             <Navbar 
                 title={title}

@@ -231,7 +231,7 @@ export const PythonCode = ({funcType,nodeType,type,subType,node}: any) => {
             </div>
             <div className='text-button mt-2'>Code Blocks</div>
             {codeBlocks.map((block: any,index: number) => (
-                <PythonCodeBlock block={block} modifyTitle={modifyTitle} removeVariable={removeVariable} 
+                <PythonCodeBlock key={index} block={block} modifyTitle={modifyTitle} removeVariable={removeVariable} 
                 addVariable={addVariable} modifyCode={modifyCode} addCodeBlock={addCodeBlock} 
                 removeCodeBlock={removeCodeBlock} runTillCurrentCode={runTillCurrentCode} 
                 modifyVariable={modifyVariable} index={index}/>

@@ -339,7 +339,7 @@ const NotionCode = () => {
         {variables.length>0 && <div className='mt-4'>
             <Label className='ml-2'>Variables</Label>
             {variables.map((variable:any) => (
-                <div className='flex gap-2 items-center mt-1'>
+                <div key={variable.key} className='flex gap-2 items-center mt-1'>
                     <div className='w-[30%] border-[1px] rounded-md p-2 break-words whitespace-normal text-wrap text-paragraph'>
                         {variable.key}
                     </div>
