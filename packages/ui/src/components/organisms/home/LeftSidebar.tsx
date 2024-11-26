@@ -8,6 +8,7 @@ import { ChevronsLeft, AlignJustifyIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../atoms/shadcn/Tooltip'
 import LeftSidebarItem from './LeftSidebarItem'
 import { useTheme } from 'next-themes';
+import Image from 'next/image';
 interface LeftSidebarProps {
     appName: string
     appIcon: string
@@ -89,7 +90,7 @@ const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebar
                         <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
                             isMobile && isCollapsed && 'border-none'
                         )}>
-                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={theme === "dark" ? appDarkIcon : appIcon} alt={appName} className='w-10 h-10' />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <Image src={theme === "dark" ? appDarkIcon : appIcon} alt={appName} width={40} height={40} />}
                             {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-paragraph text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>

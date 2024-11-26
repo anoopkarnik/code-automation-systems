@@ -52,4 +52,6 @@ From a Youtube Account Add Details of all channels subscribed to a Notion Youtub
 iii) **Storing Youtube Liked Videos Template**
 From a Youtube Account Add Liked videos properties and youtube embedding as a page in Notion Videos Database Every Hour.
 
+## License
 
+This project is licensed under the [MIT License](LICENSE).

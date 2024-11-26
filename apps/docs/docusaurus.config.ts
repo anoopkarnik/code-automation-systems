@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'CANSY Documentations',
-  tagline: 'Code Automations and NotionSystems for Gamifying Life',
+  tagline: 'Code Automations and Notion Systems for Gamifying Life',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -37,6 +37,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -83,8 +84,14 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
+          href: 'https://bsamaritan.com/',
+          position: 'right',
+          label: 'Platform',
+        },
+        {
           href: 'https://github.com/anoopkarnik/code-automations-notion-systems',
-          label: 'GitHub',
+          'aria-label': 'Github repository',
+          className: 'header-github-link',
           position: 'right',
         },
       ],
@@ -96,8 +103,20 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Documentation',
               to: '/docs/overview',
+            },
+            {
+              label: 'Blog',
+              to: '/blog',
+            },
+            {
+              label: 'Privacy Policy',
+              href: 'https://www.termsfeed.com/live/f7faf120-c351-422d-bd3a-cb7a2c931284'
+            },
+            {
+              label: 'Terms of Service',
+              href: 'https://www.termsofusegenerator.net/live.php?token=saSU4fpQYzVVm0jLgtV88ty1x4tEHMA7'
             },
           ],
         },
@@ -107,22 +126,9 @@ const config: Config = {
             {
               label: 'Linkedin',
               href: 'https://www.linkedin.com/company/bayesian-labs1',
-            }
+            }, 
           ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/anoopkarnik/code-automations-notion-systems',
-            },
-          ],
-        },
+        }
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Code Automations & Notion Systems, Inc.`,
     },
