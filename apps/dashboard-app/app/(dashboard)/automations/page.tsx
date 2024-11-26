@@ -9,6 +9,7 @@ import Workflows from './_components/Workflows'
 import Event from './editor/[editorId]/_components/Event'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@repo/ui/molecules/shadcn/Tabs'
 import PublicWorkflows from './_components/PublicWorkflows'
+import Templates from './_components/Templates'
 
 const Page = () => {
   const session = useSession();
@@ -22,8 +23,11 @@ const Page = () => {
             <TabsTrigger key="My Automations" value="My Automations" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
               <div>My Automations</div>
             </TabsTrigger>
-            <TabsTrigger key="Public Automations" value="Public Automations" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
-              <div>Public Automations</div>
+            <TabsTrigger key="My Automation Templates" value="My Automation Templates" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+              <div>My Automation Templates</div>
+            </TabsTrigger>
+            <TabsTrigger key="Public Automation Templates" value="Public Automation Templates" className='flex gap-1 border-b-2 shadow-md shadow-border/10 hover:bg-accent ' >
+              <div>Public Automation Templates</div>
             </TabsTrigger>
         </TabsList>
         <TabsContent value='My Automations' className='ml-8 flex flex-col items-center'>
@@ -45,7 +49,10 @@ const Page = () => {
           </Sheet>
           <Workflows/>
         </TabsContent>
-        <TabsContent value='Public Automations' className='ml-8'>
+        <TabsContent value='My Automation Templates' className='ml-8'>
+          <Templates/>
+        </TabsContent>
+        <TabsContent value='Public Automation Templates' className='ml-8'>
           <PublicWorkflows/>
         </TabsContent>
       </Tabs>

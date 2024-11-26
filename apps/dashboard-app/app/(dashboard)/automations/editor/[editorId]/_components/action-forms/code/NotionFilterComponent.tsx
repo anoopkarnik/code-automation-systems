@@ -180,7 +180,7 @@ const NotionFilterComponent = ({dbId,access_token,modifyFilterBody}:any) => {
                   value={rule.value}
                   onChange={(e) => handleRuleChange(groupIndex, ruleIndex, 'value', e.target.value)}
                   placeholder="Enter value"
-                  className="col-span-4"
+                  className="col-span-4 bg-background dark:bg-background text-foreground dark:text-foreground"
                 />
                 <ConfirmDialog
                     alertActionFunction={() => removeRuleFromGroup(groupIndex, ruleIndex)} 

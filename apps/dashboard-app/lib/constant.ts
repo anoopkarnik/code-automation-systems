@@ -185,7 +185,7 @@ export const sidebarEndItems = [
   {
       title: "Documentation",
       icon: FolderIcon,
-      href: "/docs"
+      href: process.env.NEXT_PUBLIC_DOCS_URL
   }
 ]
 

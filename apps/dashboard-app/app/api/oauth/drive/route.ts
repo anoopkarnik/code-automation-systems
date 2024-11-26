@@ -10,13 +10,9 @@ export async function GET(req: NextRequest) {
         process.env.NEXT_PUBLIC_DRIVE_REDIRECT_URI
     );
 
-    // generate a url that asks permissions for Blogger and Google Calendar scopes
+    // generate a url that asks permissions for Google Drive scopes
     const scopes = [
-        'https://www.googleapis.com/auth/drive',                 // Full access to Google Drive
-        'https://www.googleapis.com/auth/drive.file',            // Access to files created or opened by the app
-        'https://www.googleapis.com/auth/drive.metadata.readonly', // Read metadata of files in Google Drive
-        'https://www.googleapis.com/auth/drive.readonly',        // Read-only access to Google Drive
-        'https://www.googleapis.com/auth/drive.appdata'          // Access to app-specific data in Google Drive
+        'https://www.googleapis.com/auth/drive',                 // Full access to Google Drive        // Access to app-specific data in Google Drive
     ];
 
 

@@ -11,11 +11,11 @@ const PublicWorkflows = () => {
     useEffect(()=>{
         async function fetchWorkflows(){
             const flows = await getPublicWorkflowsAction();
-            console.log(flows)
             setWorkflows(flows);
         }
         fetchWorkflows()
     },[])
+    
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 w-full py-10 overflow-y-auto gap-4'>
         {workflows?.map((workflow:any) => (

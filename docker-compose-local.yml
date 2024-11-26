@@ -9,9 +9,9 @@ services:
     networks:
       - turborepo-network
     env_file:
-      - .env.dashboard-app
+      - ./apps/dashboard-app/.env
     volumes:
-      - /home/ubuntu/logs/dashboard-app:/app/apps/dashboard-app/logs
+      - ./logs/dashboard-app:/app/apps/dashboard-app/logs
 
   scheduler:
     image: anoopkarnik/scheduler:latest
@@ -21,9 +21,9 @@ services:
     networks:
       - turborepo-network
     env_file:
-      - .env.scheduler
+      - ./apps/scheduler/.env
     volumes:
-      - /home/ubuntu/logs/scheduler:/app/apps/scheduler/logs
+      - ./logs/scheduler:/app/apps/scheduler/logs
 
   processor:
     image: anoopkarnik/processor:latest
@@ -33,9 +33,9 @@ services:
     networks:
       - turborepo-network
     env_file:
-      - .env.processor
+      - ./apps/processor/.env
     volumes:
-      - /home/ubuntu/logs/processor:/app/apps/processor/logs
+      - ./logs/processor:/app/apps/processor/logs
 
   worker:
     image: anoopkarnik/worker:latest
@@ -45,9 +45,10 @@ services:
     networks:
       - turborepo-network
     env_file:
-      - .env.worker
+      - ./apps/worker/.env
     volumes:
-      - /home/ubuntu/logs/worker:/app/apps/worker/logs
+      - ./logs/worker:/app/apps/worker/logs
+
   flask-worker:
     image: anoopkarnik/flask-worker:latest
     restart: always
@@ -56,9 +57,9 @@ services:
     networks:
       - turborepo-network
     env_file:
-      - .env.flask-worker
+      - ./apps/flask-worker/app/.env
     volumes:
-      - /home/ubuntu/logs/flask-worker:/app/apps/flask-worker/app/logs
+      - ./logs/flask-worker:/app/apps/flask-worker/app/logs
       
 networks:
   turborepo-network:

@@ -24,6 +24,7 @@ const NotionCode = () => {
     const [filterBody, setFilterBody] = useState<any>({})
     const [children, setChildren] = useState<any>({})
     const [properties, setProperties] = useState<any>({})
+    const [variables, setVariables] = useState<any>([])
 
     const [sampleCode, setSampleCode] = useState('');
 
@@ -36,8 +37,11 @@ const NotionCode = () => {
         try {
             const response = await fetch('/samplePythonCodes/notion/queryNotionDatabase.txt'); // Assuming the file is in the public folder
             let text = await response.text();
-            text = text.replaceAll("{{token}}", selectedNotionAccount);
-            text = text.replaceAll("{{db_id}}", JSON.parse(selectedDatabase).id.replaceAll("-",""));
+            let variables:any = []
+            variables.push({key: "token", value: selectedNotionAccount})
+            variables.push({key: "db_id", value: JSON.parse(selectedDatabase).id.replaceAll("-","")})
+            setVariable("")
+            setVariables(variables)
             text = text.replaceAll("{{filter_body}}", JSON.stringify(filterBody));
             setSampleCode(text);
 
@@ -51,9 +55,11 @@ const NotionCode = () => {
         try {
             const response = await fetch('/samplePythonCodes/notion/createNotionPage.txt'); // Assuming the file is in the public folder
             let text = await response.text();
-            text = text.replaceAll("{{token}}", selectedNotionAccount);
-            text = text.replaceAll("{{db_id}}", JSON.parse(selectedDatabase).id.replaceAll("-",""));
-
+            let variables:any = []
+            variables.push({key: "token", value: selectedNotionAccount})
+            variables.push({key: "db_id", value: JSON.parse(selectedDatabase).id.replaceAll("-","")})
+            setVariable("")
+            setVariables(variables)
             let lines = text.split('\n')
             let propertiesIndex= -1
             // Find the index of the line where `properties = {}` is located
@@ -76,9 +82,10 @@ const NotionCode = () => {
         try {
             const response = await fetch('/samplePythonCodes/notion/updateNotionPage.txt'); // Assuming the file is in the public folder
             let text = await response.text();
-            text = text.replaceAll("{{token}}", selectedNotionAccount);
-
-            
+            let variables:any = []
+            variables.push({key: "token", value: selectedNotionAccount})
+            setVariable("")
+            setVariables(variables)
             let lines = text.split('\n')
             let propertiesIndex= -1
             // Find the index of the line where `properties = {}` is located
@@ -102,9 +109,10 @@ const NotionCode = () => {
         try {
             const response = await fetch('/samplePythonCodes/notion/appendBlockChildren.txt'); // Assuming the file is in the public folder
             let text = await response.text();
-            text = text.replaceAll("{{token}}", selectedNotionAccount);
-
-            
+            let variables:any = []
+            variables.push({key: "token", value: selectedNotionAccount})
+            setVariable("")
+            setVariables(variables)
             let lines = text.split('\n')
             let childrenIndex= -1
             // Find the index of the line where `children = []` is located
@@ -323,8 +331,30 @@ const NotionCode = () => {
                     Append Children Block Sample Code
                 </Button>}
         </div>
-        {variable && <input className='p-2 mt-4 w-full' type="text" value={variable} placeholder='Variable Value' />}
-        {sampleCode && <textarea className='p-2 mt-4 w-full h-96' value={sampleCode} placeholder='Sample Code' />}
+        {variable && 
+        <div className='mt-4'>
+            <Label className='ml-2'>Variable</Label>
+            <input className='p-2 w-full' type="text" value={variable} placeholder='Variable Value' />
+        </div>}
+        {variables.length>0 && <div className='mt-4'>
+            <Label className='ml-2'>Variables</Label>
+            {variables.map((variable:any) => (
+                <div key={variable.key} className='flex gap-2 items-center mt-1'>
+                    <div className='w-[30%] border-[1px] rounded-md p-2 break-words whitespace-normal text-wrap text-paragraph'>
+                        {variable.key}
+                    </div>
+                    <div className='w-[50%] border-[1px] rounded-md p-2 break-words whitespace-normal text-wrap text-paragraph'>
+                        {variable.value}
+                    </div>
+                </div>
+            ))}
+        </div>}
+        {sampleCode && 
+            <div className='mt-4'>
+                <Label className='ml-2'>Sample Code</Label>
+                <textarea className='p-2 w-full h-96' value={sampleCode} placeholder='Sample Code' />
+            </div>
+        }
         
     </div>
   )

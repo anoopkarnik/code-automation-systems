@@ -62,7 +62,7 @@ const NotionPropertiesComponent = ({dbId,access_token,modifyProperties}:any) => 
                     (selectedProperties[index].type != "select" && selectedProperties[index].type != "multi_select") &&  
                     <Input 
                         placeholder='Enter Value'  
-                        className='col-span-4' 
+                        className='col-span-4 bg-background dark:bg-background text-foreground dark:text-foreground' 
                         onChange={(e) => modifyProperty(index,"value",e.target.value)}
                     />
                 }

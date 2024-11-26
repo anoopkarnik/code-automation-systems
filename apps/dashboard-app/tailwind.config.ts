@@ -1,4 +1,3 @@
-import { sub } from "date-fns";
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 
@@ -11,7 +10,7 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "../../packages/ui/src/**/*.{ts,tsx,js,jsx,mdx}",
     './.storybook/**/*.{js,ts,jsx,tsx,mdx}', // Include Storybook stories
-    './stories/**/*.{js,ts,jsx,tsx,mdx}',
+    './stories/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   prefix: "",
   theme: {
