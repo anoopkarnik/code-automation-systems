@@ -30,7 +30,22 @@ sidebar_position: 1
   npm -v
   ```
   Download using this site https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
-  
+
+- docker >= 27.1.1
+  ``` bash
+  # Check Availability and Version
+  docker -v
+  ```
+  Download using this site https://www.docker.com/products/docker-desktop/
+
+
+- docker-compose >= 1.29.2
+  ``` bash
+  # Check Availability and Version
+  docker-compose -v
+  ```
+  Download using this site https://docs.docker.com/compose/install
+
 - git
   ``` bash
   # Check Availability
@@ -38,7 +53,7 @@ sidebar_position: 1
   ```
   Download using this site https://git-scm.com/downloads
 
-## Using Locally using Docker Compose
+## Using Locally with only Docker Compose
 
 - docker >= 27.1.1
   ``` bash

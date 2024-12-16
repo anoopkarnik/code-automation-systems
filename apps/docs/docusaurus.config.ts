@@ -38,6 +38,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           showLastUpdateTime: true,
+          
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -82,7 +83,11 @@ const config: Config = {
           position: 'left',
           label: 'Documentation',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          to: '/blog',
+          label: 'Blog', 
+          position: 'left'
+        },
         {
           href: 'https://bsamaritan.com/',
           position: 'right',

@@ -25,8 +25,8 @@ export default function NavbarClient() {
                 return 
             }
             const pathSegments = pathname?.split('/').filter(Boolean);
-            let extractedTitle:any = pathSegments?.length > 0 ? pathSegments[pathSegments.length - 1]?.replaceAll("-","") : '';
-            const formattedTitle = extractedTitle.charAt(0).toUpperCase() + extractedTitle.slice(1);
+            let extractedTitle:any = pathSegments?.length > 0 ? pathSegments[pathSegments.length - 1]?.replaceAll("-"," ") : '';
+            const formattedTitle = extractedTitle.charAt(0).toUpperCase() + extractedTitle.slice(1)
             setTitle(formattedTitle);
         };
 

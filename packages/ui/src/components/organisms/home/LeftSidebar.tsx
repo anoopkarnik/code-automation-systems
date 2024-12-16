@@ -28,6 +28,7 @@ const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebar
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
     const {theme} = useTheme();
+    const [appIconTheme, setAppIconTheme] = useState<any>(appDarkIcon);
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -73,6 +74,11 @@ const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebar
         }
     }, [isMobile, pathname])
 
+    useEffect(() => {
+        setAppIconTheme(theme === "dark" ? appDarkIcon : appIcon);
+    },[theme])
+
+
     return (
         <>
             <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto ',
@@ -90,7 +96,7 @@ const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebar
                         <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
                             isMobile && isCollapsed && 'border-none'
                         )}>
-                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <Image src={theme === "dark" ? appDarkIcon : appIcon} alt={appName} width={40} height={40} />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <Image src={appIconTheme} alt={appName} width={40} height={40} />}
                             {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-paragraph text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>

@@ -13,7 +13,8 @@
     "start-dashboard-app": "cd ./apps/dashboard-app && npm run start",
     "start-scheduler": "cd ./apps/scheduler && npm run dev",
     "start-worker": "cd ./apps/worker && npm run dev",
-    "start-processor": "cd ./apps/processor && npm run dev"
+    "start-processor": "cd ./apps/processor && npm run dev",
+    "start-docs": "cd ./apps/docs && npm run start"
   },
   "exports": {
     "./zod": "./src/index.ts"

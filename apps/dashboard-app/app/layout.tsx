@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter,DM_Sans,Roboto_Mono} from "next/font/google";
-import "@repo/ui/styles/personal-app"
+import "@repo/ui/styles/personal-rose"
 import { ThemeProvider } from "../providers/theme-provider"
 import { SessionProviders } from "../providers/session-provider";
 import { ConnectionsProvider } from "../providers/connections-provider";

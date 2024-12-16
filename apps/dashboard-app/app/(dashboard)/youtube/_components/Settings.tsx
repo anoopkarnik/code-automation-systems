@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import DbSelection from '../../../../components/DbSelection'
+import DbSelection from '../../systems/_components/DbSelection'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@repo/ui/molecules/shadcn/Select'
 import { useSession } from 'next-auth/react'
 import { getYoutubeConnection, getAndUpdateChannels, getAndUpdateVideos } from '../../../actions/connections/youtube-connections'

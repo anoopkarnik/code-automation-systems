@@ -31,4 +31,4 @@ This documentation is intended for:
 
 ## Contacting Support
 
-If you encounter any issues or have questions not covered in this documentation, our dedicated support team is here to assist you. Contact us at *danoopkarnik@gmail.com*.
+If you encounter any issues or have questions not covered in this documentation, our dedicated support team is here to assist you. Contact us at *support@bsamaritan.com*.
