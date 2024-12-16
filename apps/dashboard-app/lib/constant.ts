@@ -1,45 +1,5 @@
-import { LandmarkIcon, ArrowLeftRightIcon, BadgeCentIcon, BluetoothConnectedIcon, Briefcase, BriefcaseIcon, ClockIcon, Library, 
-  LibraryIcon, Notebook, NotebookIcon, WebhookIcon, WorkflowIcon, FileLineChart, 
-  Settings,
-  BookPlusIcon,
-  CameraIcon,
-  ArchiveIcon,
-  OctagonAlertIcon,
-  PodcastIcon,
-  Tv2Icon,
-  ClapperboardIcon,
-  NetworkIcon,
-  FileBarChartIcon,
-  PanelsTopLeftIcon,
-  ListCollapseIcon,
-  CalendarCheck2Icon,
-  CalendarCheckIcon,
-  ColumnsIcon,
-  FerrisWheelIcon,
-  RouteIcon,
-  ContactIcon,
-  KeyRoundIcon,
-  ShoppingCartIcon,
-  PieChartIcon,
-  GoalIcon,
-  TrophyIcon,
-  WormIcon,
-  YoutubeIcon,
-  VideoIcon,
-  DatabaseIcon,
-  SproutIcon,
-  FolderIcon,
-  StoreIcon,
-  HeartPulseIcon,
-  BrainIcon,
-  Gamepad2Icon,
-  MehIcon,
-  Clapperboard,
-  HomeIcon,
-  Code,
-  CodeIcon} from "lucide-react";
-import { Connection } from "./types";
-import { types } from "util";
+import { BadgeCentIcon,  BriefcaseIcon, ClockIcon,  WebhookIcon, NetworkIcon,
+  CalendarCheck2Icon,ContactIcon, FolderIcon, CodeIcon} from "lucide-react";
 
 export const tablesInDatabase:any = {
   "Project Management":{'Projects':"projectsDb",'Epics / Features':"epicsDb", 'Tasks':"projectTasksDb", 
@@ -49,7 +9,7 @@ export const tablesInDatabase:any = {
   "Personal Productivity": {"Tasks": "tasksDb", "Scheduler": "schedulerDb", "Calendar": "calendarDb",
     "Duration Based Actions": "durationBasedActionsDb", "Time Tracking": "timeTrackingDb",
     "Weekly Focus Work Planner": "weeklyFocusWorkPlannerDb", "People":"peopleDb"},
-  "Knowledge & Skill Development": {'Quick Capture':"quickCaptureDb",'Skill Trees':"skillTreesDb",
+  "Skill Development": {'Quick Capture':"quickCaptureDb",'Skill Trees':"skillTreesDb",
     'Areas':"areasDb",'Archive':"archiveDb",'Interesting':"interestingDb",'Books':"booksDb",
     'Podcasts':"podcastsDb",'Youtube Channels':"youtubeChannelsDb",'Videos':"videosDb", "People":"peopleDb"},
   "Resource Management": {'Inventory':"inventoryDb", "People":"peopleDb"},
@@ -64,6 +24,83 @@ export const tablesInDatabase:any = {
    
 }
 
+export const propertiesInDatabase: any = {
+  "Personal Finance": {
+    "Portfolio Value": "The total current market value of all investments, including stocks, mutual funds, bonds, and other securities.",
+    "Liquid Assets": "Cash or assets that can be easily converted into cash, such as savings accounts, cash equivalents, or short-term investments.",
+    "Semi-Liquid Assets": "Assets that can be converted into cash but may take some time or incur a penalty, such as fixed deposits, gold, or certain types of bonds.",
+    "Long-Term Assets": "Investments or holdings meant for long-term growth, such as real estate, retirement accounts, or stocks held for extended periods.",
+    "Monthly Budget Spent": "The total amount of money spent from the monthly allocated budget during a specific period.",
+    "Monthly Budget Allocation": "The planned or allocated amount of money to be spent or used in a given month for expenses and savings.",
+    "Yearly Budget Spent": "The total amount of money spent from the yearly allocated budget during a specific year.",
+    "Yearly Budget Allocation": "The planned or allocated amount of money to be spent or used in a given year for expenses and savings.",
+    "Yearly Fund Spent": "The total money utilized from designated funds for yearly goals, emergencies, or specific financial activities.",
+    "Yearly Fund Allocation": "The amount of money set aside annually for specific purposes such as savings, investments, or goals.",
+    "Yearly Expenses": "The total expenditures over a year, covering all categories such as essentials, leisure, and investments.",
+    "Lean FIRE": "Financial independence with a frugal lifestyle, requiring lower annual expenses and a smaller portfolio.",
+    "FIRE": "Financial Independence Retire Early; a state where your investments generate enough income to cover all living expenses without active work.",
+    "Coast FIRE": "A financial state where you've saved enough early that your investments grow on their own to support retirement without additional contributions.",
+    "Fat FIRE": "A more comfortable form of financial independence, involving a larger portfolio to sustain a higher standard of living during retirement."
+  },
+  "Project Management":{
+    "Total Tasks": "The total number of tasks assigned to you not completed.",
+    "Total Tasks in Current Sprint": "The total number of tasks not completed assigned to you in the current sprint.",
+    "Total Storypoints Left": "The total number of storypoints left to complete in the current sprint.",
+    "Total Bugs": "The total number of bugs assigned to you not completed.",
+  },
+  "Personal Productivity":{
+    "Habits Todo": "The total number of habits still to do",
+    "Daily Habits": "The total number of daily habits",
+    "Weekly Habits": "The total number of weekly habits",
+    "Tasks Todo": "The total number of tasks still to do",
+    "Daily Tasks": "The total number of daily tasks",
+    "Weekly Tasks": "The total number of weekly tasks",
+    "Monthly Tasks": "The total number of monthly tasks",
+    "Financial Obligations Todo": "The total number of financial obligations still to be marked",
+    "Financial Obligations": "The total number of financial obligations",
+    "Important & Urgent Tasks": "The total number of important and urgent tasks to do",
+    "Not Important & Urgent Tasks": "The total number of not important and urgent tasks to do",
+    "Important & Not Urgent Tasks": "The total number of important and not urgent tasks to do",
+    "Not Important & Not Urgent Tasks": "The total number of not important and not urgent tasks to do"
+  },
+  "Social & Relationships":{
+    "Total People to Talk to": "The total number of people in your social sphere who you should talk to today",
+    "Total Family Members": "The total number of family members you have in your social sphere",
+    "Total Lifelong Friends": "The total number of lifelong friends you have in your social sphere",
+    "Total Acquaintances": "The total number of acquaintances you have in your social sphere",
+    "Total Professional Relationships": "The total number of professional relationships you have in your social sphere",
+    "Healthy Relationships": "The total number of healthy relationships you have in your social sphere",
+    "Unhealthy Relationships": "The total number of unhealthy relationships you have in your social sphere"
+  },
+  "Resource Management":{
+    "Groceries": "The total number of groceries you check the stock of every weekend",
+    "Toiletries": "The total number of toiletries you check the stock of every weekend",
+    "Wishlist Items": "The total number of wishlist items you check the stock of every weekend",
+    "Pantry Items": "The total number of pantry items you check the stock of every weekend",
+    "Wishlist Cost": "The total cost of the wishlist items you have in your inventory",
+  },
+  "Skill Development":{
+    "Total Interesting Left": "The total number of interesting items left to read",
+    "To Read Non Fiction Books": "The total number of non fiction books you want to read",
+    "Total Non Fiction Books": "The total number of non fiction books in your list",
+    "Partially Read Non Fiction Books": "The total number of non fiction books you have read partially",
+    "Currently Reading Non Fiction Books": "The total number of non fiction books you are currently reading",
+    "Read Non Fiction Books": "The total number of non fiction books you have read",
+    "Abandoned Non Fiction Books": "The total number of non fiction books you have abandoned",
+    "Total Channels Subscribed": "The total number of youtube channels you are subscribed to",
+    "Total Parent Skill Trees": "The total number of skill trees you want to learn",
+    "Total Mental Skill Trees": "The total number of mental skill trees you want to learn",
+    "Total Life Skill Trees": "The total number of life skill trees you want to learn",
+    "Total Social Skill Trees": "The total number of social skill trees you want to learn",
+    "Total Extracurricular Skill Trees": "The total number of extracurricular skill trees you want to learn",
+    "Total Software Skill Trees": "The total number of software skill trees you want to learn",
+    "Total Business Skill Trees": "The total number of business skill trees you want to learn",
+  }
+
+
+}
+
+
 export const sidebarStartItems = [
   {
     title: "Home",
@@ -77,26 +114,28 @@ export const sidebarStartItems = [
     subItems: [
       {
         title: "Project Management",
-        icon: BriefcaseIcon,
-        href: "/project-management",
+        image: "/project-management.png",
+        imageDark: "/project-management-dark.png",
+        href: "/systems/project-management",
       },
       {
         title: "Personal Finance",
-        icon: BadgeCentIcon,
-        href: "/personal-finance",
+        image: "/personal finance.png",
+        imageDark: "/personal-finance-dark.png",
+        href: "/systems/personal-finance",
         tables: {'Assets and Liabilities':"assetsDb",'Financial Transaction':"transactionsDb",
           'Budget':"budgetDb",'Funds':"fundsDb"}
       },
       {
         title: "Personal Productivity",
         icon: CalendarCheck2Icon,
-        href: "/personal-productivity",
+        href: "/systems/personal-productivity",
         tables: ['Tasks','Scheduler','Calendar','Duration Based Actions','Time Tracking',"Weekly Focus Work Planner"]
       },
       {
-        title: "Knowledge & Skill Development",
+        title: "Skill Development",
         icon: NetworkIcon,
-        href: "/knowledge-skill-development",
+        href: "/systems/skill-development",
         tables: ['Quick Capture','Skill Trees (Notion Db)','Areas','Archive','Interesting','Books','Podcasts',
           'Youtube Channels','Videos'
         ]
@@ -104,25 +143,25 @@ export const sidebarStartItems = [
       // {
       //   title: "Resource Management",
       //   icon: StoreIcon,
-      //   href: "/resource-management",
+      //   href: "/systems/resource-management",
       //   tables: ['Inventory']
       // },
       {
         title: "Social & Relationships",
         icon: ContactIcon,
-        href: "social-relationships",
+        href: "/systems/social-relationships",
         tables: ['Social Sphere']
       },
       // {
       //   title: "Health & Fitness",
       //   icon: HeartPulseIcon,
-      //   href: "/health-fitness",
+      //   href: "/systems/health-fitness",
       //   tables: ['Status','Exercises']
       // },
       // {
       //   title: "Emotional & Mental",
       //   icon: MehIcon,
-      //   href: "/emotional-mental",
+      //   href: "/systems/emotional-mental",
       //   tables: ['Journal','Mood Category','Mood Tracker']
       // },
       // {
@@ -133,13 +172,13 @@ export const sidebarStartItems = [
       // {
       //   title: "Personal Goals",
       //   icon: GoalIcon,
-      //   href: "/personal-goals",
+      //   href: "/systems/personal-goals",
       //   tables: ['Goals','Rewards','Punishments']
       // },
       // {
       //   title: "Decision Making",
       //   icon: RouteIcon,
-      //   href: "/decision-making",
+      //   href: "/systems/decision-making",
       //   tables: ['Decisions']
       // },
       // {
@@ -185,81 +224,15 @@ export const sidebarEndItems = [
   {
       title: "Documentation",
       icon: FolderIcon,
-      href: "/docs"
+      href: process.env.NEXT_PUBLIC_DOCS_URL
   }
-]
-
-export const skillTreeTypes = [
-  {title: 'Software', icon: DatabaseIcon,},
-  {title: 'Extracurricular', icon: SproutIcon},
-  {title: 'Life', icon: PieChartIcon},
-  {title: 'Business', icon: BriefcaseIcon},
-  {title: 'Mental', icon: BadgeCentIcon},
-  {title: 'Social', icon: ContactIcon},
-]
-
-export const financeItems = [
-  {title: 'Overview',icon: Briefcase,},
-  {title: 'Account', icon: LandmarkIcon,},
-  {title: 'Transactions',icon: ArrowLeftRightIcon,},
-  {title: 'Monthly Budget', icon: ArrowLeftRightIcon, },
-  {title: 'Budget Plan', icon: ArrowLeftRightIcon, },
-  {title: 'Financial Goals', icon: ArrowLeftRightIcon, },
-  {title: 'settings',icon: Settings, }
-]
-
-export const knowledgeBaseItems = [
-  {title: 'Overview',icon: FileBarChartIcon,},
-  {title: 'Books', icon: BookPlusIcon,},
-  {title: 'Quick Capture',icon: CameraIcon,},
-  {title: 'Areas', icon: LibraryIcon, },
-  {title: 'Archive', icon: ArchiveIcon, },
-  {title: 'Interesting', icon: OctagonAlertIcon },
-  {title: 'Podcasts', icon: PodcastIcon, },
-  {title: 'Channels', icon: Tv2Icon, },
-  {title: 'Videos', icon: ClapperboardIcon, },
-  {title: 'Skill Trees', icon: NetworkIcon, },
-  {title: 'settings',icon: Settings, }
-] 
-
-export const projectItems = [
-  {title: 'Overview',icon: FileBarChartIcon,},
-  {title: 'Projects', icon: PanelsTopLeftIcon,},
-  {title: 'Blogs', icon: ListCollapseIcon,},
-  {title: 'Place of Work', icon: LandmarkIcon,},
-  {title: 'settings',icon: Settings, }
-]
-
-export const plannerItems = [
-  {title: 'Overview',icon: FileBarChartIcon,},
-  {title: 'Scheduler', icon: CalendarCheck2Icon,},
-  {title: 'Calendar', icon: CalendarCheckIcon,},
-  {title: 'Eisenhower Matrix', icon: ColumnsIcon,},
-  {title: 'Actions', icon: FerrisWheelIcon,},
-  {title: 'Time Tracking', icon: ClockIcon,},
-  {title: 'Weekly Planner', icon: RouteIcon,},
-  {title: 'settings',icon: Settings, }
-]
-
-
-export const personalInfoItems = [
-  {title: 'Overview',icon: FileBarChartIcon,},
-  {title: 'Social Sphere', icon: ContactIcon,},
-  {title: 'Passwords', icon: KeyRoundIcon,},
-  {title: 'Journal', icon: NotebookIcon,},
-  {title: 'Inventory', icon: ShoppingCartIcon,},
-  {title: 'Status', icon: PieChartIcon,},
-  {title: 'Goals', icon: GoalIcon,},
-  {title: 'Rewards', icon: TrophyIcon,},
-  {title: 'Punishments', icon: WormIcon,},
-  {title: 'settings',icon: Settings, }
 ]
 
 export const CONNECTIONS: any = [
     {
       title: 'Notion',
       description: 'Create entries in your notion dashboard and automate tasks.',
-      image: '/notion.png',
+      image: '/connections/notion.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: true
@@ -267,7 +240,7 @@ export const CONNECTIONS: any = [
     {
       title: 'OpenAI',
       description: 'Interact with openAI API',
-      image: '/openai.png',
+      image: '/connections/openai.png',
       accessTokenKey: 'accessToken',
       showModal: true,
       published: true,
@@ -283,7 +256,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Postgresql',
       description: 'Connect to your Postgresql database',
-      image: '/postgres.png',
+      image: '/connections/postgres.png',
       showModal: true,
       published: false,
       formElements: [
@@ -322,7 +295,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Drive',
       description: 'Connect to your Google Drive',
-      image: '/googleDrive.png',
+      image: '/connections/googleDrive.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: true
@@ -330,7 +303,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Youtube',
       description: 'Connect to your Youtube account',
-      image: '/youtube.png',
+      image: '/connections/youtube.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: true
@@ -338,7 +311,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Google Calendar',
       description: 'Connect to your Google Calendar account',
-      image: '/calendar.png',
+      image: '/connections/calendar.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -346,7 +319,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Google Sheets',
       description: 'Connect to your Google Sheets account',
-      image: '/sheets.png',
+      image: '/connections/sheets.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -354,7 +327,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Github',
       description: 'Connect to your Github account',
-      image: '/github.png',
+      image: '/connections/github.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -362,7 +335,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Gmail',
       description: 'Connect to your Gmail account',
-      image: '/gmail.png',
+      image: '/connections/gmail.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -370,7 +343,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Discord',
       description: 'Connect to your Discord account',
-      image: '/discord.png',
+      image: '/connections/discord.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -378,7 +351,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Google Search',
       description: 'Connect to your Google Search account',
-      image: '/googleSearch.png',
+      image: '/connections/googleSearch.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -386,7 +359,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Reddit',
       description: 'Connect to your Reddit account',
-      image: '/reddit.png',
+      image: '/connections/reddit.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -394,7 +367,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Linkedin',
       description: 'Connect to your Linkedin account',
-      image: '/linkedin.png',
+      image: '/connections/linkedin.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -402,7 +375,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Twitter',
       description: 'Connect to your Twitter account',
-      image: '/twitter.png',
+      image: '/connections/twitter.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false
@@ -410,7 +383,7 @@ export const CONNECTIONS: any = [
     {
       title: 'Voice Monkey',
       description: 'Connect to your Voice Monkey account',
-      image: '/voiceMonkey.png',
+      image: '/connections/voiceMonkey.png',
       accessTokenKey: 'accessToken',
       showModal: false,
       published: false

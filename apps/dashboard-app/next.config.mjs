@@ -1,5 +1,7 @@
-import nextra from "nextra";
-import { hostname } from "os";
+import { createMDX } from 'fumadocs-mdx/next';
+
+const withMDX = createMDX();
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,12 +19,11 @@ const nextConfig = {
     }
 };
 
-const withNextraDocs = nextra({
-    theme: 'nextra-theme-docs',
-    themeConfig: './theme-docs.config.jsx',
-    basePath: '/docs'
-});
+// const withNextraDocs = nextra({
+//     theme: 'nextra-theme-docs',
+//     themeConfig: './theme-docs.config.jsx'
+// });
 
-const combinedConfig = withNextraDocs(nextConfig);
+const combinedConfig = withMDX(nextConfig);
 
 export default combinedConfig;

@@ -12,7 +12,8 @@ import {createWorkflow, editWorkflow, getWorkflowsByUserId, publishWorkflow,  de
     updateAction,
     updateTrigger,
     makeWorkflowPublic,
-    getPublicWorkflows
+    getPublicWorkflows,
+    getTemplatesByUserId
 } from '@repo/prisma-db/repo/workflow';
 import {logger} from '@repo/winston-logger/index';
 
@@ -36,6 +37,12 @@ export const getPublicWorkflowsAction = async () => {
     const workflows = await getPublicWorkflows();
     return workflows;
 }
+
+export const getTemplatesAction = async (userId:string) => {
+    const workflows = await getTemplatesByUserId(userId)
+    return workflows;
+}
+
 
 export const editFlow = async (workflowId:string, name:string, description: string) => {
     logger.info('Editing workflow',workflowId, name, description);
@@ -148,21 +155,85 @@ export const createActionAction = async({workflowId, actionId, metadata,sortingO
 export const duplicateWorkflow = async (workflowId:string,userId:any) => {
     try{
         const workflow = await getWorkflowById(workflowId);
-        const newWorkflow = await createWorkflow({
-            name: workflow?.name +" Duplicated", description: workflow?.description, userId:userId, publish: false,share:false});
-        const trigger:any = workflow?.trigger;
-
-        const actions:any = workflow?.actions;
-        await createTrigger({workflowId: newWorkflow.id, triggerId: trigger.triggerId, metadata: trigger.metadata});
-        for (let i=0; i<actions.length; i++){
-            await createAction({
-                workflowId: newWorkflow.id, actionId: actions[i].actionId, metadata: actions[i].metadata,
-                sortingOrder: actions[i].sortingOrder});
+        if (!workflow){
+            return {error: "Workflow not found"}
         }
-        return {success: "Workflow duplicated successfully", result: newWorkflow}
+        const newWorkflow = await createWorkflow({
+            name: workflow?.name +" Duplicated", description: workflow?.description, userId:userId, publish: false,
+            shared:false, template: false});
+        if (!newWorkflow){
+            return {error: "Workflow creation failed"}
+        }
+        const trigger:any = workflow?.trigger;
+        const actions:any = workflow?.actions;
+        try {
+            await createTrigger({workflowId: newWorkflow.id, triggerId: trigger.triggerId, metadata: trigger.metadata});
+        }
+        catch (error) {
+            return {error: "Trigger duplication failed"}
+        }
+        try{
+            for (let i=0; i<actions.length; i++){
+                let metadata = actions[i].metadata;
+                await createAction({
+                    workflowId: newWorkflow.id, actionId: actions[i].actionId, metadata: metadata,
+                    sortingOrder: actions[i].sortingOrder});
+            }
+        }
+        catch (error) {
+            return {error: "Action duplication failed"}
+        }
+        return {success: "Workflow duplicated successfully", result: workflow}
     }
     catch (error) {
         return {error: "Workflow duplication failed"}
+    }
+}
+
+export const createTemplate = async (workflowId:string,userId:any) => {
+    try{
+        const workflow = await getWorkflowById(workflowId);
+        if (!workflow){
+            return {error: "Workflow not found"}
+        }
+        const newWorkflow = await createWorkflow({
+            name: workflow?.name +" Template", description: workflow?.description, userId:userId, publish: false,
+            shared:false, template:true});
+        const trigger:any = workflow?.trigger;
+
+        const actions:any = workflow?.actions;
+        try {
+            await createTrigger({workflowId: newWorkflow.id, triggerId: trigger.triggerId, metadata: trigger.metadata});
+        }
+        catch (error) {
+            return {error: "Trigger creation for this template failed"}
+        }
+        try{
+            for (let i=0; i<actions.length; i++){
+                let metadata = actions[i].metadata;
+                if (metadata.hasOwnProperty('codeBlocks') && metadata.codeBlocks.length > 0 ){
+                    metadata.codeBlocks = metadata.codeBlocks.map((block:any) => {
+                        if (block.hasOwnProperty('variables') && block.variables.length > 0){
+                            block.variables = block.variables.map((variable:any) => {
+                                variable.value = "";
+                                return variable;
+                            })
+                        }
+                        return block;
+                    })
+                }
+                await createAction({
+                    workflowId: newWorkflow.id, actionId: actions[i].actionId, metadata: metadata,
+                    sortingOrder: actions[i].sortingOrder});
+            }
+        }
+        catch (error) {
+            return {error: "Actions Creation for this template failed"}
+        }
+        return {success: "Template created successfully", result: workflow}
+    }
+    catch (error) {
+        return {error: "Template creation failed"}
     }
 }
 

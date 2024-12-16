@@ -6,12 +6,15 @@
     "dev": "turbo dev",
     "lint": "turbo lint -- --max-warnings 20",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:generate": "cd packages/prisma-db && npx prisma generate && cd ../..",
+    "db:migrate": "cd packages/prisma-db && npx prisma migrate dev --name init",
+    "db:generate": "cd packages/prisma-db && npx prisma generate",
+    "build-deploy-docs": "cd ./apps/docs && npm run deploy-s3 ",
     "build-dashboard-app": "cd ./apps/dashboard-app && npm run build",
     "start-dashboard-app": "cd ./apps/dashboard-app && npm run start",
     "start-scheduler": "cd ./apps/scheduler && npm run dev",
     "start-worker": "cd ./apps/worker && npm run dev",
-    "start-processor": "cd ./apps/processor && npm run dev"
+    "start-processor": "cd ./apps/processor && npm run dev",
+    "start-docs": "cd ./apps/docs && npm run start"
   },
   "exports": {
     "./zod": "./src/index.ts"
@@ -32,7 +35,12 @@
   ],
   "dependencies": {
     "fs": "^0.0.1-security",
+    "fumadocs-mdx": "^11.1.1",
     "install": "^0.13.0",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.0"
   }
 }

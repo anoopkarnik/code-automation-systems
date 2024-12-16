@@ -10,12 +10,9 @@ export async function GET(req: NextRequest) {
         process.env.NEXT_PUBLIC_YOUTUBE_REDIRECT_URI
     );
 
-    // generate a url that asks permissions for Blogger and Google Calendar scopes
+    // generate a url that asks permissions for Youtube scopes
     const scopes = [
-    'https://www.googleapis.com/auth/youtube',
-    'https://www.googleapis.com/auth/youtube.force-ssl',
-    'https://www.googleapis.com/auth/youtube.readonly',
-    'https://www.googleapis.com/auth/youtube.upload',
+    'https://www.googleapis.com/auth/youtube'
     ];
 
 

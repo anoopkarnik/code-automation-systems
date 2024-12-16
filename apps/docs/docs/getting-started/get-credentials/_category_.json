@@ -1,0 +1,8 @@
+{
+  "label": "Getting Credentials",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Getting API Keys or OAuth Credentials for the third party connections."
+  }
+}

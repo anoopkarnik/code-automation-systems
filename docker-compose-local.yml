@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  dashboard-app:
+    image: anoopkarnik/dashboard-app:latest
+    restart: always
+    ports:
+      - "4000:4000"
+    networks:
+      - turborepo-network
+    env_file:
+      - ./apps/dashboard-app/.env
+    volumes:
+      - ./logs/dashboard-app:/app/apps/dashboard-app/logs
+
+  scheduler:
+    image: anoopkarnik/scheduler:latest
+    restart: always
+    ports:
+      - "4001:4001"
+    networks:
+      - turborepo-network
+    env_file:
+      - ./apps/scheduler/.env
+    volumes:
+      - ./logs/scheduler:/app/apps/scheduler/logs
+
+  processor:
+    image: anoopkarnik/processor:latest
+    restart: always
+    ports:
+      - "4002:4002"
+    networks:
+      - turborepo-network
+    env_file:
+      - ./apps/processor/.env
+    volumes:
+      - ./logs/processor:/app/apps/processor/logs
+
+  worker:
+    image: anoopkarnik/worker:latest
+    restart: always
+    ports:
+      - "4003:4003"
+    networks:
+      - turborepo-network
+    env_file:
+      - ./apps/worker/.env
+    volumes:
+      - ./logs/worker:/app/apps/worker/logs
+
+  flask-worker:
+    image: anoopkarnik/flask-worker:latest
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - turborepo-network
+    env_file:
+      - ./apps/flask-worker/app/.env
+    volumes:
+      - ./logs/flask-worker:/app/apps/flask-worker/app/logs
+      
+networks:
+  turborepo-network:
+    external: true

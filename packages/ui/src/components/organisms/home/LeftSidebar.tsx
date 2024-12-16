@@ -7,16 +7,18 @@ import { useMediaQuery } from 'usehooks-ts'
 import { ChevronsLeft, AlignJustifyIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../atoms/shadcn/Tooltip'
 import LeftSidebarItem from './LeftSidebarItem'
-
+import { useTheme } from 'next-themes';
+import Image from 'next/image';
 interface LeftSidebarProps {
     appName: string
     appIcon: string
+    appDarkIcon: string
     sidebarStartItems: any
     sidebarEndItems: any
     redirect: (href: string) => void
 }
 
-const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
+const LeftSidebar = ({ appName, appIcon, appDarkIcon, sidebarStartItems, sidebarEndItems, redirect }: LeftSidebarProps) => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 640px)");
     const isNotMobile = useMediaQuery("(min-width: 640px)");
@@ -25,6 +27,8 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+    const {theme} = useTheme();
+    const [appIconTheme, setAppIconTheme] = useState<any>(appDarkIcon);
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
@@ -70,6 +74,11 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
         }
     }, [isMobile, pathname])
 
+    useEffect(() => {
+        setAppIconTheme(theme === "dark" ? appDarkIcon : appIcon);
+    },[theme])
+
+
     return (
         <>
             <div ref={sidebarRef} className={cn('group/sidebar max-h-screen bg-secondary overflow-hidden sticky flex flex-col z-10 overflow-y-auto ',
@@ -87,8 +96,8 @@ const LeftSidebar = ({ appName, appIcon, sidebarStartItems, sidebarEndItems, red
                         <div className={cn('flex items-center justify-center gap-4 w-full border-border/40 border-b-2 pb-4 ml-4',
                             isMobile && isCollapsed && 'border-none'
                         )}>
-                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <img src={appIcon} alt={appName} className='w-8 h-8' />}
-                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-subtitle text-wrap '>{appName}</h1>}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appIcon && <Image src={appIconTheme} alt={appName} width={40} height={40} />}
+                            {(!isMobile || (isMobile && !isCollapsed)) && appName && <h1 className='text-paragraph text-wrap '>{appName}</h1>}
                         </div>
                         <div className='pt-4'>
                             {sidebarStartItems.map((item: any, index: number) => (

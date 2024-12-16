@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../atoms/shadcn/Tooltip";
 import { CircleChevronDown, CircleChevronUp } from "lucide-react";
 import { useState } from "react";
-
-
+import { useTheme } from "next-themes";
 const LeftSidebarItem = ({index,item,redirect,isMobile,isCollapsed}:any) =>{
     const [showSubItems, setShowSubItems] = useState<any>({});
     const pathname = usePathname();
+    const {theme} = useTheme();
     
     const toggleSubItems = (index:any) => {
         setShowSubItems((prev:any) =>({
